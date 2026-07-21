@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>admin — editor de conteúdo (uso pessoal)</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="projects-data.js"></script>
+<style>
+  :root{
+    --bg:#090c11; --panel:#0f141c; --panel-2:#141b25; --line:#212a37;
+    --text:#e7ecf3; --muted:#7c8698; --amber:#e0a542; --teal:#4fd8bb;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; padding:32px 20px 80px; }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  .wrap{ max-width:760px; margin:0 auto; }
+  h1{ font-family:'JetBrains Mono',monospace; font-size:22px; }
+  .warn{ margin-top:8px; padding:12px 14px; background:rgba(224,165,66,.1); border:1px solid #4a3a1e; border-radius:6px; font-size:13px; color:var(--amber); font-family:'JetBrains Mono',monospace; }
+  .proj-card{ background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px; margin-top:22px; }
+  .proj-card h2{ font-family:'JetBrains Mono',monospace; font-size:15px; margin:0 0 14px; color:var(--teal); }
+  label{ display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:12px 0 5px; }
+  input[type=text], textarea, select{
+    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    border-radius:5px; padding:9px 10px; font-family:'Inter',sans-serif; font-size:13.5px;
+  }
+  textarea{ min-height:60px; resize:vertical; font-family:'Inter',sans-serif; }
+  select{ font-family:'Inter',sans-serif; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .img-row{ display:flex; align-items:center; gap:14px; margin-top:6px; }
+  .img-preview{ width:110px; height:66px; object-fit:cover; border-radius:5px; border:1px solid var(--line); background:var(--panel-2); }
+  .img-preview.empty{ display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--muted); font-family:'JetBrains Mono',monospace; text-align:center; }
+  input[type=file]{ font-family:'Inter',sans-serif; font-size:12.5px; color:var(--muted); }
+  .actions{ position:sticky; bottom:0; margin-top:34px; background:rgba(9,12,17,.92); backdrop-filter:blur(10px); padding:16px 0; border-top:1px solid var(--line); }
+  .actions .inner{ max-width:760px; margin:0 auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  button{ font-family:'JetBrains Mono',monospace; font-size:13px; padding:11px 20px; border-radius:5px; border:1px solid var(--line); background:var(--panel-2); color:var(--text); cursor:pointer; }
+  button.primary{ background:var(--teal); color:#06110d; border-color:var(--teal); font-weight:600; }
+  #output{ margin-top:16px; width:100%; min-height:260px; background:#05070a; color:#9fe6cf; font-family:'JetBrains Mono',monospace; font-size:12px; border-radius:8px; border:1px solid var(--line); padding:16px; white-space:pre; overflow:auto; display:none; }
+  .copied{ color:var(--teal); font-family:'JetBrains Mono',monospace; font-size:12px; margin-left:6px; opacity:0; transition:opacity .3s; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>$ admin --editar-projetos</h1>
+  <div class="warn">Isto não publica nada sozinho. Edite os campos, clique em "Gerar código atualizado",
+  copie o resultado e cole substituindo TODO o conteúdo de <b>projects-data.js</b> — depois suba (commit/push)
+  esse arquivo no seu repositório do GitHub. Mantenha este admin.html fora de qualquer link do site público
+  (ele não precisa ser divulgado, mas pode ficar no mesmo repositório sem problema).</div>
+
+  <div id="cards"></div>
+
+  <div class="actions">
+    <div class="inner">
+      <button class="primary" onclick="generateCode()">Gerar código atualizado</button>
+      <button onclick="copyOutput()">Copiar código</button>
+      <span class="copied" id="copiedMsg">copiado ✓</span>
+    </div>
+  </div>
+  <textarea id="output" readonly></textarea>
+</div>
+
+<script>
+const data = typeof PROJECTS !== 'undefined' ? JSON.parse(JSON.stringify(PROJECTS)) : [];
+
+function fieldRow(p, i){
+  return `
+  <div class="proj-card" data-idx="${i}">
+    <h2>${p.title || '(novo projeto)'}</h2>
+
+    <label>Título</label>
+    <input type="text" data-field="title" value="${escapeAttr(p.title)}">
+
+    <div class="row2">
+      <div>
+        <label>Trilha</label>
+        <select data-field="track">
+          <option value="automacao" ${p.track==='automacao'?'selected':''}>Automação</option>
+          <option value="dados" ${p.track==='dados'?'selected':''}>Dados / ML</option>
+        </select>
+      </div>
+      <div>
+        <label>Status (linha pequena no topo do card)</label>
+        <input type="text" data-field="status" value="${escapeAttr(p.status)}">
+      </div>
+    </div>
+
+    <label>Descrição</label>
+    <textarea data-field="desc">${escapeHtml(p.desc)}</textarea>
+
+    <label>Destaque técnico</label>
+    <textarea data-field="highlight">${escapeHtml(p.highlight)}</textarea>
+
+    <label>Stack (separado por vírgula)</label>
+    <input type="text" data-field="stack" value="${escapeAttr((p.stack||[]).join(', '))}">
+
+    <label>Link do repositório</label>
+    <input type="text" data-field="link" value="${escapeAttr(p.link)}">
+
+    <label>Link do demo ao vivo (opcional — Netlify, Vercel, etc.)</label>
+    <input type="text" data-field="demo" value="${escapeAttr(p.demo)}">
+
+    <label>Screenshot do projeto</label>
+    <div class="img-row">
+      <img class="img-preview ${p.image ? '' : 'empty'}" id="preview-${i}" src="${p.image || ''}" ${p.image ? '' : 'style="display:flex"'}>
+      <input type="file" accept="image/*" onchange="handleImage(event, ${i})">
+    </div>
+  </div>`;
+}
+
+function escapeHtml(s){ return (s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeAttr(s){ return (s||'').replace(/"/g,'&quot;'); }
+
+function renderForm(){
+  document.getElementById('cards').innerHTML = data.map((p,i) => fieldRow(p,i)).join('');
+  document.querySelectorAll('[data-field]').forEach(el => {
+    el.addEventListener('input', () => {
+      const idx = el.closest('.proj-card').dataset.idx;
+      const field = el.dataset.field;
+      if (field === 'stack'){
+        data[idx][field] = el.value.split(',').map(s => s.trim()).filter(Boolean);
+      } else {
+        data[idx][field] = el.value;
+      }
+      if (field === 'title') el.closest('.proj-card').querySelector('h2').textContent = el.value || '(novo projeto)';
+    });
+  });
+}
+renderForm();
+
+function handleImage(evt, idx){
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    data[idx].image = reader.result; // data URL base64 — funciona sem precisar hospedar a imagem em outro lugar
+    const img = document.getElementById('preview-'+idx);
+    img.src = reader.result;
+    img.classList.remove('empty');
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function generateCode(){
+  const lines = data.map(p => `  {
+    id: ${JSON.stringify(p.id)},
+    title: ${JSON.stringify(p.title)},
+    track: ${JSON.stringify(p.track)},
+    pill: ${JSON.stringify(p.track === 'dados' ? 'Dados / ML' : 'Automação')},
+    status: ${JSON.stringify(p.status)},
+    desc: ${JSON.stringify(p.desc)},
+    highlight: ${JSON.stringify(p.highlight)},
+    stack: ${JSON.stringify(p.stack)},
+    link: ${JSON.stringify(p.link)},
+    demo: ${JSON.stringify(p.demo || "")},
+    image: ${JSON.stringify(p.image || "")}
+  }`).join(',\n');
+
+  const code = `// projects-data.js — gerado pelo admin.html em ${new Date().toLocaleString('pt-BR')}
+const PROJECTS = [
+${lines}
+];
+
+if (typeof module !== "undefined") module.exports = PROJECTS;
+`;
+  const out = document.getElementById('output');
+  out.style.display = 'block';
+  out.value = code;
+  out.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function copyOutput(){
+  const out = document.getElementById('output');
+  if (!out.value) { generateCode(); }
+  navigator.clipboard.writeText(out.value).then(() => {
+    const msg = document.getElementById('copiedMsg');
+    msg.style.opacity = 1;
+    setTimeout(() => msg.style.opacity = 0, 1600);
+  });
+}
+</script>
+</body>
+</html>
