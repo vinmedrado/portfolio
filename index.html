@@ -206,8 +206,8 @@
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
   .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
-  .log-results li{ font-size:13px; color:#33465A; display:flex; gap:7px; }
-  .log-results li::before{ content:'▸'; color:var(--blue); flex-shrink:0; }
+  .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
+  .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
   .log-results b{ color:var(--ink); }
   .log-more{ margin-top:8px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
 
