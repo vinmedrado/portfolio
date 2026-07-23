@@ -8,34 +8,39 @@
 <script src="projects-data.js"></script>
 <style>
   :root{
-    --bg:#090c11; --panel:#0f141c; --panel-2:#141b25; --line:#212a37;
-    --text:#e7ecf3; --muted:#7c8698; --amber:#e0a542; --teal:#4fd8bb;
+    --bg:#FBFAF5; --panel:#FFFFFF; --panel-2:#F3F0E7; --line:#B9C7D0;
+    --ink:#152A3D; --muted:#5F7181; --amber:#B5701F; --teal:#1E7A63;
   }
   *{ box-sizing:border-box; }
-  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; padding:32px 20px 80px; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; padding:32px 20px 80px; }
   .mono{ font-family:'JetBrains Mono',monospace; }
-  .wrap{ max-width:760px; margin:0 auto; }
-  h1{ font-family:'JetBrains Mono',monospace; font-size:22px; }
-  .warn{ margin-top:8px; padding:12px 14px; background:rgba(224,165,66,.1); border:1px solid #4a3a1e; border-radius:6px; font-size:13px; color:var(--amber); font-family:'JetBrains Mono',monospace; }
-  .proj-card{ background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px; margin-top:22px; }
-  .proj-card h2{ font-family:'JetBrains Mono',monospace; font-size:15px; margin:0 0 14px; color:var(--teal); }
+  .wrap{ max-width:780px; margin:0 auto; }
+  h1{ font-family:'JetBrains Mono',monospace; font-size:20px; }
+  .warn{ margin-top:8px; padding:12px 14px; background:var(--panel-2); border:1px solid var(--line); border-radius:4px; font-size:13px; color:var(--amber); font-family:'JetBrains Mono',monospace; }
+  .proj-card{ background:var(--panel); border:1.5px solid var(--ink); border-radius:0; padding:20px; margin-top:22px; }
+  .proj-card.flag{ border-color:var(--teal); }
+  .proj-card h2{ font-family:'JetBrains Mono',monospace; font-size:15px; margin:0 0 4px; color:var(--ink); display:flex; align-items:center; gap:8px; }
+  .flag-badge{ font-size:10px; background:var(--teal); color:#fff; padding:2px 7px; border-radius:2px; text-transform:uppercase; }
   label{ display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:12px 0 5px; }
-  input[type=text], textarea, select{
-    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
-    border-radius:5px; padding:9px 10px; font-family:'Inter',sans-serif; font-size:13.5px;
+  input[type=text], input[type=checkbox], textarea, select{
+    width:100%; background:#fff; border:1px solid var(--line); color:var(--ink);
+    border-radius:3px; padding:9px 10px; font-family:'Inter',sans-serif; font-size:13.5px;
   }
-  textarea{ min-height:60px; resize:vertical; font-family:'Inter',sans-serif; }
-  select{ font-family:'Inter',sans-serif; }
+  textarea{ min-height:56px; resize:vertical; font-family:'Inter',sans-serif; }
   .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
   .img-row{ display:flex; align-items:center; gap:14px; margin-top:6px; }
-  .img-preview{ width:110px; height:66px; object-fit:cover; border-radius:5px; border:1px solid var(--line); background:var(--panel-2); }
-  .img-preview.empty{ display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--muted); font-family:'JetBrains Mono',monospace; text-align:center; }
+  .img-preview{ width:110px; height:66px; object-fit:cover; border-radius:3px; border:1px solid var(--line); background:var(--panel-2); }
   input[type=file]{ font-family:'Inter',sans-serif; font-size:12.5px; color:var(--muted); }
-  .actions{ position:sticky; bottom:0; margin-top:34px; background:rgba(9,12,17,.92); backdrop-filter:blur(10px); padding:16px 0; border-top:1px solid var(--line); }
-  .actions .inner{ max-width:760px; margin:0 auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  button{ font-family:'JetBrains Mono',monospace; font-size:13px; padding:11px 20px; border-radius:5px; border:1px solid var(--line); background:var(--panel-2); color:var(--text); cursor:pointer; }
-  button.primary{ background:var(--teal); color:#06110d; border-color:var(--teal); font-weight:600; }
-  #output{ margin-top:16px; width:100%; min-height:260px; background:#05070a; color:#9fe6cf; font-family:'JetBrains Mono',monospace; font-size:12px; border-radius:8px; border:1px solid var(--line); padding:16px; white-space:pre; overflow:auto; display:none; }
+  .flag-toggle{ display:flex; align-items:center; gap:8px; margin-top:12px; }
+  .flag-toggle input{ width:auto; }
+  .flag-toggle label{ margin:0; }
+  .list-editor textarea{ min-height:90px; }
+  .actions{ position:sticky; bottom:0; margin-top:34px; background:rgba(251,250,245,.95); backdrop-filter:blur(10px); padding:16px 0; border-top:1.5px solid var(--ink); }
+  .actions .inner{ max-width:780px; margin:0 auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  button{ font-family:'JetBrains Mono',monospace; font-size:13px; padding:11px 20px; border-radius:3px; border:1.5px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; }
+  button.primary{ background:var(--ink); color:#fff; font-weight:600; }
+  #output{ margin-top:16px; width:100%; min-height:260px; background:#152A3D; color:#9fe6cf; font-family:'JetBrains Mono',monospace; font-size:12px; border-radius:4px; border:1px solid var(--line); padding:16px; white-space:pre; overflow:auto; display:none; }
   .copied{ color:var(--teal); font-family:'JetBrains Mono',monospace; font-size:12px; margin-left:6px; opacity:0; transition:opacity .3s; }
 </style>
 </head>
@@ -44,8 +49,8 @@
   <h1>$ admin --editar-projetos</h1>
   <div class="warn">Isto não publica nada sozinho. Edite os campos, clique em "Gerar código atualizado",
   copie o resultado e cole substituindo TODO o conteúdo de <b>projects-data.js</b> — depois suba (commit/push)
-  esse arquivo no seu repositório do GitHub. Mantenha este admin.html fora de qualquer link do site público
-  (ele não precisa ser divulgado, mas pode ficar no mesmo repositório sem problema).</div>
+  esse arquivo no seu repositório do GitHub. Marque "Projeto Principal" em no máximo um projeto — ele aparece
+  em destaque acima da grade, com funcionalidades concluídas e roadmap.</div>
 
   <div id="cards"></div>
 
@@ -61,16 +66,27 @@
 
 <script>
 const data = typeof PROJECTS !== 'undefined' ? JSON.parse(JSON.stringify(PROJECTS)) : [];
+data.forEach(p => {
+  p.results = p.results || [];
+  p.completedFeatures = p.completedFeatures || [];
+  p.roadmap = p.roadmap || [];
+});
 
 function fieldRow(p, i){
+  const isFlag = !!p.flagship;
   return `
-  <div class="proj-card" data-idx="${i}">
-    <h2>${p.title || '(novo projeto)'}</h2>
+  <div class="proj-card ${isFlag ? 'flag' : ''}" data-idx="${i}">
+    <h2>${p.title || '(novo projeto)'} ${isFlag ? '<span class="flag-badge">Principal</span>' : ''}</h2>
+
+    <div class="flag-toggle">
+      <input type="checkbox" id="flag-${i}" data-field="flagship" ${isFlag ? 'checked' : ''}>
+      <label for="flag-${i}" style="text-transform:none;font-size:13px;">Projeto Principal (Flagship) — aparece em destaque acima da grade</label>
+    </div>
 
     <label>Título</label>
     <input type="text" data-field="title" value="${escapeAttr(p.title)}">
 
-    <div class="row2">
+    <div class="row3">
       <div>
         <label>Trilha</label>
         <select data-field="track">
@@ -79,10 +95,17 @@ function fieldRow(p, i){
         </select>
       </div>
       <div>
-        <label>Status (linha pequena no topo do card)</label>
-        <input type="text" data-field="status" value="${escapeAttr(p.status)}">
+        <label>Categoria</label>
+        <input type="text" data-field="category" value="${escapeAttr(p.category||'')}" placeholder="Ex: Plataforma de Eventos">
+      </div>
+      <div>
+        <label>Ano</label>
+        <input type="text" data-field="year" value="${escapeAttr(p.year||'')}" placeholder="2026">
       </div>
     </div>
+
+    <label>Status</label>
+    <input type="text" data-field="status" value="${escapeAttr(p.status)}">
 
     <label>Descrição</label>
     <textarea data-field="desc">${escapeHtml(p.desc)}</textarea>
@@ -90,18 +113,33 @@ function fieldRow(p, i){
     <label>Destaque técnico</label>
     <textarea data-field="highlight">${escapeHtml(p.highlight)}</textarea>
 
+    <label>Principais resultados (um por linha)</label>
+    <div class="list-editor"><textarea data-field="results">${escapeHtml((p.results||[]).join('\n'))}</textarea></div>
+
+    <div class="flagship-only-${i}" style="${isFlag ? '' : 'display:none;'}">
+      <label>Funcionalidades concluídas (um por linha)</label>
+      <div class="list-editor"><textarea data-field="completedFeatures">${escapeHtml((p.completedFeatures||[]).join('\n'))}</textarea></div>
+      <label>Roadmap futuro (um por linha)</label>
+      <div class="list-editor"><textarea data-field="roadmap">${escapeHtml((p.roadmap||[]).join('\n'))}</textarea></div>
+    </div>
+
     <label>Stack (separado por vírgula)</label>
     <input type="text" data-field="stack" value="${escapeAttr((p.stack||[]).join(', '))}">
 
-    <label>Link do repositório</label>
-    <input type="text" data-field="link" value="${escapeAttr(p.link)}">
-
-    <label>Link do demo ao vivo (opcional — Netlify, Vercel, etc.)</label>
-    <input type="text" data-field="demo" value="${escapeAttr(p.demo)}">
+    <div class="row2">
+      <div>
+        <label>Link do repositório</label>
+        <input type="text" data-field="link" value="${escapeAttr(p.link)}">
+      </div>
+      <div>
+        <label>Link do demo ao vivo (opcional)</label>
+        <input type="text" data-field="demo" value="${escapeAttr(p.demo)}">
+      </div>
+    </div>
 
     <label>Screenshot do projeto</label>
     <div class="img-row">
-      <img class="img-preview ${p.image ? '' : 'empty'}" id="preview-${i}" src="${p.image || ''}" ${p.image ? '' : 'style="display:flex"'}>
+      <img class="img-preview" id="preview-${i}" src="${p.image || ''}" style="${p.image ? '' : 'display:none'}">
       <input type="file" accept="image/*" onchange="handleImage(event, ${i})">
     </div>
   </div>`;
@@ -116,12 +154,23 @@ function renderForm(){
     el.addEventListener('input', () => {
       const idx = el.closest('.proj-card').dataset.idx;
       const field = el.dataset.field;
+      if (field === 'flagship'){
+        // apenas um projeto pode ser flagship — desmarca os outros
+        data.forEach((p, j) => { p.flagship = (String(j) === idx) ? el.checked : false; });
+        renderForm();
+        return;
+      }
       if (field === 'stack'){
         data[idx][field] = el.value.split(',').map(s => s.trim()).filter(Boolean);
+      } else if (field === 'results' || field === 'completedFeatures' || field === 'roadmap'){
+        data[idx][field] = el.value.split('\n').map(s => s.trim()).filter(Boolean);
       } else {
         data[idx][field] = el.value;
       }
-      if (field === 'title') el.closest('.proj-card').querySelector('h2').textContent = el.value || '(novo projeto)';
+      if (field === 'title'){
+        const h2 = el.closest('.proj-card').querySelector('h2');
+        h2.innerHTML = (el.value || '(novo projeto)') + (data[idx].flagship ? ' <span class="flag-badge">Principal</span>' : '');
+      }
     });
   });
 }
@@ -132,10 +181,9 @@ function handleImage(evt, idx){
   if (!file) return;
   const reader = new FileReader();
   reader.onload = () => {
-    data[idx].image = reader.result; // data URL base64 — funciona sem precisar hospedar a imagem em outro lugar
+    data[idx].image = reader.result;
     const img = document.getElementById('preview-'+idx);
     img.src = reader.result;
-    img.classList.remove('empty');
     img.style.display = 'block';
   };
   reader.readAsDataURL(file);
@@ -145,11 +193,16 @@ function generateCode(){
   const lines = data.map(p => `  {
     id: ${JSON.stringify(p.id)},
     title: ${JSON.stringify(p.title)},
+    flagship: ${p.flagship ? 'true' : 'false'},
     track: ${JSON.stringify(p.track)},
     pill: ${JSON.stringify(p.track === 'dados' ? 'Dados / ML' : 'Automação')},
+    category: ${JSON.stringify(p.category || "")},
+    year: ${JSON.stringify(p.year || "")},
     status: ${JSON.stringify(p.status)},
     desc: ${JSON.stringify(p.desc)},
     highlight: ${JSON.stringify(p.highlight)},
+    results: ${JSON.stringify(p.results || [])},
+    ${p.flagship ? `completedFeatures: ${JSON.stringify(p.completedFeatures || [])},\n    roadmap: ${JSON.stringify(p.roadmap || [])},` : ''}
     stack: ${JSON.stringify(p.stack)},
     link: ${JSON.stringify(p.link)},
     demo: ${JSON.stringify(p.demo || "")},

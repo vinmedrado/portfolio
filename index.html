@@ -4,7 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Vinicius Santos Medrado — Automação & Engenharia de Dados</title>
+
+<title>Vinicius Santos Medrado — Automação de Processos & Engenharia de Dados</title>
+<meta name="description" content="Portfólio de Vinicius Santos Medrado — Analista de Automação de Processos e Engenharia de Dados. Pipelines, automações e projetos de Machine Learning aplicados à cadeia GM Brasil / Stellantis e produtos autorais.">
+<meta name="author" content="Vinicius Santos Medrado">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vinicius Santos Medrado — Automação de Processos & Engenharia de Dados">
+<meta property="og:description" content="Pipelines, automações e projetos de Machine Learning — do dado bruto à decisão automatizada.">
+<meta property="og:url" content="https://vinmedrado.github.io/portfolio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vinicius Santos Medrado — Automação & Engenharia de Dados">
+<meta name="twitter:description" content="Pipelines, automações e projetos de Machine Learning — do dado bruto à decisão automatizada.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF5'/%3E%3Cg fill='none' stroke='%232C6E8E' stroke-width='7'%3E%3Ccircle cx='50' cy='50' r='24'/%3E%3Cpath d='M50 10v14M50 76v14M10 50h14M76 50h14M21 21l10 10M69 69l10 10M79 21l-10 10M21 79l10-10'/%3E%3C/g%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vinicius Santos Medrado",
+  "jobTitle": "Analista de Automação de Processos & Engenharia de Dados",
+  "url": "https://vinmedrado.github.io/portfolio",
+  "sameAs": [
+    "https://linkedin.com/in/viniciusmedrado",
+    "https://github.com/vinmedrado"
+  ],
+  "email": "mailto:Vinicius.medrado@outlook.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Santo André", "addressRegion": "SP", "addressCountry": "BR" }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -14,6 +44,7 @@
     --blue:#2C6E8E; --blue-dim:#DCEAF0;
     --amber:#B5701F; --amber-bg:#F3E3C9; --amber-line:#D9A85C;
     --teal:#1E7A63; --teal-bg:#DCEEE7; --teal-line:#6FB39D;
+    --focus:#1656A6;
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
@@ -25,8 +56,17 @@
   ::selection{ background:var(--amber-line); color:#2a1a06; }
   a{ color:inherit; }
   .mono{ font-family:'JetBrains Mono',monospace; }
-  .draft{ font-family:'Oswald',sans-serif; }
   .wrap{ max-width:1100px; margin:0 auto; padding:0 28px; position:relative; z-index:2; }
+
+  /* ---- Acessibilidade: foco visível em qualquer elemento navegável por teclado ---- */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:3px solid var(--focus); outline-offset:2px; border-radius:2px;
+  }
+  .skip-link{
+    position:absolute; left:-9999px; top:0; background:var(--ink); color:var(--paper);
+    padding:10px 16px; z-index:1000; font-family:'JetBrains Mono',monospace; font-size:13px;
+  }
+  .skip-link:focus{ left:12px; top:12px; }
 
   #bp-grid{ position:fixed; inset:0; z-index:-1; opacity:.55; pointer-events:none; }
 
@@ -42,14 +82,20 @@
   .pl-fill{ position:absolute; left:0; top:0; height:100%; width:0%; background:var(--blue); }
   .pl-txt{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); letter-spacing:.05em; }
   body.loading{ overflow:hidden; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal-target{ transition:none; }
+    .gear-load, .gear-spin, .flow-line{ animation:none !important; }
+  }
 
-  header.nav{ position:sticky; top:0; z-index:50; background:rgba(251,250,245,.88); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
+  header.nav{ position:sticky; top:0; z-index:50; background:rgba(251,250,245,.9); backdrop-filter:blur(8px); border-bottom:2px solid var(--ink); }
   .nav-inner{ max-width:1100px; margin:0 auto; padding:14px 28px; display:flex; justify-content:space-between; align-items:center; }
   .nav-name{ font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; letter-spacing:.03em; display:flex; align-items:center; gap:8px; }
-  .nav-links{ display:flex; gap:26px; list-style:none; }
+  .nav-links{ display:flex; gap:22px; list-style:none; }
   .nav-links a{ text-decoration:none; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; transition:color .2s; }
   .nav-links a:hover{ color:var(--blue); }
-  @media (max-width:640px){ .nav-links{ display:none; } }
+  .nav-cv{ border:1.5px solid var(--ink); padding:6px 12px; border-radius:2px; font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; color:var(--ink); text-transform:uppercase; transition:all .2s; }
+  .nav-cv:hover{ background:var(--ink); color:var(--paper); }
+  @media (max-width:760px){ .nav-links{ display:none; } }
 
   .titleblock{ border:2px solid var(--ink); margin-top:32px; background:var(--paper); }
   .tb-main{ padding:22px 24px 18px; border-bottom:1.5px solid var(--ink); }
@@ -68,10 +114,12 @@
   h1 .accent{ color:var(--blue); }
   .hero-sub{ margin-top:16px; max-width:480px; color:var(--muted); font-size:15px; }
   .hero-cta{ margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
-  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-block; text-transform:uppercase; letter-spacing:.03em; }
+  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-block; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
   .btn-primary{ background:var(--ink); color:var(--paper); }
   .btn-primary:hover{ background:var(--blue); border-color:var(--blue); }
   .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+  .btn-teal{ border-color:var(--teal-line); color:var(--teal); }
+  .btn-teal:hover{ background:var(--teal); border-color:var(--teal); color:var(--paper); }
 
   .schema-box{ border:1.5px solid var(--ink); padding:16px; background:var(--paper); }
   .schema-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; display:flex; justify-content:space-between; }
@@ -79,7 +127,7 @@
   @keyframes flow{ to{ stroke-dashoffset:-24; } }
   .gear-spin{ animation:spin 6s linear infinite; transform-origin:center; }
 
-  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1.5px solid var(--ink); margin:50px 0 70px; }
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1.5px solid var(--ink); margin:50px 0; }
   .stat{ padding:18px 16px; border-right:1.5px solid var(--ink); }
   .stat:last-child{ border-right:none; }
   .stat-key{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; }
@@ -92,54 +140,111 @@
   .section-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--blue); text-transform:uppercase; }
   h2{ font-family:'Oswald',sans-serif; font-size:21px; font-weight:600; text-transform:uppercase; letter-spacing:.02em; }
 
+  /* ============ FLAGSHIP PROJECT (Vinance) ============ */
+  .flagship{ border:2px solid var(--ink); margin-bottom:24px; position:relative; overflow:hidden; }
+  .flagship-badge{ position:absolute; top:0; right:0; background:var(--ink); color:var(--paper); font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:6px 14px; letter-spacing:.05em; text-transform:uppercase; }
+  .flagship-shot{ border-bottom:1.5px solid var(--ink); background:var(--paper-2); min-height:110px; display:flex; align-items:center; justify-content:center; }
+  .flagship-shot img{ width:100%; height:220px; object-fit:cover; display:block; }
+  .flagship-body{ padding:24px 26px 26px; }
+  .flagship-meta{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .flagship-status{ display:inline-flex; align-items:center; gap:6px; color:var(--teal); }
+  .flagship-status .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+  .flagship-title{ font-family:'Oswald',sans-serif; font-weight:700; font-size:28px; }
+  .flagship-desc{ margin-top:10px; max-width:680px; font-size:14px; color:var(--muted); }
+  .flagship-highlight{ margin-top:10px; font-size:13px; color:#33465A; border-left:2px solid var(--line); padding-left:10px; max-width:680px; }
+  .flagship-grid{ margin-top:20px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px; }
+  @media (max-width:800px){ .flagship-grid{ grid-template-columns:1fr; } }
+  .flagship-col h3{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--ink); letter-spacing:.05em; margin-bottom:10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  .feature-list{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; }
+  .feature-list li{ font-size:12.5px; color:#33465A; display:flex; gap:6px; align-items:flex-start; }
+  .feature-list li::before{ content:'✓'; color:var(--teal); font-weight:700; flex-shrink:0; }
+  .roadmap-list{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .roadmap-list li{ font-size:12.5px; color:var(--muted); display:flex; gap:8px; align-items:flex-start; }
+  .roadmap-list li::before{ content:'○'; color:var(--amber); flex-shrink:0; }
+  .flagship-stack{ margin-top:18px; display:flex; flex-wrap:wrap; gap:6px; }
+  .flagship-actions{ margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; }
+
+  /* ============ PROJECTS GRID: rich product-style cards ============ */
+  .projects-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media (max-width:760px){ .projects-grid{ grid-template-columns:1fr; } }
+  .card{ border:1.5px solid var(--ink); padding:0; background:var(--paper); position:relative; transition:transform .25s ease, box-shadow .25s ease; }
+  .card:hover{ transform:translateY(-3px); box-shadow:6px 6px 0 rgba(21,42,61,.12); }
+  .card-shot{ border-bottom:1.5px solid var(--ink); background:var(--paper-2); overflow:hidden; }
+  .card-shot img{ width:100%; height:150px; object-fit:cover; display:block; }
+  .shot-placeholder{ width:100%; height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    background-image:repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(21,42,61,.04) 9px, rgba(21,42,61,.04) 18px); }
+  .shot-placeholder svg{ width:20px; height:20px; opacity:.4; }
+  .shot-placeholder span{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); opacity:.75; }
+  .card-head{ display:flex; align-items:center; justify-content:space-between; padding:9px 16px; border-bottom:1.5px solid var(--ink); background:var(--paper-2); font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; }
+  .card-body{ padding:18px 18px 20px; }
+  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .card-title{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16.5px; }
+  .card-cat{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:2px; }
+  .pill{ font-family:'JetBrains Mono',monospace; font-size:10px; padding:3px 8px; border-radius:2px; white-space:nowrap; text-transform:uppercase; border:1px solid; flex-shrink:0; }
+  .pill-automation{ background:var(--amber-bg); color:var(--amber); border-color:var(--amber-line); }
+  .pill-data{ background:var(--teal-bg); color:var(--teal); border-color:var(--teal-line); }
+  .card-desc{ margin-top:11px; font-size:13.2px; color:var(--muted); }
+  .card-results{ list-style:none; margin-top:11px; display:flex; flex-direction:column; gap:4px; }
+  .card-results li{ font-size:12px; color:#33465A; display:flex; gap:6px; }
+  .card-results li::before{ content:'▸'; color:var(--blue); flex-shrink:0; }
+  .stack{ margin-top:13px; display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); background:var(--paper-2); border:1px solid var(--line); padding:2px 7px; border-radius:2px; }
+  .card-actions{ margin-top:15px; display:flex; gap:8px; flex-wrap:wrap; }
+  .card-btn{ font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; padding:6px 11px; border:1.3px solid var(--ink); border-radius:2px; color:var(--ink); transition:all .2s; }
+  .card-btn:hover{ background:var(--ink); color:var(--paper); }
+  .card-btn.demo{ border-color:var(--teal-line); color:var(--teal); }
+  .card-btn.demo:hover{ background:var(--teal); border-color:var(--teal); color:var(--paper); }
+
+  /* ============ EXPERIENCE (compact, result-forward) ============ */
   .log{ border-left:3px solid var(--ink); padding-left:24px; }
-  .log-entry{ position:relative; padding-bottom:28px; }
+  .log-entry{ position:relative; padding-bottom:26px; }
   .log-entry:last-child{ padding-bottom:0; }
   .log-node{ position:absolute; left:-32px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--amber); }
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
   .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; }
-  .log-detail{ margin-top:8px; font-size:13.3px; color:#33465A; max-width:600px; }
-  .log-detail ul{ padding-left:18px; margin-top:5px; }
-  .log-detail li{ margin-bottom:4px; }
+  .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
+  .log-results li{ font-size:13px; color:#33465A; display:flex; gap:7px; }
+  .log-results li::before{ content:'▸'; color:var(--blue); flex-shrink:0; }
+  .log-results b{ color:var(--ink); }
+  .log-more{ margin-top:8px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
 
-  .projects-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-  @media (max-width:760px){ .projects-grid{ grid-template-columns:1fr; } }
-  .card{ border:1.5px solid var(--ink); padding:0; background:var(--paper); position:relative; }
-  .card-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1.5px solid var(--ink); background:var(--paper-2); }
-  .card-icon{ width:16px; height:16px; }
-  .card-body{ padding:18px 18px 20px; }
-  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
-  .card-title{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16.5px; }
-  .pill{ font-family:'JetBrains Mono',monospace; font-size:10px; padding:3px 8px; border-radius:2px; white-space:nowrap; text-transform:uppercase; border:1px solid; }
-  .pill-automation{ background:var(--amber-bg); color:var(--amber); border-color:var(--amber-line); }
-  .pill-data{ background:var(--teal-bg); color:var(--teal); border-color:var(--teal-line); }
-  .card-desc{ margin-top:11px; font-size:13.2px; color:var(--muted); }
-  .card-highlight{ margin-top:11px; font-size:12.5px; color:#33465A; border-left:2px solid var(--line); padding-left:9px; }
-  .stack{ margin-top:13px; display:flex; flex-wrap:wrap; gap:6px; }
-  .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); background:var(--paper-2); border:1px solid var(--line); padding:2px 7px; border-radius:2px; }
-  .card-link{ display:inline-block; margin-top:14px; margin-right:14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); }
-  .card-link:hover{ color:var(--blue); border-color:var(--blue); }
-  .card-link.demo{ color:var(--teal); border-color:var(--teal); }
-  .card-link.demo:hover{ color:var(--blue); border-color:var(--blue); }
+  /* ============ TECH STACK (clean, no bars/percentages) ============ */
+  .stack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1.5px solid var(--ink); }
+  .stack-cell{ padding:16px 18px; border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); }
+  .stack-cell:nth-child(3n){ border-right:none; }
+  .stack-cell h3{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--blue); letter-spacing:.05em; margin-bottom:8px; }
+  .stack-cell .items{ display:flex; flex-wrap:wrap; gap:6px; }
+  @media (max-width:760px){ .stack-grid{ grid-template-columns:repeat(2,1fr); } .stack-cell:nth-child(2n){ border-right:none; } .stack-cell:nth-child(3n){ border-right:1.5px solid var(--ink); } .stack-cell:nth-child(2n){ border-right:none; } }
+  @media (max-width:480px){ .stack-grid{ grid-template-columns:1fr; } .stack-cell{ border-right:none !important; } }
 
-  .shot-frame{ margin-bottom:0; border-bottom:1.5px solid var(--ink); background:var(--paper-2); }
-  .shot-img{ width:100%; height:150px; object-fit:cover; display:block; }
-  .shot-placeholder{ width:100%; height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
-    background-image:repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(21,42,61,.04) 9px, rgba(21,42,61,.04) 18px); }
-  .shot-placeholder svg{ width:20px; height:20px; opacity:.4; }
-  .shot-placeholder span{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); opacity:.75; }
+  /* ============ SOBRE ============ */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start; }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-text{ font-size:14.5px; color:#33465A; max-width:520px; }
+  .about-text p{ margin-bottom:12px; }
+  .about-fact{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:12px; }
+  .about-fact span:first-child{ color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
 
+  /* ============ EDUCATION ============ */
   .edu-row{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:14px 0; border-bottom:1px solid var(--line); }
   .edu-row:last-child{ border-bottom:none; }
   .edu-name{ font-weight:600; font-family:'Oswald',sans-serif; font-size:14.5px; }
   .edu-sub{ color:var(--muted); font-size:12px; margin-top:3px; }
   .edu-date{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); white-space:nowrap; }
 
+  /* ============ GITHUB CTA BANNER ============ */
+  .gh-banner{ border:1.5px solid var(--ink); padding:22px 24px; margin-top:36px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; background:var(--paper-2); }
+  .gh-banner-text{ font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; }
+  .gh-banner-sub{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
+
+  /* ============ CONTACT ============ */
   footer{ padding:54px 0 46px; }
   .footer-head{ font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; max-width:520px; text-transform:uppercase; }
-  .contact-grid{ margin-top:24px; display:flex; gap:26px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; }
+  .contact-actions{ margin-top:24px; display:flex; gap:10px; flex-wrap:wrap; }
+  .contact-grid{ margin-top:30px; display:flex; gap:26px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; }
   .contact-item{ font-size:12.5px; }
   .contact-item .label{ color:var(--muted); display:block; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
   .contact-item a{ text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); }
@@ -148,11 +253,12 @@
 </style>
 </head>
 <body class="loading">
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div id="hardbg"></div>
-<svg id="bp-grid"></svg>
+<svg id="bp-grid" aria-hidden="true"></svg>
 
-<div id="preloader">
-  <svg class="gear-load" viewBox="0 0 100 100"><g fill="none" stroke="#2C6E8E" stroke-width="6"><path d="M50 8 L56 22 L44 22 Z M50 92 L56 78 L44 78 Z M8 50 L22 44 L22 56 Z M92 50 L78 44 L78 56 Z M20 20 L30 28 L22 32 Z M80 80 L70 72 L78 68 Z M80 20 L70 28 L78 32 Z M20 80 L30 72 L22 68 Z"/><circle cx="50" cy="50" r="26"/></g></svg>
+<div id="preloader" role="status" aria-live="polite">
+  <svg class="gear-load" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#2C6E8E" stroke-width="6"><path d="M50 8 L56 22 L44 22 Z M50 92 L56 78 L44 78 Z M8 50 L22 44 L22 56 Z M92 50 L78 44 L78 56 Z M20 20 L30 28 L22 32 Z M80 80 L70 72 L78 68 Z M80 20 L70 28 L78 32 Z M20 80 L30 72 L22 68 Z"/><circle cx="50" cy="50" r="26"/></g></svg>
   <div class="pl-track"><div class="pl-fill" id="plFill"></div></div>
   <div class="pl-txt" id="plTxt">plotando sistema · 0%</div>
 </div>
@@ -160,19 +266,21 @@
 <header class="nav">
   <div class="nav-inner">
     <span class="nav-name">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
       VINICIUS.MEDRADO
     </span>
     <ul class="nav-links">
-      <li><a href="#experiencia">experiência</a></li>
+      <li><a href="#resultados">resultados</a></li>
       <li><a href="#projetos">projetos</a></li>
-      <li><a href="#formacao">formação</a></li>
-      <li><a href="#contato">contato</a></li>
+      <li><a href="#experiencia">experiência</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#sobre">sobre</a></li>
     </ul>
+    <a class="nav-cv" href="Vinicius_Santos_Medrado.pdf" download>currículo ↓</a>
   </div>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="conteudo">
 
   <div class="titleblock reveal-target" data-reveal>
     <div class="tb-main">
@@ -187,6 +295,7 @@
     </div>
   </div>
 
+  <!-- ============ HERO ============ -->
   <section class="hero" style="border:none;">
     <div>
       <h1 class="reveal-target" data-reveal>Pego processo manual e dado bruto — <span class="accent">entrego pipeline e decisão automatizada.</span></h1>
@@ -198,7 +307,7 @@
       </div>
     </div>
 
-    <div class="schema-box reveal-target" data-reveal>
+    <div class="schema-box reveal-target" data-reveal aria-hidden="true">
       <div class="schema-label"><span>ESQUEMA / PIPELINE.DWG</span><span>P&amp;ID-01</span></div>
       <svg viewBox="0 0 300 210" width="100%">
         <path d="M40,40 H130" stroke="#B9C7D0" stroke-width="10" fill="none"/>
@@ -244,13 +353,36 @@
     </div>
   </section>
 
-  <div class="stats reveal-target" data-reveal>
-    <div class="stat"><div class="stat-key">retrabalho_reduzido</div><div class="stat-num" data-count="77" data-suffix="%">0%</div><div class="stat-label">sistema de gestão interno</div></div>
-    <div class="stat"><div class="stat-key">tempo_execucao</div><div class="stat-num" data-count="75" data-suffix="%">0%</div><div class="stat-label">consolidação de relatórios</div></div>
-    <div class="stat"><div class="stat-key">ceps_em_cache</div><div class="stat-num" data-count="1" data-suffix="M+">0M+</div><div class="stat-label">consulta: horas → segundos</div></div>
-    <div class="stat"><div class="stat-key">notas_processadas</div><div class="stat-num" data-count="5000" data-suffix="+">0+</div><div class="stat-label">em um único mês</div></div>
-  </div>
+  <!-- ============ RESULTADOS ============ -->
+  <section id="resultados" style="padding-top:0; border-top:none;">
+    <div class="stats reveal-target" data-reveal>
+      <div class="stat"><div class="stat-key">retrabalho_reduzido</div><div class="stat-num" data-count="77" data-suffix="%">0%</div><div class="stat-label">sistema de gestão interno</div></div>
+      <div class="stat"><div class="stat-key">tempo_execucao</div><div class="stat-num" data-count="75" data-suffix="%">0%</div><div class="stat-label">consolidação de relatórios</div></div>
+      <div class="stat"><div class="stat-key">ceps_em_cache</div><div class="stat-num" data-count="1" data-suffix="M+">0M+</div><div class="stat-label">consulta: horas → segundos</div></div>
+      <div class="stat"><div class="stat-key">notas_processadas</div><div class="stat-num" data-count="5000" data-suffix="+">0+</div><div class="stat-label">em um único mês</div></div>
+    </div>
+  </section>
 
+  <!-- ============ PROJETOS ============ -->
+  <section id="projetos">
+    <div class="section-head reveal-target" data-reveal>
+      <span class="section-tag mono">COMPONENTES / SPEC SHEETS</span>
+      <h2>Projetos</h2>
+    </div>
+
+    <div id="flagshipContainer"></div>
+    <div class="projects-grid" id="projectsGrid"></div>
+
+    <div class="gh-banner reveal-target" data-reveal>
+      <div>
+        <div class="gh-banner-text">Todo o código está aberto no GitHub</div>
+        <div class="gh-banner-sub">// 6 repositórios · pipelines, backends e modelos documentados</div>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/vinmedrado" target="_blank" rel="noopener">ver github ↗</a>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIÊNCIA ============ -->
   <section id="experiencia">
     <div class="section-head reveal-target" data-reveal>
       <span class="section-tag mono">ROTA / HISTÓRICO</span>
@@ -262,26 +394,22 @@
         <div class="log-date mono">jun 2026 — atualmente</div>
         <div class="log-role">Analista de Dados Pleno</div>
         <div class="log-org">MSX International · Stellantis South America</div>
-        <div class="log-detail">
-          <ul>
-            <li>Automação do envio diário de pesquisas de NPS via WhatsApp com Python</li>
-            <li>Scraper em Python para extração automatizada de dados do portal interno da Stellantis</li>
-            <li>Em desenvolvimento: automação em Power Automate para BI hoje mantido manualmente</li>
-          </ul>
-        </div>
+        <ul class="log-results">
+          <li>Automação do envio diário de <b>pesquisas de NPS</b> via WhatsApp com Python</li>
+          <li>Scraper para extração automatizada de dados do portal interno da Stellantis</li>
+          <li>Automação em Power Automate para BI hoje mantido manualmente <span class="log-more">(em desenvolvimento)</span></li>
+        </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — fev 2026</div>
         <div class="log-role">Analista Administrativo de Vendas Diretas</div>
         <div class="log-org">Conduent · General Motors Brasil</div>
-        <div class="log-detail">
-          <ul>
-            <li>Pipelines ETL em Python, Power Query e SQL; dashboards como entregável de apoio à decisão</li>
-            <li>Sistema de gestão interno com login e integração Outlook — 77% menos retrabalho</li>
-            <li>Cache SQLite de +1M CEPs — consulta de horas para segundos</li>
-          </ul>
-        </div>
+        <ul class="log-results">
+          <li>Consolidação de relatórios via Python/VBA — <b>redução de 75% no tempo de execução</b></li>
+          <li>Sistema de gestão interno com integração Outlook — <b>redução de 77% de retrabalho</b></li>
+          <li>Cache SQLite de <b>+1M CEPs</b> — consulta de horas para segundos</li>
+        </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
@@ -291,50 +419,74 @@
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
-        <div class="log-date mono">jul 2022 — jan 2023</div>
-        <div class="log-role">Analista Financeiro Junior</div>
-        <div class="log-org">Conduent · GM Brasil — Exportação &amp; Logística</div>
-      </div>
-      <div class="log-entry reveal-target" data-reveal>
-        <div class="log-node"></div>
-        <div class="log-date mono">abr 2021 — jul 2022</div>
-        <div class="log-role">Assistente Administrativo</div>
-        <div class="log-org">Conduent · GM Brasil — Recebimento Fiscal</div>
-      </div>
-      <div class="log-entry reveal-target" data-reveal>
-        <div class="log-node"></div>
-        <div class="log-date mono">abr 2020 — abr 2021</div>
-        <div class="log-role">Operador de Processos</div>
-        <div class="log-org">Conduent · GM Brasil — Recebimento Fiscal</div>
+        <div class="log-date mono">jul 2022 — abr 2021</div>
+        <div class="log-role">Analista Financeiro Junior · Assistente Administrativo · Operador de Processos</div>
+        <div class="log-org">Conduent · GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</div>
+        <ul class="log-results">
+          <li>Processamento de <b>+5.000 notas fiscais</b> em um único mês, mínima margem de erro no SAP</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section id="projetos">
+  <!-- ============ STACK TÉCNICA ============ -->
+  <section id="stack">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">COMPONENTES / SPEC SHEETS</span>
-      <h2>Projetos</h2>
+      <span class="section-tag mono">MATERIAIS / COMPONENTES</span>
+      <h2>Stack Técnica</h2>
     </div>
-    <div class="projects-grid" id="projectsGrid"></div>
+    <div class="stack-grid reveal-target" data-reveal>
+      <div class="stack-cell"><h3>Automação</h3><div class="items"><span class="tag">Python</span><span class="tag">Power Automate</span><span class="tag">Selenium</span><span class="tag">VBA</span></div></div>
+      <div class="stack-cell"><h3>Dados & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag">Pandas</span></div></div>
+      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag">FastAPI</span><span class="tag">APIs REST</span><span class="tag">Docker</span><span class="tag">Git</span></div></div>
+      <div class="stack-cell"><h3>Banco de Dados</h3><div class="items"><span class="tag">PostgreSQL</span><span class="tag">SQLite</span></div></div>
+      <div class="stack-cell"><h3>BI & Visualização</h3><div class="items"><span class="tag">Power BI</span><span class="tag">DAX</span></div></div>
+      <div class="stack-cell"><h3>Machine Learning & IA</h3><div class="items"><span class="tag">Machine Learning</span><span class="tag">LLMs</span><span class="tag">React</span></div></div>
+    </div>
   </section>
 
-  <section id="formacao">
+  <!-- ============ SOBRE ============ -->
+  <section id="sobre">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">CERTIFICAÇÃO</span>
-      <h2>Formação</h2>
+      <span class="section-tag mono">MEMORIAL DESCRITIVO</span>
+      <h2>Sobre</h2>
     </div>
-    <div class="edu-row reveal-target" data-reveal>
-      <div><div class="edu-name">Bacharelado em Ciência de Dados</div><div class="edu-sub">Cruzeiro do Sul (EAD) · São Paulo, Brasil</div></div>
-      <div class="edu-date mono">jun 2025 — jun 2027</div>
+    <div class="about-grid reveal-target" data-reveal>
+      <div class="about-text">
+        <p>Comecei operando processos fiscais na cadeia GM Brasil e fui migrando pra onde o trabalho manual mais doía: relatórios repetitivos, planilhas de controle, consultas demoradas. Automatizar isso virou o fio condutor da carreira.</p>
+        <p>Hoje como Analista de Dados na Stellantis, sigo nessa linha — Python, ETL, scraping de portais internos, automação de rotinas via WhatsApp e Power Automate. Nos projetos autorais, levo o mesmo raciocínio de engenharia mais longe: pipelines orquestrados, backends assíncronos e modelos de Machine Learning aplicados a problemas reais.</p>
+      </div>
+      <div>
+        <div class="about-fact"><span>Base</span><span>Santo André, SP, Brasil</span></div>
+        <div class="about-fact"><span>Experiência</span><span>4+ anos · cadeia GM / Stellantis</span></div>
+        <div class="about-fact"><span>Formação</span><span>Ciência de Dados (em andamento)</span></div>
+        <div class="about-fact"><span>Projetos autorais</span><span>6 builds independentes</span></div>
+        <div class="about-fact" style="border-bottom:none;"><span>Foco atual</span><span>Automação & Engenharia de Dados</span></div>
+      </div>
     </div>
-    <div class="edu-row reveal-target" data-reveal>
-      <div><div class="edu-name">Técnico em Administração</div><div class="edu-sub">Senac Santo André</div></div>
-      <div class="edu-date mono">jun 2018 — jun 2020</div>
+
+    <div style="margin-top:40px;">
+      <div class="edu-row reveal-target" data-reveal>
+        <div><div class="edu-name">Bacharelado em Ciência de Dados</div><div class="edu-sub">Cruzeiro do Sul (EAD) · São Paulo, Brasil</div></div>
+        <div class="edu-date mono">jun 2025 — jun 2027</div>
+      </div>
+      <div class="edu-row reveal-target" data-reveal>
+        <div><div class="edu-name">Técnico em Administração</div><div class="edu-sub">Senac Santo André</div></div>
+        <div class="edu-date mono">jun 2018 — jun 2020</div>
+      </div>
     </div>
   </section>
 
+  <!-- ============ CONTATO ============ -->
   <footer id="contato">
     <div class="footer-head reveal-target" data-reveal>Vamos conversar sobre dados, automação ou a próxima vaga?</div>
+    <div class="contact-actions reveal-target" data-reveal>
+      <a class="btn btn-primary" href="Vinicius_Santos_Medrado.pdf" download>baixar currículo</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener">linkedin</a>
+      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener">github</a>
+      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener">whatsapp</a>
+      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com">email</a>
+    </div>
     <div class="contact-grid reveal-target" data-reveal>
       <div class="contact-item"><span class="label">email</span><a href="mailto:Vinicius.medrado@outlook.com">Vinicius.medrado@outlook.com</a></div>
       <div class="contact-item"><span class="label">telefone</span><a href="tel:+5511935350574">(11) 93535-0574</a></div>
@@ -348,6 +500,7 @@
 
 <script src="projects-data.js"></script>
 <script>
+/* ---------- BLUEPRINT GRID BACKGROUND ---------- */
 (function(){
   const svg = document.getElementById('bp-grid');
   const ns = 'http://www.w3.org/2000/svg';
@@ -369,43 +522,86 @@
   svg.appendChild(group);
 })();
 
-function shotBlock(p){
+/* ---------- RENDER PROJECTS: flagship + grid ---------- */
+function shotBlock(p, tall){
+  const h = tall ? 220 : 150;
   if (p.image && p.image.trim() !== ""){
-    return `<div class="shot-frame"><img class="shot-img" src="${p.image}" alt="Tela do projeto ${p.title}"></div>`;
+    return `<img src="${p.image}" alt="Tela do projeto ${p.title}" style="width:100%;height:${h}px;object-fit:cover;display:block;" loading="lazy">`;
   }
-  return `<div class="shot-frame"><div class="shot-placeholder">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#5F7181" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 3 3 5-5 5 4"/><circle cx="8" cy="8" r="1.4"/></svg>
+  return `<div class="shot-placeholder" style="height:${tall ? 180 : 120}px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#5F7181" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 3 3 5-5 5 4"/><circle cx="8" cy="8" r="1.4"/></svg>
     <span>adicionar screenshot em admin.html</span>
-  </div></div>`;
+  </div>`;
 }
+
+function renderFlagship(p){
+  const container = document.getElementById('flagshipContainer');
+  if (!p) { container.innerHTML = ''; return; }
+  container.innerHTML = `
+    <div class="flagship reveal-target" data-reveal>
+      <span class="flagship-badge">★ Projeto Principal</span>
+      <div class="flagship-shot">${shotBlock(p, true)}</div>
+      <div class="flagship-body">
+        <div class="flagship-meta">
+          <span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span>
+          <span class="flagship-status"><span class="dot"></span>${p.status}</span>
+        </div>
+        <div class="flagship-title">${p.title}</div>
+        <p class="flagship-desc">${p.desc}</p>
+        <p class="flagship-highlight">${p.highlight}</p>
+        <div class="flagship-grid">
+          <div class="flagship-col">
+            <h3>Funcionalidades Concluídas</h3>
+            <ul class="feature-list">${(p.completedFeatures||[]).map(f => `<li>${f}</li>`).join('')}</ul>
+          </div>
+          <div class="flagship-col">
+            <h3>Roadmap Futuro</h3>
+            <ul class="roadmap-list">${(p.roadmap||[]).map(f => `<li>${f}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="flagship-stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
+        <div class="flagship-actions">
+          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">ver no github ↗</a>
+          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">acessar demonstração ↗</a>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderProjects(){
+  if (typeof PROJECTS === 'undefined') return;
+  const flagship = PROJECTS.find(p => p.flagship);
+  const rest = PROJECTS.filter(p => !p.flagship);
+  renderFlagship(flagship);
+
   const grid = document.getElementById('projectsGrid');
-  if (!grid || typeof PROJECTS === 'undefined') return;
-  grid.innerHTML = PROJECTS.map(p => {
+  grid.innerHTML = rest.map(p => {
     const isData = p.track === 'dados';
     const icon = isData
-      ? '<svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#1E7A63" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>'
-      : '<svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>';
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7A63" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>';
     return `
     <div class="card reveal-target" data-reveal>
-      ${shotBlock(p)}
-      <div class="card-head">
-        <span class="mono" style="font-size:10.5px;color:var(--muted);text-transform:uppercase;">${p.status}</span>
-        ${icon}
-      </div>
+      <div class="card-shot">${shotBlock(p, false)}</div>
+      <div class="card-head"><span>${p.category} · ${p.year}</span>${icon}</div>
       <div class="card-body">
-        <div class="card-top"><div class="card-title">${p.title}</div><span class="pill ${isData ? 'pill-data' : 'pill-automation'}">${p.pill}</span></div>
+        <div class="card-top"><div><div class="card-title">${p.title}</div></div><span class="pill ${isData ? 'pill-data' : 'pill-automation'}">${p.pill}</span></div>
         <p class="card-desc">${p.desc}</p>
-        <p class="card-highlight">${p.highlight}</p>
+        ${p.results ? `<ul class="card-results">${p.results.slice(0,3).map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
         <div class="stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
-        <a class="card-link" href="${p.link}" target="_blank" rel="noopener">${p.link.replace('https://','')} →</a>
-        ${p.demo ? `<a class="card-link demo" href="${p.demo}" target="_blank" rel="noopener">ver demo ao vivo ↗</a>` : ''}
+        <div class="card-actions">
+          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">github ↗</a>
+          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">demo ↗</a>` : ''}
+        </div>
       </div>
     </div>`;
   }).join('');
-}
-renderProjects();
 
+  // novos elementos entram no observer de reveal
+  document.querySelectorAll('.reveal-target').forEach(el => { if (!el.dataset.observed){ io.observe(el); el.dataset.observed = '1'; } });
+}
+
+/* ---------- PRELOADER ---------- */
 let pct = 0;
 const plFill = document.getElementById('plFill');
 const plTxt = document.getElementById('plTxt');
@@ -423,12 +619,15 @@ function finishLoad(){
   setTimeout(() => pl.remove(), 650);
 }
 
-function revealNow(list){ list.forEach(el => el.classList.add('in')); }
+/* ---------- REVEAL (vanilla IntersectionObserver) ---------- */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold:.12 });
-document.querySelectorAll('.reveal-target').forEach(el => io.observe(el));
 
+renderProjects();
+document.querySelectorAll('.reveal-target').forEach(el => { io.observe(el); el.dataset.observed = '1'; });
+
+/* ---------- COUNT-UP STATS ---------- */
 const counted = new WeakSet();
 const cio = new IntersectionObserver((entries) => {
   entries.forEach(e => {
