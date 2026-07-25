@@ -74,24 +74,24 @@ const PROJECTS = [
     image: ""
   },
   {
-    id: "matchflow",
-    title: "MatchFlow Analytics",
+    id: "footballdecisionlab",
+    title: "Football Decision Lab",
     flagship: false,
     track: "dados",
     pill: "Dados / ML",
-    category: "Modelagem Estatística Esportiva",
-    year: "2025",
-    status: "online · 3 modelos comparados",
-    desc: "Pipeline de pesquisa quantitativa esportiva: feature engineering, comparação de RandomForest/LightGBM/XGBoost calibrados e Recommendation Engine.",
-    highlight: "Backtesting multi-mercado com gestão de risco via Kelly Fracionado (25%).",
+    category: "ML & Decision Intelligence Esportiva",
+    year: "2026",
+    status: "experimento prospectivo ativo · paper trading",
+    desc: "Evolução do MatchFlow: plataforma de pesquisa e operação paper que transforma partidas em decisões rastreáveis, com validação temporal, modelo champion congelado (hash SHA-256) e settlement automático.",
+    highlight: "Governança champion/challenger com promoção deliberada, calibração (Brier) auditada e guardrails fail-closed — reporta com honestidade quando o intervalo de confiança do ROI cruza zero.",
     results: [
-      "3 modelos de ML comparados e calibrados",
-      "Correção de 3 vazamentos críticos de dados",
-      "Backtesting multi-mercado com odds reais"
+      "Separação temporal rigorosa (sem data leakage) entre backfill, backtest e captura prospectiva",
+      "Guardrails fail-closed, imutabilidade de sinais e hash SHA-256 do modelo",
+      "Governança human-in-the-loop na promoção entre modelo challenger e champion"
     ],
     stack: ["Python", "Pandas", "XGBoost", "LightGBM", "Scikit-learn"],
     link: "https://github.com/vinmedrado",
-    demo: "https://matchflow-ia.netlify.app",
+    demo: "https://football-decision-lab.netlify.app/",
     image: ""
   },
   {
@@ -133,7 +133,7 @@ const PROJECTS = [
     ],
     stack: ["FastAPI", "React", "WebSocket", "WhatsApp API"],
     link: "https://github.com/vinmedrado",
-    demo: "",
+    demo: "https://lumyra-events.netlify.app/",
     image: ""
   },
   {
