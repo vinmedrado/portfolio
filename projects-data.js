@@ -50,7 +50,7 @@ const PROJECTS = [
     stack: ["Python", "FastAPI (async)", "PostgreSQL", "Redis", "Celery", "React", "TypeScript", "Groq API"],
     link: "https://github.com/vinmedrado",
     demo: "https://vinance-ai.netlify.app",
-    image: ""
+    image: "images/vinance.png"
   },
   {
     id: "applymize",
@@ -92,7 +92,7 @@ const PROJECTS = [
     stack: ["Python", "Pandas", "XGBoost", "LightGBM", "Scikit-learn"],
     link: "https://github.com/vinmedrado",
     demo: "https://football-decision-lab.netlify.app/",
-    image: ""
+    image: "images/footballdecisionlab.png"
   },
   {
     id: "marketplace",
@@ -134,7 +134,7 @@ const PROJECTS = [
     stack: ["FastAPI", "React", "WebSocket", "WhatsApp API"],
     link: "https://github.com/vinmedrado",
     demo: "https://lumyra-events.netlify.app/",
-    image: ""
+    image: "images/lumyra.png"
   },
   {
     id: "meucarrovale",
@@ -155,7 +155,7 @@ const PROJECTS = [
     stack: ["FastAPI", "React", "PostgreSQL", "Alembic"],
     link: "https://github.com/vinmedrado",
     demo: "https://meu-carro-vale.netlify.app",
-    image: ""
+    image: "images/meucarrovale.png"
   }
 ];
 
