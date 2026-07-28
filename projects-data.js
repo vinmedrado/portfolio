@@ -70,7 +70,7 @@ const PROJECTS = [
     ],
     stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
     link: "https://github.com/vinmedrado",
-    demo: "",
+    demo: "https://applymize.netlify.app",
     image: ""
   },
   {
