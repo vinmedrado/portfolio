@@ -48,7 +48,7 @@ const PROJECTS = [
       "Gestão de risco"
     ],
     stack: ["Python", "FastAPI (async)", "PostgreSQL", "Redis", "Celery", "React", "TypeScript", "Groq API"],
-    link: "https://github.com/vinmedrado",
+    link: "https://github.com/vinmedrado/vinance",
     demo: "https://vinance-ai.netlify.app",
     image: "images/vinance.png"
   },
@@ -69,7 +69,7 @@ const PROJECTS = [
       "Auto-candidatura automatizada via Selenium"
     ],
     stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
-    link: "https://github.com/vinmedrado",
+    link: "https://github.com/vinmedrado/applymize",
     demo: "https://applymize.netlify.app",
     image: ""
   },
@@ -90,7 +90,7 @@ const PROJECTS = [
       "Governança human-in-the-loop na promoção entre modelo challenger e champion"
     ],
     stack: ["Python", "Pandas", "XGBoost", "LightGBM", "Scikit-learn"],
-    link: "https://github.com/vinmedrado",
+    link: "https://github.com/vinmedrado/football-decision-lab",
     demo: "https://football-decision-lab.netlify.app/",
     image: "images/footballdecisionlab.png"
   },
@@ -132,7 +132,7 @@ const PROJECTS = [
       "Arquitetura multi-tenant isolada por cliente"
     ],
     stack: ["FastAPI", "React", "WebSocket", "WhatsApp API"],
-    link: "https://github.com/vinmedrado",
+    link: "https://github.com/vinmedrado/Lumyra",
     demo: "https://lumyra-events.netlify.app/",
     image: "images/lumyra.png"
   },
@@ -153,7 +153,7 @@ const PROJECTS = [
       "Laudo em PDF premium exportável"
     ],
     stack: ["FastAPI", "React", "PostgreSQL", "Alembic"],
-    link: "https://github.com/vinmedrado",
+    link: "https://github.com/vinmedrado/meu-carro-vale",
     demo: "https://meu-carro-vale.netlify.app",
     image: "images/meucarrovale.png"
   }
