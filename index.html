@@ -95,8 +95,10 @@
   .nav-inner{ max-width:1100px; margin:0 auto; padding:14px 28px; display:flex; justify-content:space-between; align-items:center; }
   .nav-name{ font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; letter-spacing:.03em; display:flex; align-items:center; gap:8px; }
   .nav-links{ display:flex; gap:22px; list-style:none; }
-  .nav-links a{ text-decoration:none; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; transition:color .2s; }
+  .nav-links a{ text-decoration:none; color:var(--muted); font-size:12px; font-family:'JetBrains Mono',monospace; transition:color .2s; position:relative; padding-bottom:2px; }
+  .nav-links a::after{ content:''; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--blue); transition:right .25s ease; }
   .nav-links a:hover{ color:var(--blue); }
+  .nav-links a:hover::after{ right:0; }
   .nav-cv{ border:1.5px solid var(--ink); padding:6px 12px; border-radius:2px; font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; color:var(--ink); text-transform:uppercase; transition:all .2s; }
   .nav-cv:hover{ background:var(--ink); color:var(--paper); }
   @media (max-width:760px){ .nav-links{ display:none; } }
@@ -119,6 +121,7 @@
   .hero-sub{ margin-top:16px; max-width:480px; color:var(--muted); font-size:15px; }
   .hero-cta{ margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
   .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-block; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
+  .btn:hover{ transform:translateY(-2px); box-shadow:3px 3px 0 rgba(21,42,61,.18); }
   .btn-primary{ background:var(--ink); color:var(--paper); }
   .btn-primary:hover{ background:var(--blue); border-color:var(--blue); }
   .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
@@ -145,10 +148,12 @@
   h2{ font-family:'Oswald',sans-serif; font-size:21px; font-weight:600; text-transform:uppercase; letter-spacing:.02em; }
 
   /* ============ FLAGSHIP PROJECT (Vinance) ============ */
-  .flagship{ border:2px solid var(--ink); margin-bottom:24px; position:relative; overflow:hidden; }
+  .flagship{ border:2px solid var(--ink); margin-bottom:24px; position:relative; overflow:hidden; transition:box-shadow .3s ease; }
+  .flagship:hover{ box-shadow:8px 8px 0 rgba(21,42,61,.10); }
   .flagship-badge{ position:absolute; top:0; right:0; background:var(--ink); color:var(--paper); font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:6px 14px; letter-spacing:.05em; text-transform:uppercase; }
-  .flagship-shot{ border-bottom:1.5px solid var(--ink); background:var(--paper-2); min-height:110px; display:flex; align-items:center; justify-content:center; }
-  .flagship-shot img{ width:100%; height:220px; object-fit:cover; display:block; }
+  .flagship-shot{ border-bottom:1.5px solid var(--ink); background:var(--paper-2); min-height:110px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .flagship-shot img{ width:100%; height:220px; object-fit:cover; display:block; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+  .flagship:hover .flagship-shot img{ transform:scale(1.03); }
   .flagship-body{ padding:24px 26px 26px; }
   .flagship-meta{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
   .flagship-status{ display:inline-flex; align-items:center; gap:6px; color:var(--teal); }
@@ -175,7 +180,8 @@
   .card{ border:1.5px solid var(--ink); padding:0; background:var(--paper); position:relative; transition:transform .25s ease, box-shadow .25s ease; }
   .card:hover{ transform:translateY(-3px); box-shadow:6px 6px 0 rgba(21,42,61,.12); }
   .card-shot{ border-bottom:1.5px solid var(--ink); background:var(--paper-2); overflow:hidden; }
-  .card-shot img{ width:100%; height:150px; object-fit:cover; display:block; }
+  .card-shot img{ width:100%; height:150px; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+  .card:hover .card-shot img{ transform:scale(1.045); }
   .shot-placeholder{ width:100%; height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
     background-image:repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(21,42,61,.04) 9px, rgba(21,42,61,.04) 18px); }
   .shot-placeholder svg{ width:20px; height:20px; opacity:.4; }
@@ -195,8 +201,8 @@
   .stack{ margin-top:13px; display:flex; flex-wrap:wrap; gap:6px; }
   .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); background:var(--paper-2); border:1px solid var(--line); padding:2px 7px; border-radius:2px; }
   .card-actions{ margin-top:15px; display:flex; gap:8px; flex-wrap:wrap; }
-  .card-btn{ font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; padding:6px 11px; border:1.3px solid var(--ink); border-radius:2px; color:var(--ink); transition:all .2s; }
-  .card-btn:hover{ background:var(--ink); color:var(--paper); }
+  .card-btn{ font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; padding:6px 11px; border:1.3px solid var(--ink); border-radius:2px; color:var(--ink); transition:all .2s; display:inline-block; }
+  .card-btn:hover{ background:var(--ink); color:var(--paper); transform:translateY(-1px); }
   .card-btn.demo{ border-color:var(--teal-line); color:var(--teal); }
   .card-btn.demo:hover{ background:var(--teal); border-color:var(--teal); color:var(--paper); }
 
@@ -511,7 +517,7 @@
 
 </div>
 
-<script src="projects-data.js?v=20260728b"></script>
+<script src="projects-data.js?v=20260728c"></script>
 <script>
 /* ---------- BLUEPRINT GRID BACKGROUND ---------- */
 (function(){
@@ -543,7 +549,7 @@ function shotBlock(p, tall){
   }
   return `<div class="shot-placeholder" style="height:${tall ? 180 : 120}px;">
     <svg viewBox="0 0 24 24" fill="none" stroke="#5F7181" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 3 3 5-5 5 4"/><circle cx="8" cy="8" r="1.4"/></svg>
-    <span>adicionar screenshot em admin.html</span>
+    <span>captura em processo de revisão</span>
   </div>`;
 }
 
