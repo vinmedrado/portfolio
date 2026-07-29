@@ -108,7 +108,7 @@ const PROJECTS = [
     ],
     stack: ["FastAPI", "Airflow", "PostgreSQL", "SQLAlchemy", "Docker"],
     link: "https://github.com/vinmedrado/marketplace-seller-platform",
-    demo: "https://marketplace-seller-platform.netlify.app/",
+    demo: "https://vinmedrado.github.io/marketplace-seller-platform/",
     image: "images/marketplace.png"
   },
   {
