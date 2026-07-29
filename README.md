@@ -18,6 +18,10 @@ Portfolio tecnico pessoal em formato de landing page estatica. O site apresenta 
 - `Vinicius_Santos_Medrado.pdf`: curriculo em portugues.
 - `Vinicius_Santos_Medrado_EN.pdf`: curriculo em ingles.
 
+## GIF
+
+![Portfolio demo](assets/demo/demo.gif)
+
 ## Captura
 
 ![Portfolio cover](images/og-cover.png)
