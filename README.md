@@ -22,7 +22,7 @@ Portfolio tecnico pessoal em formato de landing page estatica. O site apresenta 
 
 ![Portfolio demo](assets/demo/demo.gif)
 
-## Captura
+## Preview
 
 ![Portfolio cover](images/og-cover.png)
 
