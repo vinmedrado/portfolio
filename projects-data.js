@@ -71,7 +71,7 @@ const PROJECTS = [
     stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
     link: "https://github.com/vinmedrado/applymize",
     demo: "https://applymize.netlify.app",
-    image: ""
+    image: "images/applymize.jpg"
   },
   {
     id: "footballdecisionlab",
@@ -111,9 +111,9 @@ const PROJECTS = [
       "Banco multi-cliente com isolamento por tenant"
     ],
     stack: ["FastAPI", "Airflow", "PostgreSQL", "SQLAlchemy", "Docker"],
-    link: "https://github.com/vinmedrado",
-    demo: "",
-    image: ""
+    link: "https://github.com/vinmedrado/marketplace-seller-platform",
+    demo: "https://marketplace-seller-platform.netlify.app/",
+    image: "images/marketplace.png"
   },
   {
     id: "lumyra",
