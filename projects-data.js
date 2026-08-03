@@ -1226,10 +1226,10 @@ docs/screenshots/pdf-report.png
     stack: ["Python", "Flask", "Playwright", "Groq API", "SQLite", "pytest"],
     link: "https://github.com/vinmedrado/freelance-bot",
     demo: "https://vinmedrado.github.io/freelance-bot/",
-    image: "gallery/freelancebot/freelancebot-01.jpg",
+    image: "docs/images/demo-dashboard.png",
     pdf: "docs/proposta-99freelas.pdf",
     pdfLabel: "ver proposta em PDF",
-    gallery: ["gallery/freelancebot/freelancebot-01.jpg", "gallery/freelancebot/freelancebot-02.jpg", "gallery/freelancebot/freelancebot-03.jpg", "gallery/freelancebot/freelancebot-04.jpg", "gallery/freelancebot/freelancebot-05.jpg", "gallery/freelancebot/freelancebot-06.jpg", "gallery/freelancebot/freelancebot-07.jpg"],
+    gallery: ["docs/images/demo-dashboard.png", "docs/images/demo-detail.png", "docs/images/demo-proposal.png", "docs/images/landing.png"],
     readmeHtml: `<p align="center">
   <img src="branding/banner.svg" alt="FreelanceBot AI - radar de oportunidades, propostas e precificacao" width="100%">
 </p>
