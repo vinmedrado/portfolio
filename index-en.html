@@ -501,10 +501,10 @@
   <!-- ============ RESULTADOS ============ -->
   <section id="resultados" style="padding-top:0; border-top:none;">
     <div class="stats reveal-target" data-reveal>
-      <div class="stat"><div class="stat-key">rework_reduced</div><div class="stat-num" data-count="77" data-suffix="%">0%</div><div class="stat-label">internal management system</div></div>
-      <div class="stat"><div class="stat-key">execution_time</div><div class="stat-num" data-count="75" data-suffix="%">0%</div><div class="stat-label">report consolidation</div></div>
-      <div class="stat"><div class="stat-key">zip_codes_cached</div><div class="stat-num" data-count="1" data-suffix="M+">0M+</div><div class="stat-label">lookup: hours → seconds</div></div>
-      <div class="stat"><div class="stat-key">invoices_processed</div><div class="stat-num" data-count="5000" data-suffix="+">0+</div><div class="stat-label">in a single month</div></div>
+      <div class="stat"><div class="stat-key">rework_reduced</div><div class="stat-num" data-count="77" data-suffix="%">77%</div><div class="stat-label">internal management system</div></div>
+      <div class="stat"><div class="stat-key">execution_time</div><div class="stat-num" data-count="75" data-suffix="%">75%</div><div class="stat-label">report consolidation</div></div>
+      <div class="stat"><div class="stat-key">zip_codes_cached</div><div class="stat-num" data-count="1" data-suffix="M+">1M+</div><div class="stat-label">lookup: hours → seconds</div></div>
+      <div class="stat"><div class="stat-key">invoices_processed</div><div class="stat-num" data-count="5000" data-suffix="+">5000+</div><div class="stat-label">in a single month</div></div>
     </div>
   </section>
 
@@ -900,6 +900,14 @@ const cio = new IntersectionObserver((entries) => {
   });
 }, { threshold:.4 });
 document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
+setTimeout(() => {
+  document.querySelectorAll('.stat-num').forEach(el => {
+    if (counted.has(el)) return;
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    el.textContent = Math.floor(target) + suffix;
+  });
+}, 1600);
 </script>
 
 <!-- ============ PROJECT DETAIL OVERLAY ============ -->
