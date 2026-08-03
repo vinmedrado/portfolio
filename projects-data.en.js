@@ -46,7 +46,8 @@ const PROJECTS = [
     stack: ["Python", "FastAPI (async)", "PostgreSQL", "Redis", "Celery", "React", "TypeScript", "Groq API"],
     link: "https://github.com/vinmedrado/vinance",
     demo: "https://vinance-ai.netlify.app",
-    image: "images/vinance.png"
+    image: "images/vinance.png",
+    gallery: ["gallery/vinance/vinance-01.jpg", "gallery/vinance/vinance-02.jpg", "gallery/vinance/vinance-03.jpg", "gallery/vinance/vinance-04.jpg", "gallery/vinance/vinance-05.jpg", "gallery/vinance/vinance-06.jpg"]
   },
   {
     id: "applymize",
@@ -67,7 +68,8 @@ const PROJECTS = [
     stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
     link: "https://github.com/vinmedrado/applymize",
     demo: "https://applymize.netlify.app",
-    image: "images/applymize.jpg"
+    image: "images/applymize.jpg",
+    gallery: ["gallery/applymize/applymize-01.jpg", "gallery/applymize/applymize-02.jpg", "gallery/applymize/applymize-03.jpg", "gallery/applymize/applymize-04.jpg", "gallery/applymize/applymize-05.jpg", "gallery/applymize/applymize-06.jpg", "gallery/applymize/applymize-07.jpg", "gallery/applymize/applymize-08.jpg"]
   },
   {
     id: "footballdecisionlab",
@@ -88,7 +90,8 @@ const PROJECTS = [
     stack: ["Python", "Pandas", "XGBoost", "LightGBM", "Scikit-learn"],
     link: "https://github.com/vinmedrado/football-decision-lab",
     demo: "https://football-decision-lab.netlify.app/",
-    image: "images/footballdecisionlab.png"
+    image: "images/footballdecisionlab.png",
+    gallery: ["gallery/footballdecisionlab/footballdecisionlab-01.jpg", "gallery/footballdecisionlab/footballdecisionlab-02.jpg", "gallery/footballdecisionlab/footballdecisionlab-03.jpg", "gallery/footballdecisionlab/footballdecisionlab-04.jpg", "gallery/footballdecisionlab/footballdecisionlab-05.jpg", "gallery/footballdecisionlab/footballdecisionlab-06.jpg", "gallery/footballdecisionlab/footballdecisionlab-07.jpg", "gallery/footballdecisionlab/footballdecisionlab-08.jpg", "gallery/footballdecisionlab/footballdecisionlab-09.jpg", "gallery/footballdecisionlab/footballdecisionlab-10.jpg", "gallery/footballdecisionlab/footballdecisionlab-11.jpg"]
   },
   {
     id: "marketplace",
@@ -109,7 +112,8 @@ const PROJECTS = [
     stack: ["FastAPI", "Airflow", "PostgreSQL", "SQLAlchemy", "Docker"],
     link: "https://github.com/vinmedrado/marketplace-seller-platform",
     demo: "https://vinmedrado.github.io/marketplace-seller-platform/",
-    image: "images/marketplace.png"
+    image: "images/marketplace.png",
+    gallery: ["gallery/marketplace/marketplace-01.jpg", "gallery/marketplace/marketplace-02.jpg", "gallery/marketplace/marketplace-03.jpg", "gallery/marketplace/marketplace-04.jpg", "gallery/marketplace/marketplace-05.jpg", "gallery/marketplace/marketplace-06.jpg", "gallery/marketplace/marketplace-07.jpg", "gallery/marketplace/marketplace-08.jpg"]
   },
   {
     id: "lumyra",
@@ -130,7 +134,8 @@ const PROJECTS = [
     stack: ["FastAPI", "React", "WebSocket", "WhatsApp API"],
     link: "https://github.com/vinmedrado/Lumyra",
     demo: "https://lumyra-events.netlify.app/",
-    image: "images/lumyra.png"
+    image: "images/lumyra.png",
+    gallery: ["gallery/lumyra/lumyra-01.jpg", "gallery/lumyra/lumyra-02.jpg", "gallery/lumyra/lumyra-03.jpg", "gallery/lumyra/lumyra-04.jpg", "gallery/lumyra/lumyra-05.jpg", "gallery/lumyra/lumyra-06.jpg", "gallery/lumyra/lumyra-07.jpg", "gallery/lumyra/lumyra-08.jpg", "gallery/lumyra/lumyra-09.jpg", "gallery/lumyra/lumyra-10.jpg", "gallery/lumyra/lumyra-11.jpg", "gallery/lumyra/lumyra-12.jpg", "gallery/lumyra/lumyra-13.jpg", "gallery/lumyra/lumyra-14.jpg"]
   },
   {
     id: "meucarrovale",
@@ -150,8 +155,31 @@ const PROJECTS = [
     ],
     stack: ["FastAPI", "React", "PostgreSQL", "Alembic"],
     link: "https://github.com/vinmedrado/meu-carro-vale",
-    demo: "https://meu-carro-vale.netlify.app",
-    image: "images/meucarrovale.png"
+    demo: "https://vinmedrado.github.io/meu-carro-vale/",
+    image: "images/meucarrovale.png",
+    gallery: ["gallery/meucarrovale/meucarrovale-01.jpg", "gallery/meucarrovale/meucarrovale-02.jpg", "gallery/meucarrovale/meucarrovale-03.jpg", "gallery/meucarrovale/meucarrovale-04.jpg"]
+  },
+  {
+    id: "freelancebot",
+    title: "FreelanceBot AI",
+    flagship: false,
+    track: "automacao",
+    pill: "Automation",
+    category: "Commercial Automation for Freelancers",
+    year: "2026",
+    status: "online · static demo on GitHub Pages",
+    desc: "Local system that finds freelance opportunities on Workana, 99Freelas and Freelancer.com, scores fit against a professional profile, calculates price/timeline and generates structured commercial proposals for human review.",
+    highlight: "Deterministic pricing and proposal pipeline with AI (Groq) used only for text analysis — price and hours never depend on the model.",
+    results: [
+      "Playwright scraping across 3 freelance platforms",
+      "Deterministic pricing engine (hours, price range, confidence)",
+      "Generates short proposal, full proposal and commercial PDF"
+    ],
+    stack: ["Python", "Flask", "Playwright", "Groq API", "SQLite", "pytest"],
+    link: "https://github.com/vinmedrado/freelance-bot",
+    demo: "https://vinmedrado.github.io/freelance-bot/",
+    image: "gallery/freelancebot/freelancebot-01.jpg",
+    gallery: ["gallery/freelancebot/freelancebot-01.jpg", "gallery/freelancebot/freelancebot-02.jpg", "gallery/freelancebot/freelancebot-03.jpg", "gallery/freelancebot/freelancebot-04.jpg", "gallery/freelancebot/freelancebot-05.jpg", "gallery/freelancebot/freelancebot-06.jpg", "gallery/freelancebot/freelancebot-07.jpg"]
   }
 ];
 

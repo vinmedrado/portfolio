@@ -265,6 +265,133 @@
   .contact-item a{ text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); }
   .contact-item a:hover{ color:var(--blue); border-color:var(--blue); }
   .foot-note{ margin-top:40px; font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .card-shot, .flagship-shot{ cursor:pointer; }
+  .card{ cursor:pointer; }
+  .card-actions a, .flagship-actions a{ cursor:pointer; }
+
+  /* ============ PROJECT DETAIL OVERLAY ============ */
+  #projectDetail{
+    position:fixed; inset:0; z-index:1000; background:var(--paper);
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+    transform:translateY(100%); transition:transform .38s cubic-bezier(.2,.7,.2,1);
+  }
+  #projectDetail.open{ transform:translateY(0); }
+  body.detail-open{ overflow:hidden; }
+  .pd-topbar{
+    position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:14px;
+    padding:16px 20px; background:var(--paper); border-bottom:1.5px solid var(--ink);
+  }
+  .pd-back{
+    display:inline-flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; font-weight:600; color:var(--ink); background:none; border:1.5px solid var(--ink);
+    padding:8px 14px; border-radius:2px; cursor:pointer; transition:all .2s; text-decoration:none;
+  }
+  .pd-back:hover{ background:var(--ink); color:var(--paper); }
+  .pd-topbar-title{ font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; color:var(--muted); }
+  .pd-body{ max-width:920px; margin:0 auto; padding:32px 24px 80px; }
+  .pd-header{ margin-bottom:22px; }
+  .pd-meta{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; display:flex; gap:8px; flex-wrap:wrap; }
+  .pd-title{ font-family:'Oswald',sans-serif; font-weight:700; font-size:clamp(26px,5vw,38px); margin:6px 0 10px; }
+  .pd-desc{ font-size:14.5px; color:#33465A; max-width:70ch; }
+  .pd-stack{ margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
+  .pd-actions{ margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+
+  .pd-section-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--blue); text-transform:uppercase; letter-spacing:.04em; margin:36px 0 12px; display:block; border-bottom:1.5px solid var(--ink); padding-bottom:8px; }
+
+  .pd-gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
+  .pd-gallery img{
+    width:100%; height:150px; object-fit:cover; display:block; border:1.5px solid var(--ink);
+    cursor:zoom-in; transition:transform .25s ease, box-shadow .25s ease; background:var(--paper-2);
+  }
+  .pd-gallery img:hover{ transform:translateY(-2px); box-shadow:4px 4px 0 rgba(21,42,61,.12); }
+
+  .pd-readme{ font-size:14px; color:#33465A; max-width:74ch; }
+  .pd-readme h1, .pd-readme h2, .pd-readme h3{ font-family:'Oswald',sans-serif; color:var(--ink); margin:26px 0 10px; line-height:1.3; }
+  .pd-readme h1{ font-size:22px; } .pd-readme h2{ font-size:19px; } .pd-readme h3{ font-size:16px; }
+  .pd-readme p{ margin:10px 0; }
+  .pd-readme ul, .pd-readme ol{ margin:10px 0 10px 22px; }
+  .pd-readme li{ margin:4px 0; }
+  .pd-readme code{ font-family:'JetBrains Mono',monospace; font-size:12.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; }
+  .pd-readme pre{ font-family:'JetBrains Mono',monospace; font-size:12px; background:var(--paper-2); border:1.5px solid var(--line); padding:12px 14px; border-radius:3px; overflow-x:auto; margin:12px 0; }
+  .pd-readme pre code{ background:none; padding:0; }
+  .pd-readme a{ color:var(--blue); text-decoration:underline; }
+  .pd-readme blockquote{ border-left:3px solid var(--blue); padding-left:12px; color:var(--muted); margin:12px 0; }
+  .pd-readme table{ border-collapse:collapse; margin:12px 0; font-size:13px; width:100%; }
+  .pd-readme th, .pd-readme td{ border:1px solid var(--line); padding:6px 10px; text-align:left; }
+  .pd-readme img{ max-width:100%; }
+  .pd-no-readme{ font-size:13px; color:var(--muted); font-style:italic; }
+
+  /* lightbox */
+  #pdLightbox{
+    position:fixed; inset:0; z-index:1100; background:rgba(21,42,61,.94);
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  #pdLightbox.open{ display:flex; }
+  #pdLightbox img{ max-width:100%; max-height:100%; box-shadow:0 10px 40px rgba(0,0,0,.4); }
+  #pdLightbox .pd-lb-close{
+    position:absolute; top:18px; right:22px; color:#fff; font-size:28px; background:none; border:none; cursor:pointer;
+    font-family:'JetBrains Mono',monospace; line-height:1;
+  }
+  @media (max-width:600px){
+    .pd-body{ padding:24px 16px 60px; }
+    .pd-gallery{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
+    .pd-gallery img{ height:110px; }
+  }
+
+  /* ============ EXPERIENCE (compact, result-forward) ============ */
+  .log{ border-left:3px solid var(--ink); padding-left:24px; }
+  .log-entry{ position:relative; padding-bottom:26px; }
+  .log-entry:last-child{ padding-bottom:0; }
+  .log-node{ position:absolute; left:-32px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--amber); }
+  .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
+  .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
+  .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; }
+  .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
+  .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
+  .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
+  .log-results b{ color:var(--ink); }
+  .log-more{ margin-top:8px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+
+  /* ============ TECH STACK (clean, no bars/percentages) ============ */
+  .stack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1.5px solid var(--ink); }
+  .stack-cell{ padding:16px 18px; border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); }
+  .stack-cell:nth-child(3n){ border-right:none; }
+  .stack-cell h3{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--blue); letter-spacing:.05em; margin-bottom:8px; }
+  .stack-cell .items{ display:flex; flex-wrap:wrap; gap:6px; }
+  @media (max-width:760px){ .stack-grid{ grid-template-columns:repeat(2,1fr); } .stack-cell:nth-child(2n){ border-right:none; } .stack-cell:nth-child(3n){ border-right:1.5px solid var(--ink); } .stack-cell:nth-child(2n){ border-right:none; } }
+  @media (max-width:480px){ .stack-grid{ grid-template-columns:1fr; } .stack-cell{ border-right:none !important; } }
+
+  /* ============ SOBRE ============ */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start; }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-text{ font-size:14.5px; color:#33465A; max-width:520px; }
+  .about-text p{ margin-bottom:12px; }
+  .about-fact{ display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:12px; }
+  .about-fact span:first-child{ color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+
+  /* ============ EDUCATION ============ */
+  .edu-row{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:14px 0; border-bottom:1px solid var(--line); }
+  .edu-row:last-child{ border-bottom:none; }
+  .edu-name{ font-weight:600; font-family:'Oswald',sans-serif; font-size:14.5px; }
+  .edu-sub{ color:var(--muted); font-size:12px; margin-top:3px; }
+  .edu-date{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); white-space:nowrap; }
+
+  /* ============ GITHUB CTA BANNER ============ */
+  .gh-banner{ border:1.5px solid var(--ink); padding:22px 24px; margin-top:36px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; background:var(--paper-2); }
+  .gh-banner-text{ font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; }
+  .gh-banner-sub{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); margin-top:4px; }
+
+  /* ============ CONTACT ============ */
+  footer{ padding:54px 0 46px; }
+  .footer-head{ font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; max-width:520px; text-transform:uppercase; }
+  .contact-actions{ margin-top:24px; display:flex; gap:10px; flex-wrap:wrap; }
+  .contact-grid{ margin-top:30px; display:flex; gap:26px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; }
+  .contact-item{ font-size:12.5px; }
+  .contact-item .label{ color:var(--muted); display:block; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+  .contact-item a{ text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); }
+  .contact-item a:hover{ color:var(--blue); border-color:var(--blue); }
+  .foot-note{ margin-top:40px; font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
 </style>
 </head>
 <body class="loading">
@@ -394,7 +521,7 @@
     <div class="gh-banner reveal-target" data-reveal>
       <div>
         <div class="gh-banner-text">All the code is open on GitHub</div>
-        <div class="gh-banner-sub">// 6 repositories · documented pipelines, backends, and models</div>
+        <div class="gh-banner-sub">// 7 repositories · documented pipelines, backends, and models</div>
       </div>
       <a class="btn btn-primary" href="https://github.com/vinmedrado" target="_blank" rel="noopener">view github ↗</a>
     </div>
@@ -565,15 +692,15 @@ function renderFlagship(p){
   const container = document.getElementById('flagshipContainer');
   if (!p) { container.innerHTML = ''; return; }
   container.innerHTML = `
-    <div class="flagship reveal-target" data-reveal>
+    <div class="flagship reveal-target" data-reveal data-project-id="${p.id}">
       <span class="flagship-badge">★ Flagship Project</span>
-      <div class="flagship-shot">${shotBlock(p, true)}</div>
+      <div class="flagship-shot" data-open-detail="${p.id}">${shotBlock(p, true)}</div>
       <div class="flagship-body">
         <div class="flagship-meta">
           <span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span>
           <span class="flagship-status"><span class="dot"></span>${p.status}</span>
         </div>
-        <div class="flagship-title">${p.title}</div>
+        <div class="flagship-title" data-open-detail="${p.id}">${p.title}</div>
         <p class="flagship-desc">${p.desc}</p>
         <p class="flagship-highlight">${p.highlight}</p>
         <div class="flagship-grid">
@@ -588,6 +715,7 @@ function renderFlagship(p){
         </div>
         <div class="flagship-stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
         <div class="flagship-actions">
+          <button class="card-btn" type="button" data-open-detail="${p.id}">screenshots &amp; readme</button>
           <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">view on github ↗</a>
           ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">view live demo ↗</a>` : ''}
         </div>
@@ -608,7 +736,7 @@ function renderProjects(){
       ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7A63" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>'
       : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>';
     return `
-    <div class="card reveal-target" data-reveal>
+    <div class="card reveal-target" data-reveal data-open-detail="${p.id}">
       <div class="card-shot">${shotBlock(p, false)}</div>
       <div class="card-head"><span>${p.category} · ${p.year}</span>${icon}</div>
       <div class="card-body">
@@ -617,8 +745,8 @@ function renderProjects(){
         ${p.results ? `<ul class="card-results">${p.results.slice(0,3).map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
         <div class="stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
         <div class="card-actions">
-          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">github ↗</a>
-          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">demo ↗</a>` : ''}
+          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener" data-stop-detail>github ↗</a>
+          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener" data-stop-detail>demo ↗</a>` : ''}
         </div>
       </div>
     </div>`;
@@ -654,6 +782,103 @@ const io = new IntersectionObserver((entries) => {
 renderProjects();
 document.querySelectorAll('.reveal-target').forEach(el => { io.observe(el); el.dataset.observed = '1'; });
 
+/* ---------- PROJECT DETAIL OVERLAY ---------- */
+const pdEl = document.getElementById('projectDetail');
+const pdBody = document.getElementById('pdBody');
+const pdTopbarTitle = document.getElementById('pdTopbarTitle');
+const pdLightbox = document.getElementById('pdLightbox');
+const pdLbImg = document.getElementById('pdLbImg');
+let pdLastFocus = null;
+
+function openProjectDetail(id, pushState){
+  const p = (typeof PROJECTS !== 'undefined') ? PROJECTS.find(x => x.id === id) : null;
+  if (!p) return;
+
+  const gallery = p.gallery || [];
+  pdBody.innerHTML = `
+    <div class="pd-header">
+      <div class="pd-meta"><span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span><span>${p.status || ''}</span></div>
+      <div class="pd-title">${p.title}</div>
+      <p class="pd-desc">${p.desc}</p>
+      <div class="pd-stack">${(p.stack||[]).map(s => `<span class="tag">${s}</span>`).join('')}</div>
+      <div class="pd-actions">
+        <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">view on github ↗</a>
+        ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">view live demo ↗</a>` : ''}
+      </div>
+    </div>
+    ${gallery.length ? `
+    <span class="pd-section-tag">Product screenshots</span>
+    <div class="pd-gallery">${gallery.map((src,i) => `<img src="${src}" alt="Screenshot ${i+1} of ${p.title}" loading="lazy" data-lightbox="${src}">`).join('')}</div>
+    ` : ''}
+    <span class="pd-section-tag">About the project (README)</span>
+    ${p.readmeHtml ? `<div class="pd-readme">${p.readmeHtml}</div>` : `<p class="pd-no-readme">Full README available in the GitHub repository.</p>`}
+  `;
+
+  pdTopbarTitle.textContent = p.title;
+  pdLastFocus = document.activeElement;
+  pdEl.classList.add('open');
+  document.body.classList.add('detail-open');
+  pdEl.scrollTop = 0;
+  document.getElementById('pdBackBtn').focus();
+
+  if (pushState !== false){
+    history.pushState({ pdProject: id }, '', '#projeto-' + id);
+  }
+}
+
+function closeProjectDetail(popState){
+  pdEl.classList.remove('open');
+  document.body.classList.remove('detail-open');
+  if (pdLastFocus && pdLastFocus.focus) pdLastFocus.focus();
+  if (!popState && location.hash.startsWith('#projeto-')){
+    history.back();
+  }
+}
+
+document.getElementById('pdBackBtn').addEventListener('click', () => closeProjectDetail(false));
+
+// abrir a partir de qualquer card / print do projeto
+document.addEventListener('click', (e) => {
+  if (e.target.closest('[data-stop-detail]')) return; // botões github/demo não abrem o overlay
+  const trigger = e.target.closest('[data-open-detail]');
+  if (trigger){
+    e.preventDefault();
+    openProjectDetail(trigger.getAttribute('data-open-detail'));
+  }
+});
+
+// lightbox das imagens dentro do detalhe
+pdBody.addEventListener('click', (e) => {
+  const img = e.target.closest('[data-lightbox]');
+  if (!img) return;
+  pdLbImg.src = img.getAttribute('data-lightbox');
+  pdLbImg.alt = img.alt;
+  pdLightbox.classList.add('open');
+});
+document.getElementById('pdLbClose').addEventListener('click', () => pdLightbox.classList.remove('open'));
+pdLightbox.addEventListener('click', (e) => { if (e.target === pdLightbox) pdLightbox.classList.remove('open'); });
+
+// suporte ao botão "voltar" físico/gesto do navegador (essencial no celular)
+window.addEventListener('popstate', () => {
+  if (pdLightbox.classList.contains('open')){ pdLightbox.classList.remove('open'); return; }
+  if (!location.hash.startsWith('#projeto-')){
+    closeProjectDetail(true);
+  }
+});
+
+// Esc fecha lightbox ou overlay
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (pdLightbox.classList.contains('open')){ pdLightbox.classList.remove('open'); return; }
+  if (pdEl.classList.contains('open')) closeProjectDetail(false);
+});
+
+// permite abrir direto por link, ex: portfolio/#projeto-vinance
+if (location.hash.startsWith('#projeto-')){
+  const idFromHash = location.hash.replace('#projeto-', '');
+  openProjectDetail(idFromHash, false);
+}
+
 /* ---------- COUNT-UP STATS ---------- */
 const counted = new WeakSet();
 const cio = new IntersectionObserver((entries) => {
@@ -676,6 +901,20 @@ const cio = new IntersectionObserver((entries) => {
 }, { threshold:.4 });
 document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
 </script>
+
+<!-- ============ PROJECT DETAIL OVERLAY ============ -->
+<div id="projectDetail" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="pd-topbar">
+    <button class="pd-back" id="pdBackBtn" type="button">← back</button>
+    <span class="pd-topbar-title" id="pdTopbarTitle"></span>
+  </div>
+  <div class="pd-body" id="pdBody"></div>
+</div>
+
+<div id="pdLightbox">
+  <button class="pd-lb-close" id="pdLbClose" type="button" aria-label="Close image">✕</button>
+  <img id="pdLbImg" src="" alt="">
+</div>
 
 </body>
 </html>

@@ -60,4 +60,4 @@ Depois abra `http://127.0.0.1:4173`.
 
 - O conteudo do site e editado a partir dos arquivos `projects-data.js` e `projects-data.en.js`.
 - O portfolio serve como vitrine principal para recrutadores e clientes.
-- `TODO`: definir licenca, se aplicavel, ou deixar o repositorio sem licenca publica por decisao do autor.
+- Repositorio sem licenca publica definida por decisao do autor.
