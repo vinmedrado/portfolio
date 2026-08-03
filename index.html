@@ -614,11 +614,26 @@
       <div class="contact-item"><span class="label">github</span><a href="https://github.com/vinmedrado" target="_blank" rel="noopener">github.com/vinmedrado</a></div>
     </div>
     <div class="foot-note">// build: dado bruto → pipeline → decisão · desenho aprovado</div>
-  </footer>
+</footer>
 
 </div>
 
-<script src="projects-data.js?v=20260803c"></script>
+<!-- ============ PROJECT DETAIL OVERLAY ============ -->
+<div id="projectDetail" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
+  <div class="pd-topbar">
+    <button class="pd-back" id="pdBackBtn" type="button">voltar</button>
+    <span class="pd-topbar-title" id="pdTopbarTitle"></span>
+  </div>
+  <div class="pd-hero" id="pdHero"></div>
+  <div class="pd-body" id="pdBody"></div>
+</div>
+
+<div id="pdLightbox">
+  <button class="pd-lb-close" id="pdLbClose" type="button" aria-label="Fechar imagem">x</button>
+  <img id="pdLbImg" src="" alt="">
+</div>
+
+<script src="projects-data.js?v=20260803d"></script>
 <script>
 /* ---------- BLUEPRINT GRID BACKGROUND ---------- */
 (function(){
@@ -864,28 +879,44 @@ if (location.hash.startsWith('#projeto-')){
   openProjectDetail(idFromHash, false);
 }
 
-/* ---------- STATIC STATS ---------- */
-document.querySelectorAll('.stat-num').forEach(el => {
+/* ---------- COUNT-UP STATS ---------- */
+const counted = new WeakSet();
+function setStatFinal(el){
   const target = parseFloat(el.dataset.count);
   const suffix = el.dataset.suffix || '';
   el.textContent = Math.floor(target) + suffix;
-});
+}
+function animateStat(el){
+  if (counted.has(el)) return;
+  counted.add(el);
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const start = performance.now();
+  const dur = 1200;
+  function step(now){
+    const p = Math.min(1, (now - start) / dur);
+    el.textContent = Math.floor(p * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+if ('IntersectionObserver' in window){
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        animateStat(e.target);
+        cio.unobserve(e.target);
+      }
+    });
+  }, { threshold:.4 });
+  document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
+} else {
+  document.querySelectorAll('.stat-num').forEach(setStatFinal);
+}
+setTimeout(() => document.querySelectorAll('.stat-num').forEach(el => {
+  if (!counted.has(el)) setStatFinal(el);
+}), 2200);
 </script>
-
-<!-- ============ PROJECT DETAIL OVERLAY ============ -->
-<div id="projectDetail" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
-  <div class="pd-topbar">
-    <button class="pd-back" id="pdBackBtn" type="button">← voltar</button>
-    <span class="pd-topbar-title" id="pdTopbarTitle"></span>
-  </div>
-  <div class="pd-hero" id="pdHero"></div>
-  <div class="pd-body" id="pdBody"></div>
-</div>
-
-<div id="pdLightbox">
-  <button class="pd-lb-close" id="pdLbClose" type="button" aria-label="Fechar imagem">✕</button>
-  <img id="pdLbImg" src="" alt="">
-</div>
 
 </body>
 </html>
