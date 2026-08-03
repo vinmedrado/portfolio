@@ -79,6 +79,7 @@
 
   #preloader{ position:fixed; inset:0; background:var(--paper); z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; }
   #preloader.done{ animation:plOut .55s ease forwards; }
+  #preloader{ animation:plOut .55s ease 4.5s forwards; }
   @keyframes plOut{ to{ opacity:0; visibility:hidden; } }
   .gear-load{ width:56px; height:56px; animation:spin 2.2s linear infinite; }
   @keyframes spin{ to{ transform:rotate(360deg); } }
@@ -422,7 +423,7 @@
 <div id="preloader" role="status" aria-live="polite">
   <svg class="gear-load" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#2C6E8E" stroke-width="6"><path d="M50 8 L56 22 L44 22 Z M50 92 L56 78 L44 78 Z M8 50 L22 44 L22 56 Z M92 50 L78 44 L78 56 Z M20 20 L30 28 L22 32 Z M80 80 L70 72 L78 68 Z M80 20 L70 28 L78 32 Z M20 80 L30 72 L22 68 Z"/><circle cx="50" cy="50" r="26"/></g></svg>
   <div class="pl-track"><div class="pl-fill" id="plFill"></div></div>
-  <div class="pl-txt" id="plTxt">plotting system · 0%</div>
+  <div class="pl-txt" id="plTxt">plotting system...</div>
 </div>
 
 <header class="nav">
@@ -672,7 +673,7 @@
 
 </div>
 
-<script src="projects-data.en.js?v=20260729c"></script>
+<script src="projects-data.en.js?v=20260803c"></script>
 <script>
 /* ---------- BLUEPRINT GRID BACKGROUND ---------- */
 (function(){
@@ -918,27 +919,12 @@ if (location.hash.startsWith('#projeto-')){
   openProjectDetail(idFromHash, false);
 }
 
-/* ---------- COUNT-UP STATS ---------- */
-const counted = new WeakSet();
-const cio = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !counted.has(e.target)){
-      counted.add(e.target);
-      const el = e.target;
-      const target = parseFloat(el.dataset.count);
-      const suffix = el.dataset.suffix || '';
-      const start = performance.now();
-      const dur = 1200;
-      function step(now){
-        const p = Math.min(1, (now-start)/dur);
-        el.textContent = Math.floor(p*target) + suffix;
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-  });
-}, { threshold:.4 });
-document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
+/* ---------- STATIC STATS ---------- */
+document.querySelectorAll('.stat-num').forEach(el => {
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  el.textContent = Math.floor(target) + suffix;
+});
 </script>
 
 <!-- ============ PROJECT DETAIL OVERLAY ============ -->
