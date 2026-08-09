@@ -22,6 +22,8 @@
 <meta name="twitter:image" content="https://vinmedrado.github.io/portfolio/images/og-cover.png">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF5'/%3E%3Cg fill='none' stroke='%232C6E8E' stroke-width='7'%3E%3Ccircle cx='50' cy='50' r='24'/%3E%3Cpath d='M50 10v14M50 76v14M10 50h14M76 50h14M21 21l10 10M69 69l10 10M79 21l-10 10M21 79l10-10'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 
 <script type="application/ld+json">
 {
@@ -244,7 +246,8 @@
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
   .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .log-org-item{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .log-org-item{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:0; }
+  .log-org-item img{ height:22px; width:auto; max-width:110px; }
   .log-org-sep{ opacity:.6; }
   .log-org img{ height:18px; width:auto; max-width:80px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.85; }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
@@ -394,7 +397,8 @@
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
   .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .log-org-item{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .log-org-item{ display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:0; }
+  .log-org-item img{ height:22px; width:auto; max-width:110px; }
   .log-org-sep{ opacity:.6; }
   .log-org img{ height:18px; width:auto; max-width:80px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.85; }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
@@ -564,7 +568,7 @@
       <div class="profile-photo-frame">
         <div class="schema-label"><span>PORTRAIT / PROFILE.DWG</span><span>FIG-01</span></div>
         <div class="profile-photo-wrap">
-          <img src="images/perfil.jpg" alt="Vinicius Santos Medrado" loading="lazy">
+          <img src="images/perfil.webp" alt="Vinicius Santos Medrado" loading="lazy">
           <span class="corner corner-tl" aria-hidden="true"></span>
           <span class="corner corner-br" aria-hidden="true"></span>
         </div>
@@ -633,7 +637,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — feb 2026</div>
         <div class="log-role">Direct Sales Administrative Analyst</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">General Motors Brasil</span></div>
+        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil</span></div>
         <ul class="log-results">
           <li>Report consolidation via Python/VBA — <b>75% reduction in execution time</b></li>
           <li>Internal management system with Outlook integration — <b>77% reduction in rework</b></li>

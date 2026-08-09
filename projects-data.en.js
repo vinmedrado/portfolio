@@ -47,7 +47,7 @@ const PROJECTS = [
     link: "https://github.com/vinmedrado/vinance",
     demo: "https://vinance-ai.netlify.app",
     image: "images/vinance.png",
-    gallery: ["gallery/vinance/vinance-01.jpg", "gallery/vinance/vinance-02.jpg", "gallery/vinance/vinance-03.jpg", "gallery/vinance/vinance-04.jpg", "gallery/vinance/vinance-05.jpg", "gallery/vinance/vinance-06.jpg"]
+    gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"]
   },
   {
     id: "applymize",
@@ -68,8 +68,8 @@ const PROJECTS = [
     stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
     link: "https://github.com/vinmedrado/applymize",
     demo: "https://applymize.netlify.app",
-    image: "images/applymize.jpg",
-    gallery: ["gallery/applymize/applymize-01.jpg", "gallery/applymize/applymize-02.jpg", "gallery/applymize/applymize-03.jpg", "gallery/applymize/applymize-04.jpg", "gallery/applymize/applymize-05.jpg", "gallery/applymize/applymize-06.jpg", "gallery/applymize/applymize-07.jpg", "gallery/applymize/applymize-08.jpg"]
+    image: "images/applymize.webp",
+    gallery: ["gallery/applymize/applymize-01.webp", "gallery/applymize/applymize-02.webp", "gallery/applymize/applymize-03.webp", "gallery/applymize/applymize-04.webp", "gallery/applymize/applymize-05.webp", "gallery/applymize/applymize-06.webp", "gallery/applymize/applymize-07.webp", "gallery/applymize/applymize-08.webp"]
   },
   {
     id: "footballdecisionlab",
@@ -91,7 +91,7 @@ const PROJECTS = [
     link: "https://github.com/vinmedrado/football-decision-lab",
     demo: "https://football-decision-lab.netlify.app/",
     image: "images/footballdecisionlab.png",
-    gallery: ["gallery/footballdecisionlab/footballdecisionlab-01.jpg", "gallery/footballdecisionlab/footballdecisionlab-02.jpg", "gallery/footballdecisionlab/footballdecisionlab-03.jpg", "gallery/footballdecisionlab/footballdecisionlab-04.jpg", "gallery/footballdecisionlab/footballdecisionlab-05.jpg", "gallery/footballdecisionlab/footballdecisionlab-06.jpg", "gallery/footballdecisionlab/footballdecisionlab-07.jpg", "gallery/footballdecisionlab/footballdecisionlab-08.jpg", "gallery/footballdecisionlab/footballdecisionlab-09.jpg", "gallery/footballdecisionlab/footballdecisionlab-10.jpg", "gallery/footballdecisionlab/footballdecisionlab-11.jpg"]
+    gallery: ["gallery/footballdecisionlab/footballdecisionlab-01.webp", "gallery/footballdecisionlab/footballdecisionlab-02.webp", "gallery/footballdecisionlab/footballdecisionlab-03.webp", "gallery/footballdecisionlab/footballdecisionlab-04.webp", "gallery/footballdecisionlab/footballdecisionlab-05.webp", "gallery/footballdecisionlab/footballdecisionlab-06.webp", "gallery/footballdecisionlab/footballdecisionlab-07.webp", "gallery/footballdecisionlab/footballdecisionlab-08.webp", "gallery/footballdecisionlab/footballdecisionlab-09.webp", "gallery/footballdecisionlab/footballdecisionlab-10.webp", "gallery/footballdecisionlab/footballdecisionlab-11.webp"]
   },
   {
     id: "marketplace",
@@ -113,7 +113,7 @@ const PROJECTS = [
     link: "https://github.com/vinmedrado/marketplace-seller-platform",
     demo: "https://vinmedrado.github.io/marketplace-seller-platform/",
     image: "images/marketplace.png",
-    gallery: ["gallery/marketplace/marketplace-01.jpg", "gallery/marketplace/marketplace-02.jpg", "gallery/marketplace/marketplace-03.jpg", "gallery/marketplace/marketplace-04.jpg", "gallery/marketplace/marketplace-05.jpg", "gallery/marketplace/marketplace-06.jpg", "gallery/marketplace/marketplace-07.jpg", "gallery/marketplace/marketplace-08.jpg"]
+    gallery: ["gallery/marketplace/marketplace-01.webp", "gallery/marketplace/marketplace-02.webp", "gallery/marketplace/marketplace-03.webp", "gallery/marketplace/marketplace-04.webp", "gallery/marketplace/marketplace-05.webp", "gallery/marketplace/marketplace-06.webp", "gallery/marketplace/marketplace-07.webp", "gallery/marketplace/marketplace-08.webp"]
   },
   {
     id: "lumyra",
@@ -135,7 +135,7 @@ const PROJECTS = [
     link: "https://github.com/vinmedrado/Lumyra",
     demo: "https://lumyra-events.netlify.app/",
     image: "images/lumyra.png",
-    gallery: ["gallery/lumyra/lumyra-01.jpg", "gallery/lumyra/lumyra-02.jpg", "gallery/lumyra/lumyra-03.jpg", "gallery/lumyra/lumyra-04.jpg", "gallery/lumyra/lumyra-05.jpg", "gallery/lumyra/lumyra-06.jpg", "gallery/lumyra/lumyra-07.jpg", "gallery/lumyra/lumyra-08.jpg", "gallery/lumyra/lumyra-09.jpg", "gallery/lumyra/lumyra-10.jpg", "gallery/lumyra/lumyra-11.jpg", "gallery/lumyra/lumyra-12.jpg", "gallery/lumyra/lumyra-13.jpg", "gallery/lumyra/lumyra-14.jpg"]
+    gallery: ["gallery/lumyra/lumyra-01.webp", "gallery/lumyra/lumyra-02.webp", "gallery/lumyra/lumyra-03.webp", "gallery/lumyra/lumyra-04.webp", "gallery/lumyra/lumyra-05.webp", "gallery/lumyra/lumyra-06.webp", "gallery/lumyra/lumyra-07.webp", "gallery/lumyra/lumyra-08.webp", "gallery/lumyra/lumyra-09.webp", "gallery/lumyra/lumyra-10.webp", "gallery/lumyra/lumyra-11.webp", "gallery/lumyra/lumyra-12.webp", "gallery/lumyra/lumyra-13.webp", "gallery/lumyra/lumyra-14.webp"]
   },
   {
     id: "meucarrovale",
@@ -159,7 +159,7 @@ const PROJECTS = [
     image: "images/meucarrovale.png",
     pdf: "docs/laudo-meu-carro-vale.pdf",
     pdfLabel: "view sample report (PDF)",
-    gallery: ["gallery/meucarrovale/meucarrovale-01.jpg", "gallery/meucarrovale/meucarrovale-02.jpg", "gallery/meucarrovale/meucarrovale-03.jpg", "gallery/meucarrovale/meucarrovale-04.jpg"]
+    gallery: ["gallery/meucarrovale/meucarrovale-01.webp", "gallery/meucarrovale/meucarrovale-02.webp", "gallery/meucarrovale/meucarrovale-03.webp", "gallery/meucarrovale/meucarrovale-04.webp"]
   },
   {
     id: "freelancebot",

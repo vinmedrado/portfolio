@@ -1,0 +1,14 @@
+{
+  "name": "Vinicius Santos Medrado — Automação & Engenharia de Dados",
+  "short_name": "Vinicius Medrado",
+  "start_url": "/portfolio/index.html",
+  "scope": "/portfolio/",
+  "display": "standalone",
+  "background_color": "#FBFAF5",
+  "theme_color": "#152A3D",
+  "description": "Portfólio de Vinicius Santos Medrado — automação de processos, engenharia de dados e produtos autorais.",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
