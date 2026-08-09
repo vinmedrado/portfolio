@@ -241,8 +241,10 @@
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
-  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; }
-  .log-org img{ height:14px; width:auto; max-width:70px; object-fit:contain; filter:grayscale(1) contrast(1.05) brightness(.55) sepia(.15); opacity:.75; }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .org-company{ color:var(--ink); font-weight:600; }
+  .org-sep{ color:var(--line); }
+  .org-client{ color:var(--muted); }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
   .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
   .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
@@ -389,8 +391,10 @@
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
-  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; }
-  .log-org img{ height:14px; width:auto; max-width:70px; object-fit:contain; filter:grayscale(1) contrast(1.05) brightness(.55) sepia(.15); opacity:.75; }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .org-company{ color:var(--ink); font-weight:600; }
+  .org-sep{ color:var(--line); }
+  .org-client{ color:var(--muted); }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
   .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
   .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
@@ -496,11 +500,12 @@
       </div>
       <div class="logo-strip reveal-target" data-reveal>
         <div class="logo-strip-label">Experience across the automotive &amp; corporate chain</div>
-        <div class="logo-row">
-          <img src="images/stellantis.png" alt="Stellantis" loading="lazy">
-          <img src="images/gm.png" alt="General Motors" loading="lazy">
-          <img src="images/msx.png" alt="MSX International" loading="lazy">
-          <img src="images/conduent.png" alt="Conduent" loading="lazy">
+        <div class="logo-row" aria-label="Companies across my professional experience">
+          <span class="brand-chip">Stellantis</span>
+          <span class="brand-chip">General Motors</span>
+          <span class="brand-chip">MSX International</span>
+          <span class="brand-chip">Conduent</span>
+          <span class="brand-chip">Infosys</span>
         </div>
       </div>
     </div>
@@ -564,9 +569,9 @@
         <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
       </div>
       <div class="profile-text">
-        <span class="section-tag mono">MEMO / WHO BUILDS IT</span>
-        <h2>Behind the pipelines</h2>
-        <p>Outside of code, my priority is my family — my parents and my wife come before anything else. The rest of my time goes to sports, travel, and church, which is where most of the ideas I later bring into code come from.</p>
+        <span class="section-tag mono">BEYOND THE CODE</span>
+        <h2>What exists beyond the screen</h2>
+        <p>My life is not only about code. Family comes first, and outside work I enjoy sports, traveling and being part of my church community. Those moments help me discover new things, stay balanced and return to projects with fresh perspectives.</p>
         <div class="profile-tags">
           <span class="tag">Family</span><span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Church</span>
         </div>
@@ -614,7 +619,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — present</div>
         <div class="log-role">Mid-Level Data Analyst</div>
-        <div class="log-org"><img src="images/msx.png" alt="MSX International">MSX International · <img src="images/stellantis.png" alt="Stellantis">Stellantis South America</div>
+        <div class="log-org"><span class="org-company">MSX International</span><span class="org-sep">/</span><span class="org-client">Stellantis South America</span></div>
         <ul class="log-results">
           <li>Automated daily <b>NPS survey</b> delivery via WhatsApp with Python</li>
           <li>Scraper for automated data extraction from Stellantis' internal portal</li>
@@ -625,7 +630,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — feb 2026</div>
         <div class="log-role">Direct Sales Administrative Analyst</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">General Motors Brasil</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">General Motors Brasil</span></div>
         <ul class="log-results">
           <li>Report consolidation via Python/VBA — <b>75% reduction in execution time</b></li>
           <li>Internal management system with Outlook integration — <b>77% reduction in rework</b></li>
@@ -636,13 +641,13 @@
         <div class="log-node"></div>
         <div class="log-date mono">jan 2023 — may 2023</div>
         <div class="log-role">Mid-Level Financial Analyst</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística</span></div>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">apr 2021 — jan 2023</div>
         <div class="log-role">Junior Financial Analyst · Administrative Assistant</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processed <b>+5,000 invoices</b> in a single month, minimal error margin in SAP</li>
         </ul>
@@ -651,7 +656,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">apr 2020 — apr 2021</div>
         <div class="log-role">Senior Process Operator</div>
-        <div class="log-org"><img src="images/infosys.png" alt="Infosys">Infosys · <img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</div>
+        <div class="log-org"><span class="org-company">Infosys</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Document and invoice control; coordinated interface between departments</li>
         </ul>

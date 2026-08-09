@@ -109,13 +109,13 @@
   .lang-switch:hover .inactive{ color:var(--blue); }
   @media (max-width:760px){ .nav-links{ display:none; } }
 
-  /* ============ LOGO STRIP (empresas) ============ */
-  .logo-strip{ margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
-  .logo-strip-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px; }
-  .logo-row{ display:flex; align-items:center; gap:30px; flex-wrap:wrap; }
-  .logo-row img{ height:22px; width:auto; max-width:110px; object-fit:contain; filter:grayscale(1) contrast(1.05) brightness(.55) sepia(.15); opacity:.68; transition:opacity .2s, filter .2s; }
-  .logo-row img:hover{ opacity:1; filter:grayscale(0) contrast(1) brightness(1); }
-  @media (max-width:600px){ .logo-row{ gap:20px; } .logo-row img{ height:18px; } }
+  /* ============ MARCAS / EMPRESAS ============ */
+  .logo-strip{ margin-top:24px; padding-top:20px; border-top:1px solid var(--line); }
+  .logo-strip-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px; }
+  .logo-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .brand-chip{ display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:7px 12px; border:1px solid var(--line); background:rgba(255,255,255,.34); border-radius:2px; font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; letter-spacing:.025em; color:var(--ink); white-space:nowrap; transition:border-color .2s, transform .2s, background .2s; }
+  .brand-chip:hover{ border-color:var(--blue); background:rgba(44,110,142,.05); transform:translateY(-1px); }
+  @media (max-width:600px){ .logo-row{ gap:8px; } .brand-chip{ min-height:32px; padding:6px 10px; font-size:12px; } }
 
   /* ============ PERFIL (foto) ============ */
   .profile-grid{ display:grid; grid-template-columns:.82fr 1.18fr; gap:44px; align-items:center; padding:56px 0; }
@@ -334,8 +334,10 @@
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
-  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; }
-  .log-org img{ height:14px; width:auto; max-width:70px; object-fit:contain; filter:grayscale(1) contrast(1.05) brightness(.55) sepia(.15); opacity:.75; }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .org-company{ color:var(--ink); font-weight:600; }
+  .org-sep{ color:var(--line); }
+  .org-client{ color:var(--muted); }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
   .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
   .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
@@ -441,11 +443,12 @@
       </div>
       <div class="logo-strip reveal-target" data-reveal>
         <div class="logo-strip-label">Experiência na cadeia automotiva &amp; corporativa</div>
-        <div class="logo-row">
-          <img src="images/stellantis.png" alt="Stellantis" loading="lazy">
-          <img src="images/gm.png" alt="General Motors" loading="lazy">
-          <img src="images/msx.png" alt="MSX International" loading="lazy">
-          <img src="images/conduent.png" alt="Conduent" loading="lazy">
+        <div class="logo-row" aria-label="Empresas da trajetória profissional">
+          <span class="brand-chip">Stellantis</span>
+          <span class="brand-chip">General Motors</span>
+          <span class="brand-chip">MSX International</span>
+          <span class="brand-chip">Conduent</span>
+          <span class="brand-chip">Infosys</span>
         </div>
       </div>
     </div>
@@ -509,9 +512,9 @@
         <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
       </div>
       <div class="profile-text">
-        <span class="section-tag mono">MEMORIAL / QUEM CONSTRÓI</span>
-        <h2>Por trás dos pipelines</h2>
-        <p>Fora do código, prioridade é minha família — meus pais e minha esposa vêm antes de qualquer coisa. O resto do tempo divido entre esporte, viagem e igreja, que é de onde vem boa parte das ideias que eu trago pra dentro do código depois.</p>
+        <span class="section-tag mono">ALÉM DO CÓDIGO</span>
+        <h2>O que existe fora da tela</h2>
+        <p>Minha vida não gira só em torno de código. Minha família é minha prioridade e, fora do trabalho, gosto de praticar esportes, viajar e estar na igreja. São esses momentos que me ajudam a conhecer coisas novas, manter o equilíbrio e voltar aos projetos com outras perspectivas.</p>
         <div class="profile-tags">
           <span class="tag">Família</span><span class="tag">Esporte</span><span class="tag">Viagem</span><span class="tag">Igreja</span>
         </div>
@@ -559,7 +562,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — atualmente</div>
         <div class="log-role">Analista de Dados Pleno</div>
-        <div class="log-org"><img src="images/msx.png" alt="MSX International">MSX International · <img src="images/stellantis.png" alt="Stellantis">Stellantis South America</div>
+        <div class="log-org"><span class="org-company">MSX International</span><span class="org-sep">/</span><span class="org-client">Stellantis South America</span></div>
         <ul class="log-results">
           <li>Automação do envio diário de <b>pesquisas de NPS</b> via WhatsApp com Python</li>
           <li>Scraper para extração automatizada de dados do portal interno da Stellantis</li>
@@ -570,7 +573,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — fev 2026</div>
         <div class="log-role">Analista Administrativo de Vendas Diretas</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">General Motors Brasil</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">General Motors Brasil</span></div>
         <ul class="log-results">
           <li>Consolidação de relatórios via Python/VBA — <b>redução de 75% no tempo de execução</b></li>
           <li>Sistema de gestão interno com integração Outlook — <b>redução de 77% de retrabalho</b></li>
@@ -581,13 +584,13 @@
         <div class="log-node"></div>
         <div class="log-date mono">jan 2023 — mai 2023</div>
         <div class="log-role">Analista Financeiro Pleno</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística</span></div>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">abr 2021 — jan 2023</div>
         <div class="log-role">Analista Financeiro Junior · Assistente Administrativo</div>
-        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</div>
+        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processamento de <b>+5.000 notas fiscais</b> em um único mês, mínima margem de erro no SAP</li>
         </ul>
@@ -596,7 +599,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">abr 2020 — abr 2021</div>
         <div class="log-role">Operador de Processos Senior</div>
-        <div class="log-org"><img src="images/infosys.png" alt="Infosys">Infosys · <img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</div>
+        <div class="log-org"><span class="org-company">Infosys</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Controle de documentos e notas fiscais; coordenação de interface entre departamentos</li>
         </ul>
