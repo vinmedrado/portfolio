@@ -111,10 +111,10 @@
 
   .logo-strip{ margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
   .logo-strip-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px; }
-  .logo-row{ display:flex; align-items:center; gap:30px; flex-wrap:wrap; }
-  .logo-row img{ height:22px; width:auto; max-width:110px; object-fit:contain; filter:grayscale(1) contrast(1.05) brightness(.55) sepia(.15); opacity:.68; transition:opacity .2s, filter .2s; }
-  .logo-row img:hover{ opacity:1; filter:grayscale(0) contrast(1) brightness(1); }
-  @media (max-width:600px){ .logo-row{ gap:20px; } .logo-row img{ height:18px; } }
+  .logo-row{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+  .logo-row img{ height:24px; width:auto; max-width:100px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.8; transition:opacity .2s, filter .2s; }
+  .logo-row img:hover{ opacity:1; filter:grayscale(0) contrast(1); }
+  @media (max-width:600px){ .logo-row{ gap:20px; } .logo-row img{ height:26px; } }
 
   /* ============ PERFIL (foto) ============ */
   .profile-grid{ display:grid; grid-template-columns:.82fr 1.18fr; gap:44px; align-items:center; padding:56px 0; }
@@ -241,10 +241,8 @@
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
-  .log-org{ color:var(--muted); font-size:12.5px; margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
-  .org-company{ color:var(--ink); font-weight:600; }
-  .org-sep{ color:var(--line); }
-  .org-client{ color:var(--muted); }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; }
+  .log-org img{ height:18px; width:auto; max-width:80px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.85; }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
   .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
   .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
@@ -391,10 +389,8 @@
   .log-entry.current .log-node{ border-color:var(--blue); background:var(--blue-dim); }
   .log-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
   .log-role{ font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; margin-top:3px; }
-  .log-org{ color:var(--muted); font-size:12.5px; margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
-  .org-company{ color:var(--ink); font-weight:600; }
-  .org-sep{ color:var(--line); }
-  .org-client{ color:var(--muted); }
+  .log-org{ color:var(--muted); font-size:12.5px; margin-top:2px; display:flex; align-items:center; gap:8px; }
+  .log-org img{ height:18px; width:auto; max-width:80px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.85; }
   .log-results{ list-style:none; margin-top:9px; display:flex; flex-direction:column; gap:5px; max-width:600px; }
   .log-results li{ font-size:13px; color:#33465A; position:relative; padding-left:15px; }
   .log-results li::before{ content:'▸'; color:var(--blue); position:absolute; left:0; top:1px; }
@@ -500,12 +496,11 @@
       </div>
       <div class="logo-strip reveal-target" data-reveal>
         <div class="logo-strip-label">Experience across the automotive &amp; corporate chain</div>
-        <div class="logo-row" aria-label="Companies from my professional journey">
-          <div class="brand-card brand-stellantis" title="Stellantis South America"><img class="brand-logo" src="images/stellantis-clean.png" alt="Stellantis"></div>
-          <div class="brand-card brand-gm" title="General Motors"><img class="brand-logo" src="images/gm-clean.png" alt="General Motors"></div>
-          <div class="brand-card brand-msx" title="MSX International"><img class="brand-logo" src="images/msx-clean.png" alt="MSX International"></div>
-          <div class="brand-card brand-conduent" title="Conduent"><img class="brand-logo" src="images/conduent-clean.png" alt="Conduent"></div>
-          <div class="brand-card brand-infosys" title="Infosys"><img class="brand-logo" src="images/infosys-clean.png" alt="Infosys"></div>
+        <div class="logo-row">
+          <img src="images/stellantis.png" alt="Stellantis" loading="lazy">
+          <img src="images/gm.png" alt="General Motors" loading="lazy">
+          <img src="images/msx.png" alt="MSX International" loading="lazy">
+          <img src="images/conduent.png" alt="Conduent" loading="lazy">
         </div>
       </div>
     </div>
@@ -569,9 +564,9 @@
         <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
       </div>
       <div class="profile-text">
-        <span class="section-tag mono">BEYOND WORK</span>
-        <h2>Who I am outside projects</h2>
-        <p>My family comes first. Outside work, I enjoy sports, traveling and church life — parts of my routine that broaden my perspective and help me keep a healthy balance between career and personal life.</p>
+        <span class="section-tag mono">MEMO / WHO BUILDS IT</span>
+        <h2>Behind the pipelines</h2>
+        <p>Outside of code, my priority is my family — my parents and my wife come before anything else. The rest of my time goes to sports, travel, and church, which is where most of the ideas I later bring into code come from.</p>
         <div class="profile-tags">
           <span class="tag">Family</span><span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Church</span>
         </div>
@@ -619,7 +614,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — present</div>
         <div class="log-role">Mid-Level Data Analyst</div>
-        <div class="log-org"><span class="company-badge company-msx"><img src="images/msx-clean.png" alt="">MSX International</span><span class="org-sep">/</span><span class="client-badge client-stellantis"><img src="images/stellantis-clean.png" alt="">Stellantis South America</span></div>
+        <div class="log-org"><img src="images/msx.png" alt="MSX International">MSX International · <img src="images/stellantis.png" alt="Stellantis">Stellantis South America</div>
         <ul class="log-results">
           <li>Automated daily <b>NPS survey</b> delivery via WhatsApp with Python</li>
           <li>Scraper for automated data extraction from Stellantis' internal portal</li>
@@ -630,7 +625,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — feb 2026</div>
         <div class="log-role">Direct Sales Administrative Analyst</div>
-        <div class="log-org"><span class="company-badge company-conduent"><img src="images/conduent-clean.png" alt="">Conduent</span><span class="org-sep">/</span><span class="client-badge client-gm"><img src="images/gm-clean.png" alt="">General Motors Brasil</span></div>
+        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">General Motors Brasil</div>
         <ul class="log-results">
           <li>Report consolidation via Python/VBA — <b>75% reduction in execution time</b></li>
           <li>Internal management system with Outlook integration — <b>77% reduction in rework</b></li>
@@ -641,13 +636,13 @@
         <div class="log-node"></div>
         <div class="log-date mono">jan 2023 — may 2023</div>
         <div class="log-role">Mid-Level Financial Analyst</div>
-        <div class="log-org"><span class="company-badge company-conduent"><img src="images/conduent-clean.png" alt="">Conduent</span><span class="org-sep">/</span><span class="client-badge client-gm"><img src="images/gm-clean.png" alt="">GM Brasil — Exportação &amp; Logística</span></div>
+        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</div>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">apr 2021 — jan 2023</div>
         <div class="log-role">Junior Financial Analyst · Administrative Assistant</div>
-        <div class="log-org"><span class="company-badge company-conduent"><img src="images/conduent-clean.png" alt="">Conduent</span><span class="org-sep">/</span><span class="client-badge client-gm"><img src="images/gm-clean.png" alt="">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
+        <div class="log-org"><img src="images/conduent.png" alt="Conduent">Conduent · <img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</div>
         <ul class="log-results">
           <li>Processed <b>+5,000 invoices</b> in a single month, minimal error margin in SAP</li>
         </ul>
@@ -656,7 +651,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">apr 2020 — apr 2021</div>
         <div class="log-role">Senior Process Operator</div>
-        <div class="log-org"><span class="company-badge company-infosys"><img src="images/infosys-clean.png" alt="">Infosys</span><span class="org-sep">/</span><span class="client-badge client-gm"><img src="images/gm-clean.png" alt="">GM Brasil — Recebimento Fiscal</span></div>
+        <div class="log-org"><img src="images/infosys.png" alt="Infosys">Infosys · <img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</div>
         <ul class="log-results">
           <li>Document and invoice control; coordinated interface between departments</li>
         </ul>
