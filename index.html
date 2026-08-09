@@ -110,12 +110,27 @@
   @media (max-width:760px){ .nav-links{ display:none; } }
 
   /* ============ MARCAS / EMPRESAS ============ */
-  .logo-strip{ margin-top:24px; padding-top:20px; border-top:1px solid var(--line); }
+  .logo-strip{ margin-top:26px; padding-top:20px; border-top:1px solid var(--line); }
   .logo-strip-label{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px; }
-  .logo-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .brand-chip{ display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:7px 12px; border:1px solid var(--line); background:rgba(255,255,255,.34); border-radius:2px; font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; letter-spacing:.025em; color:var(--ink); white-space:nowrap; transition:border-color .2s, transform .2s, background .2s; }
-  .brand-chip:hover{ border-color:var(--blue); background:rgba(44,110,142,.05); transform:translateY(-1px); }
-  @media (max-width:600px){ .logo-row{ gap:8px; } .brand-chip{ min-height:32px; padding:6px 10px; font-size:12px; } }
+  .logo-row{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+  .brand-card{ min-height:68px; padding:10px 12px; border:1.5px solid var(--brand-border,var(--line)); background:var(--brand-bg,#fff); border-radius:4px; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; box-shadow:0 2px 0 rgba(21,42,61,.05); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .brand-card::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--brand,var(--blue)); }
+  .brand-card:hover{ transform:translateY(-3px); box-shadow:0 7px 18px rgba(21,42,61,.10); border-color:var(--brand,var(--blue)); }
+  .brand-wordmark{ font-family:'Oswald',sans-serif; font-size:17px; line-height:1; font-weight:700; letter-spacing:.025em; color:var(--brand,var(--ink)); white-space:nowrap; }
+  .brand-wordmark small{ display:block; margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:7.5px; font-weight:600; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; }
+  .brand-stellantis{ --brand:#243E90; --brand-border:#BFC9E8; --brand-bg:#F6F8FF; }
+  .brand-gm{ --brand:#1769AA; --brand-border:#B9D5EA; --brand-bg:#F3F9FD; }
+  .brand-msx{ --brand:#172A3A; --brand-border:#C3CDD5; --brand-bg:#F7F9FA; }
+  .brand-conduent{ --brand:#E24A2A; --brand-border:#F0C3B8; --brand-bg:#FFF7F4; }
+  .brand-infosys{ --brand:#007CC3; --brand-border:#B6DAEC; --brand-bg:#F3FAFD; }
+  @media (max-width:800px){ .logo-row{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media (max-width:520px){ .logo-row{ grid-template-columns:repeat(2,minmax(0,1fr)); } .brand-card{ min-height:58px; } .brand-wordmark{ font-size:15px; } }
+
+  .company-badge{ display:inline-flex; align-items:center; gap:7px; padding:4px 8px 4px 5px; border:1px solid var(--company-border,var(--line)); background:var(--company-bg,var(--paper-2)); border-radius:3px; color:var(--company,var(--ink)); font-weight:650; line-height:1; }
+  .company-badge::before{ content:attr(data-mark); min-width:25px; height:22px; padding:0 4px; display:inline-flex; align-items:center; justify-content:center; border-radius:2px; background:var(--company,var(--ink)); color:#fff; font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:700; letter-spacing:-.02em; }
+  .company-msx{ --company:#172A3A; --company-border:#C3CDD5; --company-bg:#F7F9FA; }
+  .company-conduent{ --company:#E24A2A; --company-border:#F0C3B8; --company-bg:#FFF7F4; }
+  .company-infosys{ --company:#007CC3; --company-border:#B6DAEC; --company-bg:#F3FAFD; }
 
   /* ============ PERFIL (foto) ============ */
   .profile-grid{ display:grid; grid-template-columns:.82fr 1.18fr; gap:44px; align-items:center; padding:56px 0; }
@@ -444,11 +459,11 @@
       <div class="logo-strip reveal-target" data-reveal>
         <div class="logo-strip-label">Experiência na cadeia automotiva &amp; corporativa</div>
         <div class="logo-row" aria-label="Empresas da trajetória profissional">
-          <span class="brand-chip">Stellantis</span>
-          <span class="brand-chip">General Motors</span>
-          <span class="brand-chip">MSX International</span>
-          <span class="brand-chip">Conduent</span>
-          <span class="brand-chip">Infosys</span>
+          <div class="brand-card brand-stellantis"><span class="brand-wordmark">STELLANTIS<small>South America</small></span></div>
+          <div class="brand-card brand-gm"><span class="brand-wordmark">GM<small>General Motors</small></span></div>
+          <div class="brand-card brand-msx"><span class="brand-wordmark">MSX<small>International</small></span></div>
+          <div class="brand-card brand-conduent"><span class="brand-wordmark">conduent<small>Business Services</small></span></div>
+          <div class="brand-card brand-infosys"><span class="brand-wordmark">Infosys<small>Technology Services</small></span></div>
         </div>
       </div>
     </div>
@@ -512,9 +527,9 @@
         <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
       </div>
       <div class="profile-text">
-        <span class="section-tag mono">ALÉM DO CÓDIGO</span>
-        <h2>O que existe fora da tela</h2>
-        <p>Minha vida não gira só em torno de código. Minha família é minha prioridade e, fora do trabalho, gosto de praticar esportes, viajar e estar na igreja. São esses momentos que me ajudam a conhecer coisas novas, manter o equilíbrio e voltar aos projetos com outras perspectivas.</p>
+        <span class="section-tag mono">ALÉM DO TRABALHO</span>
+        <h2>Quem eu sou fora dos projetos</h2>
+        <p>Minha família vem em primeiro lugar. Fora do trabalho, gosto de esportes, viagens e da vida na igreja — espaços que fazem parte da minha rotina, ampliam minhas referências e ajudam a manter equilíbrio entre carreira e vida pessoal.</p>
         <div class="profile-tags">
           <span class="tag">Família</span><span class="tag">Esporte</span><span class="tag">Viagem</span><span class="tag">Igreja</span>
         </div>
@@ -562,7 +577,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — atualmente</div>
         <div class="log-role">Analista de Dados Pleno</div>
-        <div class="log-org"><span class="org-company">MSX International</span><span class="org-sep">/</span><span class="org-client">Stellantis South America</span></div>
+        <div class="log-org"><span class="company-badge company-msx" data-mark="MSX">MSX International</span><span class="org-sep">/</span><span class="org-client">Stellantis South America</span></div>
         <ul class="log-results">
           <li>Automação do envio diário de <b>pesquisas de NPS</b> via WhatsApp com Python</li>
           <li>Scraper para extração automatizada de dados do portal interno da Stellantis</li>
@@ -573,7 +588,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — fev 2026</div>
         <div class="log-role">Analista Administrativo de Vendas Diretas</div>
-        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">General Motors Brasil</span></div>
+        <div class="log-org"><span class="company-badge company-conduent" data-mark="C">Conduent</span><span class="org-sep">/</span><span class="org-client">General Motors Brasil</span></div>
         <ul class="log-results">
           <li>Consolidação de relatórios via Python/VBA — <b>redução de 75% no tempo de execução</b></li>
           <li>Sistema de gestão interno com integração Outlook — <b>redução de 77% de retrabalho</b></li>
@@ -584,13 +599,13 @@
         <div class="log-node"></div>
         <div class="log-date mono">jan 2023 — mai 2023</div>
         <div class="log-role">Analista Financeiro Pleno</div>
-        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística</span></div>
+        <div class="log-org"><span class="company-badge company-conduent" data-mark="C">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística</span></div>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">abr 2021 — jan 2023</div>
         <div class="log-role">Analista Financeiro Junior · Assistente Administrativo</div>
-        <div class="log-org"><span class="org-company">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
+        <div class="log-org"><span class="company-badge company-conduent" data-mark="C">Conduent</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processamento de <b>+5.000 notas fiscais</b> em um único mês, mínima margem de erro no SAP</li>
         </ul>
@@ -599,7 +614,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">abr 2020 — abr 2021</div>
         <div class="log-role">Operador de Processos Senior</div>
-        <div class="log-org"><span class="org-company">Infosys</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Recebimento Fiscal</span></div>
+        <div class="log-org"><span class="company-badge company-infosys" data-mark="INF">Infosys</span><span class="org-sep">/</span><span class="org-client">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Controle de documentos e notas fiscais; coordenação de interface entre departamentos</li>
         </ul>
