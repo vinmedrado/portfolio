@@ -9,10 +9,10 @@ const PROJECTS = [
     flagship: true,
     track: "dados",
     pill: "Data / ML",
-    category: "Personal Financial Intelligence Platform",
+    category: "Financial Automation & Data",
     year: "2026",
     status: "Actively in development",
-    desc: "Personal financial intelligence platform: financial diagnostics, market fundamentals, heuristic asset ranking, and an AI Advisor that talks to the user using real financial context.",
+    desc: "End-to-end personal financial automation: market data pipeline, rule-based recommendation engine, and asset ranking — with a conversational Advisor that uses that context to answer the user, without promising returns.",
     highlight: "End-to-end async architecture with background processing and conversational AI hardened against prompt injection.",
     results: [
       "100% async backend (FastAPI + Celery + Redis)",
@@ -58,7 +58,7 @@ const PROJECTS = [
     category: "Job Application Automation",
     year: "2025",
     status: "live · 6 active integrations",
-    desc: "Simultaneous scraping across 6 job platforms, deduplication, and an AI-powered ATS engine (LLaMA 3.3 via Groq) that returns a compatibility score, skill gaps, and a development plan.",
+    desc: "Applying to jobs manually across platforms is slow and repetitive. Applymize automates that: simultaneous search across 6 job platforms, deduplication, and AI (LLaMA 3.3 via Groq) that scores each job's fit and flags resume gaps.",
     highlight: "Automated Selenium-based applications with a persistent Kanban pipeline.",
     results: [
       "Simultaneous scraping across 6 job platforms",
@@ -102,7 +102,7 @@ const PROJECTS = [
     category: "Marketplace Automation",
     year: "2025",
     status: "live · raw→staging→mart pipeline",
-    desc: "Backend with real OAuth2 (Mercado Livre), layered pipelines orchestrated via Apache Airflow, multi-tenant.",
+    desc: "Sellers running multiple Mercado Livre accounts have no consolidated view of their data. This platform centralizes that: a layered data pipeline (raw → staging → mart) orchestrated via Airflow, with real OAuth2 integration and per-client isolation.",
     highlight: "Feature store and ML for dynamic pricing with margin protection.",
     results: [
       "Real OAuth2 integration with Mercado Livre",

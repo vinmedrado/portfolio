@@ -13,10 +13,10 @@ const PROJECTS = [
     flagship: true, // projeto principal do portfólio — aparece em destaque acima da grade
     track: "dados",
     pill: "Dados / ML",
-    category: "Plataforma de Inteligência Financeira",
+    category: "Automação & Dados Financeiros",
     year: "2026",
     status: "Em desenvolvimento ativo",
-    desc: "Plataforma de inteligência financeira pessoal: diagnóstico financeiro, fundamentos de mercado, ranking heurístico de ativos e um Advisor com IA que conversa com o usuário usando contexto financeiro real.",
+    desc: "Automação financeira pessoal de ponta a ponta: pipeline de dados de mercado, motor de recomendação por regras e ranking de ativos — com um Advisor conversacional que usa esse contexto pra responder o usuário, sem prometer retorno.",
     highlight: "Arquitetura assíncrona ponta a ponta com processamento em background e IA conversacional protegida contra prompt injection.",
     results: [
       "Backend 100% assíncrono (FastAPI + Celery + Redis)",
@@ -257,7 +257,7 @@ celery -A backend.app.core.celery.celery_app beat --loglevel=info
     category: "Automação de Candidaturas",
     year: "2025",
     status: "online · 6 integrações ativas",
-    desc: "Scraping simultâneo em 6 plataformas de vagas, deduplicação e engine de ATS com IA (LLaMA 3.3 via Groq) que retorna score, gaps e plano de desenvolvimento.",
+    desc: "Candidatar-se em várias vagas manualmente toma tempo e é repetitivo. O Applymize automatiza esse processo: busca simultânea em 6 plataformas de vagas, remove duplicadas e usa IA (LLaMA 3.3 via Groq) pra pontuar a aderência de cada vaga e apontar lacunas do currículo.",
     highlight: "Auto-candidatura via Selenium com funil Kanban persistente.",
     results: [
       "Scraping simultâneo em 6 plataformas de vagas",
@@ -581,7 +581,7 @@ lucro futuro, e nenhuma saída do sistema constitui recomendação financeira.</
     category: "Automação para Marketplaces",
     year: "2025",
     status: "online · pipeline raw→staging→mart",
-    desc: "Backend com OAuth2 real (Mercado Livre), pipelines em camadas orquestrados via Apache Airflow, multi-tenant.",
+    desc: "Vendedores que operam em múltiplas contas do Mercado Livre não têm visão consolidada dos dados. Essa plataforma centraliza isso: pipeline de dados em camadas (raw → staging → mart) orquestrado via Airflow, com integração OAuth2 real e isolamento por cliente.",
     highlight: "Feature store e ML para precificação dinâmica com proteção de margem.",
     results: [
       "Integração OAuth2 real com Mercado Livre",
