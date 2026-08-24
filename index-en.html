@@ -121,6 +121,10 @@
   /* ============ PERFIL (foto) ============ */
   .profile-grid{ display:grid; grid-template-columns:.82fr 1.18fr; gap:44px; align-items:center; padding:56px 0; }
   @media (max-width:900px){ .profile-grid{ grid-template-columns:1fr; padding:40px 0; } }
+  .profile-text-only{ max-width:640px; padding:56px 0; }
+  .profile-text-only h2{ font-family:'Oswald',sans-serif; font-weight:600; font-size:clamp(22px,3vw,28px); margin-top:8px; }
+  .profile-text-only p{ margin-top:14px; color:var(--muted); font-size:14.5px; line-height:1.6; }
+  @media (max-width:900px){ .profile-text-only{ padding:40px 0; } }
   .profile-photo-frame{ border:1.5px solid var(--ink); padding:14px; background:var(--paper); max-width:340px; }
   .profile-photo-wrap{ position:relative; overflow:hidden; }
   .profile-photo-wrap img{ display:block; width:100%; height:auto; }
@@ -149,7 +153,11 @@
   h1 .accent{ color:var(--blue); }
   .hero-sub{ margin-top:16px; max-width:480px; color:var(--muted); font-size:15px; }
   .hero-cta{ margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
-  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-block; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
+  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-flex; align-items:center; gap:8px; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
+  .btn-icon{ width:15px; height:15px; object-fit:contain; flex-shrink:0; }
+  .btn-primary .btn-icon{ filter:brightness(0) invert(1); }
+  .btn-ghost .btn-icon, .btn-teal .btn-icon{ filter:brightness(0) saturate(100%); opacity:.85; }
+  .btn-teal:hover .btn-icon{ filter:brightness(0) invert(1); opacity:1; }
   .btn:hover{ transform:translateY(-2px); box-shadow:3px 3px 0 rgba(21,42,61,.18); }
   .btn-primary{ background:var(--ink); color:var(--paper); }
   .btn-primary:hover{ background:var(--blue); border-color:var(--blue); }
@@ -501,7 +509,7 @@
       <p class="hero-sub reveal-target" data-reveal>I turn manual processes into data pipelines and automations — using data engineering, AI and software development as supporting tools to get there.</p>
       <div class="hero-cta reveal-target" data-reveal>
         <a class="btn btn-primary" href="#projetos">view projects</a>
-        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado_EN.pdf" download>download resume (pdf)</a>
+        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado_EN.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">download resume (pdf)</a>
         <a class="btn btn-ghost" href="#contato">contact</a>
       </div>
       <div class="logo-strip reveal-target" data-reveal>
@@ -564,23 +572,12 @@
 
   <!-- ============ PERFIL ============ -->
   <section id="perfil" style="border-top:none;">
-    <div class="profile-grid reveal-target" data-reveal>
-      <div class="profile-photo-frame">
-        <div class="schema-label"><span>PORTRAIT / PROFILE.DWG</span><span>FIG-01</span></div>
-        <div class="profile-photo-wrap">
-          <img src="images/perfil.webp" alt="Vinicius Santos Medrado" loading="lazy">
-          <span class="corner corner-tl" aria-hidden="true"></span>
-          <span class="corner corner-br" aria-hidden="true"></span>
-        </div>
-        <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
-      </div>
-      <div class="profile-text">
-        <span class="section-tag mono">MEMO / WHO BUILDS IT</span>
-        <h2>Behind the pipelines</h2>
-        <p>Outside of code, I like stepping out of routine — travel and sports are part of that. It's in those moments away from the keyboard that most of my ideas actually show up.</p>
-        <div class="profile-tags">
-          <span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Focus</span><span class="tag">Discipline</span>
-        </div>
+    <div class="profile-text-only reveal-target" data-reveal>
+      <span class="section-tag mono">MEMO / WHO BUILDS IT</span>
+      <h2>Behind the pipelines</h2>
+      <p>Outside of code, I like stepping out of routine — travel and sports are part of that. It's in those moments away from the keyboard that most of my ideas actually show up.</p>
+      <div class="profile-tags">
+        <span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Focus</span><span class="tag">Discipline</span>
       </div>
     </div>
   </section>
@@ -629,11 +626,10 @@
         <div class="log-role">Mid-Level Data Analyst</div>
         <div class="log-org"><span class="log-org-item"><img src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
         <ul class="log-results">
-          <li>Automated daily <b>NPS survey</b> delivery via WhatsApp with Python</li>
+          <li>Automated the <b>Daily NPS</b> process end-to-end (Focus lookup, history, comparison, PowerPoint) — cutting manual work from <b>~13 minutes to under 1 minute</b></li>
+          <li>End-to-end automation (Python/Selenium) from Focus to <b>Power BI Dataflow and semantic model refresh</b> — extraction, SSO, publishing 4 datasets to SharePoint, and triggering via Power Automate</li>
           <li>Rewrote DAX, Power Query and NLP across <b>4 corporate CX dashboards</b> broken by a methodology change — dataflows and semantic model recovered without losing historical trend data</li>
-          <li>End-to-end automation (Python/Selenium) from Focus to SharePoint — extraction, SSO auth, and automatic replacement of <b>4 corporate datasets</b>, with a desktop panel and real-time logs</li>
           <li>Proof of concept integrating <b>Azure/Entra ID, MSAL and Microsoft Graph</b> to update SharePoint files via an authenticated session</li>
-          <li>Power Automate automation for a currently manual BI dashboard <span class="log-more">(in progress)</span></li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -652,14 +648,29 @@
         <div class="log-date mono">jan 2023 — may 2023</div>
         <div class="log-role">Mid-Level Financial Analyst</div>
         <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <ul class="log-results">
+          <li>Built pivot tables and Excel formulas to speed up data analysis for the logistics team</li>
+          <li>Developed a VBA tool that queried the mainframe for real-time packaging status</li>
+        </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
-        <div class="log-date mono">apr 2021 — jan 2023</div>
-        <div class="log-role">Junior Financial Analyst · Administrative Assistant</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
+        <div class="log-date mono">jul 2022 — jan 2023</div>
+        <div class="log-role">Junior Financial Analyst</div>
+        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <ul class="log-results">
+          <li>Helped implement a new triangulation process, speeding up operations and removing critical bottlenecks</li>
+          <li>Built a VBA macro that standardized logistics file formatting (PCK/LPN/ASN) before system submission, eliminating recurring character-count errors</li>
+        </ul>
+      </div>
+      <div class="log-entry reveal-target" data-reveal>
+        <div class="log-node"></div>
+        <div class="log-date mono">apr 2021 — jul 2022</div>
+        <div class="log-role">Administrative Assistant</div>
+        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processed <b>+5,000 invoices</b> in a single month, minimal error margin in SAP</li>
+          <li>Trained new hires on the fiscal receiving process</li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -681,11 +692,11 @@
       <h2>Tech Stack</h2>
     </div>
     <div class="stack-grid reveal-target" data-reveal>
-      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag">Python</span><span class="tag">Power Automate</span><span class="tag">Selenium</span><span class="tag">VBA</span></div></div>
-      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag">Pandas</span></div></div>
+      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag">Power Automate</span><span class="tag"><img class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag">VBA</span></div></div>
+      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag"><img class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
       <div class="stack-cell"><h3>BI & Visualization</h3><div class="items"><span class="tag">Power BI</span><span class="tag">DAX</span></div></div>
-      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">React</span></div></div>
-      <div class="stack-cell"><h3>Databases</h3><div class="items"><span class="tag">PostgreSQL</span><span class="tag">SQLite</span></div></div>
+      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag">REST APIs</span><span class="tag"><img class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
+      <div class="stack-cell"><h3>Databases</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/postgresql.svg" alt="">PostgreSQL</span><span class="tag"><img class="tag-icon" src="images/icons/sqlite.svg" alt="">SQLite</span></div></div>
       <div class="stack-cell"><h3>Machine Learning & AI</h3><div class="items"><span class="tag">Machine Learning</span><span class="tag">LLMs</span></div></div>
     </div>
   </section>
@@ -726,11 +737,11 @@
   <footer id="contato">
     <div class="footer-head reveal-target" data-reveal>Let's talk about data, automation, or your next opening?</div>
     <div class="contact-actions reveal-target" data-reveal>
-      <a class="btn btn-primary" href="Vinicius_Santos_Medrado_EN.pdf" download>download resume</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener">linkedin</a>
-      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener">github</a>
-      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener">whatsapp</a>
-      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com">email</a>
+      <a class="btn btn-primary" href="Vinicius_Santos_Medrado_EN.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">download resume</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/linkedin.svg" alt="">linkedin</a>
+      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/github.svg" alt="">github</a>
+      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/whatsapp.svg" alt="">whatsapp</a>
+      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com"><img class="btn-icon" src="images/icons/email.svg" alt="">email</a>
     </div>
     <div class="contact-grid reveal-target" data-reveal>
       <div class="contact-item"><span class="label">email</span><a href="mailto:Vinicius.medrado@outlook.com">Vinicius.medrado@outlook.com</a></div>

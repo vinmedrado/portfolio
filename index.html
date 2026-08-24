@@ -122,6 +122,10 @@
   /* ============ PERFIL (foto) ============ */
   .profile-grid{ display:grid; grid-template-columns:.82fr 1.18fr; gap:44px; align-items:center; padding:56px 0; }
   @media (max-width:900px){ .profile-grid{ grid-template-columns:1fr; padding:40px 0; } }
+  .profile-text-only{ max-width:640px; padding:56px 0; }
+  .profile-text-only h2{ font-family:'Oswald',sans-serif; font-weight:600; font-size:clamp(22px,3vw,28px); margin-top:8px; }
+  .profile-text-only p{ margin-top:14px; color:var(--muted); font-size:14.5px; line-height:1.6; }
+  @media (max-width:900px){ .profile-text-only{ padding:40px 0; } }
   .profile-photo-frame{ border:1.5px solid var(--ink); padding:14px; background:var(--paper); max-width:340px; }
   .profile-photo-wrap{ position:relative; overflow:hidden; }
   .profile-photo-wrap img{ display:block; width:100%; height:auto; }
@@ -150,7 +154,11 @@
   h1 .accent{ color:var(--blue); }
   .hero-sub{ margin-top:16px; max-width:480px; color:var(--muted); font-size:15px; }
   .hero-cta{ margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
-  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-block; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
+  .btn{ padding:11px 20px; border-radius:2px; font-size:12.5px; font-weight:600; text-decoration:none; font-family:'JetBrains Mono',monospace; border:2px solid var(--ink); transition:all .2s; display:inline-flex; align-items:center; gap:8px; text-transform:uppercase; letter-spacing:.03em; cursor:pointer; }
+  .btn-icon{ width:15px; height:15px; object-fit:contain; flex-shrink:0; }
+  .btn-primary .btn-icon{ filter:brightness(0) invert(1); }
+  .btn-ghost .btn-icon, .btn-teal .btn-icon{ filter:brightness(0) saturate(100%); opacity:.85; }
+  .btn-teal:hover .btn-icon{ filter:brightness(0) invert(1); opacity:1; }
   .btn:hover{ transform:translateY(-2px); box-shadow:3px 3px 0 rgba(21,42,61,.18); }
   .btn-primary{ background:var(--ink); color:var(--paper); }
   .btn-primary:hover{ background:var(--blue); border-color:var(--blue); }
@@ -231,7 +239,8 @@
   .card-results li{ font-size:12px; color:#33465A; display:flex; gap:6px; }
   .card-results li::before{ content:'▸'; color:var(--blue); flex-shrink:0; }
   .stack{ margin-top:13px; display:flex; flex-wrap:wrap; gap:6px; }
-  .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); background:var(--paper-2); border:1px solid var(--line); padding:2px 7px; border-radius:2px; }
+  .tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); background:var(--paper-2); border:1px solid var(--line); padding:2px 7px; border-radius:2px; display:inline-flex; align-items:center; gap:5px; }
+  .tag-icon{ width:12px; height:12px; object-fit:contain; filter:grayscale(1) contrast(1.1); opacity:.75; }
   .card-actions{ margin-top:15px; display:flex; gap:8px; flex-wrap:wrap; }
   .card-btn{ font-family:'JetBrains Mono',monospace; font-size:11px; text-decoration:none; padding:6px 11px; border:1.3px solid var(--ink); border-radius:2px; color:var(--ink); transition:all .2s; display:inline-block; }
   .card-btn:hover{ background:var(--ink); color:var(--paper); transform:translateY(-1px); }
@@ -443,7 +452,7 @@
       <p class="hero-sub reveal-target" data-reveal>Transformo processos manuais em pipelines de dados e automações — usando engenharia de dados, IA e desenvolvimento de software como ferramentas de apoio pra chegar lá.</p>
       <div class="hero-cta reveal-target" data-reveal>
         <a class="btn btn-primary" href="#projetos">ver projetos</a>
-        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado.pdf" download>baixar currículo (pdf)</a>
+        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">baixar currículo (pdf)</a>
         <a class="btn btn-ghost" href="#contato">contato</a>
       </div>
       <div class="logo-strip reveal-target" data-reveal>
@@ -506,23 +515,12 @@
 
   <!-- ============ PERFIL ============ -->
   <section id="perfil" style="border-top:none;">
-    <div class="profile-grid reveal-target" data-reveal>
-      <div class="profile-photo-frame">
-        <div class="schema-label"><span>RETRATO / PERFIL.DWG</span><span>FIG-01</span></div>
-        <div class="profile-photo-wrap">
-          <img src="images/perfil.webp" alt="Vinicius Santos Medrado" loading="lazy">
-          <span class="corner corner-tl" aria-hidden="true"></span>
-          <span class="corner corner-br" aria-hidden="true"></span>
-        </div>
-        <div class="profile-caption"><span>Bariloche, AR</span><span>2026</span></div>
-      </div>
-      <div class="profile-text">
-        <span class="section-tag mono">MEMORIAL / QUEM CONSTRÓI</span>
-        <h2>Por trás dos pipelines</h2>
-        <p>Fora do código, gosto de sair da rotina — viagem e esporte entram nessa lista. É nesses momentos, longe do teclado, que a maioria das minhas ideias aparece.</p>
-        <div class="profile-tags">
-          <span class="tag">Esporte</span><span class="tag">Viagem</span><span class="tag">Foco</span><span class="tag">Disciplina</span>
-        </div>
+    <div class="profile-text-only reveal-target" data-reveal>
+      <span class="section-tag mono">MEMORIAL / QUEM CONSTRÓI</span>
+      <h2>Por trás dos pipelines</h2>
+      <p>Fora do código, gosto de sair da rotina — viagem e esporte entram nessa lista. É nesses momentos, longe do teclado, que a maioria das minhas ideias aparece.</p>
+      <div class="profile-tags">
+        <span class="tag">Esporte</span><span class="tag">Viagem</span><span class="tag">Foco</span><span class="tag">Disciplina</span>
       </div>
     </div>
   </section>
@@ -571,11 +569,10 @@
         <div class="log-role">Analista de Dados Pleno</div>
         <div class="log-org"><span class="log-org-item"><img src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
         <ul class="log-results">
-          <li>Automação do envio diário de <b>pesquisas de NPS</b> via WhatsApp com Python</li>
+          <li>Automatizei o <b>NPS Diário</b> de ponta a ponta (consulta ao Focus, histórico, comparação e PowerPoint) — reduzindo o processo manual de <b>~13 minutos para menos de 1 minuto</b></li>
+          <li>Automação end-to-end (Python/Selenium) do Focus à atualização de <b>Dataflows e modelos semânticos no Power BI</b> — extração, SSO, publicação de 4 bases no SharePoint e disparo via Power Automate</li>
           <li>Reescrita de DAX, Power Query e NLP em <b>4 dashboards corporativos de CX</b> quebrados por mudança de metodologia — dataflows e modelo semântico recuperados sem perder série histórica</li>
-          <li>Automação end-to-end (Python/Selenium) do Focus ao SharePoint — extração, autenticação SSO e substituição automática de <b>4 bases corporativas</b>, com painel desktop e logs em tempo real</li>
           <li>Prova de conceito de integração com <b>Azure/Entra ID, MSAL e Microsoft Graph</b> para atualização de arquivos no SharePoint via sessão autenticada</li>
-          <li>Automação em Power Automate para BI hoje mantido manualmente <span class="log-more">(em desenvolvimento)</span></li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -594,14 +591,29 @@
         <div class="log-date mono">jan 2023 — mai 2023</div>
         <div class="log-role">Analista Financeiro Pleno</div>
         <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <ul class="log-results">
+          <li>Criei tabelas dinâmicas e fórmulas em Excel para acelerar a análise de dados da área de logística</li>
+          <li>Desenvolvi um VBA que consultava o mainframe para checar status de embalagens em tempo real</li>
+        </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
         <div class="log-node"></div>
-        <div class="log-date mono">abr 2021 — jan 2023</div>
-        <div class="log-role">Analista Financeiro Junior · Assistente Administrativo</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística / Recebimento Fiscal</span></div>
+        <div class="log-date mono">jul 2022 — jan 2023</div>
+        <div class="log-role">Analista Financeiro Junior</div>
+        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <ul class="log-results">
+          <li>Participei da implementação de um novo processo de triangulação, acelerando operações e eliminando gargalos críticos</li>
+          <li>Criei uma macro em VBA que padronizava a formatação de arquivos de logística (PCK/LPN/ASN) antes do envio ao sistema, eliminando erros recorrentes de submissão por caractere incorreto</li>
+        </ul>
+      </div>
+      <div class="log-entry reveal-target" data-reveal>
+        <div class="log-node"></div>
+        <div class="log-date mono">abr 2021 — jul 2022</div>
+        <div class="log-role">Assistente Administrativo</div>
+        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processamento de <b>+5.000 notas fiscais</b> em um único mês, mínima margem de erro no SAP</li>
+          <li>Treinamento de novos colaboradores no processo de recebimento fiscal</li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -623,11 +635,11 @@
       <h2>Stack Técnica</h2>
     </div>
     <div class="stack-grid reveal-target" data-reveal>
-      <div class="stack-cell"><h3>Automação</h3><div class="items"><span class="tag">Python</span><span class="tag">Power Automate</span><span class="tag">Selenium</span><span class="tag">VBA</span></div></div>
-      <div class="stack-cell"><h3>Dados & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag">Pandas</span></div></div>
+      <div class="stack-cell"><h3>Automação</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag">Power Automate</span><span class="tag"><img class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag">VBA</span></div></div>
+      <div class="stack-cell"><h3>Dados & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag"><img class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
       <div class="stack-cell"><h3>BI & Visualização</h3><div class="items"><span class="tag">Power BI</span><span class="tag">DAX</span></div></div>
-      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag">FastAPI</span><span class="tag">APIs REST</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">React</span></div></div>
-      <div class="stack-cell"><h3>Banco de Dados</h3><div class="items"><span class="tag">PostgreSQL</span><span class="tag">SQLite</span></div></div>
+      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag">APIs REST</span><span class="tag"><img class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
+      <div class="stack-cell"><h3>Banco de Dados</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/postgresql.svg" alt="">PostgreSQL</span><span class="tag"><img class="tag-icon" src="images/icons/sqlite.svg" alt="">SQLite</span></div></div>
       <div class="stack-cell"><h3>Machine Learning & IA</h3><div class="items"><span class="tag">Machine Learning</span><span class="tag">LLMs</span></div></div>
     </div>
   </section>
@@ -668,11 +680,11 @@
   <footer id="contato">
     <div class="footer-head reveal-target" data-reveal>Vamos conversar sobre dados, automação ou a próxima vaga?</div>
     <div class="contact-actions reveal-target" data-reveal>
-      <a class="btn btn-primary" href="Vinicius_Santos_Medrado.pdf" download>baixar currículo</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener">linkedin</a>
-      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener">github</a>
-      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener">whatsapp</a>
-      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com">email</a>
+      <a class="btn btn-primary" href="Vinicius_Santos_Medrado.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">baixar currículo</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/linkedin.svg" alt="">linkedin</a>
+      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/github.svg" alt="">github</a>
+      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/whatsapp.svg" alt="">whatsapp</a>
+      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com"><img class="btn-icon" src="images/icons/email.svg" alt="">email</a>
     </div>
     <div class="contact-grid reveal-target" data-reveal>
       <div class="contact-item"><span class="label">email</span><a href="mailto:Vinicius.medrado@outlook.com">Vinicius.medrado@outlook.com</a></div>
