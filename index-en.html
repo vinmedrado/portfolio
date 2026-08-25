@@ -246,7 +246,9 @@
   .card-btn.demo:hover{ background:var(--teal); border-color:var(--teal); color:var(--paper); }
 
   /* ============ EXPERIENCE (compact, result-forward) ============ */
-  .log{ border-left:3px solid var(--ink); padding-left:24px; }
+  .log{ position:relative; border-left:none; padding-left:24px; }
+  .log::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--line); }
+  .log-progress{ position:absolute; left:0; top:0; width:3px; height:0%; background:var(--ink); transition:height .1s linear; }
   .log-entry{ position:relative; padding-bottom:26px; }
   .log-entry:last-child{ padding-bottom:0; }
   .log-node{ position:absolute; left:-32px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--amber); }
@@ -397,7 +399,9 @@
   }
 
   /* ============ EXPERIENCE (compact, result-forward) ============ */
-  .log{ border-left:3px solid var(--ink); padding-left:24px; }
+  .log{ position:relative; border-left:none; padding-left:24px; }
+  .log::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--line); }
+  .log-progress{ position:absolute; left:0; top:0; width:3px; height:0%; background:var(--ink); transition:height .1s linear; }
   .log-entry{ position:relative; padding-bottom:26px; }
   .log-entry:last-child{ padding-bottom:0; }
   .log-node{ position:absolute; left:-32px; top:2px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:2px solid var(--amber); }
@@ -529,12 +533,16 @@
       <svg viewBox="0 0 300 210" width="100%">
         <path d="M40,40 H130" stroke="#B9C7D0" stroke-width="10" fill="none"/>
         <path class="flow-line" d="M40,40 H130" stroke="#2C6E8E" stroke-width="2" fill="none"/>
+        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0s" path="M40,40 H130"/></circle>
         <path d="M170,40 H260" stroke="#B9C7D0" stroke-width="10" fill="none"/>
         <path class="flow-line" d="M170,40 H260" stroke="#2C6E8E" stroke-width="2" fill="none" style="animation-delay:.3s"/>
+        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="1.6s" repeatCount="indefinite" begin=".3s" path="M170,40 H260"/></circle>
         <path d="M260,40 V100 H170" stroke="#B9C7D0" stroke-width="10" fill="none"/>
         <path class="flow-line" d="M260,40 V100 H170" stroke="#2C6E8E" stroke-width="2" fill="none" style="animation-delay:.6s"/>
+        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="1.6s" repeatCount="indefinite" begin=".6s" path="M260,40 V100 H170"/></circle>
         <path d="M130,100 H40 V160" stroke="#B9C7D0" stroke-width="10" fill="none"/>
         <path class="flow-line" d="M130,100 H40 V160" stroke="#1E7A63" stroke-width="2" fill="none" style="animation-delay:.9s"/>
+        <circle r="3" fill="#1E7A63" class="data-packet"><animateMotion dur="1.6s" repeatCount="indefinite" begin=".9s" path="M130,100 H40 V160"/></circle>
 
         <rect x="14" y="14" width="52" height="52" rx="4" fill="#FBFAF5" stroke="#152A3D" stroke-width="2"/>
         <path d="M20,30 h40 M20,42 h40 M20,54 h40" stroke="#B9C7D0" stroke-width="2"/>
@@ -620,6 +628,7 @@
     </div>
     <p class="section-intro reveal-target" data-reveal>Started in operations and finance within the GM chain, then steered the route toward data and automation — where I work full-time today.</p>
     <div class="log">
+      <div class="log-progress" id="logProgress"></div>
       <div class="log-entry current reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — present</div>
@@ -692,12 +701,12 @@
       <h2>Tech Stack</h2>
     </div>
     <div class="stack-grid reveal-target" data-reveal>
-      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag">Power Automate</span><span class="tag"><img class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag">VBA</span></div></div>
-      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag">SQL</span><span class="tag">ETL</span><span class="tag">Power Query</span><span class="tag"><img class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
-      <div class="stack-cell"><h3>BI & Visualization</h3><div class="items"><span class="tag">Power BI</span><span class="tag">DAX</span></div></div>
-      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag">REST APIs</span><span class="tag"><img class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
+      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag"><img class="tag-icon" src="images/icons/power-automate.svg" alt="">Power Automate</span><span class="tag"><img class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag"><img class="tag-icon" src="images/icons/vba.svg" alt="">VBA</span></div></div>
+      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/sql.svg" alt="">SQL</span><span class="tag"><img class="tag-icon" src="images/icons/etl.svg" alt="">ETL</span><span class="tag"><img class="tag-icon" src="images/icons/power-query.svg" alt="">Power Query</span><span class="tag"><img class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
+      <div class="stack-cell"><h3>BI & Visualization</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/power-bi.svg" alt="">Power BI</span><span class="tag"><img class="tag-icon" src="images/icons/dax.svg" alt="">DAX</span></div></div>
+      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag"><img class="tag-icon" src="images/icons/apis-rest.svg" alt="">REST APIs</span><span class="tag"><img class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
       <div class="stack-cell"><h3>Databases</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/postgresql.svg" alt="">PostgreSQL</span><span class="tag"><img class="tag-icon" src="images/icons/sqlite.svg" alt="">SQLite</span></div></div>
-      <div class="stack-cell"><h3>Machine Learning & AI</h3><div class="items"><span class="tag">Machine Learning</span><span class="tag">LLMs</span></div></div>
+      <div class="stack-cell"><h3>Machine Learning & AI</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/machine-learning.svg" alt="">Machine Learning</span><span class="tag"><img class="tag-icon" src="images/icons/llms.svg" alt="">LLMs</span></div></div>
     </div>
   </section>
 
@@ -889,6 +898,29 @@ function finishLoad(){
   document.body.classList.remove('loading');
   setTimeout(() => pl.remove(), 650);
 }
+
+/* ---------- LOG TIMELINE PROGRESS LINE ---------- */
+(function(){
+  const logEl = document.querySelector('.log');
+  const progressEl = document.getElementById('logProgress');
+  if (!logEl || !progressEl) return;
+  let ticking = false;
+  function updateProgress(){
+    const rect = logEl.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height;
+    let visible = (vh * 0.75) - rect.top;
+    visible = Math.max(0, Math.min(visible, total));
+    const pct = total > 0 ? (visible / total) * 100 : 0;
+    progressEl.style.height = pct + '%';
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking){ requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive:true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+})();
 
 /* ---------- REVEAL (vanilla IntersectionObserver) ---------- */
 const io = new IntersectionObserver((entries) => {
