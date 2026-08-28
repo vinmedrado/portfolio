@@ -91,7 +91,7 @@ const PROJECTS = [
     link: "https://github.com/vinmedrado/football-decision-lab",
     demo: "https://football-decision-lab.netlify.app/",
     image: "images/footballdecisionlab.png",
-    gallery: ["gallery/footballdecisionlab/footballdecisionlab-01.webp", "gallery/footballdecisionlab/footballdecisionlab-02.webp", "gallery/footballdecisionlab/footballdecisionlab-03.webp", "gallery/footballdecisionlab/footballdecisionlab-04.webp", "gallery/footballdecisionlab/footballdecisionlab-05.webp", "gallery/footballdecisionlab/footballdecisionlab-06.webp", "gallery/footballdecisionlab/footballdecisionlab-07.webp", "gallery/footballdecisionlab/footballdecisionlab-08.webp", "gallery/footballdecisionlab/footballdecisionlab-09.webp", "gallery/footballdecisionlab/footballdecisionlab-10.webp", "gallery/footballdecisionlab/footballdecisionlab-11.webp"]
+    gallery: ["gallery/footballdecisionlab/footballdecisionlab-07.webp", "gallery/footballdecisionlab/footballdecisionlab-08.webp", "gallery/footballdecisionlab/footballdecisionlab-09.webp", "gallery/footballdecisionlab/footballdecisionlab-10.webp", "gallery/footballdecisionlab/footballdecisionlab-11.webp", "gallery/footballdecisionlab/footballdecisionlab-02.webp", "gallery/footballdecisionlab/footballdecisionlab-05.webp", "gallery/footballdecisionlab/footballdecisionlab-01.webp", "gallery/footballdecisionlab/footballdecisionlab-03.webp", "gallery/footballdecisionlab/footballdecisionlab-04.webp", "gallery/footballdecisionlab/footballdecisionlab-06.webp"]
   },
   {
     id: "marketplace",
@@ -180,10 +180,10 @@ const PROJECTS = [
     stack: ["Python", "Flask", "Playwright", "Groq API", "SQLite", "pytest"],
     link: "https://github.com/vinmedrado/freelance-bot",
     demo: "https://vinmedrado.github.io/freelance-bot/",
-    image: "docs/images/demo-dashboard.png",
+    image: "gallery/freelancebot/freelancebot-04.webp",
     pdf: "docs/proposta-99freelas.pdf",
     pdfLabel: "view sample proposal (PDF)",
-    gallery: ["docs/images/demo-dashboard.png", "docs/images/demo-detail.png", "docs/images/demo-proposal.png", "docs/images/landing.png"]
+    gallery: ["gallery/freelancebot/freelancebot-04.webp", "docs/images/demo-dashboard.png", "docs/images/demo-detail.png", "docs/images/demo-proposal.png"]
   }
 ];
 
