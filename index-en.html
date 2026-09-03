@@ -6,19 +6,19 @@
 <meta name="color-scheme" content="light">
 
 <title>Vinicius Santos Medrado — Data & Process Automation</title>
-<meta name="description" content="Portfolio of Vinicius Santos Medrado — process automation and data engineering applied to the GM Brasil / Stellantis supply chain, with independent products that use machine learning and AI as a supporting layer.">
+<meta name="description" content="Portfolio of Vinicius Santos Medrado — processes, automation, data, integrations and systems applied to the GM Brasil / Stellantis supply chain, with independent products that use software, machine learning and AI when appropriate.">
 <meta name="author" content="Vinicius Santos Medrado">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vinicius Santos Medrado — Data & Process Automation">
-<meta property="og:description" content="Process automation and data engineering — from raw data to automated decisions.">
+<meta property="og:description" content="Processes, automation, data and integrations — from manual work to systems and automated decisions.">
 <meta property="og:url" content="https://vinmedrado.github.io/portfolio/index-en.html">
 <meta property="og:image" content="https://vinmedrado.github.io/portfolio/images/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vinicius Santos Medrado — Data & Automation">
-<meta name="twitter:description" content="Pipelines, automations, and Machine Learning projects — from raw data to automated decisions.">
+<meta name="twitter:description" content="Automations, pipelines, integrations and systems — from manual processes to data-driven outcomes.">
 <meta name="twitter:image" content="https://vinmedrado.github.io/portfolio/images/og-cover.png">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBFAF5'/%3E%3Cg fill='none' stroke='%232C6E8E' stroke-width='7'%3E%3Ccircle cx='50' cy='50' r='24'/%3E%3Cpath d='M50 10v14M50 76v14M10 50h14M76 50h14M21 21l10 10M69 69l10 10M79 21l-10 10M21 79l10-10'/%3E%3C/g%3E%3C/svg%3E">
@@ -42,6 +42,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -74,25 +75,12 @@
   }
   .skip-link:focus{ left:12px; top:12px; }
 
-  #bp-grid{ position:fixed; inset:0; z-index:-1; opacity:.55; pointer-events:none; }
 
   .reveal-target{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
   .reveal-target.in{ opacity:1; transform:translateY(0); }
 
-  #preloader{ position:fixed; inset:0; background:var(--paper); z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; }
-  #preloader.done{ animation:plOut .2s ease forwards; }
-  #preloader{ animation:plOut .2s ease .35s forwards; }
-  @keyframes plOut{ to{ opacity:0; visibility:hidden; } }
-  .gear-load{ width:56px; height:56px; animation:spin 2.2s linear infinite; }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  .pl-track{ width:240px; height:6px; background:var(--paper-2); border:1px solid var(--line); border-radius:2px; position:relative; overflow:hidden; }
-  .pl-fill{ position:absolute; left:0; top:0; height:100%; width:0%; background:var(--blue); }
-  .pl-txt{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); letter-spacing:.05em; }
-  body.loading{ overflow:hidden; }
   @media (prefers-reduced-motion: reduce){
     .reveal-target{ transition:none; }
-    .gear-load, .gear-spin, .flow-line, .data-packet{ animation:none !important; }
-    #preloader{ animation:none !important; display:none !important; }
     .log-progress{ transition:none; }
   }
 
@@ -478,35 +466,30 @@
   .contact-item a:hover{ color:var(--blue); border-color:var(--blue); }
   .foot-note{ margin-top:40px; font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace; }
 </style>
+<link rel="stylesheet" href="design-system.css?v=20260903">
+<link rel="stylesheet" href="automation-systems.css?v=20260903qa1">
 </head>
-<body class="loading">
+<body>
 <a class="skip-link" href="#conteudo">Skip to content</a>
 <div id="hardbg"></div>
-<svg id="bp-grid" aria-hidden="true"></svg>
 
-<div id="preloader" role="status" aria-live="polite">
-  <svg class="gear-load" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#2C6E8E" stroke-width="6"><path d="M50 8 L56 22 L44 22 Z M50 92 L56 78 L44 78 Z M8 50 L22 44 L22 56 Z M92 50 L78 44 L78 56 Z M20 20 L30 28 L22 32 Z M80 80 L70 72 L78 68 Z M80 20 L70 28 L78 32 Z M20 80 L30 72 L22 68 Z"/><circle cx="50" cy="50" r="26"/></g></svg>
-  <div class="pl-txt" id="plTxt">loading</div>
-</div>
 
 <header class="nav">
   <div class="nav-inner">
     <span class="nav-name">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
-      VINICIUS.MEDRADO
+      <span class="nav-brand-text">VINICIUS.MEDRADO</span>
     </span>
-    <ul class="nav-links">
-      <li><a href="#resultados">results</a></li>
-      <li><a href="#projetos">projects</a></li>
-      <li><a href="#experiencia">experience</a></li>
-      <li><a href="#stack">stack</a></li>
-      <li><a href="#sobre">about</a></li>
-    </ul>
-    <a class="lang-switch" href="index.html" aria-label="Mudar para português">
-      <span class="inactive">PT</span><span class="active">EN</span>
-    </a>
-    <a class="nav-cv" href="Vinicius_Santos_Medrado_EN.pdf" download>resume ↓</a>
+    <ul class="nav-links"><li><a href="#resultados">results</a></li><li><a href="#projetos">projects</a></li><li><a href="#experiencia">experience</a></li><li><a href="#stack">stack</a></li><li><a href="#sobre">about</a></li></ul>
+    <div class="nav-actions">
+      <a class="lang-switch" href="index.html" aria-label="Mudar para português"><span class="inactive">PT</span><span class="active">EN</span></a>
+      <a class="nav-cv" href="Vinicius_Santos_Medrado_EN.pdf" download>resume ↓</a>
+      <button class="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-panel"><a href="#resultados">results</a><a href="#projetos">projects</a><a href="#experiencia">experience</a><a href="#stack">stack</a><a href="#sobre">about</a><a class="mobile-cv" href="Vinicius_Santos_Medrado_EN.pdf" download>download resume</a></div>
+  </nav>
 </header>
 
 <div class="wrap" id="conteudo">
@@ -517,21 +500,21 @@
       <div class="tb-role">data &amp; process automation</div>
     </div>
     <div class="tb-fields">
-      <div class="tb-field"><div class="k">Drawing</div><div class="v">PORTFOLIO-01</div></div>
-      <div class="tb-field"><div class="k">Scale</div><div class="v">1 : 1</div></div>
-      <div class="tb-field"><div class="k">Rev.</div><div class="v">2026.07</div></div>
-      <div class="tb-field"><div class="k">Location</div><div class="v">Santo André, SP — Brazil</div></div>
+      <div class="tb-field"><div class="k">Input</div><div class="v">Processes + Data</div></div>
+      <div class="tb-field"><div class="k">Layer</div><div class="v">Automation + Integrations</div></div>
+      <div class="tb-field"><div class="k">Output</div><div class="v">Systems + Decision</div></div>
+      <div class="tb-field"><div class="k">Based in</div><div class="v">Santo André, SP — Brazil</div></div>
     </div>
   </div>
 
   <!-- ============ HERO ============ -->
   <section class="hero" style="border:none;">
     <div>
-      <h1 class="reveal-target" data-reveal>I take manual process and raw data — <span class="accent">I deliver pipeline and automated decision.</span></h1>
-      <p class="hero-sub reveal-target" data-reveal>I turn manual processes into data pipelines and automations — using data engineering, AI and software development as supporting tools to get there.</p>
+      <h1 class="reveal-target" data-reveal>I take manual processes and raw data — <span class="accent">and turn them into automated pipelines and decisions.</span></h1>
+      <p class="hero-sub reveal-target" data-reveal>I turn manual routines, scattered data and operational tasks into automations, pipelines, integrations and systems — using data, APIs, AI and software as tools to reach the outcome.</p>
       <div class="hero-cta reveal-target" data-reveal>
         <a class="btn btn-primary" href="#projetos">view projects</a>
-        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado_EN.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">download resume (pdf)</a>
+        <a class="btn btn-ghost" href="Vinicius_Santos_Medrado_EN.pdf" download><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/download.svg" alt="">download resume (pdf)</a>
         <a class="btn btn-ghost" href="#contato">contact</a>
       </div>
       <div class="logo-strip reveal-target" data-reveal>
@@ -546,91 +529,43 @@
       </div>
     </div>
 
-    <div class="schema-box reveal-target" data-reveal aria-hidden="true">
-      <div class="schema-label"><span>SCHEMATIC / PIPELINE.DWG</span><span>P&amp;ID-01</span></div>
-      <svg viewBox="0 0 300 210" width="100%">
-        <path d="M40,40 H130" stroke="#B9C7D0" stroke-width="10" fill="none"/>
-        <path class="flow-line" d="M40,40 H130" stroke="#2C6E8E" stroke-width="2" fill="none"/>
-        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="3.2s" repeatCount="3" begin="0s" path="M40,40 H130"/></circle>
-        <path d="M170,40 H260" stroke="#B9C7D0" stroke-width="10" fill="none"/>
-        <path class="flow-line" d="M170,40 H260" stroke="#2C6E8E" stroke-width="2" fill="none" style="animation-delay:.3s"/>
-        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="3.2s" repeatCount="3" begin=".3s" path="M170,40 H260"/></circle>
-        <path d="M260,40 V100 H170" stroke="#B9C7D0" stroke-width="10" fill="none"/>
-        <path class="flow-line" d="M260,40 V100 H170" stroke="#2C6E8E" stroke-width="2" fill="none" style="animation-delay:.6s"/>
-        <circle r="3" fill="#2C6E8E" class="data-packet"><animateMotion dur="3.2s" repeatCount="3" begin=".6s" path="M260,40 V100 H170"/></circle>
-        <path d="M130,100 H40 V160" stroke="#B9C7D0" stroke-width="10" fill="none"/>
-        <path class="flow-line" d="M130,100 H40 V160" stroke="#1E7A63" stroke-width="2" fill="none" style="animation-delay:.9s"/>
-        <circle r="3" fill="#1E7A63" class="data-packet"><animateMotion dur="3.2s" repeatCount="3" begin=".9s" path="M130,100 H40 V160"/></circle>
-
-        <rect x="14" y="14" width="52" height="52" rx="4" fill="#FBFAF5" stroke="#152A3D" stroke-width="2"/>
-        <path d="M20,30 h40 M20,42 h40 M20,54 h40" stroke="#B9C7D0" stroke-width="2"/>
-        <text x="40" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#5F7181">RAW</text>
-
-        <g transform="translate(130,14)">
-          <rect width="40" height="52" rx="4" fill="#FBFAF5" stroke="#152A3D" stroke-width="2"/>
-          <path d="M8,26 L32,10 M8,26 L32,42" stroke="#B5701F" stroke-width="2.4" fill="none"/>
-          <text x="20" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#5F7181">ETL</text>
-        </g>
-
-        <g transform="translate(260,40)">
-          <g class="gear-spin">
-            <circle r="20" fill="#FBFAF5" stroke="#152A3D" stroke-width="2"/>
-            <g fill="none" stroke="#1E7A63" stroke-width="3">
-              <path d="M0 -17 L0 -24 M0 17 L0 24 M-17 0 L-24 0 M17 0 L24 0 M-12 -12 L-17 -17 M12 12 L17 17 M12 -12 L17 -17 M-12 12 L-17 17"/>
-            </g>
-            <circle r="8" fill="none" stroke="#152A3D" stroke-width="2"/>
-          </g>
-          <text x="0" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#5F7181">MODEL</text>
-        </g>
-
-        <g transform="translate(14,100)">
-          <rect width="52" height="52" rx="4" fill="#FBFAF5" stroke="#152A3D" stroke-width="2"/>
-          <path d="M10,40 L26,24 L36,34 L48,16" stroke="#1E7A63" stroke-width="2.4" fill="none"/>
-          <circle cx="48" cy="16" r="2.6" fill="#1E7A63"/>
-          <text x="26" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#5F7181">SHIP</text>
-        </g>
-
-        <line x1="14" y1="195" x2="286" y2="195" stroke="#B9C7D0" stroke-width="1"/>
-        <text x="150" y="207" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#5F7181">raw → etl → model → ship</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- ============ PERFIL ============ -->
-  <section id="perfil" style="border-top:none;">
-    <div class="profile-text-only reveal-target" data-reveal>
-      <span class="section-tag mono">MEMO / WHO BUILDS IT</span>
-      <h2>Behind the pipelines</h2>
-      <p>Outside of code, I like stepping out of routine — travel and sports are part of that. It's in those moments away from the keyboard that most of my ideas actually show up.</p>
-      <div class="profile-tags">
-        <span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Focus</span><span class="tag">Discipline</span>
+    <div class="schema-box reveal-target" data-reveal role="img" aria-label="Automation flow from manual process to outcome">
+      <div class="schema-label"><span>ORCHESTRATION / PROCESS → OUTCOME</span><span class="run-state">FLOW ACTIVE</span></div>
+      <div class="orchestration-diagram">
+        <div class="orchestration-track"><span class="automation-runner" aria-hidden="true"></span><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="6" width="20" height="20"/><path d="M10 11h12M10 16h9M10 21h6"/></svg></div><div class="orchestration-step">MANUAL PROCESS</div><div class="orchestration-state">TRIGGER</div></div><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 8h18v16H7z"/><path d="M11 12h10M11 16h6"/><path d="M5 11V6h5M27 11V6h-5M5 21v5h5M27 21v5h-5"/></svg></div><div class="orchestration-step">CAPTURE</div><div class="orchestration-state">INPUT</div></div><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="16" cy="16" r="5"/><path d="M16 3v5M16 24v5M3 16h5M24 16h5M6.8 6.8l3.6 3.6M21.6 21.6l3.6 3.6M25.2 6.8l-3.6 3.6M10.4 21.6l-3.6 3.6"/></svg></div><div class="orchestration-step">AUTOMATION</div><div class="orchestration-state">RUNNING</div></div><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="6" width="8" height="7"/><rect x="20" y="19" width="8" height="7"/><rect x="20" y="6" width="8" height="7"/><path d="M12 9.5h8M24 13v6M20 22.5H11c-4 0-6-2.5-6-6V13"/></svg></div><div class="orchestration-step">INTEGRATION</div><div class="orchestration-state">SYNC</div></div><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="16" cy="8" rx="9" ry="4"/><path d="M7 8v8c0 2.2 4 4 9 4s9-1.8 9-4V8M7 16v8c0 2.2 4 4 9 4s9-1.8 9-4v-8"/></svg></div><div class="orchestration-step">DATA</div><div class="orchestration-state">VALIDATED</div></div><div class="orchestration-node"><div class="orchestration-port"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 25V15M13 25V10M21 25V18M27 25V6"/><path d="M4 27h25"/><path d="M7 11l7-5 7 6 7-8"/></svg></div><div class="orchestration-step">DECISION / OUTCOME</div><div class="orchestration-state">OUTPUT</div></div></div>
+        <div class="orchestration-footer"><span>trigger → capture → automate → integrate → validate → output</span><strong>AUTOMATION / DATA SYSTEMS</strong></div>
       </div>
     </div>
+
   </section>
 
   <!-- ============ RESULTADOS ============ -->
   <section id="resultados" style="padding-top:0; border-top:none;">
+    <div class="results-proof-head reveal-target" data-reveal>
+      <span class="section-tag mono">EVIDENCE / IMPACT</span>
+      <div class="results-proof-copy"><h2>Results behind the work</h2><p>Professional outcomes connected to what matters: reducing manual effort, accelerating workflows and operating at scale.</p></div>
+    </div>
     <div class="stats reveal-target" data-reveal>
-      <div class="stat"><div class="stat-key">rework_reduced</div><div class="stat-num" data-count="77" data-suffix="%">0%</div><div class="stat-label">internal management system</div></div>
-      <div class="stat"><div class="stat-key">execution_time</div><div class="stat-num" data-count="75" data-suffix="%">0%</div><div class="stat-label">report consolidation</div></div>
-      <div class="stat"><div class="stat-key">zip_codes_cached</div><div class="stat-num" data-count="1" data-suffix="M+">0M+</div><div class="stat-label">lookup: hours → seconds</div></div>
-      <div class="stat"><div class="stat-key">invoices_processed</div><div class="stat-num" data-count="5000" data-suffix="+">0+</div><div class="stat-label">in a single month</div></div>
+      <div class="stat"><div class="impact-route"><span>internal operations</span><i></i><span>less rework</span></div><div class="stat-key">rework_reduced</div><div class="stat-num" data-count="77" data-suffix="%">77%</div><div class="stat-label">internal management system</div></div>
+      <div class="stat"><div class="impact-route"><span>consolidation</span><i></i><span>less time</span></div><div class="stat-key">execution_time</div><div class="stat-num" data-count="75" data-suffix="%">75%</div><div class="stat-label">report consolidation</div></div>
+      <div class="stat"><div class="impact-route"><span>ZIP lookup</span><i></i><span>seconds</span></div><div class="stat-key">zip_codes_cached</div><div class="stat-num" data-count="1" data-suffix="M+">1M+</div><div class="stat-label">lookup: hours → seconds</div></div>
+      <div class="stat"><div class="impact-route"><span>processing</span><i></i><span>monthly scale</span></div><div class="stat-key">invoices_processed</div><div class="stat-num" data-count="5000" data-suffix="+">5,000+</div><div class="stat-label">in a single month</div></div>
     </div>
   </section>
 
   <!-- ============ PROJETOS ============ -->
   <section id="projetos">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">COMPONENTS / SPEC SHEETS</span>
+      <span class="section-tag mono">SYSTEMS / INDEPENDENT FLOWS</span>
       <h2>Projects</h2>
     </div>
-    <p class="section-intro reveal-target" data-reveal>All of them share the same core — data and automation. Data engineering, AI, and software development come in as tools to solve each specific problem.</p>
+    <p class="section-intro reveal-target" data-reveal>All of them share the same core — processes, automation and data. Integrations, APIs, AI and software come in as tools to solve each specific problem.</p>
 
     <div id="flagshipContainer"></div>
     <div class="projects-grid" id="projectsGrid"></div>
 
     <div class="secondary-projects-head reveal-target" data-reveal>
-      <span class="section-tag mono">ARCHIVE / OTHER BUILDS</span>
+      <span class="section-tag mono">OTHER SYSTEMS / BUILDS</span>
       <h3>More projects</h3>
     </div>
     <div class="secondary-projects" id="secondaryProjects"></div>
@@ -647,17 +582,18 @@
   <!-- ============ EXPERIÊNCIA ============ -->
   <section id="experiencia">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">ROUTE / HISTORY</span>
+      <span class="section-tag mono">EVOLUTION / PROCESSES → SYSTEMS</span>
       <h2>Career Path</h2>
     </div>
     <p class="section-intro reveal-target" data-reveal>Started in operations and finance within the GM chain, then steered the route toward data and automation — where I work full-time today.</p>
+    <div class="career-system-flow reveal-target" data-reveal aria-label="Professional evolution from operations to systems"><div class="career-system-stage">Operations</div><div class="career-system-stage">Data</div><div class="career-system-stage">Automation</div><div class="career-system-stage">Integrations</div><div class="career-system-stage">Systems</div></div>
     <div class="log">
       <div class="log-progress" id="logProgress"></div>
       <div class="log-entry current reveal-target" data-reveal>
         <div class="log-node"></div>
         <div class="log-date mono">jun 2026 — present</div>
         <div class="log-role">Mid-Level Data Analyst</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
         <ul class="log-results">
           <li>Automated the <b>Daily NPS</b> process end-to-end (Focus lookup, history, comparison, PowerPoint) — cutting manual work from <b>~13 minutes to under 1 minute</b></li>
           <li>End-to-end automation (Python/Selenium) from Focus to <b>Power BI Dataflow and semantic model refresh</b> — extraction, SSO, publishing 4 datasets to SharePoint, and triggering via Power Automate</li>
@@ -669,7 +605,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jun 2023 — feb 2026</div>
         <div class="log-role">Direct Sales Administrative Analyst</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil</span></div>
         <ul class="log-results">
           <li>Report consolidation via Python/VBA — <b>75% reduction in execution time</b></li>
           <li>Internal management system with Outlook integration — <b>77% reduction in rework</b></li>
@@ -680,7 +616,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jan 2023 — may 2023</div>
         <div class="log-role">Mid-Level Financial Analyst</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
         <ul class="log-results">
           <li>Built pivot tables and Excel formulas to speed up data analysis for the logistics team</li>
           <li>Developed a VBA tool that queried the mainframe for real-time packaging status</li>
@@ -690,7 +626,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">jul 2022 — jan 2023</div>
         <div class="log-role">Junior Financial Analyst</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil — Exportação &amp; Logística</span></div>
         <ul class="log-results">
           <li>Helped implement a new triangulation process, speeding up operations and removing critical bottlenecks</li>
           <li>Built a VBA macro that standardized logistics file formatting (PCK/LPN/ASN) before system submission, eliminating recurring character-count errors</li>
@@ -700,7 +636,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">apr 2021 — jul 2022</div>
         <div class="log-role">Administrative Assistant</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Processed <b>+5,000 invoices</b> in a single month, minimal error margin in SAP</li>
           <li>Trained new hires on the fiscal receiving process</li>
@@ -710,7 +646,7 @@
         <div class="log-node"></div>
         <div class="log-date mono">apr 2020 — apr 2021</div>
         <div class="log-role">Senior Process Operator</div>
-        <div class="log-org"><span class="log-org-item"><img src="images/infosys.png" alt="Infosys">Infosys</span><span class="log-org-sep">·</span><span class="log-org-item"><img src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
+        <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/infosys.png" alt="Infosys">Infosys</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil — Recebimento Fiscal</span></div>
         <ul class="log-results">
           <li>Document and invoice control; coordinated interface between departments</li>
         </ul>
@@ -718,38 +654,52 @@
     </div>
   </section>
 
-  <!-- ============ STACK TÉCNICA ============ -->
+  <!-- ============ TECH STACK ============ -->
   <section id="stack">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">MATERIALS / COMPONENTS</span>
+      <span class="section-tag mono">ECOSYSTEM / SYSTEM LAYERS</span>
       <h2>Tech Stack</h2>
     </div>
+    <div class="stack-system-caption reveal-target" data-reveal><b>Automation</b><i></i><span>Data &amp; ETL</span><i></i><span>Backend &amp; APIs</span><i></i><span>Databases</span><i></i><span>BI</span><i></i><span>ML &amp; AI</span></div>
     <div class="stack-grid reveal-target" data-reveal>
-      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag"><img class="tag-icon" src="images/icons/power-automate.svg" alt="">Power Automate</span><span class="tag"><img class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag"><img class="tag-icon" src="images/icons/vba.svg" alt="">VBA</span></div></div>
-      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/sql.svg" alt="">SQL</span><span class="tag"><img class="tag-icon" src="images/icons/etl.svg" alt="">ETL</span><span class="tag"><img class="tag-icon" src="images/icons/power-query.svg" alt="">Power Query</span><span class="tag"><img class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
-      <div class="stack-cell"><h3>BI & Visualization</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/power-bi.svg" alt="">Power BI</span><span class="tag"><img class="tag-icon" src="images/icons/dax.svg" alt="">DAX</span></div></div>
-      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag"><img class="tag-icon" src="images/icons/apis-rest.svg" alt="">REST APIs</span><span class="tag"><img class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
-      <div class="stack-cell"><h3>Databases</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/postgresql.svg" alt="">PostgreSQL</span><span class="tag"><img class="tag-icon" src="images/icons/sqlite.svg" alt="">SQLite</span></div></div>
-      <div class="stack-cell"><h3>Machine Learning & AI</h3><div class="items"><span class="tag"><img class="tag-icon" src="images/icons/machine-learning.svg" alt="">Machine Learning</span><span class="tag"><img class="tag-icon" src="images/icons/llms.svg" alt="">LLMs</span></div></div>
+      <div class="stack-cell"><h3>Automation</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/python.svg" alt="">Python</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/power-automate.svg" alt="">Power Automate</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/selenium.svg" alt="">Selenium</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/vba.svg" alt="">VBA</span></div></div>
+      <div class="stack-cell"><h3>Data & ETL</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/sql.svg" alt="">SQL</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/etl.svg" alt="">ETL</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/power-query.svg" alt="">Power Query</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/pandas.svg" alt="">Pandas</span></div></div>
+      <div class="stack-cell"><h3>BI & Visualization</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/power-bi.svg" alt="">Power BI</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/dax.svg" alt="">DAX</span></div></div>
+      <div class="stack-cell"><h3>Backend & APIs</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/fastapi.svg" alt="">FastAPI</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/apis-rest.svg" alt="">REST APIs</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/docker.svg" alt="">Docker</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/git.svg" alt="">Git</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/react.svg" alt="">React</span></div></div>
+      <div class="stack-cell"><h3>Databases</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/postgresql.svg" alt="">PostgreSQL</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/sqlite.svg" alt="">SQLite</span></div></div>
+      <div class="stack-cell"><h3>Machine Learning & AI</h3><div class="items"><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/machine-learning.svg" alt="">Machine Learning</span><span class="tag"><img loading="lazy" decoding="async" class="tag-icon" src="images/icons/llms.svg" alt="">LLMs</span></div></div>
     </div>
   </section>
+
+  <!-- ============ PERFIL ============ -->
+  <section id="perfil" style="border-top:none;">
+    <div class="profile-text-only reveal-target" data-reveal>
+      <span class="section-tag mono">PERSON / OUTSIDE THE FLOW</span>
+      <h2>Behind the pipelines</h2>
+      <p>Outside of code, I like stepping out of routine — travel and sports are part of that. It's in those moments away from the keyboard that most of my ideas actually show up.</p>
+      <div class="profile-tags">
+        <span class="tag">Sports</span><span class="tag">Travel</span><span class="tag">Focus</span><span class="tag">Discipline</span>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ============ SOBRE ============ -->
   <section id="sobre">
     <div class="section-head reveal-target" data-reveal>
-      <span class="section-tag mono">DESCRIPTIVE MEMO</span>
+      <span class="section-tag mono">CONTEXT / HOW I WORK</span>
       <h2>About</h2>
     </div>
     <div class="about-grid reveal-target" data-reveal>
       <div class="about-text">
         <p>My work starts before the code: understanding the problem, researching the domain, mapping constraints and then designing a solution. That mindset connects my work in operations, reporting, internal automation and independent products.</p>
-        <p>Today I connect automation, data and product: I turn manual routines into systems, validate assumptions with data and evolve projects as new needs appear. The focus is not only writing code, but building complete, useful and maintainable solutions.</p>
+        <p>Today I connect processes, automation, data, integrations and software: I turn manual routines into systems, validate assumptions with data and evolve projects as new needs appear. The focus is not only writing code, but building complete, useful and maintainable solutions.</p>
       </div>
       <div>
         <div class="about-fact"><span>Based in</span><span>Santo André, SP — Brazil</span></div>
         <div class="about-fact"><span>Experience</span><span>4+ years · GM / Stellantis chain</span></div>
         <div class="about-fact"><span>Education</span><span>Data Science (in progress)</span></div>
-        <div class="about-fact"><span>Independent projects</span><span>6 independent builds</span></div>
+        <div class="about-fact"><span>Independent projects</span><span>7 independent builds</span></div>
         <div class="about-fact" style="border-bottom:none;"><span>Current focus</span><span>Data & Automation</span></div>
       </div>
     </div>
@@ -768,13 +718,13 @@
 
   <!-- ============ CONTATO ============ -->
   <footer id="contato">
-    <div class="footer-head reveal-target" data-reveal>Let's talk about data, automation, or your next opening?</div>
+    <div class="footer-head reveal-target" data-reveal>Let's talk about automation, data, integrations, or your next opportunity?</div>
     <div class="contact-actions reveal-target" data-reveal>
-      <a class="btn btn-primary" href="Vinicius_Santos_Medrado_EN.pdf" download><img class="btn-icon" src="images/icons/download.svg" alt="">download resume</a>
-      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/linkedin.svg" alt="">linkedin</a>
-      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/github.svg" alt="">github</a>
-      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener"><img class="btn-icon" src="images/icons/whatsapp.svg" alt="">whatsapp</a>
-      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com"><img class="btn-icon" src="images/icons/email.svg" alt="">email</a>
+      <a class="btn btn-primary" href="Vinicius_Santos_Medrado_EN.pdf" download><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/download.svg" alt="">download resume</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/linkedin.svg" alt="">linkedin</a>
+      <a class="btn btn-ghost" href="https://github.com/vinmedrado" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/github.svg" alt="">github</a>
+      <a class="btn btn-teal" href="https://wa.me/5511935350574" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/whatsapp.svg" alt="">whatsapp</a>
+      <a class="btn btn-ghost" href="mailto:Vinicius.medrado@outlook.com"><img loading="lazy" decoding="async" class="btn-icon" src="images/icons/email.svg" alt="">email</a>
     </div>
     <div class="contact-grid reveal-target" data-reveal>
       <div class="contact-item"><span class="label">email</span><a href="mailto:Vinicius.medrado@outlook.com">Vinicius.medrado@outlook.com</a></div>
@@ -782,13 +732,13 @@
       <div class="contact-item"><span class="label">linkedin</span><a href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener">linkedin.com/in/viniciusmedrado</a></div>
       <div class="contact-item"><span class="label">github</span><a href="https://github.com/vinmedrado" target="_blank" rel="noopener">github.com/vinmedrado</a></div>
     </div>
-    <div class="foot-note">// build: raw data → pipeline → decision · drawing approved</div>
+    <div class="foot-note">// process → automation → integration → data → outcome</div>
 </footer>
 
 </div>
 
 <!-- ============ PROJECT DETAIL OVERLAY ============ -->
-<div id="projectDetail" role="dialog" aria-modal="true" aria-labelledby="pdTopbarTitle">
+<div id="projectDetail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="pdTopbarTitle">
   <div class="pd-topbar">
     <button class="pd-back" id="pdBackBtn" type="button">back</button>
     <span class="pd-topbar-title" id="pdTopbarTitle"></span>
@@ -797,142 +747,154 @@
   <div class="pd-body" id="pdBody"></div>
 </div>
 
-<div id="pdLightbox">
+<div id="pdLightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
   <button class="pd-lb-close" id="pdLbClose" type="button" aria-label="Close image">x</button>
   <img id="pdLbImg" src="" alt="">
 </div>
 
-<script src="projects-data.en.js?v=20260804a"></script>
+<script src="projects-data.en.js?v=20260903"></script>
 <script>
-/* ---------- BLUEPRINT GRID BACKGROUND ---------- */
-(function(){
-  const svg = document.getElementById('bp-grid');
-  const ns = 'http://www.w3.org/2000/svg';
-  svg.setAttribute('width','100%'); svg.setAttribute('height','100%');
-  const gap = 46;
-  const w = Math.ceil(window.innerWidth/gap)+2, h = Math.ceil(document.documentElement.scrollHeight/gap)+2;
-  const group = document.createElementNS(ns,'g');
-  group.setAttribute('stroke', '#D7E2E9'); group.setAttribute('stroke-width','1');
-  for (let i=0;i<w;i++){
-    const l = document.createElementNS(ns,'line');
-    l.setAttribute('x1', i*gap); l.setAttribute('x2', i*gap); l.setAttribute('y1', 0); l.setAttribute('y2', h*gap);
-    group.appendChild(l);
-  }
-  for (let j=0;j<h;j++){
-    const l = document.createElementNS(ns,'line');
-    l.setAttribute('y1', j*gap); l.setAttribute('y2', j*gap); l.setAttribute('x1', 0); l.setAttribute('x2', w*gap);
-    group.appendChild(l);
-  }
-  svg.appendChild(group);
-})();
-
-/* ---------- RENDER PROJECTS: flagship + grid ---------- */
+/* ---------- RENDER PROJECTS: progressive disclosure ---------- */
 function shotBlock(p, tall){
-  const h = tall ? 220 : 150;
+  const h = tall ? 300 : 190;
   if (p.image && p.image.trim() !== ""){
-    return `<img src="${p.image}" alt="Screenshot of the ${p.title} project" style="width:100%;height:${h}px;object-fit:cover;display:block;" loading="lazy">`;
+    return `<img src="${p.image}" alt="Screenshot of the ${p.title}" style="width:100%;height:${h}px;object-fit:cover;object-position:top;display:block;" loading="lazy" decoding="async">`;
   }
-  return `<div class="shot-placeholder" style="height:${tall ? 180 : 120}px;">
+  return `<div class="shot-placeholder" style="height:${tall ? 210 : 150}px;">
     <svg viewBox="0 0 24 24" fill="none" stroke="#5F7181" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 3 3 5-5 5 4"/><circle cx="8" cy="8" r="1.4"/></svg>
     <span>screenshot pending review</span>
   </div>`;
 }
 
+function compactStack(p, limit){
+  const values = (p.stack || []).slice(0, limit);
+  const extra = Math.max(0, (p.stack || []).length - values.length);
+  return values.map(s => `<span class="tag">${s}</span>`).join('') + (extra ? `<span class="tag stack-more">+${extra} more</span>` : '');
+}
+
+
+function projectFlowMarkup(p, variant = 'compact'){
+  const source = Array.isArray(p.flow) ? p.flow.filter(Boolean) : [];
+  if (!source.length) return '';
+  let nodes = source;
+  if (variant !== 'detail' && source.length > 5){
+    nodes = [source[0], source[1], '…', source[source.length - 2], source[source.length - 1]];
+  }
+  const nodeHtml = nodes.map(value => `<span class="project-flow-node">${value}</span>`).join('');
+  const label = variant === 'detail' ? 'ARCHITECTURE / SYSTEM FLOW' : 'FLOW / ARCHITECTURE';
+  const status = variant === 'detail' ? 'END-TO-END' : 'PIPELINE';
+  return `<div class="project-flow ${variant}"><div class="project-flow-label"><span>${label}</span><span>${status}</span></div><div class="project-flow-track">${nodeHtml}</div></div>`;
+}
+
+function normalizeHeading(value){
+  return (value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+function readmeSection(p, aliases){
+  if (!p.readmeHtml) return null;
+  const root = document.createElement('div');
+  root.innerHTML = p.readmeHtml;
+  const normalizedAliases = aliases.map(normalizeHeading);
+  const heading = [...root.querySelectorAll('h2')].find(h => { const key = normalizeHeading(h.textContent); return normalizedAliases.some(alias => key === alias || key.includes(alias)); });
+  if (!heading) return null;
+  const holder = document.createElement('div');
+  let cursor = heading.nextElementSibling;
+  while (cursor && cursor.tagName !== 'H2'){
+    holder.appendChild(cursor.cloneNode(true));
+    cursor = cursor.nextElementSibling;
+  }
+  const html = holder.innerHTML.trim();
+  return html ? html : null;
+}
+
+function caseNarrativeMarkup(p){
+  const specs = [
+    { label:'PROBLEM', aliases:['problem'] },
+    { label:'SOLUTION', aliases:['solution'] },
+    { label:'ARCHITECTURE', aliases:['architecture','architecture summary'], wide:true },
+    { label:'AUTOMATION / PIPELINE', aliases:['pipeline flow','pipeline','automation'], wide:true },
+    { label:'FEATURES', aliases:['main features','features'] },
+    { label:'CHALLENGES', aliases:['main technical challenges','technical challenges'] },
+    { label:'LEARNINGS', aliases:['learnings','main learnings'], wide:true }
+  ];
+  const cards = specs.map(spec => {
+    const html = readmeSection(p, spec.aliases);
+    return html ? `<section class="pd-case-card${spec.wide ? ' wide' : ''}"><div class="pd-case-card-label">${spec.label}</div><div class="pd-case-card-content">${html}</div></section>` : '';
+  }).filter(Boolean).join('');
+  if (!cards) return '';
+  return `<div class="pd-case-heading"><h2>Technical case</h2><span>content extracted from project documentation</span></div><div class="pd-case-grid">${cards}</div>`;
+}
+
+
 function renderFlagship(p){
   const container = document.getElementById('flagshipContainer');
   if (!p) { container.innerHTML = ''; return; }
+  const evidence = (p.results || []).slice(0,3).map(r => `<div class="flagship-evidence-item">${r}</div>`).join('');
   container.innerHTML = `
-    <div class="flagship reveal-target" data-reveal data-project-id="${p.id}">
+    <article class="flagship reveal-target" data-reveal data-open-detail="${p.id}">
       <span class="flagship-badge">★ Flagship Project</span>
-      <div class="flagship-shot" data-open-detail="${p.id}">${shotBlock(p, true)}</div>
+      <div class="flagship-shot">${shotBlock(p, true)}</div>
       <div class="flagship-body">
-        <div class="flagship-meta">
-          <span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span>
-          <span class="flagship-status"><span class="dot"></span>${p.status}</span>
-        </div>
-        <div class="flagship-title" data-open-detail="${p.id}">${p.title}</div>
+        <div class="flagship-meta"><span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span><span class="flagship-status"><span class="dot"></span>${p.status || ''}</span></div>
+        <div class="flagship-title">${p.title}</div>
         <p class="flagship-desc">${p.desc}</p>
-        <p class="flagship-highlight">${p.highlight}</p>
-        <div class="flagship-grid">
-          <div class="flagship-col">
-            <h3>Completed Features</h3>
-            <ul class="feature-list">${(p.completedFeatures||[]).map(f => `<li>${f}</li>`).join('')}</ul>
-          </div>
-          <div class="flagship-col">
-            <h3>Future Roadmap</h3>
-            <ul class="roadmap-list">${(p.roadmap||[]).map(f => `<li>${f}</li>`).join('')}</ul>
-          </div>
-        </div>
-        <div class="flagship-stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
+        ${p.highlight ? `<p class="flagship-highlight">${p.highlight}</p>` : ''}
+        ${projectFlowMarkup(p, 'compact')}
+        ${evidence ? `<div class="flagship-evidence">${evidence}</div>` : ''}
+        <div class="flagship-stack">${compactStack(p, 6)}</div>
         <div class="flagship-actions">
-          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener" data-stop-detail>view on github ↗</a>
-          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener" data-stop-detail>view live demo ↗</a>` : ''}
+          <button class="project-case-btn" type="button" data-open-detail="${p.id}">explore case →</button>
+          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener" data-stop-detail>github ↗</a>
+          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener" data-stop-detail>live demo ↗</a>` : ''}
         </div>
       </div>
-    </div>`;
+    </article>`;
 }
 
 function renderProjects(){
   if (typeof PROJECTS === 'undefined') return;
   const flagship = PROJECTS.find(p => p.flagship);
-  const featuredIds = ['marketplace', 'applymize'];
-  const rest = PROJECTS.filter(p => !p.flagship && featuredIds.includes(p.id));
+  const featuredIds = ['footballdecisionlab', 'applymize', 'marketplace', 'lumyra'];
+  const featured = PROJECTS.filter(p => !p.flagship && featuredIds.includes(p.id)).sort((a,b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
   const secondary = PROJECTS.filter(p => !p.flagship && !featuredIds.includes(p.id));
   renderFlagship(flagship);
 
   const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = rest.map(p => {
+  grid.innerHTML = featured.map(p => {
     const isData = p.track === 'dados';
     const icon = isData
       ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7A63" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>'
       : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B5701F" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>';
     return `
-    <div class="card reveal-target" data-reveal data-open-detail="${p.id}">
+    <article class="card reveal-target" data-reveal data-open-detail="${p.id}">
       <div class="card-shot">${shotBlock(p, false)}</div>
       <div class="card-head"><span>${p.category} · ${p.year}</span>${icon}</div>
       <div class="card-body">
-        <div class="card-top"><div><div class="card-title">${p.title}</div></div><span class="pill ${isData ? 'pill-data' : 'pill-automation'}">${p.pill}</span></div>
+        <div class="card-top"><div><div class="card-title">${p.title}</div><div class="card-status">${p.status || ''}</div></div><span class="pill ${isData ? 'pill-data' : 'pill-automation'}">${p.pill}</span></div>
         <p class="card-desc">${p.desc}</p>
-        ${p.results ? `<ul class="card-results">${p.results.slice(0,3).map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
-        <div class="stack">${p.stack.map(s => `<span class="tag">${s}</span>`).join('')}</div>
+        ${p.highlight ? `<p class="card-diff">${p.highlight}</p>` : ''}
+        ${projectFlowMarkup(p, 'compact')}
+        <div class="stack">${compactStack(p, 4)}</div>
         <div class="card-actions">
-          <a class="card-btn" href="${p.link}" target="_blank" rel="noopener" data-stop-detail>github ↗</a>
-          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener" data-stop-detail>demo ↗</a>` : ''}
+          <button class="card-case-btn" type="button" data-open-detail="${p.id}">view case →</button>
+          <a class="card-btn card-link-subtle" href="${p.link}" target="_blank" rel="noopener" data-stop-detail>github ↗</a>
+          ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener" data-stop-detail>live demo ↗</a>` : ''}
         </div>
       </div>
-    </div>`;
+    </article>`;
   }).join('');
 
   const secGrid = document.getElementById('secondaryProjects');
   if (secGrid){
     secGrid.innerHTML = secondary.map(p => `
-      <div class="secondary-item reveal-target" data-reveal data-open-detail="${p.id}">
-        <div class="secondary-item-main">
-          <span class="secondary-item-title">${p.title}</span>
-          <span class="secondary-item-desc">${p.category}</span>
-        </div>
-        <span class="secondary-item-meta">${p.year} · view details →</span>
-      </div>`).join('');
+      <button class="secondary-item reveal-target" type="button" data-reveal data-open-detail="${p.id}">
+        <span class="secondary-item-main"><span class="secondary-item-title">${p.title}</span><span class="secondary-item-desc">${p.category} · ${p.status || ''}</span><span class="secondary-flow-text">${(p.flow || []).join(' → ')}</span></span>
+        <span class="secondary-item-meta">${p.year} · view case →</span>
+      </button>`).join('');
   }
 
-  // novos elementos entram no observer de reveal
   document.querySelectorAll('.reveal-target').forEach(el => { if (!el.dataset.observed){ io.observe(el); el.dataset.observed = '1'; } });
 }
-
-/* ---------- PRELOADER ---------- */
-function finishLoad(){
-  const pl = document.getElementById('preloader');
-  if (!pl) return;
-  pl.classList.add('done');
-  document.body.classList.remove('loading');
-  setTimeout(() => pl.remove(), 400);
-}
-if (document.readyState === 'complete'){
-  setTimeout(finishLoad, 150);
-} else {
-  window.addEventListener('load', () => setTimeout(finishLoad, 120));
-}
-setTimeout(finishLoad, 400); // safety cap: never blocks content past 0.4s
 
 /* ---------- LOG TIMELINE PROGRESS LINE ---------- */
 (function(){
@@ -973,6 +935,17 @@ const pdTopbarTitle = document.getElementById('pdTopbarTitle');
 const pdLightbox = document.getElementById('pdLightbox');
 const pdLbImg = document.getElementById('pdLbImg');
 let pdLastFocus = null;
+let pdLbLastFocus = null;
+
+function focusWhenModalReady(container, target, delay = 60){
+  const attempt = () => {
+    if (container.classList.contains('open') && !container.contains(document.activeElement)){
+      target.focus({ preventScroll:true });
+    }
+  };
+  attempt();
+  setTimeout(attempt, delay);
+}
 
 function openProjectDetail(id, pushState){
   const p = (typeof PROJECTS !== 'undefined') ? PROJECTS.find(x => x.id === id) : null;
@@ -981,14 +954,15 @@ function openProjectDetail(id, pushState){
   const gallery = p.gallery || [];
   const heroImg = gallery[0] || p.image || '';
   const restShots = gallery.slice(1);
+  const meta = [p.category, p.year, p.status].filter(Boolean).map(v => `<span>${v}</span>`).join('<span>·</span>');
 
   pdHero.innerHTML = `
-    ${heroImg ? `<img src="${heroImg}" alt="Main screen of ${p.title}">` : ''}
     <div class="pd-hero-content">
-      <div class="pd-hero-meta"><span>${p.category}</span><span>·</span><span>${p.year}</span><span>·</span><span>${p.status || ''}</span></div>
+      <div class="pd-hero-meta">${meta}</div>
       <div class="pd-hero-title">${p.title}</div>
       <p class="pd-hero-desc">${p.desc}</p>
     </div>
+    <div class="pd-hero-visual">${heroImg ? `<img src="${heroImg}" alt="Main screen of ${p.title}" decoding="async">` : ''}</div>
   `;
 
   pdBody.innerHTML = `
@@ -996,33 +970,39 @@ function openProjectDetail(id, pushState){
       <div class="pd-stack">${(p.stack||[]).map(s => `<span class="tag">${s}</span>`).join('')}</div>
       <div class="pd-actions">
         <a class="card-btn" href="${p.link}" target="_blank" rel="noopener">view on github ↗</a>
-        ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">view live demo ↗</a>` : ''}
+        ${p.demo ? `<a class="card-btn demo" href="${p.demo}" target="_blank" rel="noopener">open live demo ↗</a>` : ''}
         ${p.pdf ? `<a class="card-btn" href="${p.pdf}" target="_blank" rel="noopener">${p.pdfLabel || 'view PDF'} ↗</a>` : ''}
       </div>
     </div>
-    ${p.highlight ? `<p class="pd-section-intro" style="margin-top:20px;">${p.highlight}</p>` : ''}
+    <div class="pd-system-flow">${projectFlowMarkup(p, 'detail')}</div>
+    <div class="pd-overview">
+      <div class="pd-overview-block"><div class="pd-overview-label">TECHNICAL DIFFERENTIATOR</div><p class="pd-overview-copy">${p.highlight || p.desc}</p></div>
+      <div class="pd-overview-block"><div class="pd-overview-label">EVIDENCE / IMPLEMENTATION</div><ul class="pd-evidence-list">${(p.results||[]).map(r => `<li>${r}</li>`).join('')}</ul></div>
+    </div>
+    ${caseNarrativeMarkup(p)}
     ${restShots.length ? `
-    <span class="pd-section-tag">Product screenshots</span>
+    <span class="pd-section-tag">SCREENSHOTS / INTERFACE</span>
     <div class="pd-showcase${restShots.length > 2 ? ' has-feature' : ''}">${restShots.map((src,i) => `
-      <div class="pd-shot">
-        <div class="pd-shot-bar"><span></span><span></span><span></span></div>
-        <img src="${src}" alt="Screenshot ${i+2} of ${p.title}" loading="lazy" data-lightbox="${src}">
-      </div>`).join('')}</div>
+      <button class="pd-shot pd-shot-button" type="button" data-lightbox="${src}" aria-label="Enlarge screenshot ${i+2} of ${p.title}">
+        <span class="pd-shot-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+        <img src="${src}" alt="Screenshot ${i+2} of ${p.title}" loading="lazy" decoding="async">
+      </button>`).join('')}</div>
     ` : ''}
     ${p.readmeHtml ? `
     <details class="pd-readme-toggle">
-      <summary>full technical documentation (readme)</summary>
+      <summary>open full technical documentation</summary>
       <div class="pd-readme">${p.readmeHtml}</div>
     </details>
-    ` : `<p class="pd-no-readme" style="margin-top:28px;">Full README available in the GitHub repository.</p>`}
+    ` : `<p class="pd-no-readme" style="margin-top:28px;">Full technical documentation is available in the GitHub repository.</p>`}
   `;
 
   pdTopbarTitle.textContent = p.title;
   pdLastFocus = document.activeElement;
   pdEl.classList.add('open');
+  pdEl.setAttribute('aria-hidden','false');
   document.body.classList.add('detail-open');
   pdEl.scrollTop = 0;
-  document.getElementById('pdBackBtn').focus();
+  focusWhenModalReady(pdEl, document.getElementById('pdBackBtn'));
 
   if (pushState !== false){
     history.pushState({ pdProject: id }, '', '#projeto-' + id);
@@ -1030,12 +1010,32 @@ function openProjectDetail(id, pushState){
 }
 
 function closeProjectDetail(popState){
+  closeLightbox(false);
   pdEl.classList.remove('open');
+  pdEl.setAttribute('aria-hidden','true');
   document.body.classList.remove('detail-open');
-  if (pdLastFocus && pdLastFocus.focus) pdLastFocus.focus();
+  if (pdLastFocus && pdLastFocus.focus){ const focusTarget = pdLastFocus; setTimeout(() => focusTarget.focus(), 20); }
   if (!popState && location.hash.startsWith('#projeto-')){
-    history.back();
+    if (history.state && history.state.pdProject){
+      history.back();
+    } else {
+      history.replaceState(null, '', location.pathname + location.search);
+    }
   }
+}
+
+function closeLightbox(restoreFocus = true){
+  if (!pdLightbox.classList.contains('open')) return;
+  pdLightbox.classList.remove('open');
+  pdLightbox.setAttribute('aria-hidden','true');
+  pdEl.setAttribute('aria-hidden','false');
+  pdLbImg.removeAttribute('src');
+  pdLbImg.alt = '';
+  if (restoreFocus && pdLbLastFocus && pdLbLastFocus.focus){
+    const focusTarget = pdLbLastFocus;
+    setTimeout(() => focusTarget.focus(), 20);
+  }
+  pdLbLastFocus = null;
 }
 
 document.getElementById('pdBackBtn').addEventListener('click', () => closeProjectDetail(false));
@@ -1043,7 +1043,12 @@ document.getElementById('pdBackBtn').addEventListener('click', () => closeProjec
 // focus trap: keeps Tab/Shift+Tab inside the modal while open
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Tab' || !pdEl.classList.contains('open')) return;
-  const focusables = pdEl.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+  if (pdLightbox.classList.contains('open')){
+    e.preventDefault();
+    document.getElementById('pdLbClose').focus({ preventScroll:true });
+    return;
+  }
+  const focusables = pdEl.querySelectorAll('a[href], button:not([disabled]), summary, [tabindex]:not([tabindex="-1"])');
   if (!focusables.length) return;
   const first = focusables[0];
   const last = focusables[focusables.length - 1];
@@ -1066,18 +1071,23 @@ document.addEventListener('click', (e) => {
 
 // lightbox das imagens dentro do detalhe
 pdBody.addEventListener('click', (e) => {
-  const img = e.target.closest('[data-lightbox]');
-  if (!img) return;
-  pdLbImg.src = img.getAttribute('data-lightbox');
-  pdLbImg.alt = img.alt;
+  const trigger = e.target.closest('[data-lightbox]');
+  if (!trigger) return;
+  const preview = trigger.querySelector('img') || trigger;
+  pdLbLastFocus = document.activeElement;
+  pdLbImg.src = trigger.getAttribute('data-lightbox');
+  pdLbImg.alt = preview.alt || '';
+  pdEl.setAttribute('aria-hidden','true');
   pdLightbox.classList.add('open');
+  pdLightbox.setAttribute('aria-hidden','false');
+  focusWhenModalReady(pdLightbox, document.getElementById('pdLbClose'), 40);
 });
-document.getElementById('pdLbClose').addEventListener('click', () => pdLightbox.classList.remove('open'));
-pdLightbox.addEventListener('click', (e) => { if (e.target === pdLightbox) pdLightbox.classList.remove('open'); });
+document.getElementById('pdLbClose').addEventListener('click', () => closeLightbox(true));
+pdLightbox.addEventListener('click', (e) => { if (e.target === pdLightbox) closeLightbox(true); });
 
 // suporte ao botão "voltar" físico/gesto do navegador (essencial no celular)
 window.addEventListener('popstate', () => {
-  if (pdLightbox.classList.contains('open')){ pdLightbox.classList.remove('open'); return; }
+  if (pdLightbox.classList.contains('open')) closeLightbox(false);
   if (!location.hash.startsWith('#projeto-')){
     closeProjectDetail(true);
   }
@@ -1086,7 +1096,7 @@ window.addEventListener('popstate', () => {
 // Esc fecha lightbox ou overlay
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
-  if (pdLightbox.classList.contains('open')){ pdLightbox.classList.remove('open'); return; }
+  if (pdLightbox.classList.contains('open')){ closeLightbox(true); return; }
   if (pdEl.classList.contains('open')) closeProjectDetail(false);
 });
 
@@ -1096,48 +1106,10 @@ if (location.hash.startsWith('#projeto-')){
   openProjectDetail(idFromHash, false);
 }
 
-/* ---------- COUNT-UP STATS ---------- */
-const counted = new WeakSet();
-function setStatFinal(el){
-  const target = parseFloat(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  el.textContent = Math.floor(target) + suffix;
-}
-function animateStat(el){
-  if (counted.has(el)) return;
-  counted.add(el);
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setStatFinal(el);
-    return;
-  }
-  const target = parseFloat(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  const start = performance.now();
-  const dur = 1200;
-  function step(now){
-    const p = Math.min(1, (now - start) / dur);
-    el.textContent = Math.floor(p * target) + suffix;
-    if (p < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-if ('IntersectionObserver' in window){
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting){
-        animateStat(e.target);
-        cio.unobserve(e.target);
-      }
-    });
-  }, { threshold:.4 });
-  document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
-} else {
-  document.querySelectorAll('.stat-num').forEach(setStatFinal);
-}
-setTimeout(() => document.querySelectorAll('.stat-num').forEach(el => {
-  if (!counted.has(el)) setStatFinal(el);
-}), 2200);
+/* ---------- STATIC IMPACT METRICS ---------- */
+// Impact numbers are intentionally static: evidence should be readable immediately, without count-up delays.
 </script>
 
+<script src="portfolio-ui.js?v=20260903"></script>
 </body>
 </html>

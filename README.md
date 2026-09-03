@@ -1,38 +1,37 @@
-# Vinicius Medrado Portfolio
+# Vinicius Medrado Portfolio — Automation & Data Systems
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111827)
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-111827?style=for-the-badge&logo=github&logoColor=white)
+Portfólio profissional estático de Vinicius Medrado, com identidade visual baseada em **automação, orquestração, integrações, dados e sistemas**. O projeto preserva o DNA técnico anterior — fundo claro, azul petróleo, grid, linhas e tipografia de engenharia — mas usa esses elementos para explicar fluxos e arquitetura em vez de simular uma planta industrial.
 
-Portfolio tecnico pessoal em formato de landing page estatica. O site apresenta a trajetoria, os projetos principais, a stack e os links de contato em duas versoes: PT-BR e EN.
+## Narrativa
 
-## O que este repositorio contem
+`Processo → Captura → Automação → Integração → Dados → Sistema / Resultado`
 
-- `index.html`: versao principal em portugues.
-- `index-en.html`: versao em ingles.
-- `admin.html`: editor visual do portfolio.
-- `projects-data.js`: fonte principal de conteudo.
-- `projects-data.en.js`: fonte equivalente em ingles.
-- `images/`: capas e screenshots dos projetos.
-- `Vinicius_Santos_Medrado.pdf`: curriculo em portugues.
-- `Vinicius_Santos_Medrado_EN.pdf`: curriculo em ingles.
+A experiência prioriza leitura rápida para recrutadores e profundidade para gestores técnicos:
 
-## GIF
+`Hero → Evidências → Projetos → Trajetória → Stack → Sobre → Contato`
 
-![Portfolio demo](assets/demo/demo.gif)
+## Estrutura principal
 
-## Preview
+- `index.html`: experiência PT-BR.
+- `index-en.html`: experiência EN.
+- `design-system.css`: base compartilhada de tokens, componentes e responsividade.
+- `automation-systems.css`: camada visual Automation & Data Systems, incluindo nodes, conectores, workflows e estados.
+- `portfolio-ui.js`: comportamento compartilhado da interface e navegação mobile.
+- `projects-data.js`: fonte de verdade dos projetos em PT-BR.
+- `projects-data.en.js`: fonte de verdade dos projetos em EN.
+- `admin.html`: editor que preserva o objeto completo do projeto ao exportar dados.
+- `images/`: capas, logos e ícones.
+- `gallery/`: screenshots dos cases.
+- `Vinicius_Santos_Medrado.pdf` e `Vinicius_Santos_Medrado_EN.pdf`: currículos.
 
-![Portfolio cover](images/og-cover.png)
+## Dados dos projetos
 
-## Tecnologias
+Os projetos não são duplicados no HTML. Cada objeto pode conter, além do conteúdo já existente, um campo `flow` com o fluxo técnico verificado daquele sistema.
 
-- HTML
-- CSS
-- JavaScript
-- JSON-like project data
-- GitHub Pages
+O frontend reutiliza esse campo em dois níveis:
+
+- **card:** arquitetura compacta para leitura rápida;
+- **case study:** fluxo completo e aprofundamento técnico.
 
 ## Como executar localmente
 
@@ -42,22 +41,13 @@ python -m http.server 4173
 
 Depois abra `http://127.0.0.1:4173`.
 
-## Estrutura
+## Deploy
 
-```text
-.
-|-- admin.html
-|-- index.html
-|-- index-en.html
-|-- projects-data.js
-|-- projects-data.en.js
-|-- images/
-|-- Vinicius_Santos_Medrado.pdf
-|-- Vinicius_Santos_Medrado_EN.pdf
-```
+Não há etapa de build. O conteúdo pode ser publicado diretamente no GitHub Pages.
 
-## Observacoes
+## Regras de manutenção
 
-- O conteudo do site e editado a partir dos arquivos `projects-data.js` e `projects-data.en.js`.
-- O portfolio serve como vitrine principal para recrutadores e clientes.
-- `TODO`: definir licenca, se aplicavel, ou deixar o repositorio sem licenca publica por decisao do autor.
+- Não duplique projetos diretamente no HTML; altere `projects-data.js` / `projects-data.en.js`.
+- Não invente etapas de arquitetura: `flow` deve refletir o comportamento real documentado do projeto.
+- Mantenha PT-BR e EN equivalentes sempre que o conteúdo correspondente existir.
+- Preserve `prefers-reduced-motion`, navegação por teclado e áreas de toque mobile ao adicionar interações.

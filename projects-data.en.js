@@ -12,6 +12,7 @@ const PROJECTS = [
     category: "Financial Automation & Data",
     year: "2026",
     status: "Actively in development",
+    flow: ["FINANCIAL DATA", "FASTAPI", "POSTGRESQL", "CELERY / REDIS", "RANKING / ADVISOR", "INTERFACE"],
     desc: "End-to-end personal financial automation: market data pipeline, rule-based recommendation engine, and asset ranking — with a conversational Advisor that uses that context to answer the user, without promising returns.",
     highlight: "End-to-end async architecture with background processing and conversational AI hardened against prompt injection.",
     results: [
@@ -58,6 +59,7 @@ const PROJECTS = [
     category: "Job Application Automation",
     year: "2025",
     status: "live · 6 active integrations",
+    flow: ["JOB SOURCES", "COLLECTION", "MATCHING", "ATS", "AUTOMATION", "WHATSAPP"],
     desc: "Applying to jobs manually across platforms is slow and repetitive. Applymize automates that: simultaneous search across 6 job platforms, deduplication, and AI (LLaMA 3.3 via Groq) that scores each job's fit and flags resume gaps.",
     highlight: "Automated Selenium-based applications with a persistent Kanban pipeline.",
     results: [
@@ -80,6 +82,7 @@ const PROJECTS = [
     category: "ML & Sports Decision Intelligence",
     year: "2026",
     status: "active prospective experiment · paper trading",
+    flow: ["MATCHES / ODDS", "TEMPORAL VALIDATION", "FEATURES", "BACKTEST", "MODEL", "PAPER", "SETTLEMENT"],
     desc: "Evolution of MatchFlow: a research and paper-trading platform that turns matches into traceable decisions, with temporal validation, a frozen champion model (SHA-256 hash), and automatic settlement.",
     highlight: "Champion/challenger governance with deliberate promotion, audited (Brier) calibration, and fail-closed guardrails — honestly reports when the ROI confidence interval crosses zero.",
     results: [
@@ -102,6 +105,7 @@ const PROJECTS = [
     category: "Marketplace Automation",
     year: "2025",
     status: "live · raw→staging→mart pipeline",
+    flow: ["MERCADO LIVRE", "OAUTH2 / API", "RAW", "STAGING", "MART", "PRICING / ML", "INTERFACE"],
     desc: "Sellers running multiple Mercado Livre accounts have no consolidated view of their data. This platform centralizes that: a layered data pipeline (raw → staging → mart) orchestrated via Airflow, with real OAuth2 integration and per-client isolation.",
     highlight: "Feature store and ML for dynamic pricing with margin protection.",
     results: [
@@ -124,6 +128,7 @@ const PROJECTS = [
     category: "Event Operations Platform",
     year: "2025",
     status: "live · realtime websocket",
+    flow: ["GUEST", "RSVP", "FASTAPI", "DATABASE", "WORKERS / SCHEDULER", "WEBSOCKET", "NOTIFICATIONS"],
     desc: "Event operations SaaS: RSVP, seating charts, and WhatsApp communication for planners and guests.",
     highlight: "Real-time dashboards via WebSocket, multi-tenant with per-client isolation.",
     results: [
@@ -146,6 +151,7 @@ const PROJECTS = [
     category: "Automotive Valuation",
     year: "2026",
     status: "live · source + confidence shown",
+    flow: ["FIPE / LISTINGS", "COLLECTION", "NORMALIZATION", "CACHE / DB", "VALUATION", "PDF REPORT"],
     desc: "Automotive valuation combining local-first FIPE data with real comparable market listings.",
     highlight: "Shows the source and confidence of every estimate; premium exportable PDF report.",
     results: [
@@ -170,6 +176,7 @@ const PROJECTS = [
     category: "Commercial Automation for Freelancers",
     year: "2026",
     status: "online · static demo on GitHub Pages",
+    flow: ["PLATFORMS", "PLAYWRIGHT", "MATCHING", "PRICING ENGINE", "GROQ", "PROPOSAL / PDF", "HUMAN REVIEW"],
     desc: "Local system that finds freelance opportunities on Workana, 99Freelas and Freelancer.com, scores fit against a professional profile, calculates price/timeline and generates structured commercial proposals for human review.",
     highlight: "Deterministic pricing and proposal pipeline with AI (Groq) used only for text analysis — price and hours never depend on the model.",
     results: [

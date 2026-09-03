@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>admin — editor de conteúdo (uso pessoal)</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="projects-data.js?v=20260729c"></script>
+<script src="projects-data.js?v=20260902"></script>
 <style>
   :root{
     --bg:#FBFAF5; --panel:#FFFFFF; --panel-2:#F3F0E7; --line:#B9C7D0;
@@ -190,29 +190,16 @@ function handleImage(evt, idx){
 }
 
 function generateCode(){
-  const lines = data.map(p => `  {
-    id: ${JSON.stringify(p.id)},
-    title: ${JSON.stringify(p.title)},
-    flagship: ${p.flagship ? 'true' : 'false'},
-    track: ${JSON.stringify(p.track)},
-    pill: ${JSON.stringify(p.track === 'dados' ? 'Dados / ML' : 'Automação')},
-    category: ${JSON.stringify(p.category || "")},
-    year: ${JSON.stringify(p.year || "")},
-    status: ${JSON.stringify(p.status)},
-    desc: ${JSON.stringify(p.desc)},
-    highlight: ${JSON.stringify(p.highlight)},
-    results: ${JSON.stringify(p.results || [])},
-    ${p.flagship ? `completedFeatures: ${JSON.stringify(p.completedFeatures || [])},\n    roadmap: ${JSON.stringify(p.roadmap || [])},` : ''}
-    stack: ${JSON.stringify(p.stack)},
-    link: ${JSON.stringify(p.link)},
-    demo: ${JSON.stringify(p.demo || "")},
-    image: ${JSON.stringify(p.image || "")}
-  }`).join(',\n');
+  // Exporta o objeto completo para não perder campos que o editor não altera
+  // (gallery, readmeHtml, pdf, pdfLabel e extensões futuras).
+  const exportData = data.map(p => ({
+    ...p,
+    pill: p.track === 'dados' ? 'Dados / ML' : 'Automação'
+  }));
 
   const code = `// projects-data.js — gerado pelo admin.html em ${new Date().toLocaleString('pt-BR')}
-const PROJECTS = [
-${lines}
-];
+// Fonte única de conteúdo dos projetos. Campos não editados visualmente são preservados.
+const PROJECTS = ${JSON.stringify(exportData, null, 2)};
 
 if (typeof module !== "undefined") module.exports = PROJECTS;
 `;

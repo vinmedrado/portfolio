@@ -16,6 +16,7 @@ const PROJECTS = [
     category: "Automação & Dados Financeiros",
     year: "2026",
     status: "Em desenvolvimento ativo",
+    flow: ["DADOS FINANCEIROS", "FASTAPI", "POSTGRESQL", "CELERY / REDIS", "RANKING / ADVISOR", "INTERFACE"],
     desc: "Automação financeira pessoal de ponta a ponta: pipeline de dados de mercado, motor de recomendação por regras e ranking de ativos — com um Advisor conversacional que usa esse contexto pra responder o usuário, sem prometer retorno.",
     highlight: "Arquitetura assíncrona ponta a ponta com processamento em background e IA conversacional protegida contra prompt injection.",
     results: [
@@ -257,6 +258,7 @@ celery -A backend.app.core.celery.celery_app beat --loglevel=info
     category: "Automação de Candidaturas",
     year: "2025",
     status: "online · 6 integrações ativas",
+    flow: ["VAGAS", "COLETA", "MATCHING", "ATS", "AUTOMAÇÃO", "WHATSAPP"],
     desc: "Candidatar-se em várias vagas manualmente toma tempo e é repetitivo. O Applymize automatiza esse processo: busca simultânea em 6 plataformas de vagas, remove duplicadas e usa IA (LLaMA 3.3 via Groq) pra pontuar a aderência de cada vaga e apontar lacunas do currículo.",
     highlight: "Auto-candidatura via Selenium com funil Kanban persistente.",
     results: [
@@ -364,6 +366,7 @@ assets/demo/   screenshots e GIFs
     category: "ML & Decision Intelligence Esportiva",
     year: "2026",
     status: "experimento prospectivo ativo · paper trading",
+    flow: ["JOGOS / ODDS", "VALIDAÇÃO TEMPORAL", "FEATURES", "BACKTEST", "MODELO", "PAPER", "SETTLEMENT"],
     desc: "Evolução do MatchFlow: plataforma de pesquisa e operação paper que transforma partidas em decisões rastreáveis, com validação temporal, modelo champion congelado (hash SHA-256) e settlement automático.",
     highlight: "Governança champion/challenger com promoção deliberada, calibração (Brier) auditada e guardrails fail-closed — reporta com honestidade quando o intervalo de confiança do ROI cruza zero.",
     results: [
@@ -577,6 +580,7 @@ lucro futuro, e nenhuma saída do sistema constitui recomendação financeira.</
     category: "Automação para Marketplaces",
     year: "2025",
     status: "online · pipeline raw→staging→mart",
+    flow: ["MERCADO LIVRE", "OAUTH2 / API", "RAW", "STAGING", "MART", "PRICING / ML", "INTERFACE"],
     desc: "Vendedores que operam em múltiplas contas do Mercado Livre não têm visão consolidada dos dados. Essa plataforma centraliza isso: pipeline de dados em camadas (raw → staging → mart) orquestrado via Airflow, com integração OAuth2 real e isolamento por cliente.",
     highlight: "Feature store e ML para precificação dinâmica com proteção de margem.",
     results: [
@@ -768,6 +772,7 @@ estão documentados em <a href="docs/BRAND.md">Identidade visual</a>.</p>
     category: "Plataforma de Eventos Operacionais",
     year: "2025",
     status: "online · websocket realtime",
+    flow: ["CONVIDADO", "RSVP", "FASTAPI", "DATABASE", "WORKERS / SCHEDULER", "WEBSOCKET", "NOTIFICAÇÕES"],
     desc: "SaaS de operação de eventos: RSVP, mapa de mesas e comunicação via WhatsApp para assessorias e convidados.",
     highlight: "Dashboards em tempo real via WebSocket, multi-tenant com isolamento por cliente.",
     results: [
@@ -883,6 +888,7 @@ assets/demo/    screenshots e GIFs
     category: "Valuation Automotivo",
     year: "2026",
     status: "online · fonte + confiança exibidas",
+    flow: ["FIPE / ANÚNCIOS", "COLETA", "NORMALIZAÇÃO", "CACHE / DB", "VALUATION", "LAUDO PDF"],
     desc: "Valuation automotivo com dados FIPE local-first combinados a comparáveis reais de anúncios de mercado.",
     highlight: "Mostra fonte e confiança de cada estimativa; laudo em PDF premium.",
     results: [
@@ -1214,6 +1220,7 @@ docs/screenshots/pdf-report.png
     category: "Automação Comercial para Freelancers",
     year: "2026",
     status: "online · demo estática no GitHub Pages",
+    flow: ["PLATAFORMAS", "PLAYWRIGHT", "MATCHING", "PRICING ENGINE", "GROQ", "PROPOSTA / PDF", "REVISÃO HUMANA"],
     desc: "Sistema local que encontra oportunidades freelance em Workana, 99Freelas e Freelancer.com, avalia aderência ao perfil, calcula preço/prazo e gera propostas comerciais estruturadas para revisão humana.",
     highlight: "Pipeline determinístico de precificação e proposta com IA (Groq) apenas na análise textual — preço e horas nunca dependem do modelo.",
     results: [
