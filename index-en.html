@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
 
 <title>Vinicius Santos Medrado — Data & Process Automation</title>
 <meta name="description" content="Portfolio of Vinicius Santos Medrado — processes, automation, data, integrations and systems applied to the GM Brasil / Stellantis supply chain, with independent products that use software, machine learning and AI when appropriate.">
@@ -468,6 +468,7 @@
 </style>
 <link rel="stylesheet" href="design-system.css?v=20260903">
 <link rel="stylesheet" href="automation-systems.css?v=20260903qa1">
+<link rel="stylesheet" href="figma-premium.css?v=20260904">
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Skip to content</a>
@@ -546,8 +547,8 @@
       <div class="results-proof-copy"><h2>Results behind the work</h2><p>Professional outcomes connected to what matters: reducing manual effort, accelerating workflows and operating at scale.</p></div>
     </div>
     <div class="stats reveal-target" data-reveal>
-      <div class="stat"><div class="impact-route"><span>internal operations</span><i></i><span>less rework</span></div><div class="stat-key">rework_reduced</div><div class="stat-num" data-count="77" data-suffix="%">77%</div><div class="stat-label">internal management system</div></div>
-      <div class="stat"><div class="impact-route"><span>consolidation</span><i></i><span>less time</span></div><div class="stat-key">execution_time</div><div class="stat-num" data-count="75" data-suffix="%">75%</div><div class="stat-label">report consolidation</div></div>
+      <div class="stat"><div class="impact-route"><span>daily NPS</span><i></i><span>less time</span></div><div class="stat-key">nps_time</div><div class="stat-num" data-count="97" data-suffix="%">97%</div><div class="stat-label">~13 min → ~20 sec</div></div>
+      <div class="stat"><div class="impact-route"><span>Oracle validation</span><i></i><span>less time</span></div><div class="stat-key">validation_time</div><div class="stat-num" data-count="81" data-suffix="%">81%</div><div class="stat-label">~3 min → ~34 sec</div></div>
       <div class="stat"><div class="impact-route"><span>ZIP lookup</span><i></i><span>seconds</span></div><div class="stat-key">zip_codes_cached</div><div class="stat-num" data-count="1" data-suffix="M+">1M+</div><div class="stat-label">lookup: hours → seconds</div></div>
       <div class="stat"><div class="impact-route"><span>processing</span><i></i><span>monthly scale</span></div><div class="stat-key">invoices_processed</div><div class="stat-num" data-count="5000" data-suffix="+">5,000+</div><div class="stat-label">in a single month</div></div>
     </div>
@@ -595,8 +596,8 @@
         <div class="log-role">Mid-Level Data Analyst</div>
         <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
         <ul class="log-results">
-          <li>Automated the <b>Daily NPS</b> process end-to-end (Focus lookup, history, comparison, PowerPoint) — cutting manual work from <b>~13 minutes to under 1 minute</b></li>
-          <li>End-to-end automation (Python/Selenium) from Focus to <b>Power BI Dataflow and semantic model refresh</b> — extraction, SSO, publishing 4 datasets to SharePoint, and triggering via Power Automate</li>
+          <li>Automated the <b>Daily NPS</b> workflow with human approval at the final step — Focus lookup, history, comparison, PowerPoint generation, monthly closing/rollover rules and WhatsApp delivery — reducing execution from <b>~13 minutes to ~20 seconds</b></li>
+          <li>Built an <b>end-to-end Python/Selenium pipeline</b> from Focus to Power BI Dataflow and semantic model refresh — extraction, SSO, publishing 4 datasets to SharePoint, and triggering via Power Automate</li>
           <li>Rewrote DAX, Power Query and NLP across <b>4 corporate CX dashboards</b> broken by a methodology change — dataflows and semantic model recovered without losing historical trend data</li>
           <li>Proof of concept integrating <b>Azure/Entra ID, MSAL and Microsoft Graph</b> to update SharePoint files via an authenticated session</li>
         </ul>
@@ -607,9 +608,10 @@
         <div class="log-role">Direct Sales Administrative Analyst</div>
         <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil</span></div>
         <ul class="log-results">
+          <li>Built a <b>human-in-the-loop Oracle CRM On Demand validation application</b> integrating Outlook, process lookup, automated document analysis and final analyst approval — reducing execution from <b>~3 minutes to ~34 seconds</b></li>
+          <li>Implemented <b>document intelligence and reliability controls</b> for ICMS/IPI, CPF/CNPJ and dates, with automatic blocking rules, resilient queues, failure recovery, traceability and post-write validation in Oracle</li>
           <li>Report consolidation via Python/VBA — <b>75% reduction in execution time</b></li>
-          <li>Internal management system with Outlook integration — <b>77% reduction in rework</b></li>
-          <li>SQLite cache of <b>+1M zip codes</b> — lookup time from hours to seconds</li>
+          <li>Management system with Outlook and SQLite cache of <b>+1M ZIP codes</b> — <b>77% less rework</b> and lookups reduced from hours to seconds</li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -697,7 +699,7 @@
       </div>
       <div>
         <div class="about-fact"><span>Based in</span><span>Santo André, SP — Brazil</span></div>
-        <div class="about-fact"><span>Experience</span><span>4+ years · GM / Stellantis chain</span></div>
+        <div class="about-fact"><span>Experience</span><span>6+ years · GM / Stellantis chain</span></div>
         <div class="about-fact"><span>Education</span><span>Data Science (in progress)</span></div>
         <div class="about-fact"><span>Independent projects</span><span>7 independent builds</span></div>
         <div class="about-fact" style="border-bottom:none;"><span>Current focus</span><span>Data & Automation</span></div>
@@ -1111,5 +1113,6 @@ if (location.hash.startsWith('#projeto-')){
 </script>
 
 <script src="portfolio-ui.js?v=20260903"></script>
+<script src="figma-premium.js?v=20260904"></script>
 </body>
 </html>

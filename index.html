@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
 
 <title>Vinicius Santos Medrado — Dados & Automação de Processos</title>
 <meta name="description" content="Portfólio de Vinicius Santos Medrado — processos, automação, dados, integrações e sistemas aplicados à cadeia GM Brasil / Stellantis, com produtos autorais que usam software, machine learning e IA quando fazem sentido.">
@@ -419,6 +419,7 @@
 </style>
 <link rel="stylesheet" href="design-system.css?v=20260903">
 <link rel="stylesheet" href="automation-systems.css?v=20260903qa1">
+<link rel="stylesheet" href="figma-premium.css?v=20260904">
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -497,8 +498,8 @@
       <div class="results-proof-copy"><h2>Resultados que sustentam o trabalho</h2><p>Indicadores da experiência profissional conectados àquilo que importa: reduzir esforço manual, acelerar fluxos e operar em escala.</p></div>
     </div>
     <div class="stats reveal-target" data-reveal>
-      <div class="stat"><div class="impact-route"><span>gestão interna</span><i></i><span>menos retrabalho</span></div><div class="stat-key">retrabalho_reduzido</div><div class="stat-num" data-count="77" data-suffix="%">77%</div><div class="stat-label">sistema de gestão interno</div></div>
-      <div class="stat"><div class="impact-route"><span>consolidação</span><i></i><span>menos tempo</span></div><div class="stat-key">tempo_execucao</div><div class="stat-num" data-count="75" data-suffix="%">75%</div><div class="stat-label">consolidação de relatórios</div></div>
+      <div class="stat"><div class="impact-route"><span>NPS diário</span><i></i><span>menos tempo</span></div><div class="stat-key">tempo_nps</div><div class="stat-num" data-count="97" data-suffix="%">97%</div><div class="stat-label">~13 min → ~20 s</div></div>
+      <div class="stat"><div class="impact-route"><span>validação Oracle</span><i></i><span>menos tempo</span></div><div class="stat-key">tempo_validacao</div><div class="stat-num" data-count="81" data-suffix="%">81%</div><div class="stat-label">~3 min → ~34 s</div></div>
       <div class="stat"><div class="impact-route"><span>consulta CEP</span><i></i><span>segundos</span></div><div class="stat-key">ceps_em_cache</div><div class="stat-num" data-count="1" data-suffix="M+">1M+</div><div class="stat-label">consulta: horas → segundos</div></div>
       <div class="stat"><div class="impact-route"><span>processamento</span><i></i><span>escala mensal</span></div><div class="stat-key">notas_processadas</div><div class="stat-num" data-count="5000" data-suffix="+">5.000+</div><div class="stat-label">em um único mês</div></div>
     </div>
@@ -546,8 +547,8 @@
         <div class="log-role">Analista de Dados Pleno</div>
         <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/msx.png" alt="MSX International">MSX International</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/stellantis.png" alt="Stellantis">Stellantis South America</span></div>
         <ul class="log-results">
-          <li>Automatizei o <b>NPS Diário</b> de ponta a ponta (consulta ao Focus, histórico, comparação e PowerPoint) — reduzindo o processo manual de <b>~13 minutos para menos de 1 minuto</b></li>
-          <li>Automação end-to-end (Python/Selenium) do Focus à atualização de <b>Dataflows e modelos semânticos no Power BI</b> — extração, SSO, publicação de 4 bases no SharePoint e disparo via Power Automate</li>
+          <li>Automatizei o <b>NPS Diário</b> com aprovação humana na etapa final — consulta ao Focus, histórico, comparação, geração de PowerPoint, regras de fechamento/virada mensal e envio via WhatsApp — reduzindo a execução de <b>~13 minutos para ~20 segundos</b></li>
+          <li>Desenvolvi um <b>pipeline end-to-end em Python/Selenium</b> do Focus à atualização de Dataflows e modelos semânticos no Power BI — extração, SSO, publicação de 4 bases no SharePoint e disparo via Power Automate</li>
           <li>Reescrita de DAX, Power Query e NLP em <b>4 dashboards corporativos de CX</b> quebrados por mudança de metodologia — dataflows e modelo semântico recuperados sem perder série histórica</li>
           <li>Prova de conceito de integração com <b>Azure/Entra ID, MSAL e Microsoft Graph</b> para atualização de arquivos no SharePoint via sessão autenticada</li>
         </ul>
@@ -558,9 +559,10 @@
         <div class="log-role">Analista Administrativo de Vendas Diretas</div>
         <div class="log-org"><span class="log-org-item"><img loading="lazy" decoding="async" src="images/conduent.png" alt="Conduent">Conduent</span><span class="log-org-sep">·</span><span class="log-org-item"><img loading="lazy" decoding="async" src="images/gm.png" alt="General Motors">GM Brasil</span></div>
         <ul class="log-results">
+          <li>Desenvolvi uma <b>aplicação human-in-the-loop para validação no Oracle CRM On Demand</b>, integrando Outlook, consulta de processos, análise automática de documentos e aprovação final — reduzindo a execução de <b>~3 minutos para ~34 segundos</b></li>
+          <li>Implementei <b>inteligência documental e controles de confiabilidade</b> para ICMS/IPI, CPF/CNPJ e datas, com regras automáticas de bloqueio, filas resilientes, recuperação de falhas, rastreabilidade e validação pós-gravação no Oracle</li>
           <li>Consolidação de relatórios via Python/VBA — <b>redução de 75% no tempo de execução</b></li>
-          <li>Sistema de gestão interno com integração Outlook — <b>redução de 77% de retrabalho</b></li>
-          <li>Cache SQLite de <b>+1M CEPs</b> — consulta de horas para segundos</li>
+          <li>Sistema de gestão com Outlook e cache SQLite de <b>+1M CEPs</b> — <b>77% menos retrabalho</b> e consultas de horas para segundos</li>
         </ul>
       </div>
       <div class="log-entry reveal-target" data-reveal>
@@ -648,7 +650,7 @@
       </div>
       <div>
         <div class="about-fact"><span>Base</span><span>Santo André, SP, Brasil</span></div>
-        <div class="about-fact"><span>Experiência</span><span>4+ anos · cadeia GM / Stellantis</span></div>
+        <div class="about-fact"><span>Experiência</span><span>6+ anos · cadeia GM / Stellantis</span></div>
         <div class="about-fact"><span>Formação</span><span>Ciência de Dados (em andamento)</span></div>
         <div class="about-fact"><span>Projetos autorais</span><span>7 builds independentes</span></div>
         <div class="about-fact" style="border-bottom:none;"><span>Foco atual</span><span>Dados & Automação</span></div>
@@ -1062,5 +1064,6 @@ if (location.hash.startsWith('#projeto-')){
 </script>
 
 <script src="portfolio-ui.js?v=20260903"></script>
+<script src="figma-premium.js?v=20260904"></script>
 </body>
 </html>
