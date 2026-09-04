@@ -412,7 +412,7 @@
   .contact-item a:hover{ color:var(--blue); border-color:var(--blue); }
   .foot-note{ margin-top:40px; font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
 </style>
-<link href="theme.css?v=20260904-spec-final" rel="stylesheet"/>
+<link href="theme.css?v=20260904-oracle-dossier" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Skip to content</a>
@@ -509,21 +509,38 @@
 <div class="pro-impact"><small>BEFORE</small><b>~13 min</b><i>→</i><small>AFTER</small><strong>~20 s</strong><span>≈ 97% less operational time</span></div>
 </article>
 <article class="pro-case pro-case-oracle">
-<div class="pro-case-no mono">02 / PROCESS VALIDATION SYSTEM</div>
-<div class="pro-case-copy">
+<div class="oracle-dossier-head">
+<div class="pro-case-no mono">CASE FILE 02 / PROCESS VALIDATION SYSTEM</div>
+<div class="oracle-status mono"><i></i> HUMAN DECISION / REQUIRED</div>
+</div>
+<div class="oracle-dossier-grid">
+<div class="oracle-copy">
+<div class="oracle-kicker mono">CONTROLLED AUTOMATION · DOCUMENTS · ORACLE CRM</div>
 <h3>Oracle Validation</h3>
-<p>Human-in-the-loop application integrating Outlook and Oracle CRM On Demand with document analysis, blocking rules and post-write verification.</p>
-<ul class="pro-points">
-<li>ICMS/IPI classification by content</li>
-<li>CPF/CNPJ and date cross-checks</li>
-<li>resilient queues and failure recovery</li>
-<li>traceability of human corrections</li>
-</ul>
+<p>Human-in-the-loop application connecting Outlook and Oracle CRM On Demand, interpreting documents, applying blocking rules and verifying data persistence after write-back.</p>
+<div class="oracle-check-grid">
+<div class="oracle-check"><span class="mono">01</span><b>ICMS / IPI</b><small>classification from document content</small></div>
+<div class="oracle-check"><span class="mono">02</span><b>IDENTITY</b><small>CPF/CNPJ and date cross-checks</small></div>
+<div class="oracle-check"><span class="mono">03</span><b>RESILIENCE</b><small>queues and controlled failure recovery</small></div>
+<div class="oracle-check"><span class="mono">04</span><b>AUDIT</b><small>traceability of human corrections</small></div>
 </div>
-<div class="pro-oracle-side">
-<div class="pro-impact compact"><small>TIME</small><b>~3 min</b><i>→</i><strong>~34 s</strong><span>≈ 81% reduction</span></div>
-<div class="pro-flow vertical mono"><span>OUTLOOK</span><i>↓</i><span>ORACLE</span><i>↓</i><span>PDFs</span><i>↓</i><span>RULES</span><i>↓</i><span>APPROVAL</span><i>↓</i><span>PERSISTENCE</span></div>
 </div>
+<aside class="oracle-metric-panel">
+<div class="oracle-metric-label mono">EXECUTION WINDOW</div>
+<div class="oracle-time-pair"><div><small>BEFORE</small><b>03:00</b></div><i>→</i><div class="after"><small>AFTER</small><strong>00:34</strong></div></div>
+<div class="oracle-reduction"><b>81%</b><span>less operational time</span></div>
+<div class="oracle-decision-note mono"><span>CONTROL POINT</span><strong>analyst approval before the critical write</strong></div>
+</aside>
+</div>
+<div class="oracle-flow mono" aria-label="Oracle validation flow">
+<div class="oracle-flow-step"><small>01</small><span>OUTLOOK</span></div>
+<div class="oracle-flow-step"><small>02</small><span>ORACLE</span></div>
+<div class="oracle-flow-step"><small>03</small><span>PDFs</span></div>
+<div class="oracle-flow-step"><small>04</small><span>RULES</span></div>
+<div class="oracle-flow-step decision"><small>05</small><span>HUMAN</span></div>
+<div class="oracle-flow-step"><small>06</small><span>VERIFY</span></div>
+</div>
+<div class="oracle-dossier-foot mono"><span>AUTOMATION / CONTROLLED</span><span>FAILURE / RECOVERABLE</span><span>WRITE / VERIFIED</span></div>
 </article>
 <article class="pro-case pro-case-pipeline">
 <div class="pro-case-no mono">03 / END-TO-END PIPELINE</div>
