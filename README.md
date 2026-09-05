@@ -1,53 +1,47 @@
-# Vinicius Medrado Portfolio — Automation & Data Systems
+# Vinicius Medrado — Portfólio
 
-Portfólio profissional estático de Vinicius Medrado, com identidade visual baseada em **automação, orquestração, integrações, dados e sistemas**. O projeto preserva o DNA técnico anterior — fundo claro, azul petróleo, grid, linhas e tipografia de engenharia — mas usa esses elementos para explicar fluxos e arquitetura em vez de simular uma planta industrial.
+Portfólio profissional estático de Vinicius Medrado, publicado em **https://vinmedrado.com**.
 
-## Narrativa
+## Stack do site
 
-`Processo → Captura → Automação → Integração → Dados → Sistema / Resultado`
+- HTML
+- CSS
+- JavaScript vanilla
+- GitHub Pages
+- domínio próprio `vinmedrado.com`
 
-A experiência prioriza leitura rápida para recrutadores e profundidade para gestores técnicos:
-
-`Hero → Evidências → Projetos → Trajetória → Stack → Sobre → Contato`
+Não há backend, banco de dados, autenticação, formulários com envio de dados ou dependências JavaScript de terceiros.
 
 ## Estrutura principal
 
-- `index.html`: experiência PT-BR.
-- `index-en.html`: experiência EN.
-- `design-system.css`: base compartilhada de tokens, componentes e responsividade.
-- `automation-systems.css`: camada visual Automation & Data Systems, incluindo nodes, conectores, workflows e estados.
-- `portfolio-ui.js`: comportamento compartilhado da interface e navegação mobile.
-- `projects-data.js`: fonte de verdade dos projetos em PT-BR.
-- `projects-data.en.js`: fonte de verdade dos projetos em EN.
-- `admin.html`: editor que preserva o objeto completo do projeto ao exportar dados.
-- `images/`: capas, logos e ícones.
-- `gallery/`: screenshots dos cases.
-- `Vinicius_Santos_Medrado.pdf` e `Vinicius_Santos_Medrado_EN.pdf`: currículos.
+- `index.html` — PT-BR
+- `index-en.html` — EN
+- `theme.css` — identidade visual atual
+- `portfolio-ui.js` — navegação mobile
+- `projects-data.js` — fonte de verdade dos projetos em PT-BR
+- `projects-data.en.js` — fonte de verdade dos projetos em EN
+- `images/` e `gallery/` — imagens e screenshots
+- `docs/` — evidências/PDFs dos cases
+- `Vinicius_Santos_Medrado.pdf` e `Vinicius_Santos_Medrado_EN.pdf` — currículos
+- `CNAME` — domínio do GitHub Pages
+- `.nojekyll` — publicação estática sem processamento Jekyll
 
-## Dados dos projetos
+## Segurança e privacidade
 
-Os projetos não são duplicados no HTML. Cada objeto pode conter, além do conteúdo já existente, um campo `flow` com o fluxo técnico verificado daquele sistema.
+A versão publicada usa uma Content Security Policy (CSP) por página, política de referrer, `noopener noreferrer` em links externos e não contém chaves, tokens, senhas ou arquivos `.env`.
 
-O frontend reutiliza esse campo em dois níveis:
-
-- **card:** arquitetura compacta para leitura rápida;
-- **case study:** fluxo completo e aprofundamento técnico.
-
-## Como executar localmente
-
-```bash
-python -m http.server 4173
-```
-
-Depois abra `http://127.0.0.1:4173`.
+O telefone e o e-mail de contato são montados no navegador para reduzir scraping básico do HTML-fonte. O site continua sendo público; informações exibidas na interface devem ser consideradas públicas.
 
 ## Deploy
 
-Não há etapa de build. O conteúdo pode ser publicado diretamente no GitHub Pages.
+O site é publicado diretamente pelo GitHub Pages. Não existe etapa de build.
 
-## Regras de manutenção
+Ao substituir uma versão antiga do repositório, remova arquivos legados que não existem mais nesta distribuição, em vez de apenas copiar os novos arquivos por cima.
 
-- Não duplique projetos diretamente no HTML; altere `projects-data.js` / `projects-data.en.js`.
-- Não invente etapas de arquitetura: `flow` deve refletir o comportamento real documentado do projeto.
-- Mantenha PT-BR e EN equivalentes sempre que o conteúdo correspondente existir.
-- Preserve `prefers-reduced-motion`, navegação por teclado e áreas de toque mobile ao adicionar interações.
+## Manutenção
+
+- mantenha `projects-data.js` / `projects-data.en.js` como fonte única de verdade;
+- nunca faça commit de `.env`, tokens, credenciais ou chaves privadas;
+- mantenha HTTPS obrigatório no GitHub Pages;
+- proteja GitHub, Cloudflare e Apple ID com 2FA/passkeys;
+- revise arquivos públicos antes de adicioná-los a `docs/` ou `gallery/`.

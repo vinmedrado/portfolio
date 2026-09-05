@@ -1,8 +1,8 @@
 {
   "name": "Vinicius Santos Medrado — Dados & Automação de Processos",
   "short_name": "Vinicius Medrado",
-  "start_url": "/portfolio/index.html",
-  "scope": "/portfolio/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",

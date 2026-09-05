@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vinmedrado.github.io/portfolio/sitemap.xml
+Sitemap: https://vinmedrado.com/sitemap.xml

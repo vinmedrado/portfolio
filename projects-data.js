@@ -1442,7 +1442,7 @@ pasta Startup do usuário.</p>
 <pre><code class="language-powershell">powershell -NoProfile -ExecutionPolicy Bypass -File .\\uninstall_autostart.ps1
 </code></pre>
 <p>No notebook, acesse <code>http://127.0.0.1:5050</code>. No celular conectado ao mesmo Wi-Fi,
-use o IP do notebook, por exemplo <code>http://192.168.0.227:5050</code>.</p>
+use o IP do notebook, por exemplo <code>http://IP_DO_NOTEBOOK:5050</code>.</p>
 <p>O dashboard não precisa de aba do Chrome aberta. Para varreduras que usam login
 do navegador, o watchdog tenta manter um Chrome de automação minimizado em
 <code>http://127.0.0.1:9222</code>, com perfil separado em <code>.chrome_bot_profile/</code>.</p>
