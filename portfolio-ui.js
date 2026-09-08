@@ -26,3 +26,40 @@
     if (window.innerWidth > 820) setOpen(false);
   }, { passive:true });
 })();
+
+(function(){
+  const loader = document.getElementById('introLoader');
+  if (!loader) return;
+  const countEl = loader.querySelector('.intro-count');
+  const barEl = loader.querySelector('.intro-bar-fill');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function finish(){
+    loader.classList.add('is-done');
+    document.documentElement.classList.remove('intro-lock');
+    window.setTimeout(() => { loader.remove(); }, 900);
+  }
+
+  if (reduceMotion){
+    finish();
+    return;
+  }
+
+  document.documentElement.classList.add('intro-lock');
+  let pct = 0;
+  const duration = 550;
+  const start = performance.now();
+
+  function tick(now){
+    const elapsed = now - start;
+    pct = Math.min(100, Math.round((elapsed / duration) * 100));
+    if (countEl) countEl.textContent = String(pct).padStart(2, '0');
+    if (barEl) barEl.style.width = pct + '%';
+    if (elapsed < duration){
+      requestAnimationFrame(tick);
+    } else {
+      window.setTimeout(finish, 220);
+    }
+  }
+  requestAnimationFrame(tick);
+})();

@@ -9,52 +9,52 @@
 const PROJECTS = [
   {
     id: "vinance",
-    title: "Vinance",
+    title: "VinanceOS",
     flagship: true, // projeto principal do portfólio — aparece em destaque acima da grade
     track: "dados",
-    pill: "Dados / ML",
-    category: "Automação & Dados Financeiros",
+    pill: "Dados / ML / Quant",
+    category: "Finanças, Investimentos & Pesquisa Quantitativa",
     year: "2026",
-    status: "Em desenvolvimento ativo",
-    flow: ["DADOS FINANCEIROS", "FASTAPI", "POSTGRESQL", "CELERY / REDIS", "RANKING / ADVISOR", "INTERFACE"],
-    desc: "Automação financeira pessoal de ponta a ponta: pipeline de dados de mercado, motor de recomendação por regras e ranking de ativos — com um Advisor conversacional que usa esse contexto pra responder o usuário, sem prometer retorno.",
-    highlight: "Arquitetura assíncrona ponta a ponta com processamento em background e IA conversacional protegida contra prompt injection.",
+    status: "Fase 38 concluída · piloto controlado · trading PAPER_ONLY",
+    flow: ["DADOS FINANCEIROS", "FASTAPI", "POSTGRESQL", "FEATURE STORE", "ML / PREDICTION ENGINE", "INTERFACE"],
+    desc: "Plataforma full stack que conecta recomendação, explicabilidade, auditoria, monitoramento e pesquisa quantitativa. Inclui Recommendation Engine, guardrails, Feature Store, ML Engine, Prediction Engine, backtesting causal, walk-forward e paper trading.",
+    highlight: "Auditoria por decision_id e correlation_id, com snapshots imutáveis de decisões e validação estatística out-of-sample (walk-forward) antes de qualquer recomendação.",
     results: [
-      "Backend 100% assíncrono (FastAPI + Celery + Redis)",
-      "Advisor com IA via Groq, sem prometer retorno ou recomendação de compra",
-      "Pipeline de ranking de ativos por perfil de risco"
+      "Arquitetura com FastAPI, PostgreSQL, Redis e Celery para processamento assíncrono e tarefas recorrentes",
+      "QA canônico: 629/629 testes aprovados, 0 falhas, 0 skipped",
+      "Backtesting causal e Walk-Forward Validation, com Research Engine (Monte Carlo, bootstrap, sensitivity analysis)"
     ],
     completedFeatures: [
       "Recommendation Engine",
-      "Investor Profile",
-      "Trend Signals",
-      "Guardrails",
-      "Investment Workspace",
-      "Backend FastAPI",
-      "APIs",
-      "Banco de Dados",
-      "Docker",
-      "Scheduler",
-      "Frontend",
-      "Recommendation Score",
-      "Explanations",
-      "Asset Scores",
-      "Ranking"
+      "Investor Profile Advisor",
+      "Budget Advisor",
+      "Trend & Momentum Engine",
+      "Guardrails Financeiros",
+      "Explanation Engine",
+      "Auditoria (decision_id / correlation_id)",
+      "Feature Store V2",
+      "Target Engine V2",
+      "ML Engine V2",
+      "Prediction Engine V2",
+      "Backtesting Causal",
+      "Walk-Forward Validation",
+      "Research Engine (Monte Carlo)",
+      "Paper Trading V2",
+      "QA Canônico (629 testes)",
+      "Hardening de Segurança"
     ],
     roadmap: [
-      "Trading Workspace",
-      "Simulação",
-      "Backtesting",
-      "Estratégias",
-      "Gestão de risco"
+      "Financial Autopilot (planejado)",
+      "Expansão do Research Engine",
+      "Novos mercados e classes de ativos"
     ],
-    stack: ["Python", "FastAPI (async)", "PostgreSQL", "Redis", "Celery", "React", "TypeScript", "Groq API"],
+    stack: ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript", "Redis", "Celery", "Docker", "scikit-learn", "XGBoost"],
     link: "https://github.com/vinmedrado/vinance",
     demo: "https://vinance-ai.netlify.app",
     image: "images/vinance.png",
     gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"],
-    readmeHtml: `<h1>Vinance v2</h1>
-<h2>Origem do projeto</h2><p>O Vinance nasceu da necessidade de organizar minha própria vida financeira em um lugar mais claro. Em vez de depender de planilhas soltas, aplicativos separados e anotações manuais, comecei a estruturar uma plataforma que reunisse receitas, despesas, investimentos e planejamento financeiro em uma experiência única.</p><h2>Problema</h2><p>O problema inicial era a falta de visão integrada. Informações financeiras pessoais costumam ficar espalhadas, dificultando entender capacidade de investimento, prioridades, riscos e próximos passos.</p><h2>Solução</h2><p>A solução foi construir uma plataforma financeira com backend próprio, autenticação, módulos de organização financeira, inteligência educacional e um Advisor com IA. O objetivo é apoiar a tomada de decisão com contexto, sem prometer retorno financeiro ou substituir análise profissional.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend assíncrono em FastAPI.</li><li>PostgreSQL para dados transacionais e fundamentos.</li><li>Redis e Celery para cache e processamento em background.</li><li>Integração com Groq para o Advisor educacional.</li><li>Docker Compose para ambiente local.</li></ul><h2>Principais funcionalidades</h2><ul><li>Cadastro, autenticação e perfil financeiro.</li><li>Registro de receitas, despesas e diagnóstico financeiro.</li><li>Ranking educacional de ativos por perfil de risco.</li><li>Advisor IA com contexto financeiro e guardrails.</li><li>Base para evolução de módulos de investimentos e estratégias quantitativas.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Separar orientação educacional de recomendação financeira definitiva.</li><li>Modelar dados financeiros de forma extensível.</li><li>Integrar IA mantendo contexto, segurança e limites claros.</li><li>Organizar uma arquitetura assíncrona com múltiplos serviços.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre arquitetura full-stack, modelagem de domínio financeiro, processamento assíncrono, integração com LLMs e construção de produto com evolução incremental.</p>
+    readmeHtml: `<h1>VinanceOS</h1><p><em>Estado descrito: roadmap funcional até a Fase 38 concluído. Financial Autopilot é próxima evolução planejada. Trading permanece em ambiente de validação/PAPER_ONLY.</em></p>
+<h2>Origem do projeto</h2><p>O Vinance nasceu da necessidade de organizar minha própria vida financeira em um lugar mais claro. Em vez de depender de planilhas soltas, aplicativos separados e anotações manuais, comecei a estruturar uma plataforma que reunisse receitas, despesas, investimentos e planejamento financeiro em uma experiência única.</p><h2>Problema</h2><p>O problema inicial era a falta de visão integrada. Informações financeiras pessoais costumam ficar espalhadas, dificultando entender capacidade de investimento, prioridades, riscos e próximos passos.</p><h2>Solução</h2><p>A solução foi construir uma plataforma financeira com backend próprio, autenticação, módulos de organização financeira, inteligência educacional e um Advisor com IA. O objetivo é apoiar a tomada de decisão com contexto, sem prometer retorno financeiro ou substituir análise profissional.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI, com processamento assíncrono via Redis e Celery para tarefas recorrentes.</li><li>PostgreSQL para dados transacionais e fundamentos.</li><li>Redis e Celery para cache e processamento em background.</li><li>Integração com Groq para o Advisor educacional.</li><li>Docker Compose para ambiente local.</li></ul><h2>Principais funcionalidades</h2><ul><li>Cadastro, autenticação e perfil financeiro.</li><li>Registro de receitas, despesas e diagnóstico financeiro.</li><li>Ranking educacional de ativos por perfil de risco.</li><li>Advisor IA com contexto financeiro e guardrails.</li><li>Base para evolução de módulos de investimentos e estratégias quantitativas.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Separar orientação educacional de recomendação financeira definitiva.</li><li>Modelar dados financeiros de forma extensível.</li><li>Integrar IA mantendo contexto, segurança e limites claros.</li><li>Organizar uma arquitetura assíncrona com múltiplos serviços.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre arquitetura full-stack, modelagem de domínio financeiro, processamento assíncrono, integração com LLMs e construção de produto com evolução incremental.</p>
 <p>Vinance v2 é uma plataforma de inteligência financeira pessoal para o mercado brasileiro. O produto combina diagnóstico financeiro, organização de receitas e despesas, fundamentos de mercado, alocação educacional por perfil, ranking heurístico de ativos e um Advisor IA com contexto do usuário.</p>
 <p>O foco do projeto é demonstrar uma arquitetura fullstack: backend FastAPI modular, frontend React, integração real entre camadas, documentação operacional e preparação segura para GitHub/deploy.</p>
 <h2>Visão do produto</h2>
