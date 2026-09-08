@@ -15,7 +15,7 @@ const PROJECTS = [
     pill: "Dados / ML / Quant",
     category: "Finanças, Investimentos & Pesquisa Quantitativa",
     year: "2026",
-    status: "Fase 38 concluída · piloto controlado · trading PAPER_ONLY",
+    status: "Piloto controlado · trading PAPER_ONLY · Fase 38 concluída",
     flow: ["DADOS FINANCEIROS", "FASTAPI", "POSTGRESQL", "FEATURE STORE", "ML / PREDICTION ENGINE", "INTERFACE"],
     desc: "Plataforma full stack que conecta recomendação, explicabilidade, auditoria, monitoramento e pesquisa quantitativa. Inclui Recommendation Engine, guardrails, Feature Store, ML Engine, Prediction Engine, backtesting causal, walk-forward e paper trading.",
     highlight: "Auditoria por decision_id e correlation_id, com snapshots imutáveis de decisões e validação estatística out-of-sample (walk-forward) antes de qualquer recomendação.",
@@ -54,7 +54,7 @@ const PROJECTS = [
     image: "images/vinance.png",
     gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"],
     readmeHtml: `<h1>VinanceOS</h1><p><em>Estado descrito: roadmap funcional até a Fase 38 concluído. Financial Autopilot é próxima evolução planejada. Trading permanece em ambiente de validação/PAPER_ONLY.</em></p>
-<h2>Origem do projeto</h2><p>O Vinance nasceu da necessidade de organizar minha própria vida financeira em um lugar mais claro. Em vez de depender de planilhas soltas, aplicativos separados e anotações manuais, comecei a estruturar uma plataforma que reunisse receitas, despesas, investimentos e planejamento financeiro em uma experiência única.</p><h2>Problema</h2><p>O problema inicial era a falta de visão integrada. Informações financeiras pessoais costumam ficar espalhadas, dificultando entender capacidade de investimento, prioridades, riscos e próximos passos.</p><h2>Solução</h2><p>A solução foi construir uma plataforma financeira com backend próprio, autenticação, módulos de organização financeira, inteligência educacional e um Advisor com IA. O objetivo é apoiar a tomada de decisão com contexto, sem prometer retorno financeiro ou substituir análise profissional.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI, com processamento assíncrono via Redis e Celery para tarefas recorrentes.</li><li>PostgreSQL para dados transacionais e fundamentos.</li><li>Redis e Celery para cache e processamento em background.</li><li>Integração com Groq para o Advisor educacional.</li><li>Docker Compose para ambiente local.</li></ul><h2>Principais funcionalidades</h2><ul><li>Cadastro, autenticação e perfil financeiro.</li><li>Registro de receitas, despesas e diagnóstico financeiro.</li><li>Ranking educacional de ativos por perfil de risco.</li><li>Advisor IA com contexto financeiro e guardrails.</li><li>Base para evolução de módulos de investimentos e estratégias quantitativas.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Separar orientação educacional de recomendação financeira definitiva.</li><li>Modelar dados financeiros de forma extensível.</li><li>Integrar IA mantendo contexto, segurança e limites claros.</li><li>Organizar uma arquitetura assíncrona com múltiplos serviços.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre arquitetura full-stack, modelagem de domínio financeiro, processamento assíncrono, integração com LLMs e construção de produto com evolução incremental.</p>
+<h2>Origem do projeto</h2><p>O Vinance nasceu da necessidade de organizar minha própria vida financeira em um lugar mais claro. Em vez de depender de planilhas soltas, aplicativos separados e anotações manuais, comecei a estruturar uma plataforma que reunisse receitas, despesas, investimentos e planejamento financeiro em uma experiência única.</p><h2>Problema</h2><p>O problema inicial era a falta de visão integrada. Informações financeiras pessoais costumam ficar espalhadas, dificultando entender capacidade de investimento, prioridades, riscos e próximos passos.</p><h2>Solução</h2><p>A solução foi construir uma plataforma financeira com backend próprio, autenticação, módulos de organização financeira, inteligência educacional e um Advisor com IA. O objetivo é apoiar a tomada de decisão com contexto, sem prometer retorno financeiro ou substituir análise profissional.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI, com processamento assíncrono via Redis e Celery para tarefas recorrentes.</li><li>PostgreSQL para dados transacionais e fundamentos.</li><li>Redis e Celery para cache e processamento em background.</li><li>Integração com Groq para o Advisor educacional.</li><li>Docker Compose para ambiente local.</li></ul><h2>Principais funcionalidades</h2><ul><li>Cadastro, autenticação e perfil financeiro.</li><li>Registro de receitas, despesas e diagnóstico financeiro.</li><li>Recommendation Engine, Budget Advisor e Guardrails financeiros.</li><li>Explanation Engine com justificativa estruturada por decisão.</li><li>Auditoria por decision_id e correlation_id, com snapshots imutáveis.</li><li>Feature Store V2, Target Engine V2, ML Engine V2 e Prediction Engine V2.</li><li>Backtesting causal, Walk-Forward Validation e Research Engine (Monte Carlo).</li><li>Paper Trading V2, com separação explícita de capital real.</li><li>Suíte de QA canônica: 629/629 testes aprovados.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Separar orientação educacional de recomendação financeira definitiva.</li><li>Modelar dados financeiros de forma extensível.</li><li>Integrar IA mantendo contexto, segurança e limites claros.</li><li>Organizar uma arquitetura assíncrona com múltiplos serviços.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre arquitetura full-stack, modelagem de domínio financeiro, processamento assíncrono, integração com LLMs e construção de produto com evolução incremental.</p>
 <p>Vinance v2 é uma plataforma de inteligência financeira pessoal para o mercado brasileiro. O produto combina diagnóstico financeiro, organização de receitas e despesas, fundamentos de mercado, alocação educacional por perfil, ranking heurístico de ativos e um Advisor IA com contexto do usuário.</p>
 <p>O foco do projeto é demonstrar uma arquitetura fullstack: backend FastAPI modular, frontend React, integração real entre camadas, documentação operacional e preparação segura para GitHub/deploy.</p>
 <h2>Visão do produto</h2>
@@ -135,7 +135,7 @@ Groq API — geração controlada do Advisor IA
 <li>Fase 13: polimento final para demo.</li>
 <li>Fase 14: preparação GitHub + deploy.</li>
 </ul>
-<p>O Vinance v2 está preparado para publicação no GitHub e para deploy futuro. Ainda não é uma versão comercial final.</p>
+<p>O VinanceOS tem roadmap funcional até a Fase 38 concluído, em uso local/privado e piloto controlado. Trading permanece em ambiente de validação (PAPER_ONLY) e o Financial Autopilot é a próxima evolução planejada — ainda não é uma versão comercial final.</p>
 <h2>Como rodar o backend localmente</h2>
 <ol>
 <li>Copie o exemplo de ambiente:</li>
@@ -257,7 +257,7 @@ celery -A backend.app.core.celery.celery_app beat --loglevel=info
     pill: "Automação",
     category: "Automação de Candidaturas",
     year: "2025",
-    status: "online · 6 integrações ativas",
+    status: "Demo pública · 6 integrações ativas",
     flow: ["VAGAS", "COLETA", "MATCHING", "ATS", "AUTOMAÇÃO", "WHATSAPP"],
     desc: "Candidatar-se em várias vagas manualmente toma tempo e é repetitivo. O Applymize automatiza esse processo: busca simultânea em 6 plataformas de vagas, remove duplicadas e usa IA (LLaMA 3.3 via Groq) pra pontuar a aderência de cada vaga e apontar lacunas do currículo.",
     highlight: "Auto-candidatura via Selenium com funil Kanban persistente.",
@@ -365,7 +365,7 @@ assets/demo/   screenshots e GIFs
     pill: "Dados / ML",
     category: "ML & Decision Intelligence Esportiva",
     year: "2026",
-    status: "experimento prospectivo ativo · paper trading",
+    status: "Projeto local · PAPER_ONLY · experimento prospectivo ativo",
     flow: ["JOGOS / ODDS", "VALIDAÇÃO TEMPORAL", "FEATURES", "BACKTEST", "MODELO", "PAPER", "SETTLEMENT"],
     desc: "Evolução do MatchFlow: plataforma de pesquisa e operação paper que transforma partidas em decisões rastreáveis, com validação temporal, modelo champion congelado (hash SHA-256) e settlement automático.",
     highlight: "Governança champion/challenger com promoção deliberada, calibração (Brier) auditada e guardrails fail-closed — reporta com honestidade quando o intervalo de confiança do ROI cruza zero.",
@@ -579,7 +579,7 @@ lucro futuro, e nenhuma saída do sistema constitui recomendação financeira.</
     pill: "Automação",
     category: "Automação para Marketplaces",
     year: "2025",
-    status: "online · pipeline raw→staging→mart",
+    status: "Demo pública (cenário sintético) · integração OAuth2 real",
     flow: ["MERCADO LIVRE", "OAUTH2 / API", "RAW", "STAGING", "MART", "PRICING / ML", "INTERFACE"],
     desc: "Vendedores que operam em múltiplas contas do Mercado Livre não têm visão consolidada dos dados. Essa plataforma centraliza isso: pipeline de dados em camadas (raw → staging → mart) orquestrado via Airflow, com integração OAuth2 real e isolamento por cliente.",
     highlight: "Feature store e ML para precificação dinâmica com proteção de margem.",
@@ -690,7 +690,7 @@ python scripts/privacy_cleanup.py --apply
 </code></pre>
 <p>Produção exige um canal privado em <code>PRIVACY_CONTACT_EMAIL</code>. Consulte o
 <a href="PRIVACY.md">Aviso de Privacidade</a> e a
-<a href="docs/LGPD.md">Governança LGPD</a>. Esses controles apoiam conformidade, mas não
+<a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/LGPD.md">Governança LGPD</a>. Esses controles apoiam conformidade, mas não
 substituem decisões do controlador, contratos e avaliação jurídica.</p>
 <h2>Organização</h2>
 <table>
@@ -747,10 +747,10 @@ substituem decisões do controlador, contratos e avaliação jurídica.</p>
 </tr>
 </tbody>
 </table>
-<p>Mais detalhes em <a href="docs/ARCHITECTURE.md">Arquitetura</a>,
-<a href="docs/SECURITY.md">Segurança</a>, <a href="docs/LGPD.md">Governança LGPD</a> e
-<a href="docs/DEMO_DATA.md">Política de dados da demo</a>. Logos, cores e o card social
-estão documentados em <a href="docs/BRAND.md">Identidade visual</a>.</p>
+<p>Mais detalhes em <a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/ARCHITECTURE.md">Arquitetura</a>,
+<a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/SECURITY.md">Segurança</a>, <a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/LGPD.md">Governança LGPD</a> e
+<a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/DEMO_DATA.md">Política de dados da demo</a>. Logos, cores e o card social
+estão documentados em <a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/BRAND.md">Identidade visual</a>.</p>
 <h2>Limites assumidos</h2>
 <ul>
 <li>Jobs do console pessoal executam em processo; não representam uma fila
@@ -771,7 +771,7 @@ estão documentados em <a href="docs/BRAND.md">Identidade visual</a>.</p>
     pill: "Automação",
     category: "Plataforma de Eventos Operacionais",
     year: "2025",
-    status: "online · websocket realtime",
+    status: "Demo pública · websocket realtime",
     flow: ["CONVIDADO", "RSVP", "FASTAPI", "DATABASE", "WORKERS / SCHEDULER", "WEBSOCKET", "NOTIFICAÇÕES"],
     desc: "SaaS de operação de eventos: RSVP, mapa de mesas e comunicação via WhatsApp para assessorias e convidados.",
     highlight: "Dashboards em tempo real via WebSocket, multi-tenant com isolamento por cliente.",
@@ -887,7 +887,7 @@ assets/demo/    screenshots e GIFs
     pill: "Dados / ML",
     category: "Valuation Automotivo",
     year: "2026",
-    status: "online · fonte + confiança exibidas",
+    status: "Demo pública · fonte + confiança exibidas",
     flow: ["FIPE / ANÚNCIOS", "COLETA", "NORMALIZAÇÃO", "CACHE / DB", "VALUATION", "LAUDO PDF"],
     desc: "Valuation automotivo com dados FIPE local-first combinados a comparáveis reais de anúncios de mercado.",
     highlight: "Mostra fonte e confiança de cada estimativa; laudo em PDF premium.",
@@ -1219,7 +1219,7 @@ docs/screenshots/pdf-report.png
     pill: "Automação",
     category: "Automação Comercial para Freelancers",
     year: "2026",
-    status: "online · demo estática no GitHub Pages",
+    status: "Demo estática · GitHub Pages",
     flow: ["PLATAFORMAS", "PLAYWRIGHT", "MATCHING", "PRICING ENGINE", "GROQ", "PROPOSTA / PDF", "REVISÃO HUMANA"],
     desc: "Sistema local que encontra oportunidades freelance em Workana, 99Freelas e Freelancer.com, avalia aderência ao perfil, calcula preço/prazo e gera propostas comerciais estruturadas para revisão humana.",
     highlight: "Pipeline determinístico de precificação e proposta com IA (Groq) apenas na análise textual — preço e horas nunca dependem do modelo.",
@@ -1370,7 +1370,7 @@ docs/screenshots/pdf-report.png
 </tr>
 </tbody>
 </table>
-<p>Mais detalhes em <a href="docs/architecture.md">docs/architecture.md</a>.</p>
+<p>Mais detalhes em <a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/architecture.md">docs/architecture.md</a>.</p>
 <h2>Como executar</h2>
 <h3>Requisitos</h3>
 <ul>
@@ -1463,14 +1463,14 @@ python -m py_compile ai_engine.py commercial_strategy.py db.py knowledge_engine.
 </code></pre>
 <h2>Documentação</h2>
 <ul>
-<li><a href="docs/architecture.md">Arquitetura</a></li>
-<li><a href="docs/decision-log.md">Decision Log</a></li>
-<li><a href="docs/proposal-intelligence.md">Proposal Intelligence</a></li>
-<li><a href="docs/commercial-strategy.md">Commercial Strategy</a></li>
-<li><a href="docs/pricing-engine.md">Pricing Engine</a></li>
-<li><a href="docs/proposal-generator.md">Proposal Generator</a></li>
-<li><a href="docs/pdf-generator.md">PDF Generator</a></li>
-<li><a href="ROADMAP.md">Roadmap</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/architecture.md">Arquitetura</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/decision-log.md">Decision Log</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/proposal-intelligence.md">Proposal Intelligence</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/commercial-strategy.md">Commercial Strategy</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/pricing-engine.md">Pricing Engine</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/proposal-generator.md">Proposal Generator</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/pdf-generator.md">PDF Generator</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/ROADMAP.md">Roadmap</a></li>
 <li><a href="CHANGELOG.md">Changelog</a></li>
 <li><a href="CONTRIBUTING.md">Contributing</a></li>
 </ul>

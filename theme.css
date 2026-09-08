@@ -260,7 +260,7 @@ footer#contato{margin:28px -28px 0;padding:0;border-top:0;background:var(--red);
   .results-proof-head,.section-head,.independent-builds-head{grid-template-columns:1fr;gap:12px}.section-head::after{display:none}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .pro-case-nps{grid-template-columns:1fr;gap:28px}.pro-impact{border-left:0;border-top:1px solid var(--line);padding:28px 0 0}.oracle-dossier-grid{grid-template-columns:1fr}.oracle-copy{border-right:0;border-bottom:1px solid var(--line)}.oracle-metric-panel{padding:20px 22px}.pipeline-main{grid-template-columns:1fr}.pipeline-count{border-left:0;border-top:1px solid var(--line);padding:24px 0 0}.system-line{grid-template-columns:none;display:flex;min-width:0}
   .flagship{grid-template-columns:1fr}.flagship-shot{border-right:0;border-bottom:1px solid var(--line);min-height:270px}.projects-grid{display:block}.card{margin-bottom:18px}
-  .log-entry{grid-template-columns:1fr;gap:7px}.log-date,.log-role,.log-org,.log-results{grid-column:1;grid-row:auto}.log-results{grid-template-columns:1fr;padding-left:16px;margin-top:8px}
+  .log-entry{grid-template-columns:1fr;gap:7px}.log-date,.log-role,.log-org,.log-results,.log-case-link{grid-column:1;grid-row:auto}.log-results{grid-template-columns:1fr;padding-left:16px;margin-top:8px}
   .stack-editorial{grid-template-columns:1fr;gap:34px}.stack-intro{position:static}.stack-intro p{max-width:540px}.stack-band{grid-template-columns:130px 1fr}.stack-logos{grid-template-columns:repeat(2,1fr)}.stack-logos figure:nth-child(2){border-right:0}.stack-logos figure:nth-child(-n+2){border-bottom:1px solid var(--line)}.stack-text-tools{grid-template-columns:1fr}.stack-text-tools>div{border-right:0;border-bottom:1px solid var(--line)}.stack-text-tools>div:last-child{border-bottom:0}
   .about-grid{grid-template-columns:1fr}
   footer#contato{margin:32px -18px 0;grid-template-columns:1fr}.footer-head{padding:28px 24px}.contact-actions{grid-column:1;grid-row:auto;padding:0 24px 24px}.contact-grid{grid-template-columns:1fr 1fr}.contact-item:nth-child(2){border-right:0}.contact-item:nth-child(-n+2){border-bottom:1px solid rgba(0,0,0,.4)}
@@ -771,3 +771,5 @@ html.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion: reduce){
   #introLoader{display:none}
 }
+.log-case-link{display:inline-block;margin-top:4px;font:500 8.5px/1.4 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--red-soft);text-decoration:none;border-bottom:1px solid var(--red-soft);padding-bottom:2px;transition:opacity .2s;grid-column:2;grid-row:4}
+.log-case-link:hover{opacity:.7}
