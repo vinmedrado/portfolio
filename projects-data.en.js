@@ -14,7 +14,7 @@ const PROJECTS = [
     status: "Controlled pilot · PAPER_ONLY trading · Phase 38 complete",
     flow: ["FINANCIAL DATA", "FASTAPI", "POSTGRESQL", "FEATURE STORE", "ML / PREDICTION ENGINE", "INTERFACE"],
     desc: "Full-stack platform connecting recommendation, explainability, audit, monitoring and quantitative research. Includes a Recommendation Engine, guardrails, Feature Store, ML Engine, Prediction Engine, causal backtesting, walk-forward validation and paper trading.",
-    highlight: "Auditability via decision_id and correlation_id, with immutable decision snapshots and out-of-sample (walk-forward) statistical validation before any recommendation.",
+    highlight: "Auditability via decision_id and correlation_id, with immutable decision snapshots; in the quantitative module, strategies undergo out-of-sample Walk-Forward validation before any promotion.",
     results: [
       "FastAPI, PostgreSQL, Redis and Celery architecture for async processing and recurring tasks",
       "Canonical QA suite: 629/629 tests passing, 0 failures, 0 skipped",
@@ -49,29 +49,6 @@ const PROJECTS = [
     demo: "https://vinance-ai.netlify.app",
     image: "images/vinance.png",
     gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"]
-  },
-  {
-    id: "applymize",
-    title: "Applymize",
-    flagship: false,
-    track: "automacao",
-    pill: "Automation",
-    category: "Job Application Automation",
-    year: "2025",
-    status: "Public demo · 6 active integrations",
-    flow: ["JOB SOURCES", "COLLECTION", "MATCHING", "ATS", "AUTOMATION", "WHATSAPP"],
-    desc: "Applying to jobs manually across platforms is slow and repetitive. Applymize automates that: simultaneous search across 6 job platforms, deduplication, and AI (LLaMA 3.3 via Groq) that scores each job's fit and flags resume gaps.",
-    highlight: "Automated Selenium-based applications with a persistent Kanban pipeline.",
-    results: [
-      "Simultaneous scraping across 6 job platforms",
-      "AI-generated compatibility score (LLaMA 3.3 70B)",
-      "Automated applications via Selenium"
-    ],
-    stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
-    link: "https://github.com/vinmedrado/applymize",
-    demo: "https://applymize.netlify.app",
-    image: "images/applymize.webp",
-    gallery: ["gallery/applymize/applymize-01.webp", "gallery/applymize/applymize-02.webp", "gallery/applymize/applymize-03.webp", "gallery/applymize/applymize-04.webp", "gallery/applymize/applymize-05.webp", "gallery/applymize/applymize-06.webp", "gallery/applymize/applymize-07.webp", "gallery/applymize/applymize-08.webp"]
   },
   {
     id: "footballdecisionlab",
@@ -120,6 +97,29 @@ const PROJECTS = [
     gallery: ["gallery/marketplace/marketplace-01.webp", "gallery/marketplace/marketplace-02.webp", "gallery/marketplace/marketplace-03.webp", "gallery/marketplace/marketplace-04.webp", "gallery/marketplace/marketplace-05.webp", "gallery/marketplace/marketplace-06.webp", "gallery/marketplace/marketplace-07.webp", "gallery/marketplace/marketplace-08.webp"]
   },
   {
+    id: "applymize",
+    title: "Applymize",
+    flagship: false,
+    track: "automacao",
+    pill: "Automation",
+    category: "Job Application Automation",
+    year: "2025",
+    status: "Public demo · 6 active integrations",
+    flow: ["JOB SOURCES", "COLLECTION", "MATCHING", "ATS", "AUTOMATION", "WHATSAPP"],
+    desc: "Applying to jobs manually across platforms is slow and repetitive. Applymize automates that: simultaneous search across 6 job platforms, deduplication, and AI (LLaMA 3.3 via Groq) that scores each job's fit and flags resume gaps.",
+    highlight: "Automated Selenium-based applications with a persistent Kanban pipeline.",
+    results: [
+      "Simultaneous scraping across 6 job platforms",
+      "AI-generated compatibility score (LLaMA 3.3 70B)",
+      "Automated applications via Selenium"
+    ],
+    stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
+    link: "https://github.com/vinmedrado/applymize",
+    demo: "https://applymize.netlify.app",
+    image: "gallery/applymize/applymize-02.webp",
+    gallery: ["gallery/applymize/applymize-02.webp", "gallery/applymize/applymize-01.webp", "gallery/applymize/applymize-03.webp", "gallery/applymize/applymize-04.webp", "gallery/applymize/applymize-05.webp", "gallery/applymize/applymize-06.webp", "gallery/applymize/applymize-07.webp", "gallery/applymize/applymize-08.webp"]
+  },
+  {
     id: "lumyra",
     title: "Lumyra",
     flagship: false,
@@ -147,7 +147,7 @@ const PROJECTS = [
     title: "Meu Carro Vale",
     flagship: false,
     track: "dados",
-    pill: "Data / ML",
+    pill: "Data / Valuation",
     category: "Automotive Valuation",
     year: "2026",
     status: "Public demo · source + confidence shown",

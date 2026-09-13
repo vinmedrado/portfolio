@@ -47,7 +47,7 @@
 
   document.documentElement.classList.add('intro-lock');
   let pct = 0;
-  const duration = 550;
+  const duration = 260;
   const start = performance.now();
 
   function tick(now){

@@ -18,7 +18,7 @@ const PROJECTS = [
     status: "Piloto controlado · trading PAPER_ONLY · Fase 38 concluída",
     flow: ["DADOS FINANCEIROS", "FASTAPI", "POSTGRESQL", "FEATURE STORE", "ML / PREDICTION ENGINE", "INTERFACE"],
     desc: "Plataforma full stack que conecta recomendação, explicabilidade, auditoria, monitoramento e pesquisa quantitativa. Inclui Recommendation Engine, guardrails, Feature Store, ML Engine, Prediction Engine, backtesting causal, walk-forward e paper trading.",
-    highlight: "Auditoria por decision_id e correlation_id, com snapshots imutáveis de decisões e validação estatística out-of-sample (walk-forward) antes de qualquer recomendação.",
+    highlight: "Auditoria por decision_id e correlation_id, com snapshots imutáveis das decisões; no módulo quantitativo, estratégias passam por validação out-of-sample com Walk-Forward antes de qualquer promoção.",
     results: [
       "Arquitetura com FastAPI, PostgreSQL, Redis e Celery para processamento assíncrono e tarefas recorrentes",
       "QA canônico: 629/629 testes aprovados, 0 falhas, 0 skipped",
@@ -53,308 +53,113 @@ const PROJECTS = [
     demo: "https://vinance-ai.netlify.app",
     image: "images/vinance.png",
     gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"],
-    readmeHtml: `<h1>VinanceOS</h1><p><em>Estado descrito: roadmap funcional até a Fase 38 concluído. Financial Autopilot é próxima evolução planejada. Trading permanece em ambiente de validação/PAPER_ONLY.</em></p>
-<h2>Origem do projeto</h2><p>O Vinance nasceu da necessidade de organizar minha própria vida financeira em um lugar mais claro. Em vez de depender de planilhas soltas, aplicativos separados e anotações manuais, comecei a estruturar uma plataforma que reunisse receitas, despesas, investimentos e planejamento financeiro em uma experiência única.</p><h2>Problema</h2><p>O problema inicial era a falta de visão integrada. Informações financeiras pessoais costumam ficar espalhadas, dificultando entender capacidade de investimento, prioridades, riscos e próximos passos.</p><h2>Solução</h2><p>A solução foi construir uma plataforma financeira com backend próprio, autenticação, módulos de organização financeira, inteligência educacional e um Advisor com IA. O objetivo é apoiar a tomada de decisão com contexto, sem prometer retorno financeiro ou substituir análise profissional.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI, com processamento assíncrono via Redis e Celery para tarefas recorrentes.</li><li>PostgreSQL para dados transacionais e fundamentos.</li><li>Redis e Celery para cache e processamento em background.</li><li>Integração com Groq para o Advisor educacional.</li><li>Docker Compose para ambiente local.</li></ul><h2>Principais funcionalidades</h2><ul><li>Cadastro, autenticação e perfil financeiro.</li><li>Registro de receitas, despesas e diagnóstico financeiro.</li><li>Recommendation Engine, Budget Advisor e Guardrails financeiros.</li><li>Explanation Engine com justificativa estruturada por decisão.</li><li>Auditoria por decision_id e correlation_id, com snapshots imutáveis.</li><li>Feature Store V2, Target Engine V2, ML Engine V2 e Prediction Engine V2.</li><li>Backtesting causal, Walk-Forward Validation e Research Engine (Monte Carlo).</li><li>Paper Trading V2, com separação explícita de capital real.</li><li>Suíte de QA canônica: 629/629 testes aprovados.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Separar orientação educacional de recomendação financeira definitiva.</li><li>Modelar dados financeiros de forma extensível.</li><li>Integrar IA mantendo contexto, segurança e limites claros.</li><li>Organizar uma arquitetura assíncrona com múltiplos serviços.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre arquitetura full-stack, modelagem de domínio financeiro, processamento assíncrono, integração com LLMs e construção de produto com evolução incremental.</p>
-<p>Vinance v2 é uma plataforma de inteligência financeira pessoal para o mercado brasileiro. O produto combina diagnóstico financeiro, organização de receitas e despesas, fundamentos de mercado, alocação educacional por perfil, ranking heurístico de ativos e um Advisor IA com contexto do usuário.</p>
-<p>O foco do projeto é demonstrar uma arquitetura fullstack: backend FastAPI modular, frontend React, integração real entre camadas, documentação operacional e preparação segura para GitHub/deploy.</p>
-<h2>Visão do produto</h2>
-<p>O Vinance ajuda o usuário a entender sua situação financeira antes de falar sobre investimentos. A jornada atual permite:</p>
-<ul>
-<li>criar conta e autenticar com JWT;</li>
-<li>cadastrar perfil financeiro inicial;</li>
-<li>registrar receitas e despesas;</li>
-<li>gerar diagnóstico financeiro;</li>
-<li>visualizar capacidade de investimento e alertas;</li>
-<li>consultar dados de mercado e fundamentos cadastrados;</li>
-<li>receber sugestões educacionais por classe de ativo;</li>
-<li>conversar com um Advisor IA educacional usando Groq, sem promessa de lucro ou recomendação definitiva de compra.</li>
-</ul>
-<h2>Stack</h2>
-<h3>Backend</h3>
-<ul>
-<li>Python 3.11+</li>
-<li>FastAPI</li>
-<li>SQLAlchemy Async</li>
-<li>Alembic</li>
-<li>PostgreSQL</li>
-<li>Redis</li>
-<li>Celery + Celery Beat</li>
-<li>Pydantic Settings</li>
-<li>httpx async para Groq</li>
-<li>Pytest</li>
-</ul>
-<h3>Frontend</h3>
-<ul>
-<li>React</li>
-<li>TypeScript</li>
-<li>Vite</li>
-<li>React Router</li>
-<li>TanStack Query</li>
-<li>Axios</li>
-<li>Design system próprio</li>
-<li>Identidade visual dark, com base inicial para light theme</li>
-</ul>
-<h2>Módulos implementados</h2>
-<ul>
-<li><code>backend/app/auth</code>: autenticação, JWT e usuário autenticado.</li>
-<li><code>backend/app/financial</code>: perfil financeiro, receitas, despesas, orçamento e diagnóstico.</li>
-<li><code>backend/app/catalog</code>: catálogo base de ativos.</li>
-<li><code>backend/app/market</code>: indicadores e fundamentos disponíveis por mercado.</li>
-<li><code>backend/app/intelligence</code>: alocação por perfil, restrições de risco, scoring heurístico e ranking educacional.</li>
-<li><code>backend/app/advisor</code>: Advisor IA educacional com Groq, memória curta em Redis e proteção básica contra prompt injection.</li>
-<li><code>frontend/src/design-system</code>: tokens visuais, tema, tipografia, espaçamentos, radius e sombras.</li>
-<li><code>frontend/src/features</code>: domínios conectados ao backend real: auth, financial, market, intelligence e advisor.</li>
-<li><code>frontend/src/pages</code>: telas funcionais com onboarding, estados vazios, loading, error e UX de demo.</li>
-</ul>
-<h2>Arquitetura resumida</h2>
-<pre><code class="language-text">frontend/ React + Vite + TanStack Query
-    ↓ HTTP /api/v1
-backend/app FastAPI modular
-    ↓
-PostgreSQL — dados transacionais e fundamentos
-Redis — cache, Celery broker/result backend e memória curta do Advisor
-Celery Worker/Beat — jobs assíncronos preparados
-Groq API — geração controlada do Advisor IA
-</code></pre>
-<h2>Status atual do projeto</h2>
-<p>Fases 0 a 14 concluídas:</p>
-<ul>
-<li>Fase 0: saneamento arquitetural.</li>
-<li>Fase 1: core backend.</li>
-<li>Fase 2: módulo financeiro.</li>
-<li>Fase 3: catálogo de ativos.</li>
-<li>Fase 4: market data.</li>
-<li>Fase 5: fundamentos de mercado.</li>
-<li>Fase 6: intelligence base heurística.</li>
-<li>Fase 7: Advisor IA com Groq.</li>
-<li>Fase 8: limpeza técnica e hardening.</li>
-<li>Fase 9: frontend base e identidade visual.</li>
-<li>Fase 10: integração frontend/backend real.</li>
-<li>Fase 11: onboarding financeiro e estados vazios.</li>
-<li>Fase 12: refinamento funcional das páginas.</li>
-<li>Fase 13: polimento final para demo.</li>
-<li>Fase 14: preparação GitHub + deploy.</li>
-</ul>
-<p>O VinanceOS tem roadmap funcional até a Fase 38 concluído, em uso local/privado e piloto controlado. Trading permanece em ambiente de validação (PAPER_ONLY) e o Financial Autopilot é a próxima evolução planejada — ainda não é uma versão comercial final.</p>
-<h2>Como rodar o backend localmente</h2>
-<ol>
-<li>Copie o exemplo de ambiente:</li>
-</ol>
-<pre><code class="language-bash">cp .env.example .env
-</code></pre>
-<ol start="2">
-<li>Ajuste pelo menos:</li>
-</ol>
-<pre><code class="language-env">DATABASE_URL=postgresql+asyncpg://vinance:vinance-local-only@postgres:5432/vinance
-REDIS_URL=redis://redis:6379/0
-SECRET_KEY=gere-uma-chave-real-forte-com-openssl-rand-hex-32
-GROQ_API_KEY=
-</code></pre>
-<ol start="3">
-<li>Suba os serviços:</li>
-</ol>
-<pre><code class="language-bash">docker compose up --build
-</code></pre>
-<ol start="4">
-<li>Rode as migrations:</li>
-</ol>
-<pre><code class="language-bash">docker compose exec backend alembic upgrade head
-</code></pre>
-<ol start="5">
-<li>Valide o healthcheck:</li>
-</ol>
-<pre><code class="language-bash">curl http://localhost:8000/health
-</code></pre>
-<h2>Como rodar o frontend localmente</h2>
-<pre><code class="language-bash">cd frontend
-cp .env.example .env
-npm install
-npm run dev
-</code></pre>
-<p>Por padrão, o frontend espera o backend em:</p>
-<pre><code class="language-env">VITE_API_BASE_URL=http://localhost:8000
-VITE_API_PREFIX=/api/v1
-</code></pre>
-<h2>Celery worker e beat</h2>
-<p>Com Docker Compose:</p>
-<pre><code class="language-bash">docker compose up celery_worker celery_beat
-</code></pre>
-<p>Manual:</p>
-<pre><code class="language-bash">celery -A backend.app.core.celery.celery_app worker --loglevel=info -Q default,market,intelligence
-celery -A backend.app.core.celery.celery_app beat --loglevel=info
-</code></pre>
-<h2>Variáveis de ambiente principais</h2>
-<p>Backend:</p>
-<ul>
-<li><code>ENVIRONMENT</code></li>
-<li><code>DATABASE_URL</code></li>
-<li><code>REDIS_URL</code></li>
-<li><code>CELERY_BROKER_URL</code></li>
-<li><code>CELERY_RESULT_BACKEND</code></li>
-<li><code>SECRET_KEY</code></li>
-<li><code>CORS_ORIGINS</code></li>
-<li><code>LOG_LEVEL</code></li>
-<li><code>GROQ_API_KEY</code></li>
-<li><code>GROQ_MODEL</code></li>
-</ul>
-<p>Frontend:</p>
-<ul>
-<li><code>VITE_API_BASE_URL</code></li>
-<li><code>VITE_API_PREFIX</code></li>
-</ul>
-<h2>Endpoints principais</h2>
-<ul>
-<li><code>GET /health</code></li>
-<li><code>POST /api/v1/auth/register</code></li>
-<li><code>POST /api/v1/auth/login</code></li>
-<li><code>GET /api/v1/auth/me</code></li>
-<li><code>GET/POST /api/v1/financial/...</code></li>
-<li><code>GET /api/v1/catalog/...</code></li>
-<li><code>GET /api/v1/market/...</code></li>
-<li><code>GET /api/v1/intelligence/recommendations</code></li>
-<li><code>POST /api/v1/advisor/chat</code></li>
-</ul>
-<h2>Limitações atuais</h2>
-<ul>
-<li>O Advisor é educacional e não substitui consultoria financeira profissional.</li>
-<li>Não há recomendação definitiva de compra/venda.</li>
-<li>Não há embeddings, vector database, LangChain, CrewAI, AutoGen ou Ollama.</li>
-<li>Não há backtest, LSTM, Prophet ou ML treinado.</li>
-<li>O frontend ainda não possui CRUD financeiro avançado.</li>
-<li>O mercado ainda não possui screener avançado ou gráficos complexos.</li>
-<li>Observabilidade e CI/CD ainda devem ser evoluídos antes de produção real.</li>
-</ul>
-<h2>Próximos passos sugeridos</h2>
-<ul>
-<li>Deploy frontend no Netlify.</li>
-<li>Deploy backend no Railway.</li>
-<li>Provisionar Postgres e Redis gerenciados.</li>
-<li>Configurar migrations em produção.</li>
-<li>Criar pipeline CI/CD.</li>
-<li>Adicionar observabilidade, logs estruturados e alertas.</li>
-<li>Evoluir telas com screenshots reais para portfólio.</li>
-</ul>
-<h2>Segurança</h2>
-<ul>
-<li>Nunca versionar <code>.env</code> real.</li>
-<li>Nunca versionar <code>GROQ_API_KEY</code>.</li>
-<li>Nunca usar a <code>SECRET_KEY</code> dos exemplos em produção.</li>
-<li>Gere <code>SECRET_KEY</code> forte com <code>openssl rand -hex 32</code> ou equivalente.</li>
-<li>Em <code>ENVIRONMENT=production</code>, o backend bloqueia <code>SECRET_KEY</code> vazia, curta ou com marcadores inseguros em inglês/português.</li>
-</ul>
-<h2>Correção Fase 14 — limpeza de legado e planilhas locais</h2>
-<p>A pasta <code>services/</code> da raiz foi arquivada em <code>_archived/fase14_legacy_services/services/</code> por conter código legado fora do backend oficial <code>backend/app</code>. Essa arquitetura antiga não faz parte do Vinance v2 aprovado e podia conter referências a Ollama e variáveis antigas como <code>OPENAI_API_KEY</code>.</p>
-<p>O Vinance v2 aprovado utiliza o backend oficial em <code>backend/app</code> e o advisor IA isolado via Groq. Ollama não faz parte da arquitetura atual do Vinance v2.</p>
-<p>Arquivos locais de planilha, como entradas financeiras ou importações B3 (<code>.xlsm</code>/<code>.xlsx</code>), não são versionados. As pastas <code>data/input/</code> e <code>data/imports/</code> permanecem apenas com <code>.gitkeep</code>.</p>
-<h2>Licença</h2>
-<p>MIT.</p>`
-  },
-  {
-    id: "applymize",
-    title: "Applymize",
-    flagship: false,
-    track: "automação",
-    pill: "Automação",
-    category: "Automação de Candidaturas",
-    year: "2025",
-    status: "Demo pública · 6 integrações ativas",
-    flow: ["VAGAS", "COLETA", "MATCHING", "ATS", "AUTOMAÇÃO", "WHATSAPP"],
-    desc: "Candidatar-se em várias vagas manualmente toma tempo e é repetitivo. O Applymize automatiza esse processo: busca simultânea em 6 plataformas de vagas, remove duplicadas e usa IA (LLaMA 3.3 via Groq) pra pontuar a aderência de cada vaga e apontar lacunas do currículo.",
-    highlight: "Auto-candidatura via Selenium com funil Kanban persistente.",
-    results: [
-      "Scraping simultâneo em 6 plataformas de vagas",
-      "Score de compatibilidade gerado por IA (LLaMA 3.3 70B)",
-      "Auto-candidatura automatizada via Selenium"
-    ],
-    stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
-    link: "https://github.com/vinmedrado/applymize",
-    demo: "https://applymize.netlify.app",
-    image: "images/applymize.webp",
-    gallery: ["gallery/applymize/applymize-01.webp", "gallery/applymize/applymize-02.webp", "gallery/applymize/applymize-03.webp", "gallery/applymize/applymize-04.webp", "gallery/applymize/applymize-05.webp", "gallery/applymize/applymize-06.webp", "gallery/applymize/applymize-07.webp", "gallery/applymize/applymize-08.webp"],
-    readmeHtml: `<h1>Applymize</h1>
-<h2>Origem do projeto</h2><p>O Applymize nasceu durante meu período de busca por emprego. Ao acompanhar vagas em várias plataformas, percebi que parte relevante do processo era repetitiva: procurar oportunidades, comparar requisitos com meu currículo, organizar candidaturas e entender onde meu perfil estava mais ou menos aderente.</p><h2>Problema</h2><p>A busca manual consumia tempo e dificultava priorizar vagas realmente compatíveis. Além disso, conceitos de ATS e triagem automatizada eram pouco transparentes para quem estava se candidatando.</p><h2>Solução</h2><p>A solução foi criar uma plataforma para descobrir vagas, avaliar aderência ao currículo, organizar o funil de candidaturas e apoiar a preparação para processos seletivos. O projeto também explora análise de perfil do LinkedIn e simulações inspiradas em testes usados por plataformas de recrutamento.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI.</li><li>PostgreSQL para persistência.</li><li>Scrapers e automações com Python e Selenium.</li><li>Integração com IA via Groq para análise textual.</li><li>Fluxos de notificação e apoio operacional via WhatsApp.</li></ul><h2>Principais funcionalidades</h2><ul><li>Descoberta de vagas em múltiplas plataformas.</li><li>Análise de aderência entre vaga e currículo.</li><li>Laboratório ATS para curriculos e descrições de vagas.</li><li>Funil de candidaturas com acompanhamento de status.</li><li>Ferramentas de apoio para LinkedIn e preparação de testes.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Lidar com dados heterogeneos de diferentes plataformas.</li><li>Construir uma análise útil sem transformar o score em uma promessa absoluta.</li><li>Organizar automações de candidatura com controle e revisão humana.</li><li>Conectar backend, frontend, IA e persistência em uma experiência coerente.</li></ul><h2>Aprendizados</h2><p>O projeto aprofundou minha visão sobre produto aplicado a carreira, automação de workflows, análise semantica de curriculos, APIs e construção de ferramentas que apoiam decisões sem remover o julgamento humano.</p>
-<p><img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
-<img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&amp;logo=fastapi&amp;logoColor=white" />
-<img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&amp;logo=react&amp;logoColor=61DAFB" />
-<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&amp;logo=typescript&amp;logoColor=white" />
-<img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&amp;logo=postgresql&amp;logoColor=white" />
-<img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&amp;logo=docker&amp;logoColor=white" /></p>
+    readmeHtml: `<h1>VinanceOS</h1><p><em>Estado descrito: roadmap funcional até a Fase 38 concluído. Financial Autopilot é a próxima evolução planejada. Trading permanece em ambiente de validação/PAPER_ONLY.</em></p>
+
 <h2>Visão geral</h2>
-<p>Plataforma autoral de inteligência de carreira criada como portfolio full-stack e ferramenta de uso pessoal. O projeto reune descoberta de vagas, filtro de relevância, matching, análise ATS, acompanhamento de candidaturas, automações e alertas.</p>
+<p>O VinanceOS é uma plataforma full stack para centralizar planejamento financeiro pessoal, análise de investimentos, recomendação de ativos, acompanhamento de decisões, automação e pesquisa quantitativa em um único ambiente — em vez de tratar orçamento, investimentos, monitoramento e trading como ferramentas isoladas.</p>
+<pre><code class="language-text">Receitas + Despesas → Situação financeira → Capacidade de investimento
+  → Estratégia financeira → Distribuição do capital → Seleção de mercados e ativos
+  → Plano de ação → Monitoramento e reavaliação</code></pre>
+
 <h2>Problema</h2>
+<p>Na prática, a jornada financeira costuma ficar espalhada por diferentes apps e planilhas: controle de receitas/despesas, planejamento, corretora, análise de carteira, recomendação de ativos, monitoramento, alertas, backtesting e acompanhamento manual dos resultados. A proposta do VinanceOS é concentrar essa jornada em um único ecossistema e reduzir progressivamente o número de parâmetros que o usuário precisa configurar manualmente.</p>
+
+<h2>Central de decisão de investimentos</h2>
+<p>A área <code>/investir</code> funciona como a central de decisão: visualmente simples, com o backend concentrando cálculo, regras, segurança e rastreabilidade. Cada recomendação normaliza a ação em <strong>Comprar, Aguardar ou Evitar</strong>, com oportunidade principal, quantidade e valor sugerido, saldo restante do orçamento, nível de risco, tendência, confiança, ranking, guardrails, explicações e alternativas — revisado para impedir mensagens contraditórias entre esses sinais.</p>
+
+<h2>Principais funcionalidades</h2>
+<h3>Planejamento &amp; recomendação</h3>
 <ul>
-<li>Busca manual em múltiplas plataformas.</li>
-<li>Falta de criterio consistente para relevância e matching.</li>
-<li>Curriculos e vagas avaliados sem contexto.</li>
-<li>Acompanhamento de candidaturas disperso.</li>
+<li><strong>Budget Advisor</strong> — recomenda a melhor utilização de um orçamento disponível sem ultrapassá-lo.</li>
+<li><strong>Recommendation Engine</strong> — combina perfil do investidor, risco, liquidez, tendência/momentum, guardrails, orçamento e ranking relativo; não depende de um único score.</li>
+<li><strong>Recommendation Score Engine</strong> — score consolidado que evita escolha baseada apenas em retorno potencial.</li>
+<li><strong>Investor Profile Advisor</strong> — perfis Conservador, Moderado e Agressivo, cada um com pesos e interpretação próprios.</li>
+<li><strong>Guardrails financeiros</strong> — camada de segurança que classifica oportunidades e registra risco/razões antes de promovê-las ao usuário.</li>
+<li><strong>Trend &amp; Momentum Engine</strong> — retornos em 1/7/30/90/180/365 dias, volatilidade, momentum score e classificação de tendência.</li>
+<li><strong>Explanation Engine</strong> — explicação estruturada por decisão (perfil, risco, liquidez, tendência, orçamento, ranking).</li>
 </ul>
-<h2>Solução</h2>
-<p>Applymize organiza o fluxo de candidatura em uma única experiência: encontrar vagas, avaliar aderência, acompanhar status e apoiar próximos passos com automação e IA contextual.</p>
-<p><a href="https://applymize.netlify.app">Site público</a></p>
+<h3>Auditoria, histórico &amp; monitoramento</h3>
+<ul>
+<li><strong>Auditoria por decision_id/correlation_id</strong> — rastreamento ponta a ponta com snapshots imutáveis; regras futuras não recalculam decisões históricas.</li>
+<li><strong>Histórico de decisões</strong> — consulta autenticada e isolada por usuário.</li>
+<li><strong>Avaliação posterior das recomendações</strong> — mede retorno, MFE/MAE e classificação do resultado em 1/7/30 dias após cada decisão.</li>
+<li><strong>Análise de calibração</strong> — verifica se score/confiança mais altos realmente antecedem melhor comportamento, segmentado por horizonte, ativo, ação e perfil.</li>
+<li><strong>Monitoramento automático e alertas</strong> — mudança de recomendação, nova oportunidade, variação de score/confiança/risco, com cooldown, deduplicação e proteção contra retries duplicados.</li>
+<li><strong>Automação com Celery + Redis</strong> — avaliação periódica de performance, monitoramento de subscriptions e tarefas recorrentes fora do ciclo de requisição.</li>
+</ul>
+<h3>Pesquisa quantitativa &amp; trading (PAPER_ONLY)</h3>
+<p>Ecossistema separado da carteira de longo prazo, criado para pesquisa, validação e simulação antes de qualquer uso de capital real:</p>
+<pre><code class="language-text">Dados de Mercado → Feature Store V2 → Target Engine V2
+  → ML Engine V2 → Prediction Engine V2 → Backtesting V2
+  → Research V2 → Validation Campaign V2 → Paper Trading V2</code></pre>
+<ul>
+<li><strong>Feature Store V2</strong> — dezenas de variáveis derivadas de preço, volume, volatilidade, médias, momentum e indicadores técnicos, com processamento incremental e idempotência.</li>
+<li><strong>Target Engine V2</strong> — alvos de treinamento (direção, take profit, stop loss, horizonte) versionados para reprodutibilidade.</li>
+<li><strong>ML Engine V2</strong> — Logistic Regression, Random Forest, Extra Trees, HistGradientBoosting e XGBoost, com model registry, calibração e artifacts versionados.</li>
+<li><strong>Prediction Engine V2</strong> — transforma probabilidades em decisão, com checagens contra features ausentes, NaN, leakage e incompatibilidade de versão.</li>
+<li><strong>Backtesting V2</strong> — reescrito após auditoria encontrar uma contaminação temporal em versão anterior; hoje processa cada candle de forma causal, validando integridade temporal e ordem sequencial das posições.</li>
+<li><strong>Walk-Forward Validation</strong> — múltiplas janelas de treino/validação/teste para medir estabilidade fora da amostra.</li>
+<li><strong>Research Engine V2</strong> — robustez e sensibilidade via Monte Carlo, bootstrap e stability heatmaps.</li>
+<li><strong>Validation Campaign V2</strong> — 100 combinações de experimentos × 5 ativos × 5 modelos × múltiplos targets, com 150 janelas walk-forward. O sistema é capaz de <strong>reprovar a própria estratégia</strong> quando a robustez OOS é insuficiente.</li>
+<li><strong>Paper Trading V2</strong> — simula capital, caixa, posições, P&amp;L, drawdown, spread, slippage, fees e position sizing, sem dinheiro real.</li>
+</ul>
+
+<h2>Segurança, QA &amp; production readiness</h2>
+<p>No fechamento do roadmap funcional até a Fase 38, o projeto passou por auditoria ampla de backend, frontend, trading, segurança, Docker, banco, migrations e E2E, além de lint, typecheck e build de produção. Resultado: <strong>CONDITIONALLY_READY</strong> — adequado para uso local/privado e piloto controlado, com pendências para exposição pública irrestrita.</p>
+<ul>
+<li>Suíte de QA canônica: <strong>629/629 testes aprovados</strong>, 0 falhas, 0 skipped.</li>
+<li>Autenticação, ownership e proteção contra IDOR.</li>
+<li>CSP, CORS seguro, anti-framing, nosniff e Permissions Policy.</li>
+<li>Vulnerabilidades de frontend reduzidas de 16 para 0.</li>
+<li>Backend, worker e Beat rodando como usuário non-root (UID/GID 10001).</li>
+<li>PostgreSQL e Redis sem publicação direta de portas no host.</li>
+<li>Imagens Python reduzidas de ~2,47 GB para ~1,02 GB.</li>
+<li>PostgreSQL + Alembic com constraints/índices de ownership e idempotência; componentes SQLite legados em migração/aposentadoria consciente, sem conversões inseguras.</li>
+</ul>
+<p><em>Filosofia de confiabilidade: se faltarem dados, uma fonte falhar ou a confiança for insuficiente, a arquitetura declara a limitação em vez de devolver uma recomendação aparentemente precisa.</em></p>
+
 <h2>Arquitetura</h2>
-<pre><code class="language-mermaid">flowchart TD
-  U[Usuário] --&gt; F[Frontend React]
-  F --&gt; A[FastAPI]
-  A --&gt; D[PostgreSQL]
-  A --&gt; I[Intelligence / ATS]
-  A --&gt; AU[Automation]
-  AU --&gt; N[WhatsApp / Alerts]
-  I --&gt; S[Scoring / Matching]
-  D --&gt; T[Tracking / History]
-</code></pre>
-<h2>Tecnologias</h2>
-<p>Python, FastAPI, PostgreSQL, React, Vite, TypeScript, Docker Compose, Selenium, Groq API.</p>
-<h2>Funcionalidades</h2>
 <ul>
-<li>Descoberta de vagas em múltiplas plataformas.</li>
-<li>Matching e scoring de aderência.</li>
-<li>Laboratório ATS para PDF, DOCX, TXT e texto colado.</li>
-<li>Demo pública interativa.</li>
-<li>IA contextual em função serverless.</li>
-<li>Auto-candidatura e funil Kanban persistente.</li>
-<li>Integração pessoal com WhatsApp.</li>
+<li>Frontend em React + TypeScript, com dark mode, responsividade (testado em 390px/320px), estados de loading/erro/vazio/sucesso e proteção de rota.</li>
+<li>Backend em FastAPI, com processamento assíncrono via Redis e Celery (Worker + Beat) para tarefas recorrentes.</li>
+<li>PostgreSQL + Alembic para dados transacionais.</li>
+<li>Docker, com hardening de containers e imagens.</li>
 </ul>
-<h2>Demonstração</h2>
+
+<h2>Stack</h2>
+<p>Python · FastAPI · PostgreSQL · React · TypeScript · Redis · Celery · Docker · scikit-learn · XGBoost</p>
+
+<h2>Principais desafios técnicos</h2>
 <ul>
-<li>Demo pública: <a href="https://applymize.netlify.app">applymize.netlify.app</a></li>
-<li>Laboratório ATS: rota pública da demo</li>
+<li>Corrigir uma contaminação temporal (look-ahead) encontrada por auditoria interna no motor de backtesting.</li>
+<li>Separar claramente orientação/educação de recomendação financeira definitiva, sem prometer retorno.</li>
+<li>Fazer o sistema reconhecer e declarar quando uma decisão não tem robustez suficiente, em vez de sempre responder algo.</li>
+<li>Migrar componentes legados em SQLite sem conversões inseguras, mantendo compatibilidade com consumidores síncronos.</li>
+<li>Orquestrar múltiplos engines (feature, target, ML, prediction, backtest, research, validation) mantendo versionamento e reprodutibilidade.</li>
 </ul>
-<h2>Como executar</h2>
-<pre><code class="language-bash">cp .env.example .env
-docker compose up -d --build
-</code></pre>
-<p>Frontend local:</p>
-<pre><code class="language-bash">cd frontend
-npm ci
-npm run dev
-</code></pre>
-<h2>Estrutura do projeto</h2>
-<pre><code class="language-text">backend/       API e domínio
-frontend/      UI React
-automation/    automações
-intelligence/  scoring e IA
-docs/          branding e documentação
-tests/         testes automatizados
-assets/demo/   screenshots e GIFs
-</code></pre>
-<h2>Roadmap</h2>
+
+<h2>Aprendizados</h2>
+<p>O projeto consolidou aprendizados sobre arquitetura full stack orientada a auditoria, causalidade temporal em séries financeiras, validação estatística fora da amostra (walk-forward, Monte Carlo, bootstrap), model registry e ML Ops, e sobre desenhar um sistema que sabe dizer "não sei" quando a robustez não é suficiente.</p>
+
+<h2>Roadmap — Financial Autopilot (planejado)</h2>
+<p>A próxima evolução planejada conecta automaticamente a situação financeira do usuário aos módulos já existentes de recomendação, monitoramento e investimentos — reduzindo progressivamente quantos parâmetros o usuário precisa informar manualmente:</p>
+<pre><code class="language-text">Receitas + Despesas → Financial State
+  → Política financeira dinâmica → Capacidade real de investimento
+  → Distribuição entre classes → Seleção de ativos
+  → Plano de ação → Monitoramento automático → Reavaliação e alertas</code></pre>
+<p>Também está planejado suporte a <strong>contexto familiar</strong> (usuário, cônjuge e household), distinguindo receitas/despesas/patrimônio individuais dos compartilhados, sem presumir que renda, patrimônio ou risco sejam iguais entre os membros.</p>
+
+<h2>Papel no projeto</h2>
+<p>Idealizador e desenvolvedor full stack: concepção do produto e roadmap, arquitetura de software, modelagem de dados, backend e APIs, frontend e UX, Recommendation Engine, engenharia de dados e pipelines, Machine Learning, backtesting e validação quantitativa, observabilidade/auditoria, Docker e infraestrutura, testes e QA.</p>
+
+<h2>Segurança — boas práticas do repositório</h2>
 <ul>
-<li>Adicionar GIFs curtos das jornadas principais.</li>
-<li>Expandir explicabilidade de matching e ATS.</li>
-<li>Evoluir observabilidade das automações.</li>
+<li>Nunca versionar <code>.env</code> real ou chaves de API.</li>
+<li>Nunca usar <code>SECRET_KEY</code> de exemplo em produção — gerar uma forte com <code>openssl rand -hex 32</code> ou equivalente.</li>
+<li>Em <code>ENVIRONMENT=production</code>, o backend bloqueia <code>SECRET_KEY</code> vazia, curta ou com marcadores inseguros.</li>
 </ul>
-<h2>Principais aprendizados</h2>
-<ul>
-<li>Arquitetura em camadas</li>
-<li>APIs REST</li>
-<li>Docker</li>
-<li>PostgreSQL</li>
-<li>FastAPI</li>
-<li>React</li>
-<li>Automações</li>
-<li>Engenharia de Dados</li>
-</ul>
-<h2>Licenca</h2>
+
+<h2>Licença</h2>
 <p>MIT.</p>`
   },
   {
@@ -380,7 +185,7 @@ assets/demo/   screenshots e GIFs
     image: "images/footballdecisionlab.png",
     gallery: ["gallery/footballdecisionlab/footballdecisionlab-07.webp", "gallery/footballdecisionlab/footballdecisionlab-08.webp", "gallery/footballdecisionlab/footballdecisionlab-09.webp", "gallery/footballdecisionlab/footballdecisionlab-10.webp", "gallery/footballdecisionlab/footballdecisionlab-11.webp", "gallery/footballdecisionlab/footballdecisionlab-02.webp", "gallery/footballdecisionlab/footballdecisionlab-05.webp", "gallery/footballdecisionlab/footballdecisionlab-01.webp", "gallery/footballdecisionlab/footballdecisionlab-03.webp", "gallery/footballdecisionlab/footballdecisionlab-04.webp", "gallery/footballdecisionlab/footballdecisionlab-06.webp"],
     readmeHtml: `<h1>Football Decision Lab</h1>
-<h2>Origem do projeto</h2><p>O Football Decision Lab nasceu da combinação entre interesse por esportes e a percepção de que decisões em apostas esportivas eram frequentemente tomadas sem base estatística suficiente. A ideia evoluiu para um laboratório de pesquisa, não para uma promessa de previsão de resultados.</p><h2>Problema</h2><p>O problema era avaliar estratégias com dados incompletos, sem validação temporal clara e sem separar o que foi aprendido no passado do que poderia ser testado prospectivamente.</p><h2>Solução</h2><p>A solução foi estruturar um pipeline de pesquisa com coleta, validação temporal, feature engineering, backtesting, congelamento de modelo e operação em ambiente paper. Quando houver ROI calculado, ele deve ser interpretado apenas como resultado de teste simulado, não como garantia de retorno real.</p><h2>Arquitetura</h2><ul><li>Pipeline em Python para coleta, normalização e validação.</li><li>Pandas e bibliotecas de Machine Learning para features e modelos.</li><li>Backtesting com separação temporal.</li><li>Congelamento de modelo champion com hash.</li><li>Captura pre-jogo e settlement em modo paper.</li><li>Site estático para apresentação e documentação.</li></ul><h2>Principais funcionalidades</h2><ul><li>Coleta e preparação de jogos e odds.</li><li>Validação temporal para reduzir risco de data leakage.</li><li>Engenharia de atributos para análise quantitativa.</li><li>Backtesting e avaliação de calibração.</li><li>Operação prospectiva simulada com controle de ciclo.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Evitar vazamento temporal entre treino, backtest e operação simulada.</li><li>Separar hipótese estatística de conclusão operacional.</li><li>Organizar governanca entre modelos champion e challenger.</li><li>Manter rastreabilidade de sinais e resultados liquidados.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre validação temporal, backtesting, calibração, governanca de modelos e a importância de comunicar incerteza de forma honesta.</p>
+<h2>Origem do projeto</h2><p>O Football Decision Lab nasceu da combinação entre interesse por esportes e a percepção de que decisões em apostas esportivas eram frequentemente tomadas sem base estatística suficiente. A ideia evoluiu para um laboratório de pesquisa, não para uma promessa de previsão de resultados.</p><h2>Problema</h2><p>O problema era avaliar estratégias com dados incompletos, sem validação temporal clara e sem separar o que foi aprendido no passado do que poderia ser testado prospectivamente.</p><h2>Solução</h2><p>A solução foi estruturar um pipeline de pesquisa com coleta, validação temporal, feature engineering, backtesting, congelamento de modelo e operação em ambiente paper. Quando houver ROI calculado, ele deve ser interpretado apenas como resultado de teste simulado, não como garantia de retorno real.</p><h2>Arquitetura</h2><ul><li>Pipeline em Python para coleta, normalização e validação.</li><li>Pandas e bibliotecas de Machine Learning para features e modelos.</li><li>Backtesting com separação temporal.</li><li>Congelamento de modelo champion com hash.</li><li>Captura pré-jogo e settlement em modo paper.</li><li>Site estático para apresentação e documentação.</li></ul><h2>Principais funcionalidades</h2><ul><li>Coleta e preparação de jogos e odds.</li><li>Validação temporal para reduzir risco de data leakage.</li><li>Engenharia de atributos para análise quantitativa.</li><li>Backtesting e avaliação de calibração.</li><li>Operação prospectiva simulada com controle de ciclo.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Evitar vazamento temporal entre treino, backtest e operação simulada.</li><li>Separar hipótese estatística de conclusão operacional.</li><li>Organizar governança entre modelos champion e challenger.</li><li>Manter rastreabilidade de sinais e resultados liquidados.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre validação temporal, backtesting, calibração, governança de modelos e a importância de comunicar incerteza de forma honesta.</p>
 <p>Pipeline local de pesquisa e operação simulada para mercados de futebol. O
 projeto coleta jogos e odds, valida dados no tempo, gera features, roda
 backtests, congela modelos, captura entradas pré-jogo e liquida resultados em
@@ -560,10 +365,10 @@ Qualquer promoção exige revisão humana, validação temporal e abertura de um
 <code>cycle_id</code>.</p>
 <h2>Documentação de continuidade</h2>
 <ul>
-<li><a href="OPERACAO_PAPER.md">Operação paper</a></li>
-<li><a href="CADERNO_CONTINUIDADE.md">Caderno de continuidade</a></li>
-<li><a href="04_ml/RETRAINING_POLICY.md">Política de retreinamento</a></li>
-<li><a href="04_ml/README_SETTLEMENT_FLASHSCORE.md">Liquidação pelo Flashscore</a></li>
+<li><a href="https://github.com/vinmedrado/football-decision-lab/blob/main/OPERACAO_PAPER.md">Operação paper</a></li>
+<li><a href="https://github.com/vinmedrado/football-decision-lab/blob/main/CADERNO_CONTINUIDADE.md">Caderno de continuidade</a></li>
+<li><a href="https://github.com/vinmedrado/football-decision-lab/blob/main/04_ml/RETRAINING_POLICY.md">Política de retreinamento</a></li>
+<li><a href="https://github.com/vinmedrado/football-decision-lab/blob/main/04_ml/README_SETTLEMENT_FLASHSCORE.md">Liquidação pelo Flashscore</a></li>
 </ul>
 <h2>Licença</h2>
 <p>MIT.</p>
@@ -689,7 +494,7 @@ python scripts/privacy_cleanup.py
 python scripts/privacy_cleanup.py --apply
 </code></pre>
 <p>Produção exige um canal privado em <code>PRIVACY_CONTACT_EMAIL</code>. Consulte o
-<a href="PRIVACY.md">Aviso de Privacidade</a> e a
+<a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/PRIVACY.md">Aviso de Privacidade</a> e a
 <a href="https://github.com/vinmedrado/marketplace-seller-platform/blob/main/docs/LGPD.md">Governança LGPD</a>. Esses controles apoiam conformidade, mas não
 substituem decisões do controlador, contratos e avaliação jurídica.</p>
 <h2>Organização</h2>
@@ -764,6 +569,114 @@ estão documentados em <a href="https://github.com/vinmedrado/marketplace-seller
 <p>MIT.</p>`
   },
   {
+    id: "applymize",
+    title: "Applymize",
+    flagship: false,
+    track: "automação",
+    pill: "Automação",
+    category: "Automação de Candidaturas",
+    year: "2025",
+    status: "Demo pública · 6 integrações ativas",
+    flow: ["VAGAS", "COLETA", "MATCHING", "ATS", "AUTOMAÇÃO", "WHATSAPP"],
+    desc: "Candidatar-se em várias vagas manualmente toma tempo e é repetitivo. O Applymize automatiza esse processo: busca simultânea em 6 plataformas de vagas, remove duplicadas e usa IA (LLaMA 3.3 via Groq) pra pontuar a aderência de cada vaga e apontar lacunas do currículo.",
+    highlight: "Auto-candidatura via Selenium com funil Kanban persistente.",
+    results: [
+      "Scraping simultâneo em 6 plataformas de vagas",
+      "Score de compatibilidade gerado por IA (LLaMA 3.3 70B)",
+      "Auto-candidatura automatizada via Selenium"
+    ],
+    stack: ["Python", "FastAPI", "React", "PostgreSQL", "Groq API", "Selenium"],
+    link: "https://github.com/vinmedrado/applymize",
+    demo: "https://applymize.netlify.app",
+    image: "gallery/applymize/applymize-02.webp",
+    gallery: ["gallery/applymize/applymize-02.webp", "gallery/applymize/applymize-01.webp", "gallery/applymize/applymize-03.webp", "gallery/applymize/applymize-04.webp", "gallery/applymize/applymize-05.webp", "gallery/applymize/applymize-06.webp", "gallery/applymize/applymize-07.webp", "gallery/applymize/applymize-08.webp"],
+    readmeHtml: `<h1>Applymize</h1>
+<h2>Origem do projeto</h2><p>O Applymize nasceu durante meu período de busca por emprego. Ao acompanhar vagas em várias plataformas, percebi que parte relevante do processo era repetitiva: procurar oportunidades, comparar requisitos com meu currículo, organizar candidaturas e entender onde meu perfil estava mais ou menos aderente.</p><h2>Problema</h2><p>A busca manual consumia tempo e dificultava priorizar vagas realmente compatíveis. Além disso, conceitos de ATS e triagem automatizada eram pouco transparentes para quem estava se candidatando.</p><h2>Solução</h2><p>A solução foi criar uma plataforma para descobrir vagas, avaliar aderência ao currículo, organizar o funil de candidaturas e apoiar a preparação para processos seletivos. O projeto também explora análise de perfil do LinkedIn e simulações inspiradas em testes usados por plataformas de recrutamento.</p><h2>Arquitetura</h2><ul><li>Frontend em React e TypeScript.</li><li>Backend em FastAPI.</li><li>PostgreSQL para persistência.</li><li>Scrapers e automações com Python e Selenium.</li><li>Integração com IA via Groq para análise textual.</li><li>Fluxos de notificação e apoio operacional via WhatsApp.</li></ul><h2>Principais funcionalidades</h2><ul><li>Descoberta de vagas em múltiplas plataformas.</li><li>Análise de aderência entre vaga e currículo.</li><li>Laboratório ATS para currículos e descrições de vagas.</li><li>Funil de candidaturas com acompanhamento de status.</li><li>Ferramentas de apoio para LinkedIn e preparação de testes.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Lidar com dados heterogêneos de diferentes plataformas.</li><li>Construir uma análise útil sem transformar o score em uma promessa absoluta.</li><li>Organizar automações de candidatura com controle e revisão humana.</li><li>Conectar backend, frontend, IA e persistência em uma experiência coerente.</li></ul><h2>Aprendizados</h2><p>O projeto aprofundou minha visão sobre produto aplicado a carreira, automação de workflows, análise semântica de currículos, APIs e construção de ferramentas que apoiam decisões sem remover o julgamento humano.</p>
+<p><img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+<img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&amp;logo=fastapi&amp;logoColor=white" />
+<img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&amp;logo=react&amp;logoColor=61DAFB" />
+<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&amp;logo=typescript&amp;logoColor=white" />
+<img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&amp;logo=postgresql&amp;logoColor=white" />
+<img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&amp;logo=docker&amp;logoColor=white" /></p>
+<h2>Visão geral</h2>
+<p>Plataforma autoral de inteligência de carreira criada como portfólio full-stack e ferramenta de uso pessoal. O projeto reúne descoberta de vagas, filtro de relevância, matching, análise ATS, acompanhamento de candidaturas, automações e alertas.</p>
+<h2>Problema</h2>
+<ul>
+<li>Busca manual em múltiplas plataformas.</li>
+<li>Falta de critério consistente para relevância e matching.</li>
+<li>Currículos e vagas avaliados sem contexto.</li>
+<li>Acompanhamento de candidaturas disperso.</li>
+</ul>
+<h2>Solução</h2>
+<p>Applymize organiza o fluxo de candidatura em uma única experiência: encontrar vagas, avaliar aderência, acompanhar status e apoiar próximos passos com automação e IA contextual.</p>
+<p><a href="https://applymize.netlify.app">Site público</a></p>
+<h2>Arquitetura</h2>
+<pre><code class="language-mermaid">flowchart TD
+  U[Usuário] --&gt; F[Frontend React]
+  F --&gt; A[FastAPI]
+  A --&gt; D[PostgreSQL]
+  A --&gt; I[Intelligence / ATS]
+  A --&gt; AU[Automation]
+  AU --&gt; N[WhatsApp / Alerts]
+  I --&gt; S[Scoring / Matching]
+  D --&gt; T[Tracking / History]
+</code></pre>
+<h2>Tecnologias</h2>
+<p>Python, FastAPI, PostgreSQL, React, Vite, TypeScript, Docker Compose, Selenium, Groq API.</p>
+<h2>Funcionalidades</h2>
+<ul>
+<li>Descoberta de vagas em múltiplas plataformas.</li>
+<li>Matching e scoring de aderência.</li>
+<li>Laboratório ATS para PDF, DOCX, TXT e texto colado.</li>
+<li>Demo pública interativa.</li>
+<li>IA contextual em função serverless.</li>
+<li>Auto-candidatura e funil Kanban persistente.</li>
+<li>Integração pessoal com WhatsApp.</li>
+</ul>
+<h2>Demonstração</h2>
+<ul>
+<li>Demo pública: <a href="https://applymize.netlify.app">applymize.netlify.app</a></li>
+<li>Laboratório ATS: rota pública da demo</li>
+</ul>
+<h2>Como executar</h2>
+<pre><code class="language-bash">cp .env.example .env
+docker compose up -d --build
+</code></pre>
+<p>Frontend local:</p>
+<pre><code class="language-bash">cd frontend
+npm ci
+npm run dev
+</code></pre>
+<h2>Estrutura do projeto</h2>
+<pre><code class="language-text">backend/       API e domínio
+frontend/      UI React
+automation/    automações
+intelligence/  scoring e IA
+docs/          branding e documentação
+tests/         testes automatizados
+assets/demo/   screenshots e GIFs
+</code></pre>
+<h2>Roadmap</h2>
+<ul>
+<li>Adicionar GIFs curtos das jornadas principais.</li>
+<li>Expandir explicabilidade de matching e ATS.</li>
+<li>Evoluir observabilidade das automações.</li>
+</ul>
+<h2>Principais aprendizados</h2>
+<ul>
+<li>Arquitetura em camadas</li>
+<li>APIs REST</li>
+<li>Docker</li>
+<li>PostgreSQL</li>
+<li>FastAPI</li>
+<li>React</li>
+<li>Automações</li>
+<li>Engenharia de Dados</li>
+</ul>
+<h2>Licenca</h2>
+<p>MIT.</p>`
+  },
+  {
     id: "lumyra",
     title: "Lumyra",
     flagship: false,
@@ -786,7 +699,7 @@ estão documentados em <a href="https://github.com/vinmedrado/marketplace-seller
     image: "images/lumyra.png",
     gallery: ["gallery/lumyra/lumyra-01.webp", "gallery/lumyra/lumyra-02.webp", "gallery/lumyra/lumyra-03.webp", "gallery/lumyra/lumyra-04.webp", "gallery/lumyra/lumyra-05.webp", "gallery/lumyra/lumyra-06.webp", "gallery/lumyra/lumyra-07.webp", "gallery/lumyra/lumyra-08.webp", "gallery/lumyra/lumyra-09.webp", "gallery/lumyra/lumyra-10.webp", "gallery/lumyra/lumyra-11.webp", "gallery/lumyra/lumyra-12.webp", "gallery/lumyra/lumyra-13.webp", "gallery/lumyra/lumyra-14.webp"],
     readmeHtml: `<h1>Lumyra</h1>
-<h2>Origem do projeto</h2><p>O Lumyra nasceu durante a organização do meu casamento. Ao comparar soluções existentes, percebi que muitas plataformas eram limitadas para quem queria uma experiência mais personalizada, organizada e premium para convidados, noivos e assessorias.</p><h2>Problema</h2><p>Eventos envolvem informações, confirmações, listas, comunicação e detalhes de experiência. Quando esses pontos ficam espalhados, a organização se torna mais trabalhosa e a jornada do convidado perde qualidade.</p><h2>Solução</h2><p>A solução foi projetar uma plataforma de eventos com foco em personalização, gerenciamento completo e experiência visual mais cuidadosa, indo além de uma pagina simples de convite.</p><h2>Arquitetura</h2><ul><li>Frontend para experiência dos convidados e painel do evento.</li><li>Backend para organização de dados do evento.</li><li>Banco de dados para convidados, confirmações e configurações.</li><li>Deploy web para acesso público.</li><li>Base para integrações futuras com comunicação e gestão de fornecedores.</li></ul><h2>Principais funcionalidades</h2><ul><li>Pagina personalizada do evento.</li><li>Gerenciamento de convidados e confirmações.</li><li>Experiência visual premium para noivos e convidados.</li><li>Estrutura para assessorias acompanharem informações do evento.</li><li>Configurações de conteúdo e personalização.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Equilibrar experiência visual com organização operacional.</li><li>Modelar dados de convidados e confirmações.</li><li>Criar uma experiência responsiva e simples de usar.</li><li>Pensar o produto para diferentes perfis de usuário.</li></ul><h2>Aprendizados</h2><p>O projeto reforcou aprendizados sobre experiência do usuário, produto orientado a eventos, personalização e construção de plataformas que combinam operação e apresentação.</p>
+<h2>Origem do projeto</h2><p>O Lumyra nasceu durante a organização do meu casamento. Ao comparar soluções existentes, percebi que muitas plataformas eram limitadas para quem queria uma experiência mais personalizada, organizada e premium para convidados, noivos e assessorias.</p><h2>Problema</h2><p>Eventos envolvem informações, confirmações, listas, comunicação e detalhes de experiência. Quando esses pontos ficam espalhados, a organização se torna mais trabalhosa e a jornada do convidado perde qualidade.</p><h2>Solução</h2><p>A solução foi projetar uma plataforma de eventos com foco em personalização, gerenciamento completo e experiência visual mais cuidadosa, indo além de uma página simples de convite.</p><h2>Arquitetura</h2><ul><li>Frontend para experiência dos convidados e painel do evento.</li><li>Backend para organização de dados do evento.</li><li>Banco de dados para convidados, confirmações e configurações.</li><li>Deploy web para acesso público.</li><li>Base para integrações futuras com comunicação e gestão de fornecedores.</li></ul><h2>Principais funcionalidades</h2><ul><li>Página personalizada do evento.</li><li>Gerenciamento de convidados e confirmações.</li><li>Experiência visual premium para noivos e convidados.</li><li>Estrutura para assessorias acompanharem informações do evento.</li><li>Configurações de conteúdo e personalização.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Equilibrar experiência visual com organização operacional.</li><li>Modelar dados de convidados e confirmações.</li><li>Criar uma experiência responsiva e simples de usar.</li><li>Pensar o produto para diferentes perfis de usuário.</li></ul><h2>Aprendizados</h2><p>O projeto reforçou aprendizados sobre experiência do usuário, produto orientado a eventos, personalização e construção de plataformas que combinam operação e apresentação.</p>
 <p><img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&amp;logo=react&amp;logoColor=61DAFB" />
 <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&amp;logo=typescript&amp;logoColor=white" />
 <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&amp;logo=fastapi&amp;logoColor=white" />
@@ -884,7 +797,7 @@ assets/demo/    screenshots e GIFs
     title: "Meu Carro Vale",
     flagship: false,
     track: "dados",
-    pill: "Dados / ML",
+    pill: "Dados / Valuation",
     category: "Valuation Automotivo",
     year: "2026",
     status: "Demo pública · fonte + confiança exibidas",
@@ -904,7 +817,7 @@ assets/demo/    screenshots e GIFs
     pdfLabel: "ver laudo em PDF",
     gallery: ["gallery/meucarrovale/meucarrovale-01.webp", "gallery/meucarrovale/meucarrovale-02.webp", "gallery/meucarrovale/meucarrovale-03.webp", "gallery/meucarrovale/meucarrovale-04.webp"],
     readmeHtml: `<h1>Meu Carro Vale</h1>
-<h2>Origem do projeto</h2><p>O Meu Carro Vale nasceu da dificuldade em encontrar um preço justo para veículos usados. Ao observar anúncios em diferentes canais, percebi que a referência da FIPE sozinha não explicava totalmente a realidade de mercado.</p><h2>Problema</h2><p>Quem compra ou vende um veículo usado precisa comparar preço, ano, versão, quilometragem, estado e comportamento do mercado. Essas informações normalmente ficam dispersas em FIPE e marketplaces.</p><h2>Solução</h2><p>A solução foi criar uma plataforma que reune informações da FIPE e de marketplaces como OLX, Mercado Livre e Webmotors para formar uma base historica e permitir analises futuras com Machine Learning para estimativa de preços.</p><h2>Arquitetura</h2><ul><li>Frontend para consulta e apresentação de analises.</li><li>Backend para normalização, cache e regras de negócio.</li><li>Banco de dados para histórico e consultas.</li><li>Integrações com FIPE e fontes publicas de anúncios.</li><li>Base para modelos futuros de precificação.</li></ul><h2>Principais funcionalidades</h2><ul><li>Consulta de referências por veículo.</li><li>Coleta e organização de anúncios de mercado.</li><li>Construção de histórico para análise futura.</li><li>Relatórios e visualização de preço estimado.</li><li>Preparação para modelos de Machine Learning.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Normalizar dados de fontes diferentes.</li><li>Lidar com variações de versão, ano e descrição dos veículos.</li><li>Construir cache e fallback para APIs externas.</li><li>Projetar uma base útil para análise historica.</li></ul><h2>Aprendizados</h2><p>O projeto aprofundou aprendizados sobre integração de dados externos, normalização, modelagem de domínio automotivo e preparação de dados para modelos preditivos.</p>
+<h2>Origem do projeto</h2><p>O Meu Carro Vale nasceu da dificuldade em encontrar um preço justo para veículos usados. Ao observar anúncios em diferentes canais, percebi que a referência da FIPE sozinha não explicava totalmente a realidade de mercado.</p><h2>Problema</h2><p>Quem compra ou vende um veículo usado precisa comparar preço, ano, versão, quilometragem, estado e comportamento do mercado. Essas informações normalmente ficam dispersas em FIPE e marketplaces.</p><h2>Solução</h2><p>A solução foi criar uma plataforma que reúne informações da FIPE e de marketplaces como OLX, Mercado Livre e Webmotors para formar uma base histórica e permitir análises futuras com Machine Learning para estimativa de preços.</p><h2>Arquitetura</h2><ul><li>Frontend para consulta e apresentação de análises.</li><li>Backend para normalização, cache e regras de negócio.</li><li>Banco de dados para histórico e consultas.</li><li>Integrações com FIPE e fontes públicas de anúncios.</li><li>Base para modelos futuros de precificação.</li></ul><h2>Principais funcionalidades</h2><ul><li>Consulta de referências por veículo.</li><li>Coleta e organização de anúncios de mercado.</li><li>Construção de histórico para análise futura.</li><li>Relatórios e visualização de preço estimado.</li><li>Preparação para modelos de Machine Learning.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Normalizar dados de fontes diferentes.</li><li>Lidar com variações de versão, ano e descrição dos veículos.</li><li>Construir cache e fallback para APIs externas.</li><li>Projetar uma base útil para análise histórica.</li></ul><h2>Aprendizados</h2><p>O projeto aprofundou aprendizados sobre integração de dados externos, normalização, modelagem de domínio automotivo e preparação de dados para modelos preditivos.</p>
 <p><strong>Meu Carro Vale</strong> é uma plataforma SaaS de valuation automotivo inteligente para o mercado brasileiro. O produto combina FIPE local-first, dados reais de mercado, comparáveis de anúncios, dashboard premium, laudo PDF e gates de monetização para ajudar usuários a estimar o valor correto de venda de carros com mais clareza e confiança.</p>
 <blockquote>
 <p>Status: projeto disponível para demonstração local, portfólio técnico e preparação de deploy. Integrações de pagamento permanecem em modo <strong>Pagar.me-ready</strong>, sem cobrança real por padrão.</p>
@@ -1254,26 +1167,26 @@ docs/screenshots/pdf-report.png
 </p>
 
 <h1>FreelanceBot AI</h1>
-<h2>Origem do projeto</h2><p>O FreelanceBot nasceu para reduzir o tempo gasto procurando oportunidades em plataformas de freelancers. A busca manual exigia abrir várias plataformas, filtrar projetos pouco compatíveis e escrever propostas do zero repetidas vezes.</p><h2>Problema</h2><p>O problema era separar oportunidades realmente aderentes do ruido. Além disso, estimar preço, prazo e escopo de forma consistente consumia tempo antes mesmo de saber se o projeto valia uma proposta.</p><h2>Solução</h2><p>A solução foi criar um sistema local que coleta oportunidades, compara requisitos com meu perfil, calcula estimativas de preço e horas e gera propostas personalizadas para revisão humana.</p><h2>Arquitetura</h2><ul><li>Dashboard Flask para revisão e controle das oportunidades.</li><li>Scrapers com Playwright conectados ao Chrome.</li><li>SQLite para persistência local.</li><li>Base de conhecimento em YAML com perfil, serviços e cases.</li><li>Pricing Engine determinístico para preço, horas e confianca.</li><li>Integração com Groq para análise textual e apoio a proposta.</li></ul><h2>Principais funcionalidades</h2><ul><li>Coleta de oportunidades em plataformas freelance.</li><li>Matching com perfil profissional.</li><li>Classificação de categoria, complexidade e riscos.</li><li>Estimativa de preço, prazo e horas.</li><li>Geração de proposta curta, completa e PDF.</li><li>Dashboard local para revisão, copia e controle de status.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Lidar com mudancas nas interfaces das plataformas.</li><li>Evitar que IA defina preço ou prazo sem regra verificavel.</li><li>Manter o sistema útil mesmo quando algum dado vem incompleto.</li><li>Separar automação de envio automático, preservando revisão humana.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre automação com navegador, produto operacional local, geração estruturada de propostas, precificação determinística e integração de IA com regras de negócio.</p>
+<h2>Origem do projeto</h2><p>O FreelanceBot nasceu para reduzir o tempo gasto procurando oportunidades em plataformas de freelancers. A busca manual exigia abrir várias plataformas, filtrar projetos pouco compatíveis e escrever propostas do zero repetidas vezes.</p><h2>Problema</h2><p>O problema era separar oportunidades realmente aderentes do ruído. Além disso, estimar preço, prazo e escopo de forma consistente consumia tempo antes mesmo de saber se o projeto valia uma proposta.</p><h2>Solução</h2><p>A solução foi criar um sistema local que coleta oportunidades, compara requisitos com meu perfil, calcula estimativas de preço e horas e gera propostas personalizadas para revisão humana.</p><h2>Arquitetura</h2><ul><li>Dashboard Flask para revisão e controle das oportunidades.</li><li>Scrapers com Playwright conectados ao Chrome.</li><li>SQLite para persistência local.</li><li>Base de conhecimento em YAML com perfil, serviços e cases.</li><li>Pricing Engine determinístico para preço, horas e confiança.</li><li>Integração com Groq para análise textual e apoio a proposta.</li></ul><h2>Principais funcionalidades</h2><ul><li>Coleta de oportunidades em plataformas freelance.</li><li>Matching com perfil profissional.</li><li>Classificação de categoria, complexidade e riscos.</li><li>Estimativa de preço, prazo e horas.</li><li>Geração de proposta curta, completa e PDF.</li><li>Dashboard local para revisão, cópia e controle de status.</li></ul><h2>Principais desafios técnicos</h2><ul><li>Lidar com mudanças nas interfaces das plataformas.</li><li>Evitar que IA defina preço ou prazo sem regra verificável.</li><li>Manter o sistema útil mesmo quando algum dado vem incompleto.</li><li>Separar automação de envio automático, preservando revisão humana.</li></ul><h2>Aprendizados</h2><p>O projeto consolidou aprendizados sobre automação com navegador, produto operacional local, geração estruturada de propostas, precificação determinística e integração de IA com regras de negócio.</p>
 <p>Sistema local para encontrar oportunidades freelance, avaliar aderência ao perfil profissional, calcular preço/prazo e gerar propostas comerciais estruturadas para revisão humana.</p>
 <p>O projeto automatiza a triagem e a preparação da proposta, mas não envia propostas automaticamente.</p>
 <p><strong>Portfolio publicado</strong></p>
 <ul>
 <li>Landing: https://vinmedrado.github.io/freelance-bot/</li>
-<li>Demo navegavel: https://vinmedrado.github.io/freelance-bot/demo.html</li>
+<li>Demo navegável: https://vinmedrado.github.io/freelance-bot/demo.html</li>
 </ul>
 <p>A demo publicada no GitHub Pages e estática e roda 100% no navegador, com dados simulados. Ela existe para demonstrar a experiência do produto sem exigir instalação. O produto local completo roda com Python, Flask, SQLite, Playwright e integração Groq.</p>
 <h2>Por que existe</h2>
 <p>Freelancers precisam revisar muitas oportunidades em plataformas como Workana, 99Freelas e Freelancer.com antes de encontrar projetos compatíveis. Depois disso, ainda precisam entender o escopo, estimar valor, separar provas profissionais e escrever uma proposta convincente.</p>
-<p>O FreelanceBot AI reduz esse trabalho repetitivo com um pipeline local e auditavel.</p>
+<p>O FreelanceBot AI reduz esse trabalho repetitivo com um pipeline local e auditável.</p>
 <h2>O que o sistema faz</h2>
 <ol>
 <li>Coleta oportunidades nas plataformas configuradas.</li>
 <li>Filtra projetos por aderência ao perfil profissional.</li>
 <li>Classifica categoria, complexidade, riscos e perguntas de escopo.</li>
-<li>Calcula horas, faixa de preço, confianca e premissas.</li>
+<li>Calcula horas, faixa de preço, confiança e premissas.</li>
 <li>Monta estratégia comercial, proposta curta, proposta completa e PDF.</li>
-<li>Exibe tudo em um dashboard Flask para revisão, copia, download e controle de status.</li>
+<li>Exibe tudo em um dashboard Flask para revisão, cópia, download e controle de status.</li>
 </ol>
 <p>A IA via Groq e usada no fluxo de análise textual. As camadas de inteligência, estratégia, precificação, proposta estruturada, PDF e dashboard possuem fallback determinístico para visualização e revisão.</p>
 <h2>Demo de portfolio</h2>
@@ -1281,12 +1194,12 @@ docs/screenshots/pdf-report.png
 <ul>
 <li>fila de oportunidades por status;</li>
 <li>filtros por texto e categoria;</li>
-<li>seleção de projeto com diagnóstico e entregaveis;</li>
-<li>estimativa de preço, horas, prazo, confianca e risco;</li>
-<li>proposta editavel e copiavel;</li>
-<li>simulação de varredura e mudanca de status.</li>
+<li>seleção de projeto com diagnóstico e entregáveis;</li>
+<li>estimativa de preço, horas, prazo, confiança e risco;</li>
+<li>proposta editável e copiável;</li>
+<li>simulação de varredura e mudança de status.</li>
 </ul>
-<p>Essa separação evita depender de login, scraping ou banco local para uma avaliação rapida do projeto.</p>
+<p>Essa separação evita depender de login, scraping ou banco local para uma avaliação rápida do projeto.</p>
 <h2>Principais recursos</h2>
 <ul>
 <li>Scrapers com Playwright para Workana, 99Freelas e Freelancer.com.</li>
@@ -1294,7 +1207,7 @@ docs/screenshots/pdf-report.png
 <li>Base de conhecimento em YAML para serviços, experiências, cases, tecnologias, estilo, negociação e preços.</li>
 <li>Proposal Intelligence determinística para diagnóstico do projeto.</li>
 <li>Commercial Strategy para posicionamento, objeções, provas e chamada para ação.</li>
-<li>Pricing Engine determinístico com horas, valor/hora, faixa, confianca e premissas.</li>
+<li>Pricing Engine determinístico com horas, valor/hora, faixa, confiança e premissas.</li>
 <li>Proposal Generator 2.0 com proposta curta, proposta completa e estrutura preparada para PDF.</li>
 <li>PDF Generator 2.0 com layout comercial compacto e fallback legado.</li>
 <li>Dashboard Flask para revisar oportunidades, copiar propostas, baixar PDF e atualizar status.</li>
@@ -1346,7 +1259,7 @@ docs/screenshots/pdf-report.png
 </tr>
 <tr>
 <td><code>pricing_engine.py</code></td>
-<td>Calcula horas, valor/hora, preço sugerido, faixa, confianca e premissas.</td>
+<td>Calcula horas, valor/hora, preço sugerido, faixa, confiança e premissas.</td>
 </tr>
 <tr>
 <td><code>proposal_generator_v2.py</code></td>
@@ -1362,7 +1275,7 @@ docs/screenshots/pdf-report.png
 </tr>
 <tr>
 <td><code>webapp.py</code></td>
-<td>Landing, dashboard, APIs, detalhe do projeto, status, PDF e copia de propostas.</td>
+<td>Landing, dashboard, APIs, detalhe do projeto, status, PDF e cópia de propostas.</td>
 </tr>
 <tr>
 <td><code>db.py</code></td>
@@ -1394,13 +1307,13 @@ source .venv/bin/activate
 <pre><code class="language-bash">pip install -r requirements.txt
 playwright install chrome
 </code></pre>
-<p>Configure variaveis:</p>
+<p>Configure variáveis:</p>
 <pre><code class="language-bash">copy .env.example .env
 </code></pre>
 <p>No macOS/Linux:</p>
 <pre><code class="language-bash">cp .env.example .env
 </code></pre>
-<p>Principais variaveis:</p>
+<p>Principais variáveis:</p>
 <pre><code class="language-env">GROQ_API_KEY=...
 GROQ_MODEL=llama-3.3-70b-versatile
 CHROME_CDP_URL=http://127.0.0.1:9222
@@ -1454,7 +1367,7 @@ faixa inicial.</p>
 <p><img alt="Landing" src="gallery/freelancebot/freelancebot-04.webp" />
 <img alt="Dashboard da demo" src="docs/images/demo-dashboard.png" />
 <img alt="Detalhe da oportunidade" src="docs/images/demo-detail.png" />
-<img alt="Proposta editavel" src="docs/images/demo-proposal.png" /></p>
+<img alt="Proposta editável" src="docs/images/demo-proposal.png" /></p>
 <h2>Qualidade</h2>
 <p>Comandos recomendados:</p>
 <pre><code class="language-bash">pytest -q
@@ -1471,11 +1384,11 @@ python -m py_compile ai_engine.py commercial_strategy.py db.py knowledge_engine.
 <li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/proposal-generator.md">Proposal Generator</a></li>
 <li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/docs/pdf-generator.md">PDF Generator</a></li>
 <li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/ROADMAP.md">Roadmap</a></li>
-<li><a href="CHANGELOG.md">Changelog</a></li>
-<li><a href="CONTRIBUTING.md">Contributing</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/CHANGELOG.md">Changelog</a></li>
+<li><a href="https://github.com/vinmedrado/freelance-bot/blob/main/CONTRIBUTING.md">Contributing</a></li>
 </ul>
 <h2>Valor como portfolio</h2>
-<p>Este e um projeto recomendavel para portfolio porque demonstra automação, produto, dados, IA aplicada, regras deterministicicas, persistência, interface web e testes. A landing apresenta o problema e a proposta de valor; a demo permite experimentar o fluxo operacional sem instalar nada.</p>
+<p>Este é um projeto recomendável para portfólio porque demonstra automação, produto, dados, IA aplicada, regras determinísticas, persistência, interface web e testes. A landing apresenta o problema e a proposta de valor; a demo permite experimentar o fluxo operacional sem instalar nada.</p>
 <h2>Limitações e segurança</h2>
 <ul>
 <li>Scrapers dependem da estrutura das plataformas e podem exigir ajustes quando as telas mudam.</li>
@@ -1485,7 +1398,7 @@ python -m py_compile ai_engine.py commercial_strategy.py db.py knowledge_engine.
 <li>Preços e prazos são estimativas assistivas, não garantias comerciais.</li>
 </ul>
 <h2>Licenca</h2>
-<p>Distribuido sob licenca MIT. Veja <a href="LICENSE">LICENSE</a>.</p>`
+<p>Distribuido sob licenca MIT. Veja <a href="https://github.com/vinmedrado/freelance-bot/blob/main/LICENSE">LICENSE</a>.</p>`
   }
 ];
 
