@@ -5,31 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#080c11" />
   <meta name="description" content="Vinicius Medrado portfolio — Data, Automation and Systems." />
-  <title>Vinicius Medrado — Premium Terminal Workspace</title>
+  <title>Vinicius Medrado — Automation Workspace</title>
   <link rel="icon" href="icon-192.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="theme.css?v=20260923c" />
+  <link rel="stylesheet" href="theme.css?v=20260923b" />
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#home" aria-label="Go to home">
       <span class="brand-mark">VM</span>
-      <span class="brand-copy"><strong>VINICIUS MEDRADO</strong><small>premium terminal workspace</small></span>
+      <span class="brand-copy"><strong>VINICIUS MEDRADO</strong><small>AUTOMATION WORKSPACE</small></span>
     </a>
 
     <button class="command-trigger" id="commandTrigger" type="button" aria-label="Open quick search">
       <span class="search-icon">⌕</span>
-      <span>Search files, projects, stacks...</span>
+      <span>Search projects, technologies, commands...</span>
       <kbd>⌘ K</kbd>
     </button>
 
     <div class="top-status">
       <span class="status-dot"></span>
-      <span><b>workspace online</b><small>python · power bi · automation · systems</small></span>
+      <span><b>MSX International · Stellantis</b><small>Data · Automation · Power BI · Processes</small></span>
     </div>
 
     <nav class="language-switch" aria-label="Language">
@@ -40,294 +40,208 @@
     <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu">☰</button>
   </header>
 
-  <div class="app-shell" id="home">
+  <section class="upper-shell" id="home">
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-head">
-        <p>EXPLORER</p>
-        <small>vinicius.workspace</small>
-      </div>
-
-      <nav class="side-nav">
-        <a class="active" href="#about"><span>▸</span>about/profile.ts</a>
-        <a href="#terminal"><span>▸</span>automation/output.log</a>
-        <a href="#impact"><span>▸</span>impact/metrics.json</a>
-        <a href="#experience"><span>▸</span>career/experience.log</a>
-        <a href="#skills"><span>▸</span>stack/modules.yaml</a>
-        <a href="#projects"><span>▸</span>projects/repositories</a>
-        <a href="#contact"><span>▸</span>contact/readme.md</a>
-        <a href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener"><span>▸</span>cv/Vinicius_Medrado.pdf</a>
-      </nav>
-
-      <div class="side-group">
-        <p>PROJECT TREE</p>
-        <nav class="project-tree">
-          <a href="#meudia"><span>⌁</span>meu-dia.app</a>
-          <a href="#applymize"><span>⌁</span>applymize.py</a>
-          <a href="#vinance"><span>⌁</span>vinanceos.ai</a>
-          <a href="#football"><span>⌁</span>football_lab.ipynb</a>
-          <a href="https://vinmedrado.github.io/marketplace-seller-platform/" target="_blank" rel="noopener"><span>⌁</span>selleros.bi</a>
-          <a href="https://lumyra-events.netlify.app/" target="_blank" rel="noopener"><span>⌁</span>lumyra.events</a>
-          <a href="https://vinmedrado.github.io/meu-carro-vale/" target="_blank" rel="noopener"><span>⌁</span>meu-carro-vale.api</a>
+      <div class="sidebar-scroll">
+        <p class="side-label">EXPLORER</p>
+        <nav class="side-nav">
+          <a class="active" href="#home"><span>⌂</span>Home</a>
+          <a href="#skills"><span>◎</span>Stack</a>
+          <a href="#impact"><span>▤</span>Impact</a>
+          <a href="#experience"><span>▦</span>Experience</a>
+          <a href="#projects"><span>▣</span>Projects</a>
+          <a href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener"><span>▧</span>Resume</a>
+          <a href="#contact"><span>✉</span>Contact</a>
         </nav>
-      </div>
 
-      <div class="side-group side-footer">
-        <p>SYSTEM</p>
-        <div class="side-stat"><span></span> Open to opportunities</div>
-        <div class="side-stat"><span></span> Santo André / SP</div>
-        <div class="side-stat"><span></span> Data Science · Technologist</div>
+        <div class="side-divider"></div>
+        <p class="side-label">PROJECTS</p>
+        <nav class="project-tree">
+          <a href="#meudia"><span>⌁</span>Meu Dia</a>
+          <a href="#applymize"><span>⌁</span>Applymize</a>
+          <a href="#vinance"><span>⌁</span>VinanceOS</a>
+          <a href="#football"><span>⌁</span>Football Decision Lab</a>
+          <a href="https://vinmedrado.github.io/marketplace-seller-platform/" target="_blank" rel="noopener"><span>⌁</span>SellerOS</a>
+          <a href="https://vinmedrado.github.io/freelance-bot/" target="_blank" rel="noopener"><span>⌁</span>FreelanceBot AI</a>
+          <a href="https://lumyra-events.netlify.app/" target="_blank" rel="noopener"><span>⌁</span>Lumyra</a>
+          <a href="https://vinmedrado.github.io/meu-carro-vale/" target="_blank" rel="noopener"><span>⌁</span>Meu Carro Vale</a>
+        </nav>
+
+        <div class="side-divider"></div>
+        <p class="side-label">LINKS</p>
+        <a class="side-plain" href="https://github.com/vinmedrado" target="_blank" rel="noopener"><span>⌘</span>GitHub</a>
+        <a class="side-plain" href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener"><span>◈</span>LinkedIn</a>
+        <a class="side-plain" href="Vinicius_Santos_Medrado_EN.pdf" download><span>⇩</span>Downloads</a>
       </div>
     </aside>
 
-    <main class="workspace-main">
-      <div class="editor-tabs">
-        <button class="tab active" type="button">profile.ts</button>
-        <button class="tab" type="button">experience.log</button>
-        <button class="tab" type="button">projects.repo</button>
-        <button class="tab ghost" type="button">resume.pdf</button>
+    <div class="upper-main">
+      <section class="hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="shell-user">vinicius@portfolio</span>:<span class="shell-path">~</span>$ whoami</div>
+          <h1><span>VINICIUS</span><strong>MEDRADO</strong></h1>
+          <h2>Data Analyst <i>•</i> Process Automation</h2>
+          <p>6 years across the GM Brazil / Stellantis operation. Currently at MSX International, working with Python, Power BI, Power Query, SharePoint, VBA and integrations to reduce manual work and support business operations.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener"><span>▧</span>Open resume <b>→</b></a>
+            <a class="button ghost" href="#projects"><span>▦</span>Explore projects <b>→</b></a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <picture class="hero-picture">
+            <source media="(max-width: 900px)" srcset="images/hero-vinicius-automation-mobile.webp" />
+            <img src="images/hero-vinicius-automation.webp" alt="" />
+          </picture>
+          <div class="hero-shade"></div>
+        </div>
+      </section>
+
+      <section class="hero-console" aria-label="Resume and automation flow">
+        <a class="cv-panel panel" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">
+          <div class="file-line">
+            <div class="pdf-icon"><span>▤</span></div>
+            <div><strong>VINICIUS_MEDRADO_RESUME.pdf</strong><small>Updated in 2026</small></div>
+            <span class="arrow">→</span>
+          </div>
+          <div class="ready"><span></span>Ready to download</div>
+          <div class="chips"><span>Data</span><span>Automation</span><span>RPA</span><span>BI</span><span>Integrations</span></div>
+          <ul class="cv-facts">
+            <li><b>Current:</b> MSX International · Stellantis South America</li>
+            <li><b>6 years:</b> same business chain · Infosys → Conduent → MSX</li>
+            <li><b>Focus:</b> Python · ETL · Power BI · RPA · enterprise integrations</li>
+          </ul>
+        </a>
+
+        <div class="terminal-panel panel">
+          <div class="panel-tabs"><span class="active">TERMINAL</span><span>OUTPUT</span><span>DEBUG</span><span>PROBLEMS</span><b>python v3.11</b></div>
+          <div class="terminal">
+            <div class="cmd">$ python nps_daily.py</div>
+            <div class="terminal-line">[OK] Focus connected</div>
+            <div class="terminal-line">[OK] extraction completed</div>
+            <div class="terminal-line">[OK] history compared</div>
+            <div class="terminal-line">[OK] PowerPoint generated</div>
+            <div class="terminal-line">[OK] output validated</div>
+            <div class="terminal-space"></div>
+            <div>execution_time: <b>20s</b></div>
+            <div>previous_time: <b>13m</b></div>
+            <div>reduction: <em>97%</em></div>
+            <div>status: <strong>success</strong></div>
+            <div class="terminal-done">│ daily routine completed without manual intervention</div>
+        </div>
+
+        <div class="flow-panel panel">
+          <div class="flow-title">NPS DAILY PIPELINE</div>
+          <ol class="flow-list">
+            <li><span>1</span><div><b>Query Focus</b><small>operational source</small></div><i>✓</i></li>
+            <li><span>2</span><div><b>Compare history</b><small>Python / rules</small></div><i>✓</i></li>
+            <li><span>3</span><div><b>Validate output</b><small>consistency checks</small></div><i>✓</i></li>
+            <li><span>4</span><div><b>Generate report</b><small>PowerPoint</small></div><i>✓</i></li>
+            <li class="live"><span>5</span><div><b>Finish</b><small>20 seconds</small></div><i>●</i></li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <main class="page-content">
+    <section class="workspace-section skills-section" id="skills">
+      <div class="section-heading"><span><i>//</i> CORE STACK</span><p>Technologies used in automation, BI, internal products and full-stack applications.</p></div>
+      <div class="skills-strip">
+        <article><img src="images/stack-real/python.png" alt="Python"><b>Python</b><small>Automation / ETL</small></article>
+        <article><img src="images/stack-real/selenium.png" alt="Selenium"><b>Selenium</b><small>Web Automation</small></article>
+        <article><img src="images/stack-real/power-automate.png" alt="Power Automate"><b>Power Automate</b><small>Workflows / RPA</small></article>
+        <article><img src="images/stack-real/vba.png" alt="VBA"><b>VBA</b><small>Excel / Systems</small></article>
+        <article><img src="images/stack-real/power-bi.png" alt="Power BI"><b>Power BI</b><small>DAX / Modeling</small></article>
+        <article><img src="images/stack-real/sql.png" alt="SQL"><b>SQL</b><small>Data / ETL</small></article>
+        <article><img src="images/stack-real/etl.png" alt="ETL"><b>ETL</b><small>Pipelines</small></article>
+        <article><img src="images/stack-real/fastapi.png" alt="FastAPI"><b>FastAPI</b><small>Backend / APIs</small></article>
+        <article><img src="images/stack-real/postgresql.png" alt="PostgreSQL"><b>PostgreSQL</b><small>Database</small></article>
+        <article><img src="images/stack-real/docker.png" alt="Docker"><b>Docker</b><small>Infra / Deploy</small></article>
+        <article><img src="images/stack-real/machine-learning.png" alt="Machine Learning"><b>ML / OCR</b><small>IDP / Models</small></article>
       </div>
+    </section>
 
-      <section class="editor-card hero-editor" id="about">
-        <div class="card-top">
-          <span class="filename">about/profile.ts</span>
-          <span class="card-dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="hero-layout">
-          <div class="hero-code">
-            <div class="code-block">
-              <span class="line-number">1</span><code><span class="kw">const</span> <span class="var">profile</span> = {</code>
-              <span class="line-number">2</span><code>&nbsp;&nbsp;<span class="prop">name</span>: <span class="str">"Vinicius Medrado"</span>,</code>
-              <span class="line-number">3</span><code>&nbsp;&nbsp;<span class="prop">focus</span>: [<span class="str">"data"</span>, <span class="str">"automation"</span>, <span class="str">"systems"</span>],</code>
-              <span class="line-number">4</span><code>&nbsp;&nbsp;<span class="prop">currentRole</span>: <span class="str">"Data Analyst @ MSX International"</span>,</code>
-              <span class="line-number">5</span><code>&nbsp;&nbsp;<span class="prop">currentClient</span>: <span class="str">"Stellantis"</span>,</code>
-              <span class="line-number">6</span><code>&nbsp;&nbsp;<span class="prop">specialties</span>: [<span class="str">"Python"</span>, <span class="str">"Power BI"</span>, <span class="str">"Power Query"</span>, <span class="str">"SharePoint"</span>, <span class="str">"VBA"</span>],</code>
-              <span class="line-number">7</span><code>&nbsp;&nbsp;<span class="prop">objective</span>: <span class="str">"turn manual process into systems"</span></code>
-              <span class="line-number">8</span><code>};</code>
-            </div>
-
-            <div class="hero-copy-block">
-              <div class="terminal-prompt">vinicius@portfolio:~$ whoami</div>
-              <h1>Real premium<br><strong>terminal workspace</strong></h1>
-              <p>I work at the intersection of automation, data and internal systems. My focus is identifying operational bottlenecks, structuring robust flows and delivering practical efficiency gains through technology.</p>
-              <div class="hero-actions">
-                <a class="button primary" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">Open resume <b>→</b></a>
-                <a class="button ghost" href="#projects">Open projects <b>→</b></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-visual-panel">
-            <div class="visual-top">
-              <span>workspace/preview</span>
-              <small>render active</small>
-            </div>
-            <div class="hero-visual-wrap">
-              <img src="images/hero-vinicius-automation.webp" alt="Illustration of Vinicius Medrado in a data and automation setup" />
-            </div>
-            <div class="visual-bottom">
-              <div><b>active stack</b><span>python · power bi · sql · integrations</span></div>
-              <div><b>mode</b><span>automation workspace</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="split-grid">
-        <section class="editor-card" id="terminal">
-          <div class="card-top">
-            <span class="filename">automation/output.log</span>
-            <span class="card-dots"><i></i><i></i><i></i></span>
-          </div>
-          <div class="terminal-box">
-            <div class="terminal-head">
-              <span class="term-title">bash</span>
-              <small>live execution</small>
-            </div>
-            <div class="terminal-lines">
-              <div><span class="prompt">$</span> run pipeline nps_daily</div>
-              <div class="ok">[ok] source connected</div>
-              <div class="ok">[ok] dataset extracted</div>
-              <div class="ok">[ok] transformation executed</div>
-              <div class="ok">[ok] sharepoint synced</div>
-              <div class="ok">[ok] power bi published</div>
-              <div class="space"></div>
-              <div>previous_process = <b>13 min</b></div>
-              <div>current_process = <b>20 s</b></div>
-              <div>operational_gain = <em>97%</em></div>
-              <div class="cursor-line">final status: completed successfully<span class="cursor"></span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="editor-card" id="impact">
-          <div class="card-top">
-            <span class="filename">impact/metrics.json</span>
-            <span class="card-dots"><i></i><i></i><i></i></span>
-          </div>
-          <div class="metrics-panel">
-            <article><small>time_reduction</small><strong>97%</strong><span>time reduction in operational routines</span></article>
-            <article><small>rework_reduction</small><strong>81%</strong><span>less rework in automated processes</span></article>
-            <article><small>processed_records</small><strong>1M+</strong><span>records processed and consolidated</span></article>
-            <article><small>automation_volume</small><strong>5,000+</strong><span>automated interactions</span></article>
-          </div>
-        </section>
+    <section class="workspace-section impact-section" id="impact">
+      <div class="section-heading"><span><i>//</i> IMPACT</span><p>Numbers from the resume — tied to real deliveries.</p></div>
+      <div class="impact-grid">
+        <article><div class="metric-icon">◷</div><div><strong>97%</strong><span>time reduction</span></div><div class="bars"><i></i><i></i><i></i><i></i></div></article>
+        <article><div class="metric-icon">⚙</div><div><strong>81%</strong><span>less rework</span></div><div class="bars"><i></i><i></i><i></i><i></i></div></article>
+        <article><div class="metric-icon">▤</div><div><strong>20,000+</strong><span>import invoices processed</span></div><div class="bars"><i></i><i></i><i></i><i></i></div></article>
+        <article><div class="metric-icon">ϟ</div><div><strong>280</strong><span>automated tests passed</span></div><div class="bars"><i></i><i></i><i></i><i></i></div></article>
       </div>
+    </section>
 
-      <section class="editor-card" id="experience">
-        <div class="card-top">
-          <span class="filename">career/experience.log</span>
-          <span class="card-dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="experience-log">
-          <article>
-            <div class="log-date">2026 — current</div>
-            <div class="log-body">
-              <h3>MSX International · Data Analyst</h3>
-              <p>Client: Stellantis. Work involving NPS extraction, Dataflows, SharePoint, Power Query, DAX and Power BI Service, plus process improvement and technical documentation.</p>
-              <ul><li>Dataflow fixes after source changes</li><li>dataset treatment and column mapping</li><li>Power BI Service publication and maintenance</li></ul>
-            </div>
-          </article>
-          <article>
-            <div class="log-date">2025 — 2026</div>
-            <div class="log-body">
-              <h3>Freelancer / Authorial projects</h3>
-              <p>Development of systems, automations, digital products and web apps, from concept to deployment and portfolio presentation.</p>
-              <ul><li>Python and Selenium automations</li><li>dashboards, ETL and data workflows</li><li>full-stack products and real-use PWAs</li></ul>
-            </div>
-          </article>
-          <article>
-            <div class="log-date">history</div>
-            <div class="log-body compact">
-              <h3>Infosys BPM · Conduent</h3>
-              <p>Operational and corporate background that strengthened process reading, execution discipline and practical awareness of where automation creates value.</p>
-            </div>
-          </article>
-        </div>
-      </section>
+    <section class="workspace-section experience-section" id="experience">
+      <div class="section-heading"><span><i>//</i> EXPERIENCE.LOG</span><p>Full professional history — including the complete progression.</p></div>
+      <div class="experience-terminal">
+        <div class="experience-terminal-head"><span>work_history.log</span><div><i></i><i></i><i></i></div></div>
+        <article class="log-entry current"><div class="log-line">01</div><div class="log-logo"><img src="images/msx.png" alt="MSX International"></div><div class="log-content"><div class="log-title"><strong>MSX International</strong><span>Data Analyst · Stellantis South America</span><time>Jun/2026 — current</time></div><ul><li><b>97%</b> reduction in daily NPS report execution: 13 min → 20 s with Python.</li><li>Recovered 4 Customer Experience scorecards; Power BI model reduced from <b>158 MB → 56 MB</b>.</li><li>Automated pre-load validation before BR + South America Dataflows and semantic models.</li></ul></div></article>
+        <article class="log-entry"><div class="log-line">02</div><div class="log-logo terminal-badge">{ }</div><div class="log-content"><div class="log-title"><strong>Automation & Development</strong><span>Freelancer</span><time>Feb/2026 — Jun/2026</time></div><ul><li>On-demand automations with Google Apps Script, VBA, OCR and Mercado Livre API integration.</li></ul></div></article>
+        <article class="log-entry"><div class="log-line">03</div><div class="log-logo"><img src="images/conduent.png" alt="Conduent"></div><div class="log-content"><div class="log-title"><strong>Conduent</strong><span>GM Brazil / Stellantis · progression to Direct Sales Administrative Analyst</span><time>Apr/2021 — Feb/2026</time></div><ul><li><b>5,000+</b> invoices processed in one month with zero SAP errors.</li><li>Access/VBA system integrated with Outlook and SAP-MM.</li><li><b>81%</b> reduction in process validation: 3 min → 34 s with Python + Oracle CRM + OCR/IDP + Outlook.</li><li><b>280 automated tests</b> passed in Process Validation and document intelligence.</li></ul></div></article>
+        <article class="log-entry"><div class="log-line">04</div><div class="log-logo"><img src="images/infosys.png" alt="Infosys"></div><div class="log-content"><div class="log-title"><strong>Infosys</strong><span>Senior Process Operator · General Motors Brazil</span><time>Apr/2020 — Apr/2021</time></div><ul><li>Processed <b>20,000+</b> vehicle import invoices and service invoices through internal systems and SAP-MM.</li></ul></div></article>
+      </div>
+    </section>
 
-      <section class="editor-card" id="skills">
-        <div class="card-top">
-          <span class="filename">stack/modules.yaml</span>
-          <span class="card-dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="stack-grid">
-          <article><img src="images/reference/skill-python.webp" alt="Python"><div><b>Python</b><small>ETL, automation, APIs, processing and internal products</small></div></article>
-          <article><img src="images/reference/skill-power-bi.webp" alt="Power BI"><div><b>Power BI</b><small>dashboards, indicators, publishing and service maintenance</small></div></article>
-          <article><img src="images/reference/skill-power-query.webp" alt="Power Query"><div><b>Power Query</b><small>data transformation and dataset preparation</small></div></article>
-          <article><img src="images/reference/skill-selenium.webp" alt="Selenium"><div><b>Selenium</b><small>web automation and repetitive task reduction</small></div></article>
-          <article><img src="images/reference/skill-sql.webp" alt="SQL"><div><b>SQL</b><small>queries, joins, structuring and data logic</small></div></article>
-          <article><img src="images/reference/skill-postgresql.webp" alt="PostgreSQL"><div><b>PostgreSQL</b><small>relational database for systems and apps</small></div></article>
-          <article><img src="images/reference/skill-power-automate.webp" alt="Power Automate"><div><b>Power Automate</b><small>corporate workflows and automations</small></div></article>
-          <article><img src="images/reference/skill-vba.webp" alt="VBA"><div><b>VBA</b><small>Excel, legacy routines and automation support</small></div></article>
-          <article><img src="images/reference/skill-apis-rest.webp" alt="APIs / REST"><div><b>APIs / REST</b><small>system integration and data exchange</small></div></article>
-          <article><img src="images/reference/skill-machine-learning.webp" alt="Machine Learning"><div><b>Machine Learning</b><small>models, forecasting and applied experimentation</small></div></article>
-        </div>
-      </section>
+    <section class="workspace-section projects-section" id="projects">
+      <div class="section-heading projects-head"><span><i>//</i> MAIN PROJECTS</span><p>Highlights that best represent engineering, automation and data. The Explorer keeps the rest.</p></div>
+      <div class="project-grid project-grid--featured">
+        <article class="project-card project-card--primary" id="meudia">
+          <div class="project-top"><img class="project-icon-img" src="images/reference/project-icon-meudia.svg" alt=""><div><h3>Meu Dia</h3><small>NEW · PWA / FULL STACK</small></div></div>
+          <p>Private multi-user PWA built with SvelteKit, Supabase Auth, PostgreSQL, offline support and real Web Push notifications.</p>
+          <div class="chips"><span>SvelteKit</span><span>Supabase</span><span>PWA</span></div>
+          <img src="images/reference/project-meudia.svg" alt="Meu Dia thumbnail" />
+          <a class="view-project" href="https://meudia.vinmedrado.com" target="_blank" rel="noopener">Open project <b>→</b></a>
+        </article>
+        <article class="project-card" id="applymize">
+          <div class="project-top"><img class="project-icon-img" src="images/reference/project-icon-applymize.webp" alt=""><div><h3>Applymize</h3><small>AUTOMATION</small></div></div>
+          <p>Platform for job-application automation, connecting vacancies, data, processes and result tracking.</p>
+          <div class="chips"><span>Python</span><span>APIs</span><span>Automation</span></div>
+          <img src="images/reference/project-applymize.webp" alt="Applymize screen" />
+          <a class="view-project" href="https://applymize.netlify.app" target="_blank" rel="noopener">Open project <b>→</b></a>
+        </article>
+        <article class="project-card" id="vinance">
+          <div class="project-top"><img class="project-icon-img" src="images/reference/project-icon-vinance.webp" alt=""><div><h3>VinanceOS</h3><small>DATA / ML</small></div></div>
+          <p>Full-stack platform for recommendation, explainability, monitoring, auditing and quantitative research.</p>
+          <div class="chips"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span></div>
+          <img src="images/reference/project-vinance.webp" alt="Vinance screen" />
+          <a class="view-project" href="https://vinance-ai.netlify.app" target="_blank" rel="noopener">Open project <b>→</b></a>
+        </article>
+        <article class="project-card" id="football">
+          <div class="project-top"><img class="project-icon-img" src="images/reference/project-icon-football.webp" alt=""><div><h3>Football Decision Lab</h3><small>ML / MLOPS</small></div></div>
+          <p>Research and paper-operation pipeline with temporal validation, backtesting, frozen champion model and automatic settlement.</p>
+          <div class="chips"><span>Python</span><span>XGBoost</span><span>LightGBM</span></div>
+          <img src="images/reference/project-football.webp" alt="Football Decision Lab screen" />
+          <a class="view-project" href="https://football-decision-lab.netlify.app/" target="_blank" rel="noopener">Open project <b>→</b></a>
+        </article>
+      </div>
+    </section>
 
-      <section class="editor-card" id="projects">
-        <div class="card-top">
-          <span class="filename">projects/repositories</span>
-          <span class="card-dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="projects-headline">
-          <h2>Main projects</h2>
-          <p>Only the strongest projects are shown on the homepage. The rest remains available in the Explorer sidebar.</p>
-        </div>
-        <div class="project-grid">
-          <article class="project-card" id="meudia">
-            <div class="repo-title"><span class="repo-badge new">new</span><h3>Meu Dia</h3></div>
-            <p>Private multi-user PWA with SvelteKit, Supabase Auth, PostgreSQL, offline support, local sync and real Web Push.</p>
-            <div class="repo-tags"><span>SvelteKit</span><span>Supabase</span><span>PWA</span></div>
-            <img src="images/reference/project-meudia.svg" alt="Meu Dia preview" />
-            <a href="https://meudia.vinmedrado.com" target="_blank" rel="noopener">Open project <b>→</b></a>
-          </article>
-          <article class="project-card" id="applymize">
-            <div class="repo-title"><span class="repo-badge">prod</span><h3>Applymize</h3></div>
-            <p>Job-application automation project connecting vacancies, data, process and productivity in one flow.</p>
-            <div class="repo-tags"><span>Python</span><span>APIs</span><span>Automation</span></div>
-            <img src="images/reference/project-applymize.webp" alt="Applymize preview" />
-            <a href="https://applymize.netlify.app" target="_blank" rel="noopener">Open project <b>→</b></a>
-          </article>
-          <article class="project-card" id="vinance">
-            <div class="repo-title"><span class="repo-badge">lab</span><h3>VinanceOS</h3></div>
-            <p>Full-stack platform for recommendation, explainability, auditing, monitoring and quantitative research.</p>
-            <div class="repo-tags"><span>Python</span><span>FastAPI</span><span>PostgreSQL</span></div>
-            <img src="images/reference/project-vinance.webp" alt="VinanceOS preview" />
-            <a href="https://vinance-ai.netlify.app" target="_blank" rel="noopener">Open project <b>→</b></a>
-          </article>
-          <article class="project-card" id="football">
-            <div class="repo-title"><span class="repo-badge">ml</span><h3>Football Decision Lab</h3></div>
-            <p>Research, temporal validation, backtesting and paper-operation pipeline focused on traceable sports-data decisions.</p>
-            <div class="repo-tags"><span>Python</span><span>ML</span><span>Data</span></div>
-            <img src="images/reference/project-football.webp" alt="Football Decision Lab preview" />
-            <a href="https://football-decision-lab.netlify.app/" target="_blank" rel="noopener">Open project <b>→</b></a>
-          </article>
-        </div>
-      </section>
+    <section class="contact-cta" id="contact">
+      <div class="cta-copy"><small>CONTACT</small><h2>Automation, data and systems — full resume available in PDF.</h2><p>Santo André / SP · corporate experience across GM Brazil / Stellantis · author projects in production and public demos.</p></div>
+      <div class="contact-buttons"><a class="button primary" href="mailto:vinicius@vinmedrado.com">✉ Contact me <b>→</b></a><a class="button ghost" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">▧ Open resume <b>→</b></a></div>
+      <div class="cta-side-note">LinkedIn: /viniciusmedrado<br>GitHub: /vinmedrado</div>
+    </section>
 
-      <section class="editor-card contact-editor" id="contact">
-        <div class="card-top">
-          <span class="filename">contact/readme.md</span>
-          <span class="card-dots"><i></i><i></i><i></i></span>
-        </div>
-        <div class="contact-grid">
-          <div>
-            <h2>Let’s talk</h2>
-            <p>Open to opportunities in automation, data, BI, internal products and corporate systems.</p>
-          </div>
-          <div class="contact-links">
-            <a class="button primary" href="mailto:contato@vinmedrado.com">Send e-mail <b>→</b></a>
-            <a class="button ghost" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">Open resume <b>→</b></a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <aside class="inspector">
-      <section class="inspector-card">
-        <div class="inspector-top"><span>STATUS</span><small>runtime</small></div>
-        <ul class="status-list">
-          <li><b>current role</b><span>Data Analyst</span></li>
-          <li><b>company</b><span>MSX International</span></li>
-          <li><b>client</b><span>Stellantis</span></li>
-          <li><b>location</b><span>Santo André · SP</span></li>
-        </ul>
-      </section>
-      <section class="inspector-card">
-        <div class="inspector-top"><span>ACTIVE</span><small>modules</small></div>
-        <div class="mini-pills"><span>Python</span><span>Power BI</span><span>SQL</span><span>Power Query</span><span>SharePoint</span><span>VBA</span></div>
-      </section>
-      <section class="inspector-card">
-        <div class="inspector-top"><span>LANGUAGES</span><small>locale</small></div>
-        <div class="locale-box"><div><span>🇧🇷</span><b>PT-BR</b></div><div><span>🇺🇸</span><b>EN</b></div></div>
-      </section>
-      <section class="inspector-card">
-        <div class="inspector-top"><span>RESUME</span><small>quick access</small></div>
-        <a class="resume-shortcut" href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">Open VINICIUS_MEDRADO_RESUME.pdf <b>→</b></a>
-      </section>
-    </aside>
-  </div>
-
-  <div class="footer-bar">
-    <span>vinicius.workspace</span>
-    <span>python 3.11</span>
-    <span>power bi service</span>
-    <span>sharepoint</span>
-    <span>git: main</span>
-  </div>
+    <footer class="footer">
+      <div class="footer-brand"><b>VM</b><span><strong>VINICIUS MEDRADO</strong><small>Data <i>•</i> Automation <i>•</i> Systems</small></span></div>
+      <nav><a href="#skills">Stack</a><a href="#impact">Impact</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener">Resume</a><a href="#contact">Contact</a></nav>
+      <div class="socials"><div class="social-links"><a href="https://linkedin.com/in/viniciusmedrado" target="_blank" rel="noopener">in</a><a href="https://github.com/vinmedrado" target="_blank" rel="noopener">◉</a><a href="mailto:vinicius@vinmedrado.com">✉</a></div><small>© 2026 Vinicius Medrado. All rights reserved.</small></div>
+    </footer>
+  </main>
 
   <div class="command-palette" id="commandPalette" aria-hidden="true">
     <button class="palette-backdrop" data-close-palette aria-label="Close search"></button>
     <div class="palette-box" role="dialog" aria-modal="true" aria-label="Quick search">
       <div class="palette-input"><span>⌕</span><input id="commandInput" type="search" placeholder="Type a project, skill or section..." autocomplete="off" /><kbd>ESC</kbd></div>
       <div class="palette-results" id="paletteResults">
-        <a href="#about" data-palette-item>▣ about/profile.ts</a>
-        <a href="#experience" data-palette-item>▣ career/experience.log</a>
-        <a href="#skills" data-palette-item>▣ stack/modules.yaml</a>
-        <a href="#meudia" data-palette-item>⌁ meu-dia.app</a>
-        <a href="#applymize" data-palette-item>⌁ applymize.py</a>
-        <a href="#vinance" data-palette-item>⌁ vinanceos.ai</a>
-        <a href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener" data-palette-item>▧ cv/Vinicius_Medrado.pdf</a>
+        <a href="#skills" data-palette-item>◎ Stack</a>
+        <a href="#impact" data-palette-item>▤ Impact</a>
+        <a href="#experience" data-palette-item>▦ Experience</a>
+        <a href="#meudia" data-palette-item>⌁ Meu Dia</a>
+        <a href="#applymize" data-palette-item>⌁ Applymize</a>
+        <a href="#vinance" data-palette-item>⌁ VinanceOS</a>
+        <a href="#football" data-palette-item>⌁ Football Decision Lab</a>
+        <a href="Vinicius_Santos_Medrado_EN.pdf" target="_blank" rel="noopener" data-palette-item>▧ Resume</a>
       </div>
     </div>
   </div>
