@@ -1,12 +1,12 @@
 {
-  "name": "Vinicius Santos Medrado — Dados & Automação de Processos",
+  "name": "Vinicius Medrado — Automation Workspace",
   "short_name": "Vinicius Medrado",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#FAF6EE",
-  "theme_color": "#18140E",
-  "description": "Portfólio de Vinicius Santos Medrado — automação de processos, engenharia de dados e produtos autorais.",
+  "background_color": "#090d12",
+  "theme_color": "#090d12",
+  "description": "Portfólio de Vinicius Medrado — dados, automação, integrações e sistemas.",
   "icons": [
     {
       "src": "icon-192.png",

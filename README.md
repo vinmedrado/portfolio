@@ -1,6 +1,24 @@
-# Vinicius Medrado — Portfólio
+# Vinicius Medrado — Automation Workspace
 
 Portfólio profissional estático de Vinicius Medrado, publicado em **https://vinmedrado.com**.
+
+## Identidade atual
+
+A interface foi reconstruída como um **Automation Workspace**: linguagem inspirada em IDEs, terminais, command centers e pipelines de dados, com foco em automação, dados e sistemas.
+
+A home inclui:
+
+- navegação lateral estilo Explorer;
+- barra de busca/command palette com `Ctrl + K`;
+- hero com ilustração e workspace de automação;
+- currículo em destaque;
+- terminal animado e fluxo de execução;
+- stack com logos reais;
+- métricas de impacto;
+- projetos com links para demos e GitHub;
+- experiência profissional, sobre e contato;
+- layout responsivo para desktop, tablet e celular;
+- PT-BR e EN.
 
 ## Stack do site
 
@@ -10,38 +28,41 @@ Portfólio profissional estático de Vinicius Medrado, publicado em **https://vi
 - GitHub Pages
 - domínio próprio `vinmedrado.com`
 
-Não há backend, banco de dados, autenticação, formulários com envio de dados ou dependências JavaScript de terceiros.
+Não existe etapa de build.
 
-## Estrutura principal
+## Arquivos principais
 
-- `index.html` — PT-BR
-- `index-en.html` — EN
-- `theme.css` — identidade visual atual
-- `portfolio-ui.js` — navegação mobile
-- `projects-data.js` — fonte de verdade dos projetos em PT-BR
-- `projects-data.en.js` — fonte de verdade dos projetos em EN
-- `images/` e `gallery/` — imagens e screenshots
-- `docs/` — evidências/PDFs dos cases
-- `Vinicius_Santos_Medrado.pdf` e `Vinicius_Santos_Medrado_EN.pdf` — currículos
-- `CNAME` — domínio do GitHub Pages
-- `.nojekyll` — publicação estática sem processamento Jekyll
+- `index.html` — versão PT-BR
+- `index-en.html` — versão EN
+- `theme.css` — identidade visual e responsividade
+- `portfolio-ui.js` — menu mobile, command palette, navegação e estados da interface
+- `images/hero-workspace.webp` — arte principal do workspace
+- `images/stack-real/` — logos das tecnologias
+- `images/*.png|webp` — capas dos projetos
+- `Vinicius_Santos_Medrado.pdf` — currículo PT-BR
+- `Vinicius_Santos_Medrado_EN.pdf` — currículo EN
+- `CNAME` e `.nojekyll` — publicação no GitHub Pages
 
-## Segurança e privacidade
+Os arquivos `projects-data.js` e `projects-data.en.js` foram mantidos no repositório como base detalhada dos projetos para evoluções futuras.
 
-A versão publicada usa uma Content Security Policy (CSP) por página, política de referrer, `noopener noreferrer` em links externos e não contém chaves, tokens, senhas ou arquivos `.env`.
+## Teste local
 
-O telefone e o e-mail de contato são montados no navegador para reduzir scraping básico do HTML-fonte. O site continua sendo público; informações exibidas na interface devem ser consideradas públicas.
+Como é um site estático, pode ser aberto diretamente pelo `index.html`. Para uma prévia mais próxima da publicação, use qualquer servidor HTTP local, por exemplo:
+
+```bash
+python -m http.server 8000
+```
+
+Depois acesse `http://localhost:8000`.
 
 ## Deploy
 
-O site é publicado diretamente pelo GitHub Pages. Não existe etapa de build.
+No repositório do portfólio:
 
-Ao substituir uma versão antiga do repositório, remova arquivos legados que não existem mais nesta distribuição, em vez de apenas copiar os novos arquivos por cima.
+```bash
+git add .
+git commit -m "feat: rebuild portfolio as automation workspace"
+git push
+```
 
-## Manutenção
-
-- mantenha `projects-data.js` / `projects-data.en.js` como fonte única de verdade;
-- nunca faça commit de `.env`, tokens, credenciais ou chaves privadas;
-- mantenha HTTPS obrigatório no GitHub Pages;
-- proteja GitHub, Cloudflare e Apple ID com 2FA/passkeys;
-- revise arquivos públicos antes de adicioná-los a `docs/` ou `gallery/`.
+O GitHub Pages publica os arquivos estáticos sem etapa de build.

@@ -163,8 +163,49 @@ const PROJECTS = [
 <p>MIT.</p>`
   },
   {
+    id: "meudia",
+    title: "Meu Dia",
+    flagship: false,
+    track: "automação",
+    pill: "Produto / Engenharia Full-Stack",
+    category: "Sistema Operacional Pessoal (PWA)",
+    year: "2026",
+    status: "Em produção · acesso privado por convite",
+    flow: ["SVELTEKIT", "SUPABASE AUTH", "POSTGRESQL / RLS", "SERVICE WORKER", "INDEXEDDB", "CLOUDFLARE WORKER / CRON", "WEB PUSH"],
+    desc: "PWA pessoal multiusuário para centralizar rotina, saúde, bem-estar, treino, dieta, fé e mercado em uma única experiência mobile-first, com funcionamento 100% offline e notificações reais via Web Push.",
+    highlight: "Segurança por Row Level Security no PostgreSQL, sessão SSR autenticada, segredos administrativos isolados do navegador e Cloudflare Worker agendado disparando notificações mesmo com o app fechado.",
+    results: [
+      "PWA instalável (iPhone, Android, desktop) com autenticação por convite e criação de senha no primeiro acesso",
+      "Offline-first: Service Worker + IndexedDB com fila persistente de sincronização",
+      "TypeScript strict, svelte-check com 0 erros e testes automatizados para as regras críticas"
+    ],
+    stack: ["Svelte 5", "SvelteKit 2", "TypeScript", "PostgreSQL", "Supabase Auth", "Cloudflare Workers"],
+    demo: "https://meudia.vinmedrado.com",
+    demoLabel: "produção (acesso por convite) ↗",
+    image: "",
+    gallery: [],
+    readmeHtml: `<h1>Meu Dia</h1>
+<p><em>Personal OS privado, offline-first e orientado a rotina, saúde e bem-estar.</em></p>
+<h2>Visão geral</h2>
+<p>O Meu Dia é uma aplicação web progressiva (PWA) construída para centralizar rotina, saúde, bem-estar, treino, dieta, fé, mercado e organização pessoal em uma única experiência, com foco em uso real no celular. Nasceu como painel pessoal e evoluiu para uma aplicação multiusuário com persistência em nuvem, autenticação segura, suporte offline e notificações reais no iPhone.</p>
+<h2>O que o projeto demonstra</h2>
+<ul>
+<li>Modelagem de dados multiusuário e autenticação/autorização no servidor.</li>
+<li>Segurança por Row Level Security no PostgreSQL.</li>
+<li>SSR com cookies de sessão e separação entre chaves públicas e segredos de backend.</li>
+<li>PWA com Service Worker e sincronização offline via IndexedDB.</li>
+<li>Web Push com VAPID e processamento agendado em Cloudflare Workers (Cron).</li>
+<li>Experiência de primeiro acesso por convite, com validações e regras de negócio por módulo.</li>
+</ul>
+<h2>Módulos</h2>
+<p>Hoje (visão consolidada), Rotina, Saúde, Bem-estar, Treino, Dieta, Fé, Mercado e Perfil — cada um com regras de inteligência calculadas apenas sobre dados reais do usuário, evitando conclusões sobre dados incompletos.</p>
+<h2>Acesso</h2>
+<p>Produção em <code>meudia.vinmedrado.com</code>, com cadastro público desativado — entrada somente por convite.</p>`
+  },
+  {
     id: "footballdecisionlab",
     title: "Football Decision Lab",
+
     flagship: false,
     track: "dados",
     pill: "Dados / ML",
