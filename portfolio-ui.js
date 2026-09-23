@@ -67,4 +67,19 @@
       history.replaceState(null, '', id);
     });
   });
+
+  // Subtle scroll reveal for terminal sections. Content stays visible when JS is unavailable.
+  const revealTargets = [...document.querySelectorAll('.workspace-section, .log-entry, .project-card, .impact-grid article')];
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealTargets.forEach(el => el.classList.add('reveal-ready'));
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    revealTargets.forEach(el => revealObserver.observe(el));
+  }
+
 })();
