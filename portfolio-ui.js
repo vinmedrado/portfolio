@@ -82,4 +82,82 @@
     revealTargets.forEach(el => revealObserver.observe(el));
   }
 
+  // Terminal "replay": stage the NPS pipeline output as if it were executing live,
+  // synced with the numbered pipeline steps alongside it. Plays once, on first view.
+  const terminalEl = document.querySelector('.terminal');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (terminalEl) {
+    const rows = [...terminalEl.querySelectorAll('.terminal-line, .terminal-space, .terminal-stat, .terminal-done')];
+    const steps = [...document.querySelectorAll('.flow-list li:not(.live) i')];
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      rows.forEach(row => row.classList.add('on'));
+      steps.forEach(step => step.classList.add('on'));
+    } else {
+      const playTerminal = () => {
+        rows.forEach((row, i) => setTimeout(() => row.classList.add('on'), 90 + i * 150));
+        const stepGap = (90 + rows.length * 150) / (steps.length + 1);
+        steps.forEach((step, i) => setTimeout(() => step.classList.add('on'), 260 + i * stepGap));
+      };
+      const termObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          playTerminal();
+          observer.disconnect();
+        });
+      }, { threshold: 0.35 });
+      termObserver.observe(terminalEl);
+    }
+  }
+
+  // Impact numbers count up from zero the first time the section scrolls into view.
+  const impactNumbers = [...document.querySelectorAll('.impact-grid strong')];
+  if (impactNumbers.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      // leave static text as authored
+    } else {
+      impactNumbers.forEach(el => {
+        const raw = el.textContent.trim();
+        const match = raw.match(/^([\D]*)([\d.,]+)([\D]*)$/);
+        if (!match) return;
+        const [, prefix, numStr, suffix] = match;
+        const digits = numStr.replace(/[.,]/g, '');
+        const target = parseInt(digits, 10);
+        if (Number.isNaN(target)) return;
+        const groupChar = /\.\d{3}(\D|$)/.test(numStr) ? '.' : (/,\d{3}(\D|$)/.test(numStr) ? ',' : '');
+        el.dataset.target = String(target);
+        el.dataset.prefix = prefix;
+        el.dataset.suffix = suffix;
+        el.dataset.group = groupChar;
+      });
+      const format = (value, el) => {
+        const str = String(value);
+        const grouped = el.dataset.group
+          ? str.replace(/\B(?=(\d{3})+(?!\d))/g, el.dataset.group)
+          : str;
+        return `${el.dataset.prefix}${grouped}${el.dataset.suffix}`;
+      };
+      const countUp = (el) => {
+        const target = Number(el.dataset.target);
+        const duration = 1100;
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = format(Math.round(target * eased), el);
+          if (progress < 1) requestAnimationFrame(tick);
+          else el.textContent = format(target, el);
+        };
+        requestAnimationFrame(tick);
+      };
+      const impactObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          countUp(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.4 });
+      impactNumbers.forEach(el => impactObserver.observe(el));
+    }
+  }
+
 })();
