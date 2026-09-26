@@ -1,5 +1,5 @@
 /**
- * Gera images/og-cover.png e images/og-cover-en.png a partir do próprio site,
+ * Gera images/og-cover-20260925.png e images/og-cover-en-20260925.png a partir do próprio site,
  * tirando um "print" real da página (não é um design separado).
  *
  * Uso:
@@ -14,8 +14,8 @@ const { chromium } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
 const TARGETS = [
-  { file: 'index.html', out: 'images/og-cover.png' },
-  { file: 'index-en.html', out: 'images/og-cover-en.png' },
+  { file: 'index.html', out: 'images/og-cover-20260925.png' },
+  { file: 'index-en.html', out: 'images/og-cover-en-20260925.png' },
 ];
 
 (async () => {
