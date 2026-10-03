@@ -51,29 +51,6 @@ const PROJECTS = [
     gallery: ["gallery/vinance/vinance-01.webp", "gallery/vinance/vinance-02.webp", "gallery/vinance/vinance-03.webp", "gallery/vinance/vinance-04.webp", "gallery/vinance/vinance-05.webp", "gallery/vinance/vinance-06.webp"]
   },
   {
-    id: "footballdecisionlab",
-    title: "Football Decision Lab",
-    flagship: false,
-    track: "dados",
-    pill: "Data / ML",
-    category: "ML & Sports Decision Intelligence",
-    year: "2026",
-    status: "Local project · PAPER_ONLY · active prospective experiment",
-    flow: ["MATCHES / ODDS", "TEMPORAL VALIDATION", "FEATURES", "BACKTEST", "MODEL", "PAPER", "SETTLEMENT"],
-    desc: "Evolution of MatchFlow: a research and paper-trading platform that turns matches into traceable decisions, with temporal validation, a frozen champion model (SHA-256 hash), and automatic settlement.",
-    highlight: "Champion/challenger governance with deliberate promotion, audited (Brier) calibration, and fail-closed guardrails — honestly reports when the ROI confidence interval crosses zero.",
-    results: [
-      "Rigorous temporal separation (no data leakage) between backfill, backtest, and prospective capture",
-      "Fail-closed guardrails, signal immutability, and SHA-256 model hashing",
-      "Human-in-the-loop governance for challenger → champion promotion"
-    ],
-    stack: ["Python", "Pandas", "XGBoost", "LightGBM", "Scikit-learn"],
-    link: "https://github.com/vinmedrado/football-decision-lab",
-    demo: "https://football-decision-lab.netlify.app/",
-    image: "images/footballdecisionlab.png",
-    gallery: ["gallery/footballdecisionlab/footballdecisionlab-07.webp", "gallery/footballdecisionlab/footballdecisionlab-08.webp", "gallery/footballdecisionlab/footballdecisionlab-09.webp", "gallery/footballdecisionlab/footballdecisionlab-10.webp", "gallery/footballdecisionlab/footballdecisionlab-11.webp", "gallery/footballdecisionlab/footballdecisionlab-02.webp", "gallery/footballdecisionlab/footballdecisionlab-05.webp", "gallery/footballdecisionlab/footballdecisionlab-01.webp", "gallery/footballdecisionlab/footballdecisionlab-03.webp", "gallery/footballdecisionlab/footballdecisionlab-04.webp", "gallery/footballdecisionlab/footballdecisionlab-06.webp"]
-  },
-  {
     id: "marketplace",
     title: "Marketplace Seller Platform",
     flagship: false,
