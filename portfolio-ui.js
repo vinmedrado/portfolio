@@ -160,4 +160,107 @@
     }
   }
 
+  // Terminal interativo: o visitante digita comandos reais, o site responde.
+  const itermOutput = document.getElementById('itermOutput');
+  const itermInput = document.getElementById('itermInput');
+  if (itermOutput && itermInput) {
+    const isEN = document.documentElement.lang.startsWith('en');
+    const projects = isEN ? [
+      { slug: 'meudia', name: 'Meu Dia', tag: 'PWA / FULL STACK' },
+      { slug: 'applymize', name: 'Applymize', tag: 'AUTOMATION / WORKFLOW' },
+      { slug: 'selleros', name: 'Marketplace Seller Platform', tag: 'APIS / AUTOMATION' },
+      { slug: 'vinance', name: 'VinanceOS', tag: 'DATA / ML' },
+    ] : [
+      { slug: 'meudia', name: 'Meu Dia', tag: 'PWA / FULL STACK' },
+      { slug: 'applymize', name: 'Applymize', tag: 'AUTOMAÇÃO / WORKFLOW' },
+      { slug: 'selleros', name: 'Marketplace Seller Platform', tag: 'APIS / AUTOMAÇÃO' },
+      { slug: 'vinance', name: 'VinanceOS', tag: 'DADOS / ML' },
+    ];
+    const stack = ['Python', 'Selenium', 'Power Automate', 'VBA', 'Power BI', 'SQL', 'ETL', 'FastAPI', 'PostgreSQL', 'Docker', 'ML / OCR'];
+    const history = [];
+    let historyIdx = -1;
+    const resumeFile = isEN ? 'Vinicius_Santos_Medrado_EN.pdf' : 'Vinicius_Santos_Medrado.pdf';
+    const contactId = isEN ? 'contact' : 'contato';
+
+    const print = (html, cls) => {
+      const row = document.createElement('div');
+      row.className = 'terminal-line' + (cls ? ' ' + cls : '');
+      row.innerHTML = html;
+      itermOutput.appendChild(row);
+      itermOutput.scrollTop = itermOutput.scrollHeight;
+    };
+    const echo = (cmd) => {
+      const row = document.createElement('div');
+      row.className = 'terminal-line iterm-cmd-echo';
+      row.textContent = cmd;
+      itermOutput.appendChild(row);
+    };
+
+    const commandsPT = {
+      help: () => print('Comandos: <strong>whoami</strong> · <strong>stack</strong> · <strong>projetos</strong> [--abrir &lt;nome&gt;] · <strong>curriculo</strong> · <strong>contato</strong> · <strong>clear</strong>'),
+      whoami: () => print('Vinicius Medrado — Analista de Dados Pleno <em>•</em> Automação de Processos. 6 anos na cadeia GM Brasil / Stellantis.'),
+      stack: () => print(stack.join(' · ')),
+      curriculo: () => { print('Abrindo ' + resumeFile + '...'); window.open(resumeFile, '_blank', 'noopener'); },
+      contato: () => { print('Rolando até contato...'); document.getElementById(contactId)?.scrollIntoView({ behavior: 'smooth' }); },
+      clear: () => { itermOutput.innerHTML = ''; },
+      sudo: () => print('Permissão negada: isso aqui não é produção.', 'iterm-err'),
+      projetos: (args) => {
+        const openIdx = args.indexOf('--abrir');
+        if (openIdx !== -1) {
+          const query = args.slice(openIdx + 1).join(' ').toLowerCase();
+          const match = projects.find(p => p.slug === query || p.name.toLowerCase().includes(query));
+          if (!match) { print('Projeto não encontrado. Digite <strong>projetos</strong> pra ver a lista.', 'iterm-err'); return; }
+          print('Abrindo ' + match.name + '...');
+          document.getElementById(match.slug)?.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+        projects.forEach(p => print('<strong>' + p.slug + '</strong> — ' + p.name + ' <em>(' + p.tag + ')</em>'));
+        print('Use: projetos --abrir &lt;nome&gt;');
+      },
+    };
+    const commandsEN = {
+      help: () => print('Commands: <strong>whoami</strong> · <strong>stack</strong> · <strong>projects</strong> [--open &lt;name&gt;] · <strong>resume</strong> · <strong>contact</strong> · <strong>clear</strong>'),
+      whoami: () => print('Vinicius Medrado — Mid-level Data Analyst <em>•</em> Process Automation. 6 years in the GM Brazil / Stellantis chain.'),
+      stack: () => print(stack.join(' · ')),
+      resume: () => { print('Opening ' + resumeFile + '...'); window.open(resumeFile, '_blank', 'noopener'); },
+      contact: () => { print('Scrolling to contact...'); document.getElementById(contactId)?.scrollIntoView({ behavior: 'smooth' }); },
+      clear: () => { itermOutput.innerHTML = ''; },
+      sudo: () => print('Permission denied: this is not production.', 'iterm-err'),
+      projects: (args) => {
+        const openIdx = args.indexOf('--open');
+        if (openIdx !== -1) {
+          const query = args.slice(openIdx + 1).join(' ').toLowerCase();
+          const match = projects.find(p => p.slug === query || p.name.toLowerCase().includes(query));
+          if (!match) { print('Project not found. Type <strong>projects</strong> to see the list.', 'iterm-err'); return; }
+          print('Opening ' + match.name + '...');
+          document.getElementById(match.slug)?.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+        projects.forEach(p => print('<strong>' + p.slug + '</strong> — ' + p.name + ' <em>(' + p.tag + ')</em>'));
+        print('Use: projects --open &lt;name&gt;');
+      },
+    };
+    const commands = isEN ? commandsEN : commandsPT;
+    commands.cv = commands.curriculo || commands.resume;
+
+    const run = (raw) => {
+      const cmdRaw = raw.trim();
+      if (!cmdRaw) return;
+      echo(cmdRaw);
+      history.push(cmdRaw); historyIdx = history.length;
+      const [cmd, ...args] = cmdRaw.toLowerCase().split(/\s+/);
+      if (commands[cmd]) commands[cmd](args);
+      else print((isEN ? 'Command not found: ' : 'Comando não encontrado: ') + cmd + (isEN ? '. Type <strong>help</strong>.' : '. Digite <strong>help</strong>.'), 'iterm-err');
+    };
+
+    itermInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { run(itermInput.value); itermInput.value = ''; }
+      else if (e.key === 'ArrowUp') { if (historyIdx > 0) { historyIdx--; itermInput.value = history[historyIdx] || ''; } e.preventDefault(); }
+      else if (e.key === 'ArrowDown') { if (historyIdx < history.length) { historyIdx++; itermInput.value = history[historyIdx] || ''; } e.preventDefault(); }
+    });
+    document.querySelectorAll('.iterm-quick button[data-cmd]').forEach(btn => {
+      btn.addEventListener('click', () => { run(btn.dataset.cmd); itermInput.focus(); });
+    });
+  }
+
 })();
