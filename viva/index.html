@@ -164,7 +164,45 @@ function stageList(phase,minutes){
  return `<section id='stage-${i}' class='stage-block ${className}'><div class='stage-head'><div class='stage-ico'>${icon}</div><div><strong>${i+1}. ${phase}</strong><small>${phaseMins} minutos · ${items.length} intervalos de movimento</small></div></div><h3>Exercícios desta etapa</h3><p class='viva-visual-note'>Veja a ilustração e leia a orientação de cada movimento.</p>${unique.map((s,j)=>`<div class='ex viva-ex-row'><div class='viva-stage-figure'>${VivaVisual.exercise(s.name)}</div><div><b>${s.name} · ${s.seconds} s</b><p>${s.hint}</p></div></div>`).join('')}<p class='stage-note'>${note}</p></section>`
 }
 function details(){const p=plans[data.duration];return `${header('Seu circuito','Aquecimento, funcional e alongamento')}<div class='section'><h2>Escolha 20, 30 ou 45 minutos</h2></div><div class='duration-small'>${[20,30,45].map(m=>`<button type='button' data-min='${m}' class='${m===data.duration?'active':''}' aria-pressed='${m===data.duration}'>${m} min</button>`).join('')}</div><div class='banner' style='margin-top:15px'><div class='kicker'>PLANO COMPLETO</div><div class='number'>${data.duration} min</div><p>Inclui as três etapas na ordem: aquecimento → treino → alongamento.</p></div><div class='section'><h2>Toque para ver uma etapa</h2></div><div class='phasegrid'>${phases.map((phase,i)=>`<button type='button' class='phasebox tap' data-phase='${phase}'>${['☀','●','✳'][i]}<b>${phase}</b>${p[i]} min<span class='phase-link'>Ver exercícios ↓</span></button>`).join('')}</div><div class='info' style='margin-top:15px'>O circuito de ${data.duration} minutos já inclui ${p[0]} min de aquecimento, ${p[1]} min de treino e ${p[2]} min de alongamento. Veja as listas abaixo antes de começar.</div>${phases.map(phase=>stageList(phase,data.duration)).join('')}<div class='info'>Áudio guiado: o VIVA anuncia cada movimento e avisa sobre os descansos. Mantenha o Safari aberto e a tela ligada para ouvir os avisos.</div><button class='primary' data-start='1'>▶ Iniciar as 3 etapas · ${data.duration} min</button>`}
-function pct(){return session?Math.min(100,100*elapsed()/session.total):0}function elapsed(){return session?Math.max(0,Math.min(session.total,session.at+(session.paused?0:(Date.now()-session.mark)/1000))):0}function indexAt(t){return Math.min(session.steps.length-1,session.steps.findIndex(x=>t<x.end)===-1?session.steps.length-1:session.steps.findIndex(x=>t<x.end))}
+function pct(){return session?Math.min(100,100*elapsed()/session.total):0}function elapsed(){return session?Math.max(0,Math.min(session.total,session.at+(session.paused?0:(Date.now()-session.mark)/1000))):0}
+const sessionKey=store+'-session';
+let lastCheckpoint=0;
+function clearCheckpoint(){try{localStorage.removeItem(sessionKey)}catch{}}
+function checkpoint(){
+ if(!session){clearCheckpoint();return}
+ const at=elapsed();
+ const safe={version:1,savedAt:Date.now(),duration:session.duration,total:session.total,
+   at:Math.max(0,Math.min(session.total,at)),paused:true,steps:session.steps,
+   coach:session.coach||null,coachId:session.coachId||null,index:session.index};
+ try{localStorage.setItem(sessionKey,JSON.stringify(safe));lastCheckpoint=Date.now()}catch{}
+}
+function restoreWorkout(){
+ let snap=null;
+ try{snap=JSON.parse(localStorage.getItem(sessionKey)||'null')}catch{clearCheckpoint();return false}
+ if(!snap)return false;
+ const now=Date.now();
+ const valid= snap.version===1&&now-Number(snap.savedAt)<=48*3600000&&now>=Number(snap.savedAt)
+  &&[20,30,45].includes(snap.duration)&&snap.total===snap.duration*60
+  &&Number.isFinite(snap.at)&&snap.at>=0&&snap.at<snap.total
+  &&Array.isArray(snap.steps)&&snap.steps.length>=3&&snap.steps.length<250
+  &&snap.steps[0]?.start===0&&snap.steps.at(-1)?.end===snap.total
+  &&snap.steps.every((s,i)=>Number.isFinite(s.start)&&Number.isFinite(s.end)&&s.end>s.start
+     &&s.start>=(i?snap.steps[i-1].end:0)&&typeof s.name==='string'&&s.name.length<150
+     &&typeof s.hint==='string'&&s.hint.length<500&&['Aquecimento','Treino','Alongamento'].includes(s.phase));
+ if(!valid){clearCheckpoint();return false}
+ session={steps:snap.steps,duration:snap.duration,total:snap.total,at:snap.at,paused:true,
+   mark:Date.now(),index:0,lastPhase:null,lastBeepSecond:null,coach:snap.coach||null,
+   coachId:snap.coachId||null};
+ session.index=indexAt(session.at);
+ screen='run';finished=false;return true;
+}
+function suspendWorkout(){
+ if(!session||session.paused)return;
+ session.at=elapsed();session.paused=true;session.mark=Date.now();
+ quiet();releaseAwake();checkpoint();
+}
+
+function indexAt(t){return Math.min(session.steps.length-1,session.steps.findIndex(x=>t<x.end)===-1?session.steps.length-1:session.steps.findIndex(x=>t<x.end))}
 function runner(){let e=elapsed(),idx=indexAt(e),s=session.steps[idx],next=session.steps[idx+1];return `${header('Treino em andamento','Circuito de '+session.duration+' minutos')}<div class="tracker">${phases.map(x=>`<div class="${phases.indexOf(x)<phases.indexOf(s.phase)?'passed':x===s.phase?'live':''}">${x}</div>`).join('')}</div><div class="clockbox"><div class="viva-focus-picture" id="focus-picture">${VivaVisual.exercise(s.rest?'Descanso':s.name,'large')}</div><div class="ring" id="ring"><div class="phasebadge" id="phase">${s.rest?'Descanso':s.phase}</div><div class="digits" id="timer">${time(s.end-e)}</div><div class="exercise" id="exname">${s.name}</div><p class="hint" id="exhint">${s.hint}</p></div><div class="next"><small>PRÓXIMO</small><b id="nextname">${next?next.name:'Fim do treino'}</b></div><div class="audio-pill"><span>◖))</span> <span>${data.voice?'Voz ligada':'Voz desligada'} · ${data.sound?'Bipes ligados':'Bipes desligados'}</span><button class="inline-button" data-mute="1">${data.voice||data.sound?'Silenciar':'Ativar áudio'}</button></div><div class="controls"><button class="small" data-step="back" title="Anterior">⏮</button><button class="big" data-pause="1" id="pausebtn" aria-label="${session.paused?'Retomar':'Pausar'}">${session.paused?'▶':'Ⅱ'}</button><button class="small" data-step="next" title="Próximo">⏭</button></div><div class="section"><small id="elapsed">${time(e)} / ${session.duration}:00</small><small id="pc">${Math.floor(pct())}%</small></div><div class="meter"><div id="fill"></div></div></div><button class="sub" style="margin-top:20px;width:100%" data-stop="1">Encerrar treino</button><div class="footer">O cronômetro avança automaticamente. Para ouvir os avisos no iPhone, mantenha esta tela aberta e o volume ativo.</div>`}
 function safeN(v){let n=Number(String(v).replace(',','.'));return Number.isFinite(n)?n:NaN}
 function wfmt(n,d=1){return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})}
@@ -207,7 +245,7 @@ function end(){
  quiet();releaseAwake();beep(900,3);say('Treino concluído! Parabéns por se movimentar hoje.');
  let h={duration:session.duration,date:new Date().toISOString(),day:new Date().toLocaleDateString('sv-SE')};
  if(session.coach){h.coach=true;h.coachDay=session.coach.day;h.coachWeek=session.coach.week;h.coachFocus=session.coach.focus;h.coachId=session.coachId;finishedCoachId=h.coachId}else finishedCoachId=null;
- data.history.push(h);save();session=null;finished=true;clearInterval(pulse);pulse=null;render();
+ data.history.push(h);save();session=null;clearCheckpoint();finished=true;clearInterval(pulse);pulse=null;render();
 }
 function start(isCoach=false){
  enableSound();keepAwake();
@@ -215,7 +253,7 @@ function start(isCoach=false){
  const steps=timeline(minutes,m?m.moves:null,m?m.low:data.low);
  const id=isCoach?'viva-'+Date.now()+'-'+Math.floor(Math.random()*100000):null;
  session={steps,duration:minutes,total:minutes*60,at:0,mark:Date.now(),paused:false,index:0,lastPhase:null,lastBeepSecond:null,coach:isCoach?{day:m.day,week:m.week,focus:m.d.title}:null,coachId:id};
- finished=false;finishedCoachId=null;screen='run';clearInterval(pulse);pulse=setInterval(tick,500);announceStep(steps[0],true);render();
+ finished=false;finishedCoachId=null;screen='run';clearInterval(pulse);pulse=setInterval(tick,500);checkpoint();announceStep(steps[0],true);render();
 }
 function keepAwake(){try{if(navigator.wakeLock&&navigator.wakeLock.request&&!lock)navigator.wakeLock.request('screen').then(x=>lock=x).catch(()=>{})}catch{}}function releaseAwake(){if(lock){try{lock.release()}catch{}lock=null}}
 function enableSound(){try{let C=window.AudioContext||window.webkitAudioContext;if(!ctx&&C)ctx=new C();if(ctx&&ctx.state==='suspended')ctx.resume();audioReady=!!ctx;}catch(err){audioReady=false}return audioReady}
@@ -224,7 +262,7 @@ function say(txt){if(!data.voice||!('speechSynthesis'in window))return;try{let s
 function quiet(){try{window.speechSynthesis&&window.speechSynthesis.cancel()}catch{}}
 function announceStep(s,first=false){if(!session)return;let phase=first||session.lastPhase!==s.phase?s.phase+'. ':'';session.lastPhase=s.phase;let txt=s.rest?'Descanso. '+s.seconds+' segundos.':phase+s.name+'. '+s.seconds+' segundos.'+(s.hint?' '+s.hint:'');beep(s.rest?520:800,2);say(txt)}
 function audioSecond(s,left){if(!session||session.paused)return;const n=Math.ceil(left);if(n<1||n>40)return;if(n<=5){beep(n<=3?1100:970,2);if(data.countdown&&data.voice&&n<=3)say(String(n))}else{beep(620,1)}}
-function tick(){if(!session)return;let e=elapsed();if(e>=session.total){end();return}let idx=indexAt(e),s=session.steps[idx];if(session.index!==idx){session.index=idx;session.lastBeepSecond=null;announceStep(s);render();return}if(!session.paused&&document.visibilityState!=='hidden'){let left=Math.ceil(s.end-e);if(left!==session.lastBeepSecond){session.lastBeepSecond=left;if(left<s.seconds)audioSecond(s,left)}}let q=(e-s.start)/s.seconds;for(let [key,value] of [['#timer',time(s.end-e)],['#elapsed',`${time(e)} / ${session.duration}:00`],['#pc',Math.floor(pct())+'%']]){let el=$(key);if(el)el.textContent=value}let ring=$('#ring');if(ring)ring.style.setProperty('--pct',Math.floor(q*100)+'%');let fill=$('#fill');if(fill)fill.style.width=pct()+'%'}
+function tick(){if(!session)return;if(!session.paused&&Date.now()-lastCheckpoint>=15000)checkpoint();let e=elapsed();if(e>=session.total){end();return}let idx=indexAt(e),s=session.steps[idx];if(session.index!==idx){session.index=idx;session.lastBeepSecond=null;announceStep(s);render();return}if(!session.paused&&document.visibilityState!=='hidden'){let left=Math.ceil(s.end-e);if(left!==session.lastBeepSecond){session.lastBeepSecond=left;if(left<s.seconds)audioSecond(s,left)}}let q=(e-s.start)/s.seconds;for(let [key,value] of [['#timer',time(s.end-e)],['#elapsed',`${time(e)} / ${session.duration}:00`],['#pc',Math.floor(pct())+'%']]){let el=$(key);if(el)el.textContent=value}let ring=$('#ring');if(ring)ring.style.setProperty('--pct',Math.floor(q*100)+'%');let fill=$('#fill');if(fill)fill.style.width=pct()+'%'}
 function render(){if(finished){app.innerHTML=`<div style="text-align:center;padding:40px 0 15px"><div class="viva-finish-mascot">${VivaVisual.mascot("small")}</div><h1>Treino concluído!</h1><p>Você completou seu circuito de ${data.history.at(-1).duration} minutos!</p></div><div class="metrics"><div class="metric"><strong>${data.history.length}</strong><small>Sessões</small></div><div class="metric"><strong>${streak()}</strong><small>Dias de sequência</small></div></div>${coachFeedbackForm()}<button class="primary cta" data-done="1">Voltar ao início</button>`}else{app.innerHTML=screen==='inicio'?home():screen==='biblioteca'?libraryView():screen==='professor'?coachPage():screen==='treinos'?details():screen==='progresso'?summary():screen==='peso'?weightPage():screen==='ajustes'?settings():runner()}nav.classList.toggle('hidden',!!session||finished);nav.innerHTML=[['inicio','⌂','Início'],['professor','✦','Professor'],['treinos','◉','Treinos'],['progresso','▥','Progresso'],['ajustes','⚙','Ajustes']].map(([s,ic,n])=>`<button data-go="${s}" class="${screen===s?'active':''}"><span>${ic}</span>${n}</button>`).join('');$('#streak').textContent=streak()?`Sequência: ${streak()} dia(s)`:'Treine no seu ritmo';if(session)tick()}
 document.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.min){data.duration=Number(b.dataset.min);save();render()}
 else if(b.dataset.phase&&!session){let phase=b.dataset.phase;screen='treinos';render();const i=phases.indexOf(phase);if(i>=0){const el=document.getElementById('stage-'+i);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}}
@@ -235,9 +273,9 @@ else if(b.dataset.libPage!==undefined&&!session){libraryPage=Math.min(37,Math.ma
 else if(b.dataset.coachDay!==undefined&&!session){data.coach.selectedDay=Number(b.dataset.coachDay);data.coach.selectedDate=new Date().toLocaleDateString('sv-SE');save();render()}
 else if(b.dataset.coachStart&&!session){start(true)}
 else if(b.dataset.start)start()
-else if(b.dataset.pause&&session){if(!session.paused){session.at=elapsed();session.paused=true;quiet()}else{session.mark=Date.now();session.paused=false}session.lastBeepSecond=null;render()}
-else if(b.dataset.step&&session){let e=elapsed(),idx=indexAt(e),s=session.steps[idx];session.at=b.dataset.step==='next'?s.end:(e-s.start>3?s.start:session.steps[Math.max(0,idx-1)].start);session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;if(session.at>=session.total)end();else{announceStep(session.steps[session.index]);render()}}
-else if(b.dataset.stop&&confirm('Encerrar treino sem registrar a sessão?')){quiet();releaseAwake();session=null;clearInterval(pulse);pulse=null;screen='inicio';render()}
+else if(b.dataset.pause&&session){if(!session.paused){session.at=elapsed();session.paused=true;quiet()}else{session.mark=Date.now();session.paused=false}session.lastBeepSecond=null;checkpoint();if(!session.paused)keepAwake();render()}
+else if(b.dataset.step&&session){let e=elapsed(),idx=indexAt(e),s=session.steps[idx];session.at=b.dataset.step==='next'?s.end:(e-s.start>3?s.start:session.steps[Math.max(0,idx-1)].start);session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;if(session.at>=session.total)end();else{checkpoint();announceStep(session.steps[session.index]);render()}}
+else if(b.dataset.stop&&confirm('Encerrar treino sem registrar a sessão?')){quiet();releaseAwake();session=null;clearCheckpoint();clearInterval(pulse);pulse=null;screen='inicio';render()}
 else if(b.dataset.mute&&session){let wantOff=data.voice||data.sound;data.voice=!wantOff;data.sound=!wantOff;save();if(!wantOff){enableSound();announceStep(session.steps[indexAt(elapsed())]);}else quiet();render()}
 else if(b.dataset.done){finished=false;finishedCoachId=null;screen='inicio';render()}
 else if(b.dataset.export){try{let payload=VivaBackup.serialize(data),blob=new Blob([payload],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='viva-backup-'+new Date().toLocaleDateString('sv-SE')+'.json';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),4000)}catch(err){alert('Falha ao gerar backup. Confira as permissões do navegador.');}}
@@ -275,11 +313,13 @@ if(e.target.id==='viva-import-file'){
 }
 if(e.target.id==='low'){data.low=e.target.checked;save()}if(e.target.id==='coachmini'){data.coach.gear.mini=e.target.checked;save();render()}if(e.target.id==='coachlong'){data.coach.gear.long=e.target.checked;save();render()}if(e.target.id==='sound'){data.sound=e.target.checked;save()}if(e.target.id==='voice'){data.voice=e.target.checked;save()}if(e.target.id==='countdown'){data.countdown=e.target.checked;save()}if(e.target.id==='volume'){data.volume=Number(e.target.value);save();render()}});
 document.addEventListener('input',e=>{if(e.target.id==='volume'){let out=$('#volume-value');if(out)out.textContent=Math.round(Number(e.target.value)*100)+'%'}});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&session){keepAwake();tick()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){suspendWorkout()}else if(session){render()}});
+window.addEventListener('pagehide',suspendWorkout);
 function onlineBanner(){const el=$('#offline-banner');if(el)el.classList.toggle('visible',navigator.onLine===false)}
 window.addEventListener('online',onlineBanner);window.addEventListener('offline',onlineBanner);
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 onlineBanner();
+restoreWorkout();
 render();
 })();
 </script></body></html>
