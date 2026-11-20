@@ -53,57 +53,81 @@ function weekKey(today){const d=dateOnly(today);d.setDate(d.getDate()-(d.getDay(
 function getDay(day){return DAYS[Math.min(4,Math.max(0,day))]}
 function movesFor(day,week,gear={},low=true,weightTrend='indefinida'){
  const pool=POOLS[day]||POOLS[0],allowed=pool.filter(k=>{const mode=M[k][2];return mode==='body'||mode==='mini'&&gear.mini||mode==='long'&&gear.long});
- const first=allowed.slice(0,2),tail=allowed.slice(2);
- const off=((week-1)*3+day)%Math.max(1,tail.length);
- const varied=Array.from({length:Math.min(7,tail.length)},(_,i)=>tail[(off+i*3)%tail.length]).filter((x,i,a)=>a.indexOf(x)===i);
- const selected=[...first,...varied,...tail].filter((x,i,a)=>a.indexOf(x)===i).slice(0,Math.min(10,allowed.length));
- if(weightTrend==='subindo' && (day===1||day===3) && !selected.includes('march'))selected.splice(2,0,'march');
- return selected.map(k=>{let [name,hint,mode]=M[k];
+ const anchor=allowed.slice(0,2),accessories=allowed.slice(2);
+ // A parte principal se mantém para acompanhar evolução; acessórios variam por semana.
+ let seed=(((Math.max(1,week)*2654435761)^(day*1013904223))>>>0);
+ const varied=[...accessories];
+ for(let i=varied.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[varied[i],varied[j]]=[varied[j],varied[i]];}
+ const chosen=[...anchor,...varied.slice(0,Math.max(0,10-anchor.length))];
+ return chosen.map(k=>{let [name,hint,mode]=M[k];
    if(k==='skipping'){name=low?'Skipping sem salto':'Skipping';hint=low?'Marche elevando os joelhos sem saltar.':'Corra no lugar com passos leves; diminua o impacto se necessário.'}
    if(k==='imaginary'){name=low?'Corda imaginária sem saltar':'Pular corda imaginária';hint=low?'Gire os punhos e alterne os pés sem salto.':'Gire os punhos e salte baixo, suavemente, se estiver confortável.'}
-   return {name,hint,gear:mode};
+   return {id:k,name,hint,gear:mode};
  });
 }
 function getPerformance(history=[],coach={},today=new Date()){
- const last14=new Date(dateOnly(today));last14.setDate(last14.getDate()-14);
- const last28=new Date(dateOnly(today));last28.setDate(last28.getDate()-28);
- const sessions=history.filter(x=>x.coach&&x.date&&new Date(x.date)<=today);
- const c14=sessions.filter(x=>new Date(x.date)>=last14).length;
- const c28=sessions.filter(x=>new Date(x.date)>=last28).length;
+ const date=dateOnly(today),d7=new Date(date),d14=new Date(date),d28=new Date(date);
+ d7.setDate(d7.getDate()-7);d14.setDate(d14.getDate()-14);d28.setDate(d28.getDate()-28);
+ const valid=history.filter(x=>x&&x.coach&&x.date&&!Number.isNaN(Date.parse(x.date))&&new Date(x.date)<=today).sort((a,b)=>new Date(a.date)-new Date(b.date));
+ const c14=new Set(valid.filter(x=>new Date(x.date)>=d14).map(x=>x.day)).size;
+ const c28=new Set(valid.filter(x=>new Date(x.date)>=d28).map(x=>x.day)).size;
  const feedback=coach.feedback||{};
- const vals=sessions.filter(x=>feedback[x.coachId]).slice(-5).map(x=>feedback[x.coachId]);
- const pain=vals.some(x=>x.pain);
- const highFatigue=vals.length>0 && vals.some(x=>x.effort>=8);
- const checkins=(coach.checkins||[]).slice(-2);
- const sore=checkins.some(x=>x.soreness>=3||x.pain);
- return {c14,c28,pain,highFatigue,sore,ready:!(pain||highFatigue||sore)};
+ const recent=valid.filter(x=>new Date(x.date)>=d7&&feedback[x.coachId]).map(x=>feedback[x.coachId]);
+ const last=recent.at(-1)||null;
+ const pain=!!last?.pain;
+ const highFatigue=!!last&&Number(last.effort)>=8;
+ const currentCheckin=(coach.checkins||[]).filter(x=>x.day&&!Number.isNaN(Date.parse(x.day))&&dateOnly(x.day)>=d7&&dateOnly(x.day)<=date).sort((a,b)=>a.day.localeCompare(b.day)).at(-1)||null;
+ const sore=!!currentCheckin&&(Number(currentCheckin.soreness)>=3||!!currentCheckin.pain);
+ const lowEnergy=!!currentCheckin&&Number(currentCheckin.energy)<=2;
+ return {c14,c28,pain,highFatigue,sore,lowEnergy,ready:!(pain||highFatigue||sore||lowEnergy),latestEffort:last?Number(last.effort):null};
 }
 function duration(week,history,coach,today=new Date()){
- const perf=getPerformance(history,coach,today);
- if(!perf.ready)return 20;
- if(week<=2)return 20;
- if(week<=4)return perf.c14>=4?30:20;
- if(week<=8)return perf.c14>=4?30:20;
- return perf.c28>=13?45:perf.c14>=4?30:20;
+ const p=getPerformance(history,coach,today);
+ if(!p.ready||week<=2)return 20;
+ if(week<=8)return p.c14>=4?30:20;
+ // Só propõe 45 minutos após adaptação prolongada e frequência sustentada.
+ return week>=13&&p.c28>=14&&p.latestEffort!==null&&p.latestEffort<=6?45:p.c14>=4?30:20;
 }
 function weightsTrend(weighIns=[]){
- const list=[...weighIns].filter(x=>Number.isFinite(Number(x.kg))&&/^\d{4}-\d{2}-\d{2}$/.test(x.day)).sort((a,b)=>a.day.localeCompare(b.day));
+ const list=[...weighIns].filter(x=>x&&Number.isFinite(Number(x.kg))&&/^\d{4}-\d{2}-\d{2}$/.test(x.day)).sort((a,b)=>a.day.localeCompare(b.day));
  if(list.length<3)return 'indefinida';
- const three=list.slice(-3);
+ const three=list.slice(-3).map(x=>({day:x.day,kg:Number(x.kg)}));
  const span=(new Date(three[2].day+'T12:00:00')-new Date(three[0].day+'T12:00:00'))/86400000;
- if(span<12)return 'indefinida';
+ const gap1=(new Date(three[1].day+'T12:00:00')-new Date(three[0].day+'T12:00:00'))/86400000;
+ const gap2=(new Date(three[2].day+'T12:00:00')-new Date(three[1].day+'T12:00:00'))/86400000;
+ if(span<12||gap1<5||gap2<5)return 'indefinida';
  const d1=three[1].kg-three[0].kg,d2=three[2].kg-three[1].kg,total=three[2].kg-three[0].kg;
- if(d1>0.1&&d2>0.1&&total>=0.5)return 'subindo';
- if(d1<-.1&&d2<-.1&&total<=-.5)return 'descendo';
+ const change=Math.max(.5,three[0].kg*.005);
+ if(d1>.1&&d2>.1&&total>=change)return 'subindo';
+ if(d1<-.1&&d2<-.1&&total<=-change)return 'descendo';
  return 'oscilando';
 }
 function guidance(week,perf,trend){
- if(!perf.ready)return 'Ajuste de recuperação: reduza a intensidade, prefira exercícios sem impacto e procure orientação se houver dor.';
- if(week<=2)return 'Adaptação inicial: priorize aprender os movimentos. Três dias de força são a base; cardio leve é opcional.';
- if(trend==='subindo')return 'Houve alta persistente em três registros. O treino terá mais variedade aeróbica leve, sem deixar a musculação de lado. Uma pesagem isolada não altera o plano.';
- if(trend==='descendo')return 'Tendência de redução de peso: mantenha a musculação para desenvolver força. Aumentos de dificuldade dependem da recuperação.';
- if(week>=5)return 'Revisão do ciclo: mantenha exercícios principais para acompanhar força e varie os complementares conforme desempenho.';
- return 'Continue com constância. O professor usa frequência, recuperação e tendência de peso, não apenas a balança.';
+ if(perf.pain||perf.sore)return 'Você registrou dor ou desconforto importante. Não force o treino: descanse e procure orientação profissional se persistir.';
+ if(perf.highFatigue||perf.lowEnergy)return 'A recuperação está pedindo atenção. Hoje o professor recomenda intensidade leve e mais descanso.';
+ if(week<=2)return 'Adaptação inicial: aprenda os movimentos e respeite os intervalos. Os dias leves são opcionais.';
+ if(trend==='subindo')return 'O peso subiu em registros semanais consecutivos. Vamos acompanhar cintura, frequência e hábitos antes de mudar o treino; força continua prioritária.';
+ if(trend==='descendo')return 'Seu peso apresenta redução gradual. Continue protegendo a massa muscular com exercícios de força e recuperação adequada.';
+ if(week>=5)return 'Revisão do ciclo: preserve os exercícios principais para medir força e varie alguns complementares sem perder consistência.';
+ return 'Seu progresso é avaliado por treinos concluídos, esforço percebido, recuperação e tendência de peso.';
 }
-g.VivaCoach=Object.freeze({DAYS,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,daysSince});
+function prescription(week,day,history=[],coach={},today=new Date()){
+ const perf=getPerformance(history,coach,today),minutes=duration(week,history,coach,today);
+ const strength=(DAYS[day]||DAYS[0]).kind==='Força';
+ const feedback=coach.feedback||{};
+ const recent=history.filter(x=>x?.coach&&x.coachId&&x.date&&Date.parse(x.date)<=today.getTime()&&DAYS[x.coachDay]?.kind==='Força'&&feedback[x.coachId])
+   .sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(-3).map(x=>feedback[x.coachId]);
+ const lastTwo=recent.slice(-2);
+ const goodForm=lastTwo.every(x=>!x.pain&&x.technique!=='insegura');
+ const easy=week>2&&strength&&perf.ready&&lastTwo.length===2&&goodForm&&lastTwo.every(x=>Number(x.effort)<=5);
+ const difficult=lastTwo.some(x=>Number(x.effort)>=8||x.technique==='insegura'||x.pain);
+ const loadHint=!strength?'Mantenha um ritmo em que seja possível falar frases curtas e faça pausas se precisar.'
+  :!perf.ready||difficult?'Prefira resistência mais leve e movimentos controlados. Não avance a tensão hoje.'
+  :easy?'Se os dois últimos treinos de força foram leves e a técnica está segura, experimente uma tensão um pouco maior, sem forçar.'
+  :'Escolha uma resistência que permita repetir cada movimento com técnica e esforço moderado. Mantenha a tensão até dominar a execução.';
+ const effortTarget=perf.ready?'Esforço percebido sugerido: de leve a moderado, aproximadamente 4–6/10.':'Hoje priorize a recuperação; se houver dor, interrompa e procure orientação.';
+ const phase=week<=2?'Adaptação':week<=4?'Consolidação':week<=8?'Desenvolvimento':'Evolução';
+ return {minutes,strength,phase,loadHint,effortTarget,ready:perf.ready,needsPainCare:perf.pain||perf.sore,progression:easy?'aumentar-opcional':difficult?'reduzir':'manter',c14:perf.c14,c28:perf.c28};
+}
+g.VivaCoach=Object.freeze({DAYS,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,prescription,daysSince});
 })(window);
