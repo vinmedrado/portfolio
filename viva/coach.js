@@ -117,7 +117,7 @@ function prescription(week,day,history=[],coach={},today=new Date()){
  const strength=(DAYS[day]||DAYS[0]).kind==='Força';
  const feedback=coach.feedback||{};
  const oldest=new Date(dateOnly(today));oldest.setDate(oldest.getDate()-28);
- const recent=history.filter(x=>x?.coach&&x.coachId&&x.date&&Number.isFinite(Date.parse(x.date))&&Date.parse(x.date)<=today.getTime()&&new Date(x.date)>=oldest&&DAYS[x.coachDay]?.kind==='Força'&&feedback[x.coachId])
+ const recent=history.filter(x=>x?.coach&&x.coachId&&x.date&&Number.isFinite(Date.parse(x.date))&&Date.parse(x.date)<=today.getTime()&&new Date(x.date)>=oldest&&DAYS[x.coachDay]?.kind==='Força'&&!x.coachRecovery&&feedback[x.coachId])
    .sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(-3).map(x=>feedback[x.coachId]);
  const lastTwo=recent.slice(-2);
  const goodForm=lastTwo.every(x=>!x.pain&&x.technique!=='insegura');
@@ -152,7 +152,7 @@ function sessionStats(history=[],today=new Date()){
  const thisWeek=valid.filter(x=>new Date(x.date)>=wk),thisMonth=valid.filter(x=>new Date(x.date)>=last28);
  return {totalCoach:valid.length,totalDays:new Set(valid.map(x=>x.day)).size,
  weekDays:new Set(thisWeek.map(x=>x.day)).size,weekMinutes:thisWeek.reduce((sum,x)=>sum+(Number(x.duration)||0),0),
- monthDays:new Set(thisMonth.map(x=>x.day)).size,strengthDays:new Set(thisWeek.filter(x=>DAYS[x.coachDay]?.kind==='Força').map(x=>x.day)).size};
+ monthDays:new Set(thisMonth.map(x=>x.day)).size,strengthDays:new Set(thisWeek.filter(x=>DAYS[x.coachDay]?.kind==='Força'&&!x.coachRecovery).map(x=>x.day)).size};
 }
 function cycleReview(coach={},history=[],weighIns=[],today=new Date()){
  const week=weekOf(coach,today),perf=getPerformance(history,coach,today),trend=weightsTrend(weighIns);
