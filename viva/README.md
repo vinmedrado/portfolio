@@ -13,6 +13,8 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 - **Biblioteca de 365 treinos distintos**: 73 semanas com 5 sequências por semana, navegáveis em 37 páginas. O programa de um ano de segunda a sexta tem cerca de 260 sessões previstas; a biblioteca oferece sequências adicionais e ampliações futuras.
 - **Professor virtual**: agenda de segunda a sexta (3 dias principais de força e 2 dias opcionais de cardio/mobilidade), aquecimento, treino e alongamento.
 - **Adaptação gradual**: sessões de 20 minutos no início; 30 e 45 minutos são sugeridos apenas conforme frequência, recuperação, esforço relatado e tempo de adaptação.
+- **Avaliação diária de prontidão**: antes de iniciar, o usuário informa energia, sono e desconfortos. O sistema pode manter a sessão, propor recuperação ativa de 20 minutos ou recomendar não treinar em caso de sinais de alerta. Sem diagnóstico médico.
+- **Diário individual de força**: após treinos de força, registra a dificuldade de dois exercícios principais e a resistência usada, sugerindo progressão somente após registros recentes favoráveis e execução segura.
 - **Ciclos de quatro semanas** com revisões de hábitos, tendência de peso, técnica e tolerância à resistência. Alguns exercícios básicos permanecem para acompanhar força.
 - **Mini bands e elásticos** opcionais e seleção de baixo impacto.
 - **Substituição de exercícios**: o usuário pode retirar movimentos dos próximos planos e reativá-los em Ajustes.
@@ -29,19 +31,21 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 |---|---|
 | `index.html` | Interface, navegação, treinos, cronômetro e progressos |
 | `coach.js` | Biblioteca de 365 combinações, intensidade, ciclos e recomendações |
+| `evolution.js` | Prontidão diária, recuperação ativa, progressão de força e leitura integrada de peso/cintura |
+| `evolution-ui.js` | Formulário diário, avaliação pós-treino e cartões de força |
 | `guide.js` | Guias de execução de 31 exercícios |
 | `visual.js` | Mascote e ilustrações vetoriais originais |
 | `backup.js` | Exportação, validação e restauração dos registros |
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (25 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (39 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
 ## Segurança, limitações e privacidade
 
-O VIVA é um orientador virtual baseado em regras, não uma avaliação clínica ou um personal trainer humano. Não diagnostica lesões, não determina uma dieta individual e não garante uma taxa de emagrecimento. O plano de força/cardio segue princípios gerais de atividade física e adaptação gradual, não é uma prescrição individual.
+O VIVA é um orientador virtual baseado em regras, não uma avaliação clínica ou um personal trainer humano. A avaliação diária é autorrelatada, não mede sinais vitais ou condições médicas; dor incomum, sintomas preocupantes e dor muscular intensa exigem precaução. Em caso de sintomas intensos ou súbitos, procure atendimento imediato. Não diagnostica lesões, não determina uma dieta individual e não garante uma taxa de emagrecimento. O plano de força/cardio segue princípios gerais de atividade física e adaptação gradual, não é uma prescrição individual.
 
 Os registros pessoais são salvos localmente no dispositivo pela chave `viva-functional-v2`; não existe backend, login ou sincronização automática entre celulares. Há também uma chave de sessão temporária para recuperação do treino. Limpar o armazenamento do navegador pode apagar os dados. Guarde o backup JSON em local privado, pois ele contém informações de saúde e treino e **não é criptografado**.
 
