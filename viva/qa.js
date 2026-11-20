@@ -3,7 +3,7 @@ function run(){
  const results=[];
  function test(name,fn){try{if(!fn())throw Error('A condição esperada não foi atendida.');results.push({name,pass:true})}
  catch(err){results.push({name,pass:false,error:String(err?.message||err)})}}
- const C=g.VivaCoach,B=g.VivaBackup,V=g.VivaVisual,G=g.VivaGuide;
+ const C=g.VivaCoach,B=g.VivaBackup,V=g.VivaVisual,G=g.VivaGuide,E=g.VivaEvolution,U=g.VivaEvolutionUI;
  const date=new Date('2026-11-20T12:00:00Z');
  test('Motor do professor disponível',()=>!!C&&C.DAYS.length===5);
  test('Biblioteca contém 365 treinos',()=>C.LIBRARY_SIZE===365);
@@ -34,6 +34,24 @@ function run(){
  test('Backup preserva substituições válidas',()=>B.parse(B.serialize(raw)).data.coach.excluded.join('|')==='miniWalk');
  test('Backup rejeita formatos desconhecidos',()=>{try{B.parse('{"format":"invalid","data":{}}');return false}catch{return true}});
  test('Backup descarta dados não permitidos',()=>B.parse(B.serialize({profile:{weighIns:[{day:'2026-11-20',kg:-55}]}})).stats.weighIns===0);
+
+ const dateLocal=new Date(2026,10,20,12),keyToday=E.dayKey(dateLocal);
+ const normal={day:keyToday,energy:4,sleep:8,soreness:0,pain:false,warning:false};
+ test('Avaliação diária exige respostas',()=>E.readiness(null,dateLocal).status==='pending'&&E.sanitizeReadiness({...normal,sleep:''},dateLocal)===null);
+ test('Avaliação liberada em condições habituais',()=>E.readiness(normal,dateLocal).canStart);
+ test('Dor incomum impede o início do treino',()=>E.readiness({...normal,pain:true},dateLocal).status==='stop');
+ test('Sintomas de alerta impedem o início',()=>E.readiness({...normal,warning:true},dateLocal).status==='stop');
+ test('Dor muscular intensa indica recuperação',()=>E.readiness({...normal,soreness:3},dateLocal).status==='rest');
+ test('Sono baixo adapta para 20 minutos',()=>E.readiness({...normal,sleep:5},dateLocal).durationCap===20);
+ test('Recuperação respeita exercícios excluídos',()=>{const x=E.adapt({duration:30,low:false,c:{excluded:['march','step']},d:{kind:'Força'},moves:[]},{...normal,energy:2},dateLocal);return x.duration===20&&x.moves.every(z=>z.gear==='body'&&!['march','step'].includes(z.id))});
+ const logs=[{id:'row',date:'2026-11-10T11:00:00Z',difficulty:'easy',band:'light',technique:'boa',pain:false},{id:'row',date:'2026-11-19T11:00:00Z',difficulty:'easy',band:'light',technique:'boa',pain:false}];
+ test('Dois registros seguros podem sugerir progressão',()=>E.exerciseAdvice('row',logs,dateLocal).status==='progress');
+ test('Treino difícil recomenda manter ou reduzir',()=>E.exerciseAdvice('row',[{...logs[1],difficulty:'hard'}],dateLocal).status==='reduce');
+ test('Cintura e peso são analisados sem diagnóstico',()=>E.weightWaistInsight([{day:'2026-10-01',kg:90},{day:'2026-10-08',kg:90},{day:'2026-11-20',kg:90}],[{day:'2026-10-01',waist:105},{day:'2026-11-20',waist:103}]).status==='waist');
+ test('Formulário diário renderiza no professor',()=>U.dailyCard({c:{readiness:null},today:dateLocal,readiness:E.readiness(null,dateLocal)}).includes('coach-readiness'));
+ test('Formulário pós-treino acompanha força',()=>U.strengthFields([{coachId:'a',coachAnchors:['squat','row']}],'a').includes('strength-difficulty-row'));
+ test('Backup preserva carga e movimentos principais',()=>{const d=B.parse(B.serialize({duration:20,coach:{strengthLogs:logs},history:[{coach:true,coachDay:0,coachAnchors:['squat','row'],date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20,coachWeek:1,coachId:'viva-1763640000000-9'}]})).data;return d.coach.strengthLogs.length===2&&d.history[0].coachAnchors.length===2});
+ test('Recuperação não é contabilizada como musculação',()=>C.sessionStats([{coach:true,coachRecovery:true,coachDay:0,date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20}],dateLocal).strengthDays===0);
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
