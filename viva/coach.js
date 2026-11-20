@@ -166,5 +166,6 @@ function cycleReview(coach={},history=[],weighIns=[],today=new Date()){
  return {week,cycle,weekOfCycle,due,status,summary,metric28:perf.c28,trend};
 }
 
-g.VivaCoach=Object.freeze({DAYS,LIBRARY_SIZE,catalogItem,catalogPage,sessionStats,cycleReview,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,prescription,daysSince});
+function getExercise(id){const x=M[id];return x?{id,name:x[0],hint:x[1],gear:x[2]}:null}
+g.VivaCoach=Object.freeze({DAYS,LIBRARY_SIZE,catalogItem,catalogPage,sessionStats,cycleReview,getExercise,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,prescription,daysSince});
 })(window);
