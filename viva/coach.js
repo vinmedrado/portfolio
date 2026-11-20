@@ -115,7 +115,8 @@ function prescription(week,day,history=[],coach={},today=new Date()){
  const perf=getPerformance(history,coach,today),minutes=duration(week,history,coach,today);
  const strength=(DAYS[day]||DAYS[0]).kind==='Força';
  const feedback=coach.feedback||{};
- const recent=history.filter(x=>x?.coach&&x.coachId&&x.date&&Date.parse(x.date)<=today.getTime()&&DAYS[x.coachDay]?.kind==='Força'&&feedback[x.coachId])
+ const oldest=new Date(dateOnly(today));oldest.setDate(oldest.getDate()-28);
+ const recent=history.filter(x=>x?.coach&&x.coachId&&x.date&&Number.isFinite(Date.parse(x.date))&&Date.parse(x.date)<=today.getTime()&&new Date(x.date)>=oldest&&DAYS[x.coachDay]?.kind==='Força'&&feedback[x.coachId])
    .sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(-3).map(x=>feedback[x.coachId]);
  const lastTwo=recent.slice(-2);
  const goodForm=lastTwo.every(x=>!x.pain&&x.technique!=='insegura');
