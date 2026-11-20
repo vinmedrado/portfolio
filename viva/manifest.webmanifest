@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "VIVA — Treino em Casa",
+  "short_name": "VIVA",
+  "description": "Treino funcional em casa com professor virtual e acompanhamento de evolução.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffaf6",
+  "theme_color": "#ff702f",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
