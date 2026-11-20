@@ -11,7 +11,7 @@ function normalize(input){
   low:input.low!==false,sound:input.sound!==false,voice:input.voice!==false,countdown:input.countdown!==false,
   volume:number(input.volume,0,1,.45),history:[],
   profile:{heightCm:null,age:null,weighIns:[]},
-  coach:{startedAt:null,gear:{mini:false,long:false},excluded:[],checkins:[],feedback:{},selectedDay:null,selectedDate:null}
+  coach:{startedAt:null,gear:{mini:false,long:false},excluded:[],checkins:[],feedback:{},readiness:null,strengthLogs:[],selectedDay:null,selectedDate:null}
  };
  const p=input.profile||{};
  d.profile.age=number(p.age,20,110);
@@ -30,7 +30,7 @@ function normalize(input){
   if(h.coach&&Number.isInteger(h.coachDay)&&h.coachDay>=0&&h.coachDay<=4){
    item.coach=true;item.coachDay=h.coachDay;
    item.coachWeek=number(h.coachWeek,1,600,1);
-   item.coachFocus=names[h.coachDay];
+   item.coachFocus=h.coachRecovery===true?'Movimento leve e mobilidade':names[h.coachDay];item.coachRecovery=h.coachRecovery===true;item.coachAnchors=(Array.isArray(h.coachAnchors)?h.coachAnchors:[]).filter(id=>typeof id==='string'&&!!g.VivaCoach?.getExercise(id)).slice(0,2);
    if(ID.test(h.coachId||''))item.coachId=h.coachId;
   }
   d.history.push(item);
@@ -41,6 +41,8 @@ function normalize(input){
  d.coach.excluded=[...new Set((Array.isArray(c.excluded)?c.excluded:[]).filter(id=>typeof id==='string'&&/^[a-zA-Z]{2,24}$/.test(id)&&(!g.VivaCoach||!!g.VivaCoach.getExercise(id))))].slice(0,40);
  d.coach.selectedDay=Number.isInteger(c.selectedDay)&&c.selectedDay>=0&&c.selectedDay<=4?c.selectedDay:null;
  d.coach.selectedDate=validDay(c.selectedDate)?c.selectedDate:null;
+ d.coach.readiness=g.VivaEvolution?.sanitizeReadiness(c.readiness,new Date())||null;
+ d.coach.strengthLogs=(Array.isArray(c.strengthLogs)?c.strengthLogs:[]).slice(-1000).map(x=>g.VivaEvolution?.sanitizeStrengthLog(x)).filter(Boolean).sort((a,b)=>a.date.localeCompare(b.date));
  const check=new Map();
  for(const x of Array.isArray(c.checkins)?c.checkins.slice(-1000):[]){
   if(!validDay(x?.day)||!validDay(x?.weekKey))continue;
