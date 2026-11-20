@@ -23,7 +23,7 @@ function adapt(base,raw,now=new Date()){
  const minutes=state.durationCap?Math.min(base.duration,state.durationCap):base.duration;
  let moves=base.moves,kind=base.d?.kind||'Funcional',title=base.d?.title||'Treino personalizado';
  if(state.recovery){
-  moves=RECOVERY.map(id=>C?.getExercise(id)).filter(Boolean);
+  moves=RECOVERY.map(id=>C?.getExercise(id)).filter(x=>x&&!(base.c?.excluded||[]).includes(x.id));
   kind='Recuperação ativa';title='Movimento leve e mobilidade';
  }
  return {...base,duration:minutes,low:base.low||state.low,moves,kind,title,readiness:state};
