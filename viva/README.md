@@ -1,34 +1,57 @@
 # VIVA — Treino em Casa
 
-Aplicativo web responsivo de treinos guiados, com professor virtual baseado em regras transparentes e salvamento local.
+PWA de treinos funcionais guiados com professor virtual baseado em regras explícitas, acompanhamento local e interface mobile.
 
 ## Publicação
 
-A pasta `viva/` é servida pelo GitHub Pages do repositório `vinmedrado/portfolio`, no endereço **https://vinmedrado.com/viva/**. O site principal do portfólio permanece intacto.
+- Aplicativo: **https://vinmedrado.com/viva/**
+- Repositório: `vinmedrado/portfolio` → pasta `viva/`
+- A publicação é feita pelo GitHub Pages. A página principal do portfólio permanece intacta.
 
-## Recursos
+## Funcionalidades da versão completa
 
-- Treinos de 20, 30 e 45 minutos, com aquecimento, circuito e alongamento.
-- Programa de segunda a sexta para retorno gradual à atividade física, com mini bands e elásticos opcionais.
-- Orientações por voz em português, cronômetro, bipes e controles de pausa/navegação.
-- Check-in de esforço, técnica, dor e recuperação; progressão de resistência baseada em dados recentes.
-- Contagem de dias únicos de treino, marcação de agenda semanal e progresso em ciclos.
-- Peso, IMC adulto e pesagens semanais com metas de referência, sem prazo final.
-- Mascote e ilustrações vetoriais originais, ilustrativas e não substitutas de demonstração profissional.
+- **Biblioteca de 365 treinos distintos**: 73 semanas com 5 sequências por semana, navegáveis em 37 páginas. O programa de um ano de segunda a sexta tem cerca de 260 sessões previstas; a biblioteca oferece sequências adicionais e ampliações futuras.
+- **Professor virtual**: agenda de segunda a sexta (3 dias principais de força e 2 dias opcionais de cardio/mobilidade), aquecimento, treino e alongamento.
+- **Adaptação gradual**: sessões de 20 minutos no início; 30 e 45 minutos são sugeridos apenas conforme frequência, recuperação, esforço relatado e tempo de adaptação.
+- **Ciclos de quatro semanas** com revisões de hábitos, tendência de peso, técnica e tolerância à resistência. Alguns exercícios básicos permanecem para acompanhar força.
+- **Mini bands e elásticos** opcionais e seleção de baixo impacto.
+- **Substituição de exercícios**: o usuário pode retirar movimentos dos próximos planos e reativá-los em Ajustes.
+- **Demonstrações**: ilustrações SVG esquemáticas, mascote original, 31 guias com preparação, execução, respiração, cuidados e alternativa simplificada.
+- **Cronômetro e áudio**: anúncios em pt-BR, bipes, contagem final, avanço manual, pausa e retomada.
+- **Proteção da integridade das sessões**: treino com muitos avanços manuais não é registrado como concluído. Ao sair do Safari, a sessão é pausada e recuperável após recarregar.
+- **Acompanhamento**: check-ins semanais (disposição, recuperação e cintura opcional), feedback pós-treino (esforço, execução e dor), pesagens e gráfico, referência de IMC adulto, painel das últimas oito semanas e histórico.
+- **Offline**: service worker guarda os arquivos principais após uma primeira visita com internet. O suporte em segundo plano e à voz depende do navegador e do sistema.
+- **Backup**: exportação e restauração validada de arquivo JSON, incluindo histórico, pesagens, professor e substituições.
 
 ## Estrutura
 
-- `index.html`: interface e cronômetro.
-- `coach.js`: planejamento e regras de progressão.
-- `visual.js`: mascote e desenhos esquemáticos de exercícios (SVG).
-- `backup.js`: exportação e importação de dados com validação de estrutura e campos.
-- `manifest.webmanifest`: instalação como aplicativo web.
-- `favicon.svg`: ícone original.
+| Arquivo | Função |
+|---|---|
+| `index.html` | Interface, navegação, treinos, cronômetro e progressos |
+| `coach.js` | Biblioteca de 365 combinações, intensidade, ciclos e recomendações |
+| `guide.js` | Guias de execução de 31 exercícios |
+| `visual.js` | Mascote e ilustrações vetoriais originais |
+| `backup.js` | Exportação, validação e restauração dos registros |
+| `sw.js` | Cache e funcionamento offline |
+| `manifest.webmanifest` | Configuração de aplicativo web instalável |
+| `favicon.svg` | Ícone do VIVA |
+| `qa.js`, `qa.html` | Bateria independente de regressão (25 verificações) |
 
-## Privacidade e limites
+A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
-A aplicação não possui conta, backend, nem sincronização entre dispositivos. Os registros são salvos no `localStorage` do navegador (chave `viva-functional-v2`) e não são publicados no repositório. Limpar dados do Safari pode apagar o histórico. O aplicativo oferece backup JSON em **Ajustes > Baixar backup do VIVA** e restauração validada. O usuário deve guardar o arquivo em local seguro; ele contém informações pessoais de saúde e treino. O programa é orientação geral de condicionamento e não substitui um educador físico ou profissional de saúde.
+## Segurança, limitações e privacidade
 
-## Desenvolvimento
+O VIVA é um orientador virtual baseado em regras, não uma avaliação clínica ou um personal trainer humano. Não diagnostica lesões, não determina uma dieta individual e não garante uma taxa de emagrecimento. O plano de força/cardio segue princípios gerais de atividade física e adaptação gradual, não é uma prescrição individual.
 
-Os arquivos são estáticos; não há build. Ao atualizar os arquivos nesta pasta, o GitHub Pages publica a nova versão preservando o endereço.
+Os registros pessoais são salvos localmente no dispositivo pela chave `viva-functional-v2`; não existe backend, login ou sincronização automática entre celulares. Há também uma chave de sessão temporária para recuperação do treino. Limpar o armazenamento do navegador pode apagar os dados. Guarde o backup JSON em local privado, pois ele contém informações de saúde e treino e **não é criptografado**.
+
+No iPhone, a voz e o cronômetro podem não continuar funcionando com a tela apagada; por isso o aplicativo pausa a sessão quando vai para segundo plano. Os desenhos são ilustrativos e não substituem instruções individualizadas.
+
+## Fundamentos consultados
+
+- [American College of Sports Medicine (2026): Resistance Training Prescription for Muscle Function, Hypertrophy, and Physical Performance](https://doi.org/10.1249/MSS.0000000000003897)
+- [Organização Mundial da Saúde: recomendações para adultos sobre atividade física](https://www.who.int/europe/news-room/fact-sheets/item/physical-activity)
+
+## Desenvolvimento e publicação
+
+Aplicativo estático, sem dependências de build. Os arquivos desta pasta são publicados por GitHub Pages. Atualizar a pasta mantém o mesmo endereço e não modifica a raiz do portfólio.
