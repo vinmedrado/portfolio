@@ -11,7 +11,7 @@ function normalize(input){
   low:input.low!==false,sound:input.sound!==false,voice:input.voice!==false,countdown:input.countdown!==false,
   volume:number(input.volume,0,1,.45),history:[],
   profile:{heightCm:null,age:null,weighIns:[]},
-  coach:{startedAt:null,gear:{mini:false,long:false},checkins:[],feedback:{},selectedDay:null,selectedDate:null}
+  coach:{startedAt:null,gear:{mini:false,long:false},excluded:[],checkins:[],feedback:{},selectedDay:null,selectedDate:null}
  };
  const p=input.profile||{};
  d.profile.age=number(p.age,20,110);
@@ -38,6 +38,7 @@ function normalize(input){
  const c=input.coach||{};
  d.coach.startedAt=validISO(c.startedAt)?new Date(c.startedAt).toISOString():null;
  d.coach.gear={mini:!!c.gear?.mini,long:!!c.gear?.long};
+ d.coach.excluded=[...new Set((Array.isArray(c.excluded)?c.excluded:[]).filter(id=>typeof id==='string'&&/^[a-zA-Z]{2,24}$/.test(id)&&(!g.VivaCoach||!!g.VivaCoach.getExercise(id))))].slice(0,40);
  d.coach.selectedDay=Number.isInteger(c.selectedDay)&&c.selectedDay>=0&&c.selectedDay<=4?c.selectedDay:null;
  d.coach.selectedDate=validDay(c.selectedDate)?c.selectedDate:null;
  const check=new Map();
