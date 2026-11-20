@@ -53,12 +53,13 @@ function weekKey(today){const d=dateOnly(today);d.setDate(d.getDate()-(d.getDay(
 function getDay(day){return DAYS[Math.min(4,Math.max(0,day))]}
 function movesFor(day,week,gear={},low=true,weightTrend='indefinida'){
  const pool=POOLS[day]||POOLS[0],allowed=pool.filter(k=>{const mode=M[k][2];return mode==='body'||mode==='mini'&&gear.mini||mode==='long'&&gear.long});
- const anchor=allowed.slice(0,2),accessories=allowed.slice(2);
- // A parte principal se mantém para acompanhar evolução; acessórios variam por semana.
- let seed=(((Math.max(1,week)*2654435761)^(day*1013904223))>>>0);
- const varied=[...accessories];
- for(let i=varied.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[varied[i],varied[j]]=[varied[j],varied[i]];}
- const chosen=[...anchor,...varied.slice(0,Math.max(0,10-anchor.length))];
+ const anchor=allowed.slice(0,2),remaining=allowed.slice(2);
+ // As três primeiras posições complementares identificam unicamente cada semana da biblioteca.
+ const picked=[];let rank=Math.max(0,Math.floor(week)-1);
+ for(let i=0;i<Math.min(3,remaining.length);i++){const idx=rank%remaining.length;rank=Math.floor(rank/remaining.length);picked.push(remaining.splice(idx,1)[0]);}
+ let seed=((Math.imul(week+1,2654435761)^Math.imul(day+1,2246822519))>>>0)||1;
+ for(let i=remaining.length-1;i>0;i--){seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;const idx=(seed>>>0)%(i+1);[remaining[idx],remaining[i]]=[remaining[i],remaining[idx]];}
+ const chosen=[...anchor,...picked,...remaining].slice(0,Math.min(10,allowed.length));
  return chosen.map(k=>{let [name,hint,mode]=M[k];
    if(k==='skipping'){name=low?'Skipping sem salto':'Skipping';hint=low?'Marche elevando os joelhos sem saltar.':'Corra no lugar com passos leves; diminua o impacto se necessário.'}
    if(k==='imaginary'){name=low?'Corda imaginária sem saltar':'Pular corda imaginária';hint=low?'Gire os punhos e alterne os pés sem salto.':'Gire os punhos e salte baixo, suavemente, se estiver confortável.'}
@@ -130,5 +131,40 @@ function prescription(week,day,history=[],coach={},today=new Date()){
  const phase=week<=2?'Adaptação':week<=4?'Consolidação':week<=8?'Desenvolvimento':'Evolução';
  return {minutes,strength,phase,loadHint,effortTarget,ready:perf.ready,needsPainCare:perf.pain||perf.sore,progression:easy?'aumentar-opcional':difficult?'reduzir':'manter',c14:perf.c14,c28:perf.c28};
 }
-g.VivaCoach=Object.freeze({DAYS,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,prescription,daysSince});
+
+const LIBRARY_SIZE=365;
+function catalogItem(number,gear={mini:true,long:true},low=true){
+ const n=Math.max(1,Math.min(LIBRARY_SIZE,Math.floor(Number(number)||1)));
+ const day=(n-1)%5,week=Math.floor((n-1)/5)+1,d=DAYS[day];
+ return {number:n,week,day,kind:d.kind,title:d.title,required:d.required,
+  moves:movesFor(day,week,gear,low),phase:week<=2?'Adaptação':week<=4?'Consolidação':week<=8?'Desenvolvimento':'Evolução',
+  plannedTime:week<=2?20:week<=12?30:45};
+}
+function catalogPage(page=1,pageSize=10,gear={},low=true){
+ const size=Math.max(5,Math.min(25,Number(pageSize)||10)),pages=Math.ceil(LIBRARY_SIZE/size);
+ const current=Math.min(pages,Math.max(1,Math.floor(Number(page)||1))),start=(current-1)*size;
+ return {page:current,pages,total:LIBRARY_SIZE,items:Array.from({length:Math.min(size,LIBRARY_SIZE-start)},(_,i)=>catalogItem(start+i+1,gear,low))};
+}
+function sessionStats(history=[],today=new Date()){
+ const wk=dateOnly(today),last28=dateOnly(today);
+ wk.setDate(wk.getDate()-(wk.getDay()+6)%7);last28.setDate(last28.getDate()-27);
+ const valid=history.filter(x=>x?.coach&&x.date&&Number.isFinite(Date.parse(x.date))&&new Date(x.date)<=today);
+ const thisWeek=valid.filter(x=>new Date(x.date)>=wk),thisMonth=valid.filter(x=>new Date(x.date)>=last28);
+ return {totalCoach:valid.length,totalDays:new Set(valid.map(x=>x.day)).size,
+ weekDays:new Set(thisWeek.map(x=>x.day)).size,weekMinutes:thisWeek.reduce((sum,x)=>sum+(Number(x.duration)||0),0),
+ monthDays:new Set(thisMonth.map(x=>x.day)).size,strengthDays:new Set(thisWeek.filter(x=>DAYS[x.coachDay]?.kind==='Força').map(x=>x.day)).size};
+}
+function cycleReview(coach={},history=[],weighIns=[],today=new Date()){
+ const week=weekOf(coach,today),perf=getPerformance(history,coach,today),trend=weightsTrend(weighIns);
+ const cycle=Math.floor((week-1)/4)+1,weekOfCycle=((week-1)%4)+1,due=weekOfCycle===4||weekOfCycle===1&&week>1;
+ const status=!perf.ready?'recuperacao':perf.c28<6?'construir-habito':'evoluir';
+ const summary=status==='recuperacao'?'Há sinais recentes de recuperação insuficiente. Reduza a intensidade e não force movimentos dolorosos.'
+ :status==='construir-habito'?'Antes de aumentar a carga, priorize criar uma rotina sustentável por algumas semanas.'
+ :trend==='subindo'?'Acompanhe a tendência de peso, cintura, alimentação e frequência. Não aumente o cardio abruptamente.'
+ :trend==='descendo'?'Boa tendência de redução. Preserve o fortalecimento muscular e progrida conforme a recuperação.'
+ :'Você mantém regularidade. Mantenha exercícios fundamentais e varie complementares conforme o esforço.';
+ return {week,cycle,weekOfCycle,due,status,summary,metric28:perf.c28,trend};
+}
+
+g.VivaCoach=Object.freeze({DAYS,LIBRARY_SIZE,catalogItem,catalogPage,sessionStats,cycleReview,getDay,weekOf,weekKey,movesFor,getPerformance,duration,weightsTrend,guidance,prescription,daysSince});
 })(window);
