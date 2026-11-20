@@ -1,7 +1,7 @@
 (function(g){'use strict';
 const reDate=/^\d{4}-\d{2}-\d{2}$/;
 const dayKey=(now=new Date())=>{const d=new Date(now);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
-const valid=(x,min,max)=>Number.isInteger(Number(x))&&Number(x)>=min&&Number(x)<=max?Number(x):null;
+const valid=(x,min,max)=>x!==null&&x!==undefined&&x!==''&&Number.isInteger(Number(x))&&Number(x)>=min&&Number(x)<=max?Number(x):null;
 function sanitizeReadiness(raw,now=new Date()){
  if(!raw||typeof raw!=='object')return null;
  const energy=valid(raw.energy,1,5),soreness=valid(raw.soreness,0,3),sleep=valid(raw.sleep,0,12);
