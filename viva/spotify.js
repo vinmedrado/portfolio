@@ -88,14 +88,17 @@ function coverMarkup(url,small=false){
  return '<span class="'+cls+'">'+(safeImage(url)?'<img src="'+esc(url)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span class="viva-spot-art-fallback">'+spotIcon('music')+'</span>')+'</span>';
 }
 function button(action,label,disabled=false,variant=''){
- return '<button type="button" class="viva-spot-button '+esc(variant)+'" data-spot="'+esc(action)+'"'+(disabled?' disabled':'')+'>'+label+'</button>';
+ const aria={prev:'Faixa anterior',next:'Próxima faixa',play:playing?'Pausar música':'Reproduzir música',
+  toggle:expanded?'Fechar player Spotify':'Abrir player Spotify',list:'Atualizar playlists',activate:'Ativar reprodução do Spotify'};
+ return '<button type="button" class="viva-spot-button '+esc(variant)+'" data-spot="'+esc(action)+'"'
+  +(aria[action]?' aria-label="'+aria[action]+'"':'')+(disabled?' disabled':'')+'>'+label+'</button>';
 }
 function playlistCards(){
  if(!playlists.length)return '<div class="viva-spot-empty">Toque em <b>Minhas playlists</b> para carregar sua biblioteca.</div>';
  return '<div class="viva-spot-list">'+playlists.map(p=>{
   const active=p.id===selected();
   return '<button type="button" data-spot-id="'+esc(p.id)+'" class="viva-spot-playlist'+(active?' is-selected':'')+'" aria-pressed="'+active+'">'
-   +coverMarkup(p.image,true)+'<span class="viva-spot-playlist-label"><b>'+esc(p.name)+'</b><small>'+(active?'SELECIONADA · TOQUE PARA TOCAR':esc(p.owner||'Playlist do Spotify'))+'</small></span>'
+   +coverMarkup(p.image,true)+'<span class="viva-spot-playlist-label"><b>'+esc(p.name)+'</b><small>'+(active&&playing&&lastStarted===p.id?'TOCANDO AGORA':active?'SELECIONADA · TOQUE PARA TOCAR':esc(p.owner||'Playlist do Spotify'))+'</small></span>'
    +'<span class="viva-spot-playlist-action">'+spotIcon(active&&playing?'equalizer':'play')+'</span></button>'
  }).join('')+'</div>';
 }
@@ -164,7 +167,7 @@ function message(x){notice=String(x||'');draw()}
 function embed(){const id=selected();if(!id){message('Escolha uma playlist.');return}const frame=dock.querySelector('[data-spot-frame]');embedOpen=!embedOpen;
  if(embedOpen&&frame&&!frame.querySelector('iframe')){const el=document.createElement('iframe');el.src='https://open.spotify.com/embed/playlist/'+id;el.title='Spotify — playlist do treino';el.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');el.style.cssText='width:100%;height:152px;border:0;border-radius:12px';frame.appendChild(el)}
  expanded=true;message(embedOpen?'Use Play no player oficial. No iPhone, pode abrir o app Spotify.':'')}
-function savePlaylist(raw){const id=playlistId(raw);if(!id){message('Cole um link de playlist Spotify, não de álbum ou música.');return false}saved(PLAYLIST,id);lastStarted='';embedOpen=false;const frame=dock?.querySelector('[data-spot-frame]');if(frame)frame.innerHTML='';message('Playlist salva.');return true}
+function savePlaylist(raw){const id=playlistId(raw);if(!id){message('Cole um link de playlist Spotify, não de álbum ou música.');return false}saved(PLAYLIST,id);lastStarted='';const chosen=playlists.find(p=>p.id===id);playlistName=chosen?.name||'Playlist escolhida';playlistArt=chosen?.image||'';embedOpen=false;const frame=dock?.querySelector('[data-spot-frame]');if(frame)frame.innerHTML='';message('Playlist salva.');return true}
 function loadSDK(){if(g.Spotify?.Player)return Promise.resolve();if(sdkLoading)return sdkLoading;sdkLoading=new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('Tempo esgotado ao carregar o Spotify.')),14000);g.onSpotifyWebPlaybackSDKReady=()=>{clearTimeout(timeout);resolve()};const tag=document.createElement('script');tag.src='https://sdk.scdn.co/spotify-player.js';tag.async=true;tag.onerror=()=>{clearTimeout(timeout);reject(Error('SDK do Spotify indisponível.'))};document.head.appendChild(tag)}).catch(e=>{sdkLoading=null;throw e});return sdkLoading}
 async function activate(){if(!auth()){message('Conecte sua conta Premium primeiro.');return}if(!g.Spotify?.Player){message('Carregando SDK. Depois toque novamente em Ativar player.');await loadSDK().catch(e=>message(e.message));return}
  if(!player){player=new g.Spotify.Player({name:'VIVA - Música do treino',getOAuthToken:cb=>token().then(t=>cb(t||'')).catch(()=>cb('')),volume:.4});
@@ -184,6 +187,7 @@ async function startPlaylist(id){
   message('Playlist selecionada. Toque em Ativar player e depois na playlist para reproduzir.');
   return false;
  }
+ if(playing&&lastStarted===id){message('Esta playlist já está tocando.');return true}
  try{
   await api('/me/player/play?device_id='+encodeURIComponent(device),'PUT',{context_uri:'spotify:playlist:'+id});
   lastStarted=id;playing=true;message('Reproduzindo a playlist selecionada.');
