@@ -1,7 +1,7 @@
 (function(g){'use strict';
 const CLIENT='viva-spotify-client-v1',PLAYLIST='viva-spotify-playlist-v1',TOKENS='viva-spotify-session-v1',PKCE='viva-spotify-pkce-v1';
 const REDIRECT='https://vinmedrado.com/viva/', SCOPES='streaming user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative';
-let dock=null,player=null,device='',playlists=[],song='',artist='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null;
+let dock=null,player=null,device='',playlists=[],song='',artist='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='';
 const saved=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k)||'';v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch{return ''}};
 const temp=(k,v)=>{try{if(v===undefined)return sessionStorage.getItem(k)||'';v?sessionStorage.setItem(k,v):sessionStorage.removeItem(k)}catch{return ''}};
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -48,7 +48,7 @@ function message(x){notice=String(x||'');draw()}
 function embed(){const id=selected();if(!id){message('Escolha uma playlist.');return}const frame=dock.querySelector('[data-spot-frame]');embedOpen=!embedOpen;
  if(embedOpen&&frame&&!frame.querySelector('iframe')){const el=document.createElement('iframe');el.src='https://open.spotify.com/embed/playlist/'+id;el.title='Spotify — playlist do treino';el.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');el.style.cssText='width:100%;height:152px;border:0;border-radius:12px';frame.appendChild(el)}
  expanded=true;message(embedOpen?'Use Play no player oficial. No iPhone, pode abrir o app Spotify.':'')}
-function savePlaylist(raw){const id=playlistId(raw);if(!id){message('Cole um link de playlist Spotify, não de álbum ou música.');return false}saved(PLAYLIST,id);embedOpen=false;const frame=dock?.querySelector('[data-spot-frame]');if(frame)frame.innerHTML='';message('Playlist salva.');return true}
+function savePlaylist(raw){const id=playlistId(raw);if(!id){message('Cole um link de playlist Spotify, não de álbum ou música.');return false}saved(PLAYLIST,id);lastStarted='';embedOpen=false;const frame=dock?.querySelector('[data-spot-frame]');if(frame)frame.innerHTML='';message('Playlist salva.');return true}
 function loadSDK(){if(g.Spotify?.Player)return Promise.resolve();if(sdkLoading)return sdkLoading;sdkLoading=new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('Tempo esgotado ao carregar o Spotify.')),14000);g.onSpotifyWebPlaybackSDKReady=()=>{clearTimeout(timeout);resolve()};const tag=document.createElement('script');tag.src='https://sdk.scdn.co/spotify-player.js';tag.async=true;tag.onerror=()=>{clearTimeout(timeout);reject(Error('SDK do Spotify indisponível.'))};document.head.appendChild(tag)}).catch(e=>{sdkLoading=null;throw e});return sdkLoading}
 async function activate(){if(!auth()){message('Conecte sua conta Premium primeiro.');return}if(!g.Spotify?.Player){message('Carregando SDK. Depois toque novamente em Ativar player.');await loadSDK().catch(e=>message(e.message));return}
  if(!player){player=new g.Spotify.Player({name:'VIVA - Música do treino',getOAuthToken:cb=>token().then(t=>cb(t||'')).catch(()=>cb('')),volume:.4});
@@ -61,11 +61,14 @@ async function activate(){if(!auth()){message('Conecte sua conta Premium primeir
 }
 async function play(){if(!device){message('Ative o player primeiro.');return}if(!selected()){message('Escolha uma playlist.');return}
  try{player.activateElement?.();if(playing){await player.pause();playing=false;message('Música pausada.');return}
-  await api('/me/player/play?device_id='+encodeURIComponent(device),'PUT',{context_uri:'spotify:playlist:'+selected()});message('Reprodução iniciada. Se o Safari bloquear, toque em Reproduzir novamente.')
+  if(lastStarted===selected()&&typeof player.getCurrentState==='function'){
+   const currentState=await player.getCurrentState();if(currentState?.paused){await player.resume();playing=true;message('Música retomada.');return;}
+  }
+  await api('/me/player/play?device_id='+encodeURIComponent(device),'PUT',{context_uri:'spotify:playlist:'+selected()});lastStarted=selected();message('Reprodução solicitada. Se o Safari bloquear, toque em Reproduzir novamente.')
  }catch(e){message(e.message)}
 }
 async function myPlaylists(){try{const x=await api('/me/playlists?limit=30&offset=0');playlists=(x?.items||[]).filter(a=>playlistId(a?.id)).map(p=>({id:p.id,name:String(p.name||'Playlist').slice(0,85)}));message(playlists.length?'Escolha uma playlist.':'Nenhuma playlist encontrada. Cole um link.')}catch(e){message(e.message)}}
-function logout(){try{player?.disconnect()}catch{}player=null;device='';playing=false;song='';artist='';playlists=[];temp(TOKENS,'');temp(PKCE,'');message('Conta desconectada deste navegador.')}
+function logout(){try{player?.disconnect()}catch{}player=null;device='';playing=false;song='';artist='';playlists=[];lastStarted='';temp(TOKENS,'');temp(PKCE,'');message('Conta desconectada deste navegador.')}
 async function onClick(e){const b=e.target.closest('[data-spot],[data-spot-id]');if(!b)return;e.preventDefault();if(b.dataset.spotId){savePlaylist(b.dataset.spotId);return}switch(b.dataset.spot){
  case 'toggle':toggle();break;case 'login':await login();break;case 'activate':await activate();break;case 'list':await myPlaylists();break;case 'play':await play();break;case 'logout':logout();break;
  case 'prev':try{await player?.previousTrack()}catch{message('Não foi possível voltar.')}break;
