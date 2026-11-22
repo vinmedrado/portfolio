@@ -342,16 +342,17 @@ function suspendWorkout(){
 function indexAt(t){return Math.min(session.steps.length-1,session.steps.findIndex(x=>t<x.end)===-1?session.steps.length-1:session.steps.findIndex(x=>t<x.end))}
 function runner(){
  const e=elapsed(),idx=indexAt(e),s=session.steps[idx],next=session.steps[idx+1],logs=session.logs||[];
- const isSet=s.mode==='strength'&&!s.rest&&!!s.id;
- const saved=logs.find(x=>x.id===s.id&&x.setNumber===s.setNumber);
+ const activeSet=s.mode==='strength'&&!s.rest&&s.id?s:s.mode==='strength'&&s.rest&&idx>0&&session.steps[idx-1]?.mode==='strength'&&!session.steps[idx-1]?.rest?session.steps[idx-1]:null;
+ const isSet=!!activeSet;
+ const saved=activeSet?logs.find(x=>x.id===activeSet.id&&x.setNumber===activeSet.setNumber):null;
  const totalSets=session.steps.filter(x=>x.mode==='strength'&&!x.rest).length;
- const strengthForm=isSet?`<div class='viva-manual-set'><h3>${saved?'Série registrada':'Registrar série'}</h3>
+ const strengthForm=isSet?`<div class='viva-manual-set'><h3>${saved?'Série registrada':s.rest?'Registrar série anterior':'Registrar série'}</h3>
  <p>O VIVA não conta repetições automaticamente. Informe o que você realmente fez.</p>
- <div class='viva-manual-grid'><label>Repetições feitas<input id='set-reps' type='number' inputmode='numeric' min='1' max='30' value='${saved?.repsDone||parseInt(s.reps,10)||8}'></label>
+ <div class='viva-manual-grid'><label>Repetições feitas<input id='set-reps' type='number' inputmode='numeric' min='1' max='30' value='${saved?.repsDone||parseInt(activeSet.reps,10)||8}'></label>
  <label>Dificuldade<select id='set-difficulty'><option value='easy' ${saved?.difficulty==='easy'?'selected':''}>Fácil</option><option value='ok' ${!saved||saved.difficulty==='ok'?'selected':''}>Adequada</option><option value='hard' ${saved?.difficulty==='hard'?'selected':''}>Muito difícil</option></select></label></div>
  <div class='viva-manual-grid'><label>Resistência<select id='set-band'><option value='none' ${!saved||saved.band==='none'?'selected':''}>Sem elástico</option><option value='light' ${saved?.band==='light'?'selected':''}>Leve</option><option value='medium' ${saved?.band==='medium'?'selected':''}>Média</option><option value='heavy' ${saved?.band==='heavy'?'selected':''}>Forte</option></select></label>
  <label>Técnica<select id='set-technique'><option value='boa' ${!saved||saved.technique==='boa'?'selected':''}>Controlada</option><option value='insegura' ${saved?.technique==='insegura'?'selected':''}>Perdi a técnica</option></select></label></div>
- <button type='button' class='coach-save' data-log-set='1'>${saved?'Atualizar série e descansar':'Concluí a série · Descansar'}</button>
+ <button type='button' class='coach-save' data-log-set='1'>${saved?'Atualizar registro':s.rest?'Registrar a série':'Concluí a série · Descansar'}</button>
  <small>${logs.length} de ${totalSets} séries registradas</small></div>`:
  totalSets?`<p class='viva-manual-summary'>${logs.length} de ${totalSets} séries registradas manualmente</p>`:'';
  return `${header('Treino em andamento',session.coach?.mode==='strength'?'Séries e repetições':'Circuito de '+session.duration+' minutos')}
@@ -513,14 +514,18 @@ else if(b.dataset.walkRemove!==undefined&&!session){const idx=Number(b.dataset.w
 else if(b.dataset.coachStart&&!session){if(coachModel().moves.length<3){alert('Reative alguns exercícios em Ajustes para continuar.');return;}start(true)}
 else if(b.dataset.start)start()
 else if(b.dataset.logSet&&session){
- const now=elapsed(),step=session.steps[indexAt(now)];
- if(!step||step.mode!=='strength'||step.rest||!step.id)return;
- const log=VivaExercises.sanitizeSetLog({id:step.id,setNumber:step.setNumber,repsDone:$('#set-reps')?.value,
+ const now=elapsed(),idx=indexAt(now),step=session.steps[idx];
+ const active=step?.mode==='strength'&&!step.rest?step:step?.mode==='strength'&&step.rest&&idx>0?session.steps[idx-1]:null;
+ if(!active||active.mode!=='strength'||active.rest||!active.id)return;
+ const log=VivaExercises.sanitizeSetLog({id:active.id,setNumber:active.setNumber,repsDone:$('#set-reps')?.value,
   band:$('#set-band')?.value,difficulty:$('#set-difficulty')?.value,technique:$('#set-technique')?.value,date:new Date().toISOString()});
  if(!log){alert('Informe de 1 a 30 repetições para registrar a série.');return;}
  session.logs=(session.logs||[]).filter(x=>x.id!==log.id||x.setNumber!==log.setNumber);session.logs.push(log);
- session.at=step.end;session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;
- checkpoint();if(!session.paused)announceStep(session.steps[session.index]);render();
+ if(!step.rest){
+  session.at=step.end;session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;
+  checkpoint();if(!session.paused)announceStep(session.steps[session.index]);
+ }else checkpoint();
+ render();
 }
 else if(b.dataset.pause&&session){if(!session.paused){session.at=elapsed();session.paused=true;quiet()}else{session.mark=Date.now();session.paused=false}session.lastBeepSecond=null;checkpoint();if(!session.paused)keepAwake();render()}
 else if(b.dataset.step&&session){let e=elapsed(),idx=indexAt(e),s=session.steps[idx];if(b.dataset.step==='next')session.skippedSeconds=(session.skippedSeconds||0)+Math.max(0,s.end-e);session.at=b.dataset.step==='next'?s.end:(e-s.start>3?s.start:session.steps[Math.max(0,idx-1)].start);session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;if(session.at>=session.total)end();else{checkpoint();if(!session.paused)announceStep(session.steps[session.index]);render()}}
