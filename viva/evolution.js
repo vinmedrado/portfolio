@@ -11,11 +11,11 @@ function sanitizeReadiness(raw,now=new Date()){
 }
 function readiness(raw,now=new Date()){
  const data=sanitizeReadiness(raw,now);
- if(!data)return {status:'pending',canStart:false,title:'Avalie como está hoje',description:'Registre energia, sono e desconfortos antes do treino.',durationCap:null,low:false,recovery:false};
+ if(!data)return {status:'pending',canStart:false,title:'Registro diário pendente',description:'Registre energia, sono e desconfortos antes do treino.',durationCap:null,low:false,recovery:false};
  if(data.warning||data.pain)return {status:'stop',canStart:false,title:'Não inicie o circuito agora',description:'Você sinalizou dor incomum ou sintomas importantes. Não force os exercícios; procure orientação de um profissional de saúde. Sintomas intensos ou súbitos exigem atendimento imediato.',durationCap:0,low:true,recovery:false};
  if(data.soreness===3)return {status:'rest',canStart:false,title:'Priorize a recuperação hoje',description:'Há dor muscular forte registrada. Evite a sessão estruturada hoje; descanse e procure orientação se não melhorar ou se piorar.',durationCap:0,low:true,recovery:false};
- if(data.energy<=2||data.sleep<=5||data.soreness===2)return {status:'light',canStart:true,title:'Hoje é dia de treino leve',description:'Reduzimos para 20 minutos com exercícios sem impacto. Faça somente o que estiver confortável; descansar também é uma opção.',durationCap:20,low:true,recovery:true};
- return {status:'normal',canStart:true,title:'Pronto para seu plano',description:'Mantenha a execução controlada e ajuste o esforço conforme a recuperação durante o treino.',durationCap:null,low:false,recovery:false};
+ if(data.energy<=2||data.sleep<=5||data.soreness===2)return {status:'light',canStart:true,title:'Sessão leve recomendada',description:'Reduzimos para 20 minutos com exercícios sem impacto. Faça somente o que estiver confortável; descansar também é uma opção.',durationCap:20,low:true,recovery:true};
+ return {status:'normal',canStart:true,title:'Treino liberado',description:'Mantenha a execução controlada e ajuste o esforço conforme a recuperação durante o treino.',durationCap:null,low:false,recovery:false};
 }
 const RECOVERY=['march','step','birdDog','toeTap','kneeDrive','calf','standingCore','deadBug'];
 function adapt(base,raw,now=new Date()){
@@ -44,11 +44,11 @@ function exerciseAdvice(id,entries=[],now=new Date()){
  const cutoff=new Date(now);cutoff.setDate(cutoff.getDate()-35);
  const logs=(Array.isArray(entries)?entries:[]).map(sanitizeStrengthLog).filter(x=>x?.id===id&&new Date(x.date)>=cutoff&&new Date(x.date)<=now).sort((a,b)=>a.date.localeCompare(b.date));
  const last=logs.at(-1),recent=logs.slice(-2);
- if(!last)return {status:'initial',title:'Aprenda a técnica primeiro',description:'Comece com resistência confortável e registre como se sentiu após o treino.',count:0};
+ if(!last)return {status:'initial',title:'Comece com resistência leve',description:'Comece com resistência confortável e registre como se sentiu após o treino.',count:0};
  if(last.pain||last.technique==='insegura'||last.difficulty==='hard')return {status:'reduce',title:'Mantenha ou reduza a dificuldade',description:'Priorize execução estável. Reduza a resistência e interrompa se houver dor.',count:logs.length};
  if(recent.length>=2&&recent.every(x=>!x.pain&&x.technique==='boa'&&x.difficulty==='easy'))
-   return {status:'progress',title:'Progressão opcional',description:'Nas duas últimas sessões este exercício pareceu fácil e estável. Se estiver confortável, experimente uma resistência ligeiramente maior; a técnica deve continuar segura.',count:logs.length};
- return {status:'maintain',title:'Mantenha a resistência atual',description:'Continue consolidando a execução antes de aumentar a tensão do elástico ou a dificuldade.',count:logs.length};
+   return {status:'progress',title:'Pode aumentar a resistência',description:'Nas duas últimas sessões este exercício pareceu fácil e estável. Se estiver confortável, experimente uma resistência ligeiramente maior; a técnica deve continuar segura.',count:logs.length};
+ return {status:'maintain',title:'Mantenha a resistência',description:'Continue consolidando a execução antes de aumentar a tensão do elástico ou a dificuldade.',count:logs.length};
 }
 function strengthHighlights(entries=[],now=new Date(),limit=4){
  const byId=new Map();
@@ -64,9 +64,9 @@ function strengthHighlights(entries=[],now=new Date(),limit=4){
 function weightWaistInsight(weighIns=[],checkins=[]){
  const w=(Array.isArray(weighIns)?weighIns:[]).filter(x=>x&&reDate.test(x.day)&&Number.isFinite(Number(x.kg))).sort((a,b)=>a.day.localeCompare(b.day));
  const c=(Array.isArray(checkins)?checkins:[]).filter(x=>x&&reDate.test(x.day)&&Number(x.waist)>=40&&Number(x.waist)<=200).sort((a,b)=>a.day.localeCompare(b.day));
- if(w.length<3)return {status:'early',title:'Ainda estamos formando sua linha de base',description:'Registre o peso em condições semelhantes, preferencialmente uma vez por semana. Não altere o treino por uma pesagem.'};
+ if(w.length<3)return {status:'early',title:'Sem dados suficientes',description:'Registre o peso em condições semelhantes, preferencialmente uma vez por semana. Não altere o treino por uma pesagem.'};
  const first=w[0],last=w.at(-1),span=(new Date(last.day+'T12:00:00')-new Date(first.day+'T12:00:00'))/86400000;
- if(span<14)return {status:'early',title:'Precisamos observar mais semanas',description:'Peso e líquidos oscilam. Continue registrando semanalmente antes de interpretar tendências.'};
+ if(span<14)return {status:'early',title:'Aguardando novas pesagens',description:'Peso e líquidos oscilam. Continue registrando semanalmente antes de interpretar tendências.'};
  if(c.length>=2){
   const firstC=c[0],lastC=c.at(-1),months=(new Date(lastC.day+'T12:00:00')-new Date(firstC.day+'T12:00:00'))/86400000;
   if(months>=21&&Number(lastC.waist)<=Number(firstC.waist)-1)
