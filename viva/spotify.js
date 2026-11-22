@@ -1,5 +1,7 @@
 (function(g){'use strict';
 const CLIENT='viva-spotify-client-v1',PLAYLIST='viva-spotify-playlist-v1',TOKENS='viva-spotify-session-v1',PKCE='viva-spotify-pkce-v1';
+// Spotify Client ID is public; no Client Secret or access tokens are included in the bundle.
+const DEFAULT_CLIENT_ID='c4e9fe8799bc44cb944b26cb54557e3d';
 const REDIRECT='https://vinmedrado.com/viva/', SCOPES='streaming user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative';
 let dock=null,player=null,device='',playlists=[],song='',artist='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='';
 const saved=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k)||'';v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch{return ''}};
@@ -9,7 +11,7 @@ const validId=x=>/^[A-Fa-f0-9]{32}$/.test(String(x||'').trim());
 function playlistId(x){const s=String(x||'').trim();if(/^[a-zA-Z0-9]{22}$/.test(s))return s;
  const uri=/^spotify:playlist:([a-zA-Z0-9]{22})$/i.exec(s);if(uri)return uri[1];
  const url=/^https:\/\/(?:www\.)?open\.spotify\.com\/(?:intl-[a-z-]+\/)?playlist\/([a-zA-Z0-9]{22})(?:[/?#].*)?$/i.exec(s);return url?url[1]:''}
-const selected=()=>saved(PLAYLIST),clientId=()=>saved(CLIENT);
+const selected=()=>saved(PLAYLIST),clientId=()=>saved(CLIENT)||DEFAULT_CLIENT_ID;
 function auth(){try{const x=JSON.parse(temp(TOKENS));return x?.access_token?x:null}catch{return null}}
 function authStore(x,previous){if(!x?.access_token||!Number(x.expires_in))throw Error('Resposta de login inválida.');const y={access_token:x.access_token,refresh_token:x.refresh_token||previous?.refresh_token||'',until:Date.now()+(Number(x.expires_in)-40)*1000};temp(TOKENS,JSON.stringify(y));return y}
 async function oauthRequest(data){const r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});if(!r.ok)throw Error('Falha ao autorizar no Spotify ('+r.status+').');return r.json()}
