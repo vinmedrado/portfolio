@@ -6,7 +6,6 @@ const STRENGTH={
  2:[['bandHinge','backLunge','bridge'],['miniWalk','miniClam','calf','miniBridge'],['deadBug','squatWide','miniKick','birdDog']],
  4:[['row','wallPush','birdDog'],['bandPress','hinge','backLunge','bridge'],['squatWide','calf','standingCore','bandLateral']]
 };
-const FALLBACK={row:['superman','birdDog'],bandHinge:['hinge','bridge'],miniWalk:['step','backLunge'],miniClam:['bridge','step'],miniBridge:['bridge'],miniKick:['backLunge'],bandPress:['wallPush'],bandLateral:['wallPush'],squat:['squatWide','backLunge'],wallPush:['inclinePush'],bridge:['hinge'],backLunge:['squat','step'],squatWide:['squat'],deadBug:['birdDog'],calf:['step'],birdDog:['deadBug']};
 const warmup=[
  ['Marcha no lugar','Comece devagar, soltando os braços.'],
  ['Círculos de ombros','Faça movimentos pequenos com os ombros, sem forçar.'],
@@ -26,14 +25,14 @@ function split(minutes){
 }
 function getExercise(id,gear,excluded=[],prefs={},replacements={},used=[]){
  const X=g.VivaExercises,skip=new Set(excluded||[]),seen=new Set(used||[]);
- const substitute=replacements?.[id];
- const candidate=substitute&&X?.allowed(substitute,gear,prefs)&&!skip.has(substitute)?substitute:id;
- const options=[candidate,...(FALLBACK[id]||[]),...(candidate===id?[]:[id])];
- for(const choice of options){if(seen.has(choice)||skip.has(choice))continue;
-  const e=g.VivaCoach?.getExercise(choice);
-  if(e&&(X?X.allowed(choice,gear,prefs):(e.gear==='body'||e.gear==='mini'&&gear?.mini||e.gear==='long'&&gear?.long)))return e;
+ const selected=replacements?.[id];
+ // An old saved substitution may not meet the updated technical requirements.
+ const preferred=selected&&X?.compatible(id,selected)?selected:id;
+ for(const candidate of [preferred,id]){
+  if(seen.has(candidate)||skip.has(candidate))continue;
+  if(X?.allowed(candidate,gear,prefs))return g.VivaCoach.getExercise(candidate);
  }
- return null;
+ return X?.alternatives(id,gear,prefs,excluded,used)[0]||null;
 }
 function pickStrength(day,week,minutes,gear,excluded=[],prefs={},replacements={}){
  const bank=STRENGTH[day]||STRENGTH[0],n=minutes===45?5:minutes===30?4:3,
@@ -60,13 +59,14 @@ function prescribe(m){
  const exercises=strength?pickStrength(m.day,m.week,minutes,gear,excluded,prefs,replacements):
   pickCardio(m.day,m.week,g.VivaExercises?g.VivaExercises.apply(m.moves||[],gear,prefs,excluded,replacements):(m.moves||[]),m.low,recovery);
  const sets=strength?(minutes===45?3:2):null;
+ const targets=strength?Object.fromEntries(exercises.map(e=>[e.id,g.VivaEvolution?.strengthPrescription(e.id,m.history||[],m.c?.feedback||{},m.week,m.today||new Date(),m.readiness?.status||'normal')||null])):{};
  const reps=strength?(m.week<=2?'8–10':'8–12'):null;
  const rest= strength?Math.floor((main*60)/(Math.max(1,exercises.length)*sets))-(minutes===20?45:50):null;
  const intensity=recovery?'Bem leve, sem saltos e com liberdade para pausar':
   strength?'Movimentos controlados; termine cada série antes de perder a boa técnica.':
   minutes===20?'Ritmo leve a moderado, sem obrigação de saltar.':'Ritmo moderado confortável; você deve conseguir falar frases.';
  return {...m,moves:exercises,training:{type:strength?'strength':'cardio',warm,main,cool,sets,reps,rest,exercises,
-  setsTotal:strength?sets*exercises.length:0,intensity,recovery}};
+  setsTotal:strength?sets*exercises.length:0,targets,intensity,recovery}};
 }
 function build(m){
  const p=m.training?m:prescribe(m),spec=p.training,total=p.duration*60,seq=[];let at=0;
@@ -88,7 +88,7 @@ function build(m){
   for(let ix=0;ix<exercise.length;ix++){
    for(let set=1;set<=spec.sets;set++){
     const e=exercise[ix]; add('Treino',e.name,e.hint,work,
-      {id:e.id,mode:'strength',sets:spec.sets,setNumber:set,reps:spec.reps,rest:false});
+      {id:e.id,mode:'strength',sets:spec.sets,setNumber:set,reps:String(spec.targets?.[e.id]?.target||8),rest:false});
     add('Treino',set===spec.sets&&ix===exercise.length-1?'Transição para alongamento':'Descanso entre séries',
       'Descanse, hidrate-se se necessário e ajuste o elástico com segurança.',rest,{mode:'strength',rest:true});
    }
