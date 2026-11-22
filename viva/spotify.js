@@ -60,7 +60,7 @@ async function callback(){const query=new URLSearchParams(location.search),code=
  try{const u=new URL(location.href);u.searchParams.delete('code');u.searchParams.delete('state');u.searchParams.delete('error');history.replaceState(null,'',u.pathname+u.search+u.hash)}catch{}
  if(err){message('Conexão cancelada.');return}
  if(!state||state.state!==query.get('state')||Date.now()-state.time>600000){message('Não foi possível validar o login. Abra o VIVA no Safari e tente novamente.');return}
- try{authStore(await oauthRequest({client_id:clientId(),grant_type:'authorization_code',code,redirect_uri:REDIRECT,code_verifier:state.verifier}));expanded=true;message('Conectado. Toque em Ativar player para liberar o áudio.');loadSDK().catch(()=>{})}catch(e){message(e.message)}}
+ try{authStore(await oauthRequest({client_id:clientId(),grant_type:'authorization_code',code,redirect_uri:REDIRECT,code_verifier:state.verifier}));expanded=true;message('Conectado. Ative o player e escolha sua playlist.');loadSDK().catch(()=>{});myPlaylists();syncPlayback();beginSync()}catch(e){message(e.message)}}
 
 function spotIcon(name){
  const paths={
@@ -168,24 +168,60 @@ function savePlaylist(raw){const id=playlistId(raw);if(!id){message('Cole um lin
 function loadSDK(){if(g.Spotify?.Player)return Promise.resolve();if(sdkLoading)return sdkLoading;sdkLoading=new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('Tempo esgotado ao carregar o Spotify.')),14000);g.onSpotifyWebPlaybackSDKReady=()=>{clearTimeout(timeout);resolve()};const tag=document.createElement('script');tag.src='https://sdk.scdn.co/spotify-player.js';tag.async=true;tag.onerror=()=>{clearTimeout(timeout);reject(Error('SDK do Spotify indisponível.'))};document.head.appendChild(tag)}).catch(e=>{sdkLoading=null;throw e});return sdkLoading}
 async function activate(){if(!auth()){message('Conecte sua conta Premium primeiro.');return}if(!g.Spotify?.Player){message('Carregando SDK. Depois toque novamente em Ativar player.');await loadSDK().catch(e=>message(e.message));return}
  if(!player){player=new g.Spotify.Player({name:'VIVA - Música do treino',getOAuthToken:cb=>token().then(t=>cb(t||'')).catch(()=>cb('')),volume:.4});
-  player.addListener('ready',x=>{device=x.device_id;message('Player pronto. Escolha sua playlist e toque em Reproduzir.')});
+  player.addListener('ready',x=>{device=x.device_id;message('Player ativo. Toque em uma playlist para iniciar a música.');syncPlayback()});
   player.addListener('not_ready',()=>{device='';message('Player desconectado. Confira a internet.')});
-  player.addListener('player_state_changed',x=>{if(!x)return;playing=!x.paused;song=x.track_window?.current_track?.name||'';artist=(x.track_window?.current_track?.artists||[]).map(a=>a.name).join(', ');draw()});
+  player.addListener('player_state_changed',onSDKState);
   for(const name of ['initialization_error','authentication_error','account_error','playback_error'])player.addListener(name,()=>message(name==='account_error'?'Esta conta precisa ter Premium e estar autorizada no app.':'O Spotify não conseguiu iniciar o player.'));
  }
  try{player.activateElement?.();const result=await player.connect();if(!result)message('Não foi possível ativar o player. Teste no Safari.')}catch(e){message(e.message)}
 }
-async function play(){if(!device){message('Ative o player primeiro.');return}if(!selected()){message('Escolha uma playlist.');return}
- try{player.activateElement?.();if(playing){await player.pause();playing=false;message('Música pausada.');return}
-  if(lastStarted===selected()&&typeof player.getCurrentState==='function'){
-   const currentState=await player.getCurrentState();if(currentState?.paused){await player.resume();playing=true;message('Música retomada.');return;}
-  }
-  await api('/me/player/play?device_id='+encodeURIComponent(device),'PUT',{context_uri:'spotify:playlist:'+selected()});lastStarted=selected();message('Reprodução solicitada. Se o Safari bloquear, toque em Reproduzir novamente.')
- }catch(e){message(e.message)}
+
+async function startPlaylist(id){
+ if(!playlistId(id)){message('Escolha uma playlist válida.');return false}
+ // On iOS activateElement must be called synchronously from the playlist tap before awaiting an API call.
+ try{player?.activateElement?.()}catch{}
+ if(!device){
+  message('Playlist selecionada. Toque em Ativar player e depois na playlist para reproduzir.');
+  return false;
+ }
+ try{
+  await api('/me/player/play?device_id='+encodeURIComponent(device),'PUT',{context_uri:'spotify:playlist:'+id});
+  lastStarted=id;playing=true;message('Reproduzindo a playlist selecionada.');
+  syncPlayback();return true;
+ }catch(e){message(e.message);return false}
 }
-async function myPlaylists(){try{const x=await api('/me/playlists?limit=30&offset=0');playlists=(x?.items||[]).filter(a=>playlistId(a?.id)).map(p=>({id:p.id,name:String(p.name||'Playlist').slice(0,85)}));message(playlists.length?'Escolha uma playlist.':'Nenhuma playlist encontrada. Cole um link.')}catch(e){message(e.message)}}
-function logout(){try{player?.disconnect()}catch{}player=null;device='';playing=false;song='';artist='';playlists=[];lastStarted='';temp(TOKENS,'');temp(PKCE,'');message('Conta desconectada deste navegador.')}
-async function onClick(e){const b=e.target.closest('[data-spot],[data-spot-id]');if(!b)return;e.preventDefault();if(b.dataset.spotId){savePlaylist(b.dataset.spotId);return}switch(b.dataset.spot){
+async function play(){
+ if(!device){message('Ative o player primeiro.');return}
+ try{player?.activateElement?.()}catch{}
+ const id=selected();
+ if(playing&&(!lastStarted||lastStarted===id)){
+  try{await player.pause();playing=false;message('Música pausada.')}catch(e){message('Não foi possível pausar. '+e.message)}
+  return;
+ }
+ if(!id){message('Escolha uma playlist.');return}
+ if(lastStarted===id&&typeof player?.getCurrentState==='function'){
+  try{
+   const state=await player.getCurrentState();
+   if(state?.paused){await player.resume();playing=true;message('Música retomada.');syncPlayback();return}
+  }catch{}
+ }
+ await startPlaylist(id);
+}
+async function myPlaylists(){
+ try{
+  const result=await api('/me/playlists?limit=30&offset=0');
+  playlists=(result?.items||[]).filter(p=>playlistId(p?.id)).map(p=>({
+    id:p.id,name:String(p.name||'Playlist').slice(0,90),owner:String(p.owner?.display_name||'').slice(0,55),
+    image:albumArt(p)
+  }));
+  const active=playlists.find(p=>p.id===selected());
+  if(active){playlistName=active.name;playlistArt=active.image}
+  message(playlists.length?'Escolha uma playlist. Um toque seleciona e reproduz.':'Nenhuma playlist encontrada. Cole o link de uma playlist.');
+ }catch(e){message('Não foi possível carregar suas playlists: '+e.message)}
+}
+
+function logout(){try{player?.disconnect()}catch{}player=null;device='';playing=false;song='';artist='';cover='';album='';trackUri='';playlists=[];lastStarted='';renderedPanel='';temp(TOKENS,'');temp(PKCE,'');message('Conta desconectada deste navegador.')}
+async function onClick(e){const b=e.target.closest('[data-spot],[data-spot-id]');if(!b)return;e.preventDefault();if(b.dataset.spotId){const id=b.dataset.spotId;try{player?.activateElement?.()}catch{}if(savePlaylist(id)){await startPlaylist(id)}return}switch(b.dataset.spot){
  case 'toggle':toggle();break;case 'login':await login();break;case 'activate':await activate();break;case 'list':await myPlaylists();break;case 'play':await play();break;case 'logout':logout();break;
  case 'prev':try{await player?.previousTrack()}catch{message('Não foi possível voltar.')}break;
  case 'next':try{await player?.nextTrack()}catch{message('Não foi possível avançar.')}break;
@@ -193,6 +229,6 @@ async function onClick(e){const b=e.target.closest('[data-spot],[data-spot-id]')
 function onSubmit(e){if(e.target.id==='spotify-playlist-form'){e.preventDefault();savePlaylist(dock.querySelector('#spotify-playlist-url')?.value);return}
  if(e.target.id==='spotify-client-form'){e.preventDefault();const id=(dock.querySelector('#spotify-client-input')?.value||'').trim();if(!validId(id)){message('Client ID inválido. Use 32 caracteres hexadecimais.');return}if(id!==clientId()){logout();saved(CLIENT,id)}message('Client ID salvo. Conecte sua conta Premium.')}}
 function toggle(value){expanded=typeof value==='boolean'?value:!expanded;draw()}
-function mount(el){if(!el)return;dock=el;dock.innerHTML='<div class="viva-spot-bar" data-spot-bar></div><div data-spot-body></div><div class="viva-spot-frame" data-spot-frame hidden></div>';dock.addEventListener('click',onClick);dock.addEventListener('submit',onSubmit);draw();callback().catch(e=>message(e.message));if(auth())loadSDK().catch(()=>{})}
+function mount(el){if(!el)return;dock=el;dock.innerHTML='<div class="viva-spot-bar" data-spot-bar></div><div data-spot-body></div><div class="viva-spot-frame" data-spot-frame hidden></div>';dock.addEventListener('click',onClick);dock.addEventListener('submit',onSubmit);draw();callback().catch(e=>message(e.message));if(auth()){loadSDK().catch(()=>{});myPlaylists();syncPlayback();beginSync()}}
 g.VivaSpotify=Object.freeze({mount,toggle,playlistId,validId,savePlaylist,clientId,selected,get connected(){return !!device},get status(){return notice}});
 })(window);
