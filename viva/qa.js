@@ -3,7 +3,7 @@ function run(){
  const results=[];
  function test(name,fn){try{if(!fn())throw Error('A condição esperada não foi atendida.');results.push({name,pass:true})}
  catch(err){results.push({name,pass:false,error:String(err?.message||err)})}}
- const C=g.VivaCoach,B=g.VivaBackup,V=g.VivaVisual,G=g.VivaGuide,E=g.VivaEvolution,U=g.VivaEvolutionUI;
+ const C=g.VivaCoach,B=g.VivaBackup,V=g.VivaVisual,G=g.VivaGuide,E=g.VivaEvolution,U=g.VivaEvolutionUI,T=g.VivaTraining;
  const date=new Date('2026-11-20T12:00:00Z');
  test('Motor do professor disponível',()=>!!C&&C.DAYS.length===5);
  test('Biblioteca contém 365 treinos',()=>C.LIBRARY_SIZE===365);
@@ -52,6 +52,25 @@ function run(){
  test('Formulário pós-treino acompanha força',()=>U.strengthFields([{coachId:'a',coachAnchors:['squat','row']}],'a').includes('strength-difficulty-row'));
  test('Backup preserva carga e movimentos principais',()=>{const d=B.parse(B.serialize({duration:20,coach:{strengthLogs:logs},history:[{coach:true,coachDay:0,coachAnchors:['squat','row'],date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20,coachWeek:1,coachId:'viva-1763640000000-9'}]})).data;return d.coach.strengthLogs.length===2&&d.history[0].coachAnchors.length===2});
  test('Recuperação não é contabilizada como musculação',()=>C.sessionStats([{coach:true,coachRecovery:true,coachDay:0,date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20}],dateLocal).strengthDays===0);
+
+ test('Planejador tem três formatos com aquecimento suficiente',()=>[20,30,45].every(n=>{const [a,b,c]=T.split(n);return a>=5&&c>=5&&a+b+c===n}));
+ for(const minutes of [20,30,45]){
+  for(const day of [0,1,2,3,4]){
+   const base={day,week:1,kind:C.DAYS[day].kind,duration:minutes,c:{gear:{mini:true,long:true},excluded:[]},moves:C.movesFor(day,1,{mini:true,long:true})};
+   const p=T.prescribe(base),steps=T.build(p);
+   test('Treino '+minutes+'min, dia '+day+' soma os tempos',()=>steps[0].start===0&&steps.at(-1).end===minutes*60);
+   test('Treino '+minutes+'min, dia '+day+' usa modalidade correta',()=>{const kind=C.DAYS[day].kind==='Força'?'strength':'cardio';
+     return p.training.type===kind&&p.training.exercises.length>=3&&steps.some(x=>x.mode===kind)});
+   if(C.DAYS[day].kind==='Força')test('Treino '+minutes+'min, dia '+day+' usa séries e repetições',()=>{const work=steps.filter(x=>x.mode==='strength'&&!x.rest),rests=steps.filter(x=>x.mode==='strength'&&x.rest);return work.length===p.training.setsTotal&&rests.length===work.length&&work.every(x=>x.setNumber>=1&&x.reps.includes('8'))});
+  }
+ }
+ test('Aquecimento de 20 min tem cinco minutos',()=>T.split(20)[0]===5);
+ test('Musculação de segunda usa padrões de movimento',()=>T.pickStrength(0,1,20,{mini:true,long:true},[]).map(x=>x.id).join(',')==='squat,row,wallPush');
+ test('Sem acessórios, musculação não usa elástico',()=>[0,2,4].every(day=>T.pickStrength(day,1,30,{mini:false,long:false},[]).every(x=>x.gear==='body')));
+ test('Movimentos retirados não entram nas séries',()=>!T.pickStrength(0,1,30,{mini:true,long:true},['squat','wallPush']).some(x=>['squat','wallPush'].includes(x.id)));
+ test('Recuperação tem intervalos leves sem saltos',()=>{const x=T.prescribe({day:1,week:1,kind:'Recuperação ativa',duration:20,c:{gear:{mini:true,long:true},excluded:[]},moves:C.movesFor(1,1,{mini:true,long:true},true)});return x.training.type==='cardio'&&T.build(x).filter(s=>s.mode==='cardio'&&!s.rest).every(s=>s.seconds<=30)});
+ test('Objetivo aeróbico cresce sem exigir 150 min inicialmente',()=>T.cardioGoals(1,0).target===30&&T.cardioGoals(12,0).target===90&&T.cardioGoals(20,0).longTerm===150);
+ test('Backup preserva caminhada e modalidade do treino',()=>{const input={duration:30,history:[{coach:true,coachDay:1,coachType:'cardio',coachMainMinutes:20,coachId:'viva-1763650800000-5',day:'2026-11-20',date:'2026-11-20T12:00:00Z',duration:30}],coach:{walks:[{day:'2026-11-20',minutes:20,intensity:'moderate'}]}};const out=B.parse(B.serialize(input)).data;return out.coach.walks[0].minutes===20&&out.history[0].coachMainMinutes===20});
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
