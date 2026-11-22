@@ -11,7 +11,7 @@ function normalize(input){
   low:input.low!==false,sound:input.sound!==false,voice:input.voice!==false,countdown:input.countdown!==false,
   volume:number(input.volume,0,1,.45),history:[],
   profile:{heightCm:null,age:null,weighIns:[]},
-  coach:{startedAt:null,gear:{mini:false,long:false},excluded:[],checkins:[],feedback:{},readiness:null,strengthLogs:[],selectedDay:null,selectedDate:null}
+  coach:{startedAt:null,gear:{mini:false,long:false},excluded:[],checkins:[],feedback:{},readiness:null,strengthLogs:[],walks:[],selectedDay:null,selectedDate:null}
  };
  const p=input.profile||{};
  d.profile.age=number(p.age,20,110);
@@ -30,7 +30,7 @@ function normalize(input){
   if(h.coach&&Number.isInteger(h.coachDay)&&h.coachDay>=0&&h.coachDay<=4){
    item.coach=true;item.coachDay=h.coachDay;
    item.coachWeek=number(h.coachWeek,1,600,1);
-   item.coachFocus=h.coachRecovery===true?'Movimento leve e mobilidade':names[h.coachDay];item.coachRecovery=h.coachRecovery===true;item.coachAnchors=(Array.isArray(h.coachAnchors)?h.coachAnchors:[]).filter(id=>typeof id==='string'&&!!g.VivaCoach?.getExercise(id)).slice(0,2);
+   item.coachFocus=h.coachRecovery===true?'Movimento leve e mobilidade':names[h.coachDay];item.coachRecovery=h.coachRecovery===true;item.coachType=['strength','cardio'].includes(h.coachType)?h.coachType:null;item.coachMainMinutes=number(h.coachMainMinutes,0,40,0);item.coachSets=number(h.coachSets,1,3,null);item.coachAnchors=(Array.isArray(h.coachAnchors)?h.coachAnchors:[]).filter(id=>typeof id==='string'&&!!g.VivaCoach?.getExercise(id)).slice(0,2);
    if(ID.test(h.coachId||''))item.coachId=h.coachId;
   }
   d.history.push(item);
@@ -43,6 +43,7 @@ function normalize(input){
  d.coach.selectedDate=validDay(c.selectedDate)?c.selectedDate:null;
  d.coach.readiness=g.VivaEvolution?.sanitizeReadiness(c.readiness,new Date())||null;
  d.coach.strengthLogs=(Array.isArray(c.strengthLogs)?c.strengthLogs:[]).slice(-1000).map(x=>g.VivaEvolution?.sanitizeStrengthLog(x)).filter(Boolean).sort((a,b)=>a.date.localeCompare(b.date));
+ d.coach.walks=(Array.isArray(c.walks)?c.walks:[]).slice(-1500).filter(x=>x&&validDay(x.day)&&['light','moderate'].includes(x.intensity)&&number(x.minutes,5,180)!==null).map(x=>({day:x.day,minutes:Number(x.minutes),intensity:x.intensity}));
  const check=new Map();
  for(const x of Array.isArray(c.checkins)?c.checkins.slice(-1000):[]){
   if(!validDay(x?.day)||!validDay(x?.weekKey))continue;
