@@ -61,22 +61,105 @@ async function callback(){const query=new URLSearchParams(location.search),code=
  if(err){message('Conexão cancelada.');return}
  if(!state||state.state!==query.get('state')||Date.now()-state.time>600000){message('Não foi possível validar o login. Abra o VIVA no Safari e tente novamente.');return}
  try{authStore(await oauthRequest({client_id:clientId(),grant_type:'authorization_code',code,redirect_uri:REDIRECT,code_verifier:state.verifier}));expanded=true;message('Conectado. Toque em Ativar player para liberar o áudio.');loadSDK().catch(()=>{})}catch(e){message(e.message)}}
-function button(action,label,disabled=false){return '<button type="button" data-spot="'+action+'"'+(disabled?' disabled':'')+'>'+label+'</button>'}
-function panel(){const id=selected(),isAuth=!!auth();return '<p class="viva-spot-copy">Escolha sua playlist. A música continua independente do cronômetro e dos avisos por voz.</p>'+
- '<form id="spotify-playlist-form"><label>Link da playlist<input id="spotify-playlist-url" type="url" placeholder="https://open.spotify.com/playlist/..." autocomplete="off"></label><button type="submit">Salvar</button></form>'+
- (id?'<p class="viva-spot-note">Playlist salva neste aparelho.</p>'+button('embed',embedOpen?'Ocultar player oficial':'Abrir player oficial'):'<p class="viva-spot-note">Escolha uma playlist para começar.</p>')+
- '<div class="viva-spot-divider"></div>'+
- (isAuth?'<div class="viva-spot-buttons">'+button('activate',device?'Player ativo':'Ativar player',!!device)+button('list','Minhas playlists')+button('logout','Desconectar')+'</div>'+
- '<div class="viva-spot-buttons">'+button('prev','Anterior',!device)+button('play',playing?'Pausar':'Reproduzir',!device)+button('next','Próxima',!device)+'</div>'+
- (playlists.length?'<div class="viva-spot-list">'+playlists.map(p=>'<button type="button" data-spot-id="'+p.id+'">'+esc(p.name)+'</button>').join('')+'</div>':''):
- validId(clientId())?button('login','Conectar Spotify Premium'):'<p class="viva-spot-note">O player por link funciona sem cadastro de desenvolvedor. Para controles próprios, configure o Client ID abaixo.</p>')+
- '<details class="viva-spot-config"><summary>Configurar Spotify for Developers</summary><p>Crie um app em developer.spotify.com/dashboard, selecione Web Playback SDK e cadastre como Redirect URI exatamente <code>'+REDIRECT+'</code>. Autorize sua conta como usuário do app. Não informe Client Secret.</p>'+
- '<form id="spotify-client-form"><label>Client ID<input id="spotify-client-input" type="text" maxlength="32" spellcheck="false" autocomplete="off" placeholder="32 caracteres" value="'+esc(clientId())+'"></label><button type="submit">Salvar ID</button></form>'+
- '<p>O login usa PKCE. Os tokens ficam na sessão deste navegador e não entram no backup do VIVA.</p></details>'+
- '<p class="viva-spot-notice" role="status">'+esc(notice)+'</p>'}
-function draw(){if(!dock)return;const bar=dock.querySelector('[data-spot-bar]'),body=dock.querySelector('[data-spot-body]'),frame=dock.querySelector('[data-spot-frame]');
- if(bar)bar.innerHTML='<span><strong>Spotify</strong><small>'+esc(song?song+(artist?' · '+artist:''):notice||'Música do treino')+'</small></span>'+button('toggle',expanded?'Fechar':'Abrir');
- if(body){body.innerHTML=panel();body.hidden=!expanded}if(frame)frame.hidden=!expanded||!embedOpen;dock.classList.toggle('is-open',expanded);dock.classList.toggle('is-used',!!selected()||!!auth())}
+
+function spotIcon(name){
+ const paths={
+  play:'<path d="M8 5.5 19 12 8 18.5Z" fill="currentColor" stroke="none"/>',
+  pause:'<rect x="7" y="5" width="3.5" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="13.5" y="5" width="3.5" height="14" rx="1" fill="currentColor" stroke="none"/>',
+  prev:'<path d="M6 5v14M19 6 8 12l11 6z" stroke-width="2" stroke-linejoin="round"/>',
+  next:'<path d="M18 5v14M5 6l11 6-11 6z" stroke-width="2" stroke-linejoin="round"/>',
+  music:'<path d="M9 17V5l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+  close:'<path d="M5 12h14m-7-7 7 7-7 7"/>',
+  chevron:'<path d="m6 9 6 6 6-6"/>',
+  equalizer:'<path d="M4 14v-4m4 8V6m4 15V3m4 15V6m4 8v-4"/>',
+  arrow:'<path d="M5 17 19 5m-9 0h9v9"/>',
+  check:'<path d="m5 12 4 4L19 6"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1"/><circle cx="3" cy="12" r="1"/><circle cx="3" cy="18" r="1"/>'
+ };
+ return '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(paths[name]||paths.music)+'</svg>';
+}
+function signal(){
+ const path='M0 39 L20 40 L35 34 L54 35 L72 18 L86 22 L101 44 L119 40 L134 29 L147 32 L163 11 L180 17 L198 44 L216 38 L232 41 L246 25 L265 31 L284 17 L305 20 L323 42 L342 45 L361 28 L378 33 L390 13 L407 18 L425 39 L444 34 L464 47 L480 38 L501 37 L520 39';
+ const wave='<svg class="viva-spot-signal-svg" viewBox="0 0 520 60" preserveAspectRatio="none"><path d="'+path+'" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ return '<div class="viva-spot-signal" aria-hidden="true"><div class="viva-spot-signal-flow">'+wave+wave+'</div><span class="viva-spot-signal-glow"></span></div>';
+}
+function coverMarkup(url,small=false){
+ const cls=small?'viva-spot-art viva-spot-art-mini':'viva-spot-art';
+ return '<span class="'+cls+'">'+(safeImage(url)?'<img src="'+esc(url)+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'<span class="viva-spot-art-fallback">'+spotIcon('music')+'</span>')+'</span>';
+}
+function button(action,label,disabled=false,variant=''){
+ return '<button type="button" class="viva-spot-button '+esc(variant)+'" data-spot="'+esc(action)+'"'+(disabled?' disabled':'')+'>'+label+'</button>';
+}
+function playlistCards(){
+ if(!playlists.length)return '<div class="viva-spot-empty">Toque em <b>Minhas playlists</b> para carregar sua biblioteca.</div>';
+ return '<div class="viva-spot-list">'+playlists.map(p=>{
+  const active=p.id===selected();
+  return '<button type="button" data-spot-id="'+esc(p.id)+'" class="viva-spot-playlist'+(active?' is-selected':'')+'" aria-pressed="'+active+'">'
+   +coverMarkup(p.image,true)+'<span class="viva-spot-playlist-label"><b>'+esc(p.name)+'</b><small>'+(active?'SELECIONADA · TOQUE PARA TOCAR':esc(p.owner||'Playlist do Spotify'))+'</small></span>'
+   +'<span class="viva-spot-playlist-action">'+spotIcon(active&&playing?'equalizer':'play')+'</span></button>'
+ }).join('')+'</div>';
+}
+function panel(){
+ const id=selected(),authorized=!!auth(),activePlaylist=selectedDetails(),hasTrack=!!song;
+ const statusLabel=hasTrack?(playing?'REPRODUZINDO AGORA':'EM PAUSA'):'AGUARDANDO REPRODUÇÃO';
+ return '<div class="viva-spot-v2">'
+  +'<section class="viva-spot-hero">'
+  +'<div class="viva-spot-eyebrow"><span class="viva-spot-signal-dot"></span> SPOTIFY PREMIUM <span class="viva-spot-hero-status">'+statusLabel+'</span></div>'
+  +'<div class="viva-spot-now">'+coverMarkup(cover||activePlaylist.image)
+  +'<div class="viva-spot-now-info"><span class="viva-spot-now-label">TOCANDO AGORA</span>'
+  +'<h3 title="'+esc(song||'Nenhuma música tocando')+'">'+esc(song||'Escolha uma playlist')+'</h3>'
+  +'<p>'+esc(artist||'A música e o artista aparecerão aqui')+'</p>'
+  +'<small>'+esc(hasTrack?album:(id?activePlaylist.name:'Spotify conectado ao VIVA'))+'</small></div></div>'
+  +signal()
+  +'<div class="viva-spot-signal-caption"><span>VIVA <i> / </i> MUSIC STREAM</span><span>'+(playing?'● SINAL ATIVO':'SINAL EM ESPERA')+'</span></div>'
+  +'<div class="viva-spot-transport">'
+  +button('prev',spotIcon('prev'),!device,'is-skip')
+  +button('play',spotIcon(playing?'pause':'play'),!device,'is-primary')
+  +button('next',spotIcon('next'),!device,'is-skip')
+  +'</div>'
+  +'<div class="viva-spot-hero-bottom"><span>'+(id?'PLAYLIST · '+esc(activePlaylist.name):'SEM PLAYLIST SELECIONADA')+'</span>'
+  +'<span>'+esc(device?'PLAYER ATIVO':authorized?'ATIVE O PLAYER':'CONECTE SUA CONTA')+'</span></div>'
+  +'</section>'
+  +'<section class="viva-spot-library"><div class="viva-spot-section-heading"><div><span>SUA BIBLIOTECA</span><h3>Playlists</h3></div>'
+  +button('list',spotIcon('list')+' Atualizar',!authorized,'is-refresh')+'</div>'
+  +(authorized?playlistCards():'<p class="viva-spot-note">Conecte sua conta Premium para acessar suas playlists.</p>')
+  +'<p class="viva-spot-library-tip">Toque em uma playlist para selecionar e reproduzir. A seleção fica destacada.</p>'
+  +'<form id="spotify-playlist-form" class="viva-spot-link-form"><label>OU COLE O LINK DA PLAYLIST</label><div><input id="spotify-playlist-url" type="url" placeholder="https://open.spotify.com/playlist/..." autocomplete="off"><button type="submit">Salvar</button></div></form>'
+  +(id?button('embed','Abrir no player oficial '+spotIcon('arrow'),false,'is-embed'):'')
+  +'</section>'
+  +'<div class="viva-spot-bottom-tools">'+(authorized?
+    button('activate',device?'✓ Player ativo':'Ativar player',!!device,'is-activate')+button('logout','Desconectar',false,'is-disconnect'):
+    button('login','Conectar Spotify Premium',false,'is-connect'))+'</div>'
+  +'<details class="viva-spot-config"><summary>Configurações avançadas</summary>'
+  +'<p>Seu Spotify já está integrado ao VIVA. Para alterar o app de desenvolvedor, use um Client ID, nunca o Client Secret. A URL de retorno deve ser <code>'+REDIRECT+'</code>.</p>'
+  +'<form id="spotify-client-form"><label>Client ID<input id="spotify-client-input" type="text" maxlength="32" spellcheck="false" autocomplete="off" value="'+esc(clientId())+'"></label><button type="submit">Salvar ID</button></form>'
+  +'<p>Login PKCE. Tokens não são salvos no backup dos treinos.</p></details>'
+  +'<div class="viva-spot-notice" role="status" aria-live="polite">'+esc(notice)+'</div>'
+  +'</div>';
+}
+function draw(){
+ if(!dock)return;
+ const bar=dock.querySelector('[data-spot-bar]'),body=dock.querySelector('[data-spot-body]'),frame=dock.querySelector('[data-spot-frame]');
+ const mini='<div class="viva-spot-mini">'+coverMarkup(cover||selectedDetails().image,true)
+  +'<span class="viva-spot-mini-text"><b>'+esc(song||'Spotify · Música do treino')+'</b><small>'+esc(artist||selectedDetails().name)+'</small></span>'
+  +'<span class="viva-spot-mini-indicator">'+spotIcon(playing?'equalizer':'music')+'</span></div>'
+  +button('toggle',expanded?spotIcon('close'):spotIcon('chevron'),false,'is-minimize');
+ if(bar&&bar.innerHTML!==mini)bar.innerHTML=mini;
+ const newPanel=panel();
+ if(body&&renderedPanel!==newPanel){
+  const list=body.querySelector('.viva-spot-list');
+  const scroll=list?.scrollTop||0,openConfig=!!body.querySelector('.viva-spot-config')?.open;
+  body.innerHTML=newPanel;renderedPanel=newPanel;
+  const next=body.querySelector('.viva-spot-list');if(next)next.scrollTop=scroll;
+  const nextConfig=body.querySelector('.viva-spot-config');if(nextConfig)nextConfig.open=openConfig;
+ }
+ if(body)body.hidden=!expanded;
+ if(frame)frame.hidden=!expanded||!embedOpen;
+ dock.classList.toggle('is-open',expanded);
+ dock.classList.toggle('is-used',!!selected()||!!auth());
+ dock.classList.toggle('is-playing',playing);
+}
+
 function message(x){notice=String(x||'');draw()}
 function embed(){const id=selected();if(!id){message('Escolha uma playlist.');return}const frame=dock.querySelector('[data-spot-frame]');embedOpen=!embedOpen;
  if(embedOpen&&frame&&!frame.querySelector('iframe')){const el=document.createElement('iframe');el.src='https://open.spotify.com/embed/playlist/'+id;el.title='Spotify — playlist do treino';el.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');el.style.cssText='width:100%;height:152px;border:0;border-radius:12px';frame.appendChild(el)}
