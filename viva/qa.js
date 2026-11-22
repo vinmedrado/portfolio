@@ -87,13 +87,31 @@ function run(){
  test('Sem apoio dos joelhos remove quatro apoios',()=>!X.allowed('birdDog',{mini:true,long:true},{noKneel:true}));
  test('Sem elásticos evita exercício que requer banda',()=>!X.allowed('row',{mini:false,long:false},{}));
  test('Substituição validada usa movimento permitido',()=>T.pickStrength(0,1,20,{mini:true,long:true},[],{}, {squat:'squatWide'})[0].id==='squatWide');
- test('Alternativa para ponte sem chão é exercício em pé',()=>X.alternatives('bridge',{mini:true,long:true},{noFloor:true}).some(m=>m.id==='hinge'));
+ test('Alternativa para ponte sem chão é exercício em pé',()=>X.alternatives('bridge',{mini:true,long:true},{noFloor:true}).some(m=>m.id==='miniKick'));
  test('Registro manual rejeita repetições impossíveis',()=>!X.sanitizeSetLog({id:'squat',setNumber:1,repsDone:0})&&!X.sanitizeSetLog({id:'squat',setNumber:1,repsDone:99}));
  test('Registro manual preserva dificuldade e técnica',()=>{const x=X.sanitizeSetLog({id:'row',setNumber:2,repsDone:9,band:'medium',difficulty:'hard',technique:'insegura'});return x?.band==='medium'&&x?.difficulty==='hard'&&x?.technique==='insegura'});
  test('Backup mantém preferências e substituições',()=>{const o=B.parse(B.serialize({coach:{preferences:{noFloor:true},replacements:{squat:'squatWide'},reasons:{squat:'discomfort'}}})).data;return o.coach.preferences.noFloor&&o.coach.replacements.squat==='squatWide'&&o.coach.reasons.squat==='discomfort'});
  test('Backup preserva séries e repetições manuais',()=>{const o=B.parse(B.serialize({history:[{coach:true,coachDay:0,coachId:'viva-1763650800000-2',day:'2026-11-20',date:'2026-11-20T14:00:00Z',duration:20,setLogs:[{id:'squat',setNumber:1,repsDone:10,difficulty:'ok',band:'none',technique:'boa'}]}]})).data;return o.history[0]?.setLogs?.[0]?.repsDone===10});
  test('Progresso só contabiliza séries informadas',()=>X.progress([{day:'2026-11-20',coachId:'a',setLogs:[{id:'squat',setNumber:1,repsDone:8}]}])[0].latest.reps===8);
  test('Alternativas respeitam motivo, equipamento e restrições',()=>X.alternatives('row',{mini:false,long:false},{noFloor:true}).length===0);
+
+ test('Remada nunca vira extensão de tronco',()=>!X.compatible('row','superman')&&X.alternatives('row',{mini:false,long:false},{}).length===0);
+ test('Bíceps não é substituído por tríceps',()=>!X.compatible('curl','bandTriceps')&&X.alternatives('curl',{mini:true,long:true},{}).length===0);
+ test('Panturrilha não é trocada por caminhada',()=>!X.compatible('calf','march'));
+ test('Agachamento preserva o padrão',()=>X.compatible('squat','squatWide'));
+ test('Restrição sem saltos remove skipping',()=>!X.allowed('skipping',{mini:true,long:true},{noJump:true}));
+ test('Mapeamento de todos os exercícios possui padrão',()=>X.ids.every(id=>!!X.pattern(id)));
+ test('Backups antigos descartam substituição incompatível',()=>{const x=B.parse(B.serialize({coach:{replacements:{row:'superman',squat:'squatWide'}}})).data.coach.replacements;return x.squat==='squatWide'&&!x.row});
+ const h2=[1,2].map(i=>({coach:true,coachType:'strength',coachId:'t'+i,date:i===1?'2026-11-12T12:00:00Z':'2026-11-19T12:00:00Z',day:i===1?'2026-11-12':'2026-11-19',setLogs:[1,2].map(setNumber=>({id:'row',setNumber,repsDone:9,band:'light',difficulty:'easy',technique:'boa'}))}));
+ const f2={t1:{effort:5,technique:'boa',pain:false},t2:{effort:5,technique:'boa',pain:false}};
+ const now2=new Date('2026-11-20T12:00:00Z');
+ test('Duas sessões completas passam a meta de oito para dez',()=>E.strengthPrescription('row',h2,f2,6,now2).target===10);
+ test('Sem respostas pós-treino não há progressão',()=>E.strengthPrescription('row',h2,{},6,now2).status==='hold');
+ test('Dor relatada bloqueia aumento',()=>E.strengthPrescription('row',h2,{...f2,t2:{...f2.t2,pain:true}},6,now2).status==='ease');
+ test('Descanso insuficiente impede progressão',()=>E.strengthPrescription('row',h2,f2,6,now2,'light').status==='hold');
+ test('Série incompleta na última sessão bloqueia aumento',()=>{const h=[...h2,{...h2[1],coachId:'t3',date:'2026-11-20T10:00:00Z',day:'2026-11-20',setLogs:[{...h2[1].setLogs[0]}]}];return E.strengthPrescription('row',h,{...f2,t3:{effort:5,pain:false,technique:'boa'}},6,now2).status==='hold'});
+ test('Resistência maior é apenas sugerida quando ambas sessões completam 12',()=>{const h=h2.map(x=>({...x,setLogs:x.setLogs.map(y=>({...y,repsDone:12}))}));return E.strengthPrescription('row',h,f2,6,now2).bandSuggestion==='medium'});
+ test('Meta individual entra nos blocos do cronômetro',()=>{const m=T.prescribe({day:0,week:6,kind:'Força',duration:20,history:h2,c:{gear:{mini:true,long:true},feedback:f2},readiness:{status:'normal'},today:now2,moves:[]});return T.build(m).filter(x=>x.id==='row').every(x=>x.reps==='10')});
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
