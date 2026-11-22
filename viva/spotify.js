@@ -43,7 +43,7 @@ function panel(){const id=selected(),isAuth=!!auth();return '<p class="viva-spot
  '<p class="viva-spot-notice" role="status">'+esc(notice)+'</p>'}
 function draw(){if(!dock)return;const bar=dock.querySelector('[data-spot-bar]'),body=dock.querySelector('[data-spot-body]'),frame=dock.querySelector('[data-spot-frame]');
  if(bar)bar.innerHTML='<span><strong>Spotify</strong><small>'+esc(song?song+(artist?' · '+artist:''):notice||'Música do treino')+'</small></span>'+button('toggle',expanded?'Fechar':'Abrir');
- if(body){body.innerHTML=panel();body.hidden=!expanded}if(frame)frame.hidden=!expanded||!embedOpen;dock.classList.toggle('is-open',expanded)}
+ if(body){body.innerHTML=panel();body.hidden=!expanded}if(frame)frame.hidden=!expanded||!embedOpen;dock.classList.toggle('is-open',expanded);dock.classList.toggle('is-used',!!selected()||!!auth())}
 function message(x){notice=String(x||'');draw()}
 function embed(){const id=selected();if(!id){message('Escolha uma playlist.');return}const frame=dock.querySelector('[data-spot-frame]');embedOpen=!embedOpen;
  if(embedOpen&&frame&&!frame.querySelector('iframe')){const el=document.createElement('iframe');el.src='https://open.spotify.com/embed/playlist/'+id;el.title='Spotify — playlist do treino';el.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');el.style.cssText='width:100%;height:152px;border:0;border-radius:12px';frame.appendChild(el)}
