@@ -3,7 +3,7 @@ const CLIENT='viva-spotify-client-v1',PLAYLIST='viva-spotify-playlist-v1',TOKENS
 // Spotify Client ID is public; no Client Secret or access tokens are included in the bundle.
 const DEFAULT_CLIENT_ID='c4e9fe8799bc44cb944b26cb54557e3d';
 const REDIRECT='https://vinmedrado.com/viva/', SCOPES='streaming user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative';
-let dock=null,player=null,device='',playlists=[],song='',artist='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='';
+let dock=null,player=null,device='',playlists=[],song='',artist='',cover='',trackUri='',album='',playlistName='',playlistArt='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='',renderedPanel='',refreshTimer=null,visibilityBound=false;
 const saved=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k)||'';v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch{return ''}};
 const temp=(k,v)=>{try{if(v===undefined)return sessionStorage.getItem(k)||'';v?sessionStorage.setItem(k,v):sessionStorage.removeItem(k)}catch{return ''}};
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -12,6 +12,37 @@ function playlistId(x){const s=String(x||'').trim();if(/^[a-zA-Z0-9]{22}$/.test(
  const uri=/^spotify:playlist:([a-zA-Z0-9]{22})$/i.exec(s);if(uri)return uri[1];
  const url=/^https:\/\/(?:www\.)?open\.spotify\.com\/(?:intl-[a-z-]+\/)?playlist\/([a-zA-Z0-9]{22})(?:[/?#].*)?$/i.exec(s);return url?url[1]:''}
 const selected=()=>saved(PLAYLIST),clientId=()=>saved(CLIENT)||DEFAULT_CLIENT_ID;
+
+const IMAGE_DOMAIN=/^https:\/\/(?:i\.scdn\.co|mosaic\.scdn\.co|[a-z0-9.-]+\.spotifycdn\.com)\/[^\s"'<>]*$/i;
+function safeImage(value){const url=String(value||'');return IMAGE_DOMAIN.test(url)?url:''}
+function albumArt(data){return safeImage(data?.images?.[0]?.url||data?.images?.[1]?.url||'')}
+function selectedDetails(){const item=playlists.find(x=>x.id===selected());return {name:item?.name||playlistName||'Playlist escolhida',image:item?.image||playlistArt||''}}
+function setTrack(item,active){
+ if(!item)return;
+ const nextSong=String(item.name||''),nextArtist=Array.isArray(item.artists)?item.artists.map(a=>a.name||'').filter(Boolean).join(', '):'';
+ const nextCover=albumArt(item.album),nextAlbum=String(item.album?.name||''),nextUri=String(item.uri||'');
+ const changed=song!==nextSong||artist!==nextArtist||cover!==nextCover||playing!==!!active||album!==nextAlbum||trackUri!==nextUri;
+ song=nextSong;artist=nextArtist;cover=nextCover;album=nextAlbum;trackUri=nextUri;playing=!!active;
+ if(changed)draw();
+}
+function onSDKState(state){
+ const current=state?.track_window?.current_track;if(current)setTrack(current,!state.paused);
+ else if(state&&playing!==!state.paused){playing=!state.paused;draw()}
+}
+async function syncPlayback(){
+ if(!auth())return;
+ try{
+  const x=await api('/me/player');
+  if(x?.item){setTrack(x.item,!!x.is_playing);return}
+  if(player?.getCurrentState){const state=await player.getCurrentState();if(state)onSDKState(state)}
+ }catch{ /* Spotify SDK events keep the player useful when the API is unavailable */ }
+}
+function beginSync(){
+ if(refreshTimer)return;
+ refreshTimer=setInterval(()=>{if(auth()&&document.visibilityState!=='hidden'&&(expanded||playing))syncPlayback()},18000);
+ if(!visibilityBound&&document?.addEventListener){visibilityBound=true;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&auth())syncPlayback()})}
+}
+
 function auth(){try{const x=JSON.parse(temp(TOKENS));return x?.access_token?x:null}catch{return null}}
 function authStore(x,previous){if(!x?.access_token||!Number(x.expires_in))throw Error('Resposta de login inválida.');const y={access_token:x.access_token,refresh_token:x.refresh_token||previous?.refresh_token||'',until:Date.now()+(Number(x.expires_in)-40)*1000};temp(TOKENS,JSON.stringify(y));return y}
 async function oauthRequest(data){const r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data)});if(!r.ok)throw Error('Falha ao autorizar no Spotify ('+r.status+').');return r.json()}
