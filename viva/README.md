@@ -38,12 +38,12 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 | `evolution-ui.js` | Formulário diário, avaliação pós-treino e cartões de força |
 | `training.js` | Protocolos separados de força e cardio, distribuição muscular e aquecimento/volta à calma |
 | `guide.js` | Guias de execução de 31 exercícios |
-| `visual.js` | Mascote e ilustrações vetoriais originais |
+| `visual.js?v=2` | Mascote e ilustrações vetoriais originais |
 | `backup.js` | Exportação, validação e restauração dos registros |
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (90 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (95 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
