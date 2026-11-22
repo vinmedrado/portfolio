@@ -112,7 +112,7 @@ function scheduleSummary(week,minutes=20,gear={mini:true,long:true}){
  return strengthDays.map(day=>{
   const exercises=pickStrength(day,week,minutes,gear,[]);
   return {day,sets:minutes===45?3:2,exercises:exercises.map(e=>e.id),
-    patterns: day===0?['agachar','puxar','empurrar']:day===2?['quadril','unilateral','glúteos']:['puxar','empurrar','pernas']};
+    patterns: day===0?['agachar','puxar','empurrar']:day===2?['quadril','unilateral','glúteos']:['puxar','empurrar','core']};
  });
 }
 function cardioGoals(week=1,done=0){
