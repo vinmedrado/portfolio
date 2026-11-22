@@ -128,10 +128,10 @@ function coachModel(){
  return VivaTraining.prescribe(VivaEvolution.adapt(base,c.readiness,today));
 }
 function strengthWeekCard(m){
- const weeks=VivaTraining.weeklyMuscleSets(m.week,m.duration,m.c.gear,m.c.excluded,m.c.preferences,m.c.replacements);
+ const weeks=VivaTraining.weeklyMuscleSets(m.week,m.duration,m.c.gear,m.c.excluded,m.c.preferences,m.c.replacements,data.history,m.c.feedback,m.today,m.readiness.status);
  const keys=['pernas','posteriores','gluteos','costas','empurrar','core'];
  return `<details class='viva-strength-volume'><summary><b>Distribuição muscular desta semana</b><span>Ver séries previstas</span></summary>
- <p>O VIVA distribui os movimentos em três dias de força para não repetir exercícios aleatoriamente.</p>
+ <p>As séries são planejadas por grupo muscular. No treino de 30 minutos, a terceira série só é liberada após registros suficientes e recuperação adequada.</p>
  <div class='viva-volume-grid'>${keys.map(k=>`<div><span>${weeks.labels[k]}</span><b>${weeks.counts[k]} séries</b></div>`).join('')}</div>
  <p class='minitip'>${weeks.note} Na adaptação inicial, não é necessário treinar até a falha ou aumentar a resistência toda semana.</p></details>`;
 }
