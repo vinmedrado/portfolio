@@ -179,7 +179,7 @@ function coachFeedbackForm(){
  <label>Esforço percebido<select id='coach-effort-value'><option value='3'>3/10 · Muito leve</option><option value='4'>4/10 · Leve</option><option value='5' selected>5/10 · Moderado</option><option value='6'>6/10 · Moderado</option><option value='7'>7/10 · Difícil</option><option value='8'>8/10 · Muito difícil</option><option value='9'>9/10 · Exaustivo</option></select></label>
  <label style='display:block;font-size:12px;font-weight:750;margin-top:13px'>Execução dos movimentos<select id='coach-post-technique'><option value='boa'>Consegui manter boa técnica</option><option value='insegura'>Tive dificuldade com a execução</option></select></label>
  <label class='coach-checkbox'><input id='coach-post-pain' type='checkbox'> Senti dor durante o exercício (não apenas esforço)</label>
- ${data.history.find(h=>h.coachId===finishedCoachId)?.setLogs?.length?`<p class='viva-manual-summary'>${data.history.find(h=>h.coachId===finishedCoachId).setLogs.length} séries com repetições registradas durante o treino.</p>`:VivaEvolutionUI.strengthFields(data.history,finishedCoachId)}
+ ${data.history.find(h=>h.coachId===finishedCoachId)?.setLogs?.length?`<p class='viva-manual-summary'>${data.history.find(h=>h.coachId===finishedCoachId).setLogs.length} séries registradas manualmente.</p>`:'<p class="viva-manual-summary">Nenhuma série foi registrada. O esforço geral será salvo, mas não gerará progresso de repetições.</p>'}
  <button class='coach-save' type='submit'>Salvar avaliação do treino</button></form>`;
 }
 function guideModal(){
@@ -533,14 +533,6 @@ document.addEventListener('submit',e=>{
    for(const entry of reported.values()){
     const log=VivaEvolution.sanitizeStrengthLog({id:entry.id,date:now,difficulty:entry.difficulty,band:entry.band,
       technique:technique==='insegura'?'insegura':entry.technique,pain});
-    if(log)data.coach.strengthLogs.push(log);
-   }
-  }else{
-   for(const id of (record?.coachAnchors||[]).slice(0,2)){
-    const ex=VivaCoach.getExercise(id);if(!ex)continue;
-    const diff=$('#strength-difficulty-'+id)?.value||'ok';
-    const band=ex.gear==='body'?'none':($('#strength-band-'+id)?.value||'light');
-    const log=VivaEvolution.sanitizeStrengthLog({id,date:now,difficulty:diff,band,technique,pain});
     if(log)data.coach.strengthLogs.push(log);
    }
   }
