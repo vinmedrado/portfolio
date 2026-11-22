@@ -10,8 +10,11 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 
 ## Funcionalidades da versão completa
 
-- **Biblioteca de 365 treinos distintos**: 73 semanas com 5 sequências por semana, navegáveis em 37 páginas. O programa de um ano de segunda a sexta tem cerca de 260 sessões previstas; a biblioteca oferece sequências adicionais e ampliações futuras.
-- **Professor virtual**: agenda de segunda a sexta (3 dias principais de força e 2 dias opcionais de cardio/mobilidade), aquecimento, treino e alongamento.
+- **Biblioteca de 365 entradas**: 73 semanas com 5 dias por semana, consultáveis em 37 páginas. As listas exploratórias são distintas, mas o programa de força mantém exercícios fundamentais por ciclos para permitir acompanhar ganhos de técnica e força. Um ano de segunda a sexta tem cerca de 260 dias úteis de treino, não 365.
+- **Professor virtual**: agenda de segunda a sexta (3 dias principais de força e 2 dias opcionais de cardio/mobilidade), aquecimento, treino e volta à calma.
+- **Treino de força com prescrição própria**: exercícios de agachar, puxar, empurrar, quadril e estabilidade; 2–3 séries por movimento, 8–12 repetições orientativas, pausas de aproximadamente 55–100 segundos e controles por grupo muscular. O cronômetro disponibiliza uma janela para cada série, mas **não conta as repetições automaticamente**.
+- **Cardio em intervalos próprios**: alterna movimento e recuperação, com intensidade adaptada ao início e às semanas seguintes. A versão de 20 minutos tem 5 minutos de aquecimento, 10 de circuito e 5 de volta à calma; 30 minutos têm 5/20/5, e 45 minutos têm 7/30/8.
+- **Registro aeróbico gradual**: painel distingue minutos de cardio com esforço autorrelatado e caminhadas moderadas registradas, com referências semanais progressivas. Não usa minutos de musculação para alegar que uma meta aeróbica foi atingida.
 - **Adaptação gradual**: sessões de 20 minutos no início; 30 e 45 minutos são sugeridos apenas conforme frequência, recuperação, esforço relatado e tempo de adaptação.
 - **Avaliação diária de prontidão**: antes de iniciar, o usuário informa energia, sono e desconfortos. O sistema pode manter a sessão, propor recuperação ativa de 20 minutos ou recomendar não treinar em caso de sinais de alerta. Sem diagnóstico médico.
 - **Diário individual de força**: após treinos de força, registra a dificuldade de dois exercícios principais e a resistência usada, sugerindo progressão somente após registros recentes favoráveis e execução segura.
@@ -23,7 +26,7 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 - **Proteção da integridade das sessões**: treino com muitos avanços manuais não é registrado como concluído. Ao sair do Safari, a sessão é pausada e recuperável após recarregar.
 - **Acompanhamento**: check-ins semanais (disposição, recuperação e cintura opcional), feedback pós-treino (esforço, execução e dor), pesagens e gráfico, referência de IMC adulto, painel das últimas oito semanas e histórico.
 - **Offline**: service worker guarda os arquivos principais após uma primeira visita com internet. O suporte em segundo plano e à voz depende do navegador e do sistema.
-- **Backup**: exportação e restauração validada de arquivo JSON, incluindo histórico, pesagens, professor e substituições.
+- **Backup**: exportação e restauração validada de arquivo JSON, incluindo histórico, pesagens, professor, substituições, caminhadas e modalidade dos treinos.
 
 ## Estrutura
 
@@ -33,13 +36,14 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 | `coach.js` | Biblioteca de 365 combinações, intensidade, ciclos e recomendações |
 | `evolution.js` | Prontidão diária, recuperação ativa, progressão de força e leitura integrada de peso/cintura |
 | `evolution-ui.js` | Formulário diário, avaliação pós-treino e cartões de força |
+| `training.js` | Protocolos separados de força e cardio, distribuição muscular e aquecimento/volta à calma |
 | `guide.js` | Guias de execução de 31 exercícios |
 | `visual.js` | Mascote e ilustrações vetoriais originais |
 | `backup.js` | Exportação, validação e restauração dos registros |
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (39 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (90 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
