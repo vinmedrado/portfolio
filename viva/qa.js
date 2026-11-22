@@ -130,6 +130,11 @@ function run(){
  test('Spotify rejeita links de faixa ou álbum',()=>S.playlistId('https://open.spotify.com/track/37i9dQZF1DXcBWIGoYBM5M')===''&&S.playlistId('https://open.spotify.com/album/37i9dQZF1DXcBWIGoYBM5M')==='');
  test('Spotify valida Client ID sem expor segredo',()=>S.validId('abcdef0123456789abcdef0123456789')&&!S.validId('my-secret'));
  test('Spotify não possui conexão automática sem autenticação',()=>!S.connected);
+ test('Spotify aceita capa no CDN oficial',()=>S.safeImage('https://i.scdn.co/image/test123')==='https://i.scdn.co/image/test123');
+ test('Spotify rejeita capa não confiável e HTML malicioso',()=>S.safeImage('https://unsafe.example/a.jpg')===''&&S.safeImage('https://i.scdn.co/image/x" onerror="alert(1)')==='');
+ test('Spotify expõe apenas os metadados de reprodução ao painel',()=>{const p=S.nowPlaying;return typeof p.song==='string'&&typeof p.artist==='string'&&typeof p.playing==='boolean'&&!('access_token' in p)});
+ test('Spotify rejeita domínio imitador',()=>S.playlistId('https://open.spotify.com.evil.example/playlist/37i9dQZF1DXcBWIGoYBM5M')==='');
+
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
