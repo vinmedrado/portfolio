@@ -50,6 +50,63 @@ function exerciseAdvice(id,entries=[],now=new Date()){
    return {status:'progress',title:'Pode aumentar a resistência',description:'Nas duas últimas sessões este exercício pareceu fácil e estável. Se estiver confortável, experimente uma resistência ligeiramente maior; a técnica deve continuar segura.',count:logs.length};
  return {status:'maintain',title:'Mantenha a resistência',description:'Continue consolidando a execução antes de aumentar a tensão do elástico ou a dificuldade.',count:logs.length};
 }
+
+/** Per-exercise double progression. Based only on user-reported, completed sets, not elapsed time. */
+function strengthPrescription(id,history=[],feedback={},week=1,now=new Date(),readinessState='normal'){
+ const max=week<=2?10:12,baseline={id,target:8,range:'8–'+max,status:'baseline',
+  title:'Comece com 8 repetições controladas',description:'Registre todas as séries e como se sentiu. O ajuste depende de pelo menos dois treinos registrados.',bandSuggestion:null,completeSessions:0};
+ if(!g.VivaCoach?.getExercise(id))return {...baseline,status:'unknown'};
+ const cutoff=new Date(now);cutoff.setDate(cutoff.getDate()-42);
+ const sessions=(Array.isArray(history)?history:[]).filter(h=>h&&h.coach&&h.coachRecovery!==true&&h.date
+   &&Number.isFinite(Date.parse(h.date))&&new Date(h.date)>=cutoff&&new Date(h.date)<=now
+   &&Array.isArray(h.setLogs)&&h.setLogs.some(x=>x.id===id))
+   .map(h=>{
+     const bySet=new Map();for(const raw of h.setLogs){
+      const x=g.VivaExercises?.sanitizeSetLog(raw);
+      if(x?.id===id)bySet.set(x.setNumber,x);
+     }
+     const logs=[...bySet.values()].sort((a,b)=>a.setNumber-b.setNumber);
+     const fb=feedback?.[h.coachId]||null;
+     return {date:new Date(h.date),day:h.day,logs,feedback:fb,
+       complete:logs.length>=2,band:logs[0]?.band||null};
+   }).sort((a,b)=>a.date-b.date);
+ if(!sessions.length)return baseline;
+ const last=sessions.at(-1);
+ const redFlag=last.logs.some(x=>x.difficulty==='hard'||x.technique!=='boa')
+    ||last.feedback?.pain===true||last.feedback?.technique==='insegura'
+    ||Number(last.feedback?.effort)>=8;
+ if(redFlag)return {...baseline,status:'ease',title:'Mantenha ou reduza a dificuldade',
+   description:'Houve esforço muito alto, dor ou dificuldade técnica no último registro. Não aumente a resistência. Interrompa movimentos dolorosos.',completeSessions:sessions.filter(x=>x.complete).length};
+ const complete=sessions.filter(x=>x.complete);
+ const prev=complete.at(-2),current=complete.at(-1);
+ if(!prev||!current||!prev.feedback||!current.feedback||readinessState!=='normal'){
+   return {...baseline,status:'hold',title:'Mantenha a carga atual',
+    description:'Ainda faltam dois treinos completos com esforço e técnica avaliados, ou a recuperação pede cautela.',completeSessions:complete.length};
+ }
+ const gap=Math.abs(current.date-prev.date)/86400000;
+ const logs=[...prev.logs,...current.logs];
+ const safeFeedback=[prev.feedback,current.feedback].every(x=>x.pain!==true&&x.technique==='boa'&&Number(x.effort)>=1&&Number(x.effort)<=7);
+ const safeSets=logs.every(x=>x.repsDone>=8&&x.repsDone<=30&&x.technique==='boa'&&x.difficulty!=='hard');
+ const sameResistance=logs.every(x=>x.band===logs[0].band);
+ if(gap<1||!safeFeedback||!safeSets||!sameResistance)
+   return {...baseline,status:'hold',title:'Consolide a execução',
+     description:'Registre séries com boa técnica, esforço moderado e resistência comparável em dias diferentes antes de progredir.',
+     completeSessions:complete.length};
+ const lowest=Math.min(...logs.map(x=>x.repsDone)),next=Math.min(max,lowest+1);
+ if(lowest<max){
+   return {...baseline,target:next,status:'reps',title:'Alvo ajustado para '+next+' repetições',
+     description:'As duas últimas sessões completas tiveram execução estável. A meta de repetições sobe apenas um passo. Se a técnica piorar, volte ao nível anterior.',
+     completeSessions:complete.length};
+ }
+ const gear=g.VivaCoach.getExercise(id)?.gear,band=logs[0].band;
+ const nextBand=band==='light'?'medium':band==='medium'?'heavy':null;
+ const canUpgrade=week>2&&(gear==='mini'||gear==='long')&&nextBand;
+ return {...baseline,target:max,range:baseline.range,status:canUpgrade?'band':'maintain',
+   title:canUpgrade?'Pode testar uma resistência maior':'Mantenha o controle das repetições',
+   description:canUpgrade?'Você concluiu pelo menos duas sessões com o limite de repetições e boa técnica. Se estiver confortável, experimente a próxima resistência; é opcional e você deve voltar à mais leve se perder controle.':'Continue com o mesmo nível até que seja seguro variar a dificuldade.',
+   bandSuggestion:canUpgrade?nextBand:null,completeSessions:complete.length};
+}
+
 function strengthHighlights(entries=[],now=new Date(),limit=4){
  const byId=new Map();
  for(const entry of Array.isArray(entries)?entries:[]){
@@ -77,5 +134,5 @@ function weightWaistInsight(weighIns=[],checkins=[]){
  if(diff>=Math.max(.4,first.kg*.005))return {status:'increase',title:'Peso aumentou desde o início',description:'Antes de aumentar o cardio, observe medidas, frequência dos treinos, alimentação e possíveis oscilações de líquidos.'};
  return {status:'stable',title:'Peso relativamente estável',description:'Peso estável não significa automaticamente falta de progresso. Observe cintura, força, disposição e regularidade.'};
 }
-g.VivaEvolution=Object.freeze({dayKey,sanitizeReadiness,readiness,adapt,sanitizeStrengthLog,exerciseAdvice,strengthHighlights,weightWaistInsight,RECOVERY});
+g.VivaEvolution=Object.freeze({dayKey,sanitizeReadiness,readiness,adapt,sanitizeStrengthLog,exerciseAdvice,strengthPrescription,strengthHighlights,weightWaistInsight,RECOVERY});
 })(window);
