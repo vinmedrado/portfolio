@@ -71,6 +71,11 @@ function run(){
  test('Recuperação tem intervalos leves sem saltos',()=>{const x=T.prescribe({day:1,week:1,kind:'Recuperação ativa',duration:20,c:{gear:{mini:true,long:true},excluded:[]},moves:C.movesFor(1,1,{mini:true,long:true},true)});return x.training.type==='cardio'&&T.build(x).filter(s=>s.mode==='cardio'&&!s.rest).every(s=>s.seconds<=30)});
  test('Objetivo aeróbico cresce sem exigir 150 min inicialmente',()=>T.cardioGoals(1,0).target===30&&T.cardioGoals(12,0).target===90&&T.cardioGoals(20,0).longTerm===150);
  test('Backup preserva caminhada e modalidade do treino',()=>{const input={duration:30,history:[{coach:true,coachDay:1,coachType:'cardio',coachMainMinutes:20,coachId:'viva-1763650800000-5',day:'2026-11-20',date:'2026-11-20T12:00:00Z',duration:30}],coach:{walks:[{day:'2026-11-20',minutes:20,intensity:'moderate'}]}};const out=B.parse(B.serialize(input)).data;return out.coach.walks[0].minutes===20&&out.history[0].coachMainMinutes===20});
+
+ test('Volume semanal mostra força por grupo muscular',()=>{const p=T.weeklyMuscleSets(1,20,{mini:true,long:true},[]);return p.counts.pernas>=4&&p.counts.costas>=4&&p.counts.empurrar>=4&&p.counts.core>=2});
+ test('Aquecimento não conta como série de musculação',()=>{const p=T.weeklyMuscleSets(1,20,{mini:true,long:true},[]);return p.totalSets===18});
+ test('Sexta-feira inclui estabilidade de tronco na adaptação',()=>T.pickStrength(4,1,20,{mini:true,long:true},[]).some(x=>x.id==='birdDog'));
+ test('Volumetria semanal aumenta de forma estruturada',()=>T.weeklyMuscleSets(1,45,{mini:true,long:true},[]).totalSets>T.weeklyMuscleSets(1,20,{mini:true,long:true},[]).totalSets);
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
