@@ -8,7 +8,7 @@
 - Não mesclar a branch de preparação no `main` do portfólio: ela é apenas a origem para transferir o novo projeto.
 
 ## Criação do repositório
-Crie `treine-no-lar` em https://github.com/new (público e sem README inicial). Copie os arquivos desta pasta para a raiz do novo repositório. Não publique backups ou dados reais de usuários.
+Crie `treine-no-lar` em https://github.com/new (público e **com a opção Add a README file ativada**, para iniciar a branch `main`). Volte à conversa: o assistente poderá transferir os arquivos da branch de preparação para a raiz do repositório via GitHub conectado. Não publique backups ou dados reais de usuários.
 
 ## Hospedagem e domínio
 Em Settings → Pages do novo repositório, selecione `main` e `/ (root)`.
