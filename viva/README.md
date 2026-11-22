@@ -46,7 +46,7 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (133 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (137 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
@@ -77,13 +77,17 @@ O VIVA oferece um painel de música que permanece montado enquanto o cronômetro
 
 - **Player oficial**: em Início, toque em **Música**, cole um endereço `https://open.spotify.com/playlist/...`, salve e abra o player oficial. Não exige Client ID. O comportamento de reprodução completa é determinado pelo Spotify e pelo Safari.
 - **Controle Premium (Web Playback SDK)**: permite autenticar uma conta Premium, listar até 30 playlists disponíveis e controlar reproduzir/pausar, faixa anterior e próxima dentro do VIVA, respeitando as limitações do navegador e as permissões da API.
+- **Spotify V2 — visualização premium**: card escuro com capa oficial do álbum, nome da música, artista, playlist selecionada e uma faixa animada inspirada em gráfico de mercado financeiro. A animação é **puramente decorativa**: corre durante a reprodução e para na pausa; não analisa nem sincroniza a onda sonora real. O player compacto também exibe a faixa animada.
+- **Playlists em cards**: um toque seleciona e inicia a reprodução quando o player já está ativo; a playlist ativa é destacada. Tocar novamente na mesma playlist que já toca não reinicia sua música.
+- **Faixa atual confiável**: informações vêm de `player_state_changed` (SDK) e do estado atual de reprodução (`GET /me/player`) quando necessário. As capas exibidas vêm apenas de domínios de imagens confiáveis do Spotify; títulos e nomes são escapados antes de serem exibidos.
+- **Acessibilidade e bateria**: botões com rótulos, cores de alto contraste e animação desativada se o sistema operacional solicitar redução de movimento; sincronização leve enquanto a página estiver visível.
 
 ### Configurar o Spotify Premium
 
 1. Abra [Spotify for Developers](https://developer.spotify.com/dashboard) com uma conta Premium e crie um app autorizado para **Web Playback SDK**.
 2. Cadastre exatamente `https://vinmedrado.com/viva/` como **Redirect URI** (HTTPS, com barra final). Adicione sua conta aos usuários permitidos se o dashboard solicitar.
 3. O **Client ID público já está configurado no VIVA**. Abra **Música** e toque em **Conectar Spotify Premium**. Não é necessário inserir um Client Secret.
-4. Toque em **Conectar Spotify Premium**, autorize sua conta, depois em **Ativar player** e **Reproduzir**. No iPhone, o Safari pode exigir mais de um toque devido às políticas de autoplay.
+4. Toque em **Conectar Spotify Premium**, autorize sua conta, depois em **Ativar player** e escolha uma playlist com um toque. A playlist selecionada passa a tocar; se o Safari bloquear autoplay, toque no botão central de reprodução.
 
 O Client ID é um identificador público distribuído no código da página; o navegador pode guardar um ID alternativo se você personalizar a configuração. A autenticação utiliza Authorization Code com PKCE, sem servidor e sem Client Secret. Tokens são guardados no `sessionStorage` do navegador e **não entram no arquivo de backup do VIVA**. Sair do navegador ou trocar entre PWA e Safari pode exigir uma nova conexão. O SDK precisa de internet; o modo offline do VIVA não permite ouvir Spotify offline pelo site.
 
