@@ -558,12 +558,22 @@ document.addEventListener('submit',e=>{
   const now=new Date().toISOString(),technique=$('#coach-post-technique').value==='insegura'?'insegura':'boa',pain=$('#coach-post-pain').checked;
   data.coach.feedback[finishedCoachId]={effort:Number($('#coach-effort-value').value),technique,pain,date:now};
   const record=data.history.find(x=>x.coachId===finishedCoachId);
-  for(const id of (record?.coachAnchors||[]).slice(0,2)){
-   const ex=VivaCoach.getExercise(id);if(!ex)continue;
-   const diff=$('#strength-difficulty-'+id)?.value||'ok';
-   const band=ex.gear==='body'?'none':($('#strength-band-'+id)?.value||'light');
-   const log=VivaEvolution.sanitizeStrengthLog({id,date:now,difficulty:diff,band,technique,pain});
-   if(log)data.coach.strengthLogs.push(log);
+  const manually=(record?.setLogs||[]),reported=new Map();
+  for(const entry of manually)reported.set(entry.id,entry);
+  if(reported.size){
+   for(const entry of reported.values()){
+    const log=VivaEvolution.sanitizeStrengthLog({id:entry.id,date:now,difficulty:entry.difficulty,band:entry.band,
+      technique:technique==='insegura'?'insegura':entry.technique,pain});
+    if(log)data.coach.strengthLogs.push(log);
+   }
+  }else{
+   for(const id of (record?.coachAnchors||[]).slice(0,2)){
+    const ex=VivaCoach.getExercise(id);if(!ex)continue;
+    const diff=$('#strength-difficulty-'+id)?.value||'ok';
+    const band=ex.gear==='body'?'none':($('#strength-band-'+id)?.value||'light');
+    const log=VivaEvolution.sanitizeStrengthLog({id,date:now,difficulty:diff,band,technique,pain});
+    if(log)data.coach.strengthLogs.push(log);
+   }
   }
   data.coach.strengthLogs=data.coach.strengthLogs.slice(-1000);save();
  }
