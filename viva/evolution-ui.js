@@ -3,7 +3,7 @@ function dailyCard(m){
  const today=window.VivaEvolution.sanitizeReadiness(m.c.readiness,m.today),s=m.readiness;
  const selected=(v,t)=>Number(v)===Number(t)?'selected':'';
  const energy=['Muito baixa','Baixa','Normal','Boa','Excelente'];
- return `<section id="viva-preflight" class="viva-preflight"><div class="viva-preflight-head"><div><div class="kicker">ANTES DE TREINAR</div><h3>Como está seu corpo hoje?</h3><small>Registre sua disposição antes de começar.</small></div><span class="viva-preflight-symbol">✓</span></div>
+ return `<section id="viva-preflight" class="viva-preflight"><div class="viva-preflight-head"><div><div class="kicker">ANTES DE TREINAR</div><h3>Avaliação antes do treino</h3><small>Registre sua disposição antes de começar.</small></div><span class="viva-preflight-symbol">✓</span></div>
  <form id="coach-readiness">
  <div class="coach-form-grid"><label>Energia<select id="viva-energy" required><option value="" disabled ${!today?'selected':''}>Selecionar</option>${[1,2,3,4,5].map(v=>`<option value="${v}" ${today?selected(today.energy,v):''}>${v} · ${energy[v-1]}</option>`).join('')}</select></label>
  <label>Horas de sono<select id="viva-sleep" required><option value="" disabled ${!today?'selected':''}>Selecionar</option>${[5,7,8].map(v=>`<option value="${v}" ${today?selected(today.sleep,v):''}>${v===5?'Até 5 horas':v===7?'6–7 horas':'8 horas ou mais'}</option>`).join('')}</select></label></div>
