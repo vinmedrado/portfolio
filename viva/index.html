@@ -137,6 +137,123 @@ html,body{background:#f1f2f2;color:var(--ink)}
 .viva-spot-frame{padding:0 12px 12px}
 body:has(.nav.hidden) .viva-spot-dock{bottom:calc(12px + env(safe-area-inset-bottom))}
 @media(max-width:360px){.viva-music-entry{flex-wrap:wrap}.viva-music-entry button{width:100%}.viva-spot-bar small{max-width:160px}}
+
+/* Spotify V2 — editorial, dark, low-distraction music player */
+.viva-spot-dock{
+ --spot-ink:#eaf3f0;--spot-sub:#94aaa6;--spot-green:#89f2b2;
+ background:#10191f!important;color:var(--spot-ink);
+ border:1px solid #2c4448!important;border-radius:22px!important;
+ box-shadow:0 18px 60px #03101258!important;
+ scrollbar-width:thin;scrollbar-color:#385756 transparent;
+ max-height:min(755px,calc(100dvh - 119px));overflow-x:hidden;
+}
+.viva-spot-dock *{box-sizing:border-box}
+.viva-spot-dock button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.viva-spot-dock button:focus-visible,.viva-spot-dock input:focus-visible,.viva-spot-dock summary:focus-visible{outline:2px solid #9cf2bc;outline-offset:3px}
+.viva-spot-bar{display:flex;align-items:center;gap:8px;padding:8px 12px!important;min-height:64px!important;background:#131e25;border-bottom:1px solid #2d4147}
+.viva-spot-mini{min-width:0;display:flex;align-items:center;gap:11px;flex:1}
+.viva-spot-mini-text{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+.viva-spot-mini-text b{display:block!important;font-size:12px!important;font-weight:800;color:#f4fbf7!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viva-spot-mini-text small{display:block!important;font-size:10px!important;color:#98aca7!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:none!important;margin:0!important}
+.viva-spot-bar button.is-minimize{width:39px;height:39px;display:grid;place-items:center;flex-shrink:0;padding:0!important;background:#22343a;border:1px solid #39524f;color:#cce8d9;border-radius:12px}
+.viva-spot-mini-signal{width:67px;height:28px;display:block;flex-shrink:0}
+.viva-spot-mini-signal .viva-spot-signal{height:28px;border:0;background:transparent;box-shadow:none}
+.viva-spot-mini-signal .viva-spot-signal-flow{top:0}
+.viva-spot-mini-signal .viva-spot-signal-svg{height:28px}
+.viva-spot-mini-signal .viva-spot-signal-glow{display:none}
+.viva-spot-dock [data-spot-body]{background:#10191f;border-top:0!important;padding:0 12px 14px!important}
+.viva-spot-v2{padding:5px 0 0}
+.viva-spot-hero{background:radial-gradient(circle at 6% 0%,#244238 0,#192c2b 22%,#17232a 60%,#142027 100%);border:1px solid #314a49;border-radius:18px;padding:17px 15px 14px;box-shadow:inset 0 1px #ffffff13}
+.viva-spot-eyebrow{display:flex;align-items:center;gap:8px;color:#aac6b9;font-size:9px;font-weight:850;letter-spacing:1.1px;line-height:1.2}
+.viva-spot-hero-status{margin-left:auto;color:#a9b9b3;letter-spacing:.6px;text-align:right;font-size:9px}
+.viva-spot-signal-dot{width:7px;height:7px;border-radius:50%;background:#5d786e;box-shadow:none;flex:0 0 7px}
+.viva-spot-dock.is-playing .viva-spot-signal-dot{background:#6cffaa;box-shadow:0 0 10px #78ffa88f}
+.viva-spot-now{display:flex;gap:14px;align-items:center;margin:18px 0 15px;min-width:0}
+.viva-spot-art{width:78px;height:78px;flex:0 0 78px;display:grid;place-items:center;border-radius:13px;overflow:hidden;background:linear-gradient(142deg,#32634c,#153128 60%,#112128);border:1px solid #4e6d59;box-shadow:0 10px 25px #020e1570}
+.viva-spot-art img{display:block;width:100%;height:100%;object-fit:cover}
+.viva-spot-art-fallback{display:grid;place-items:center;color:#8ce9ac}
+.viva-spot-art-fallback svg{width:30px;height:30px}
+.viva-spot-art-mini{width:40px;height:40px;flex:0 0 40px;border-radius:10px;box-shadow:none}
+.viva-spot-art-mini .viva-spot-art-fallback svg{width:20px;height:20px}
+.viva-spot-now-info{min-width:0;flex:1}
+.viva-spot-now-label{display:block;font-size:9px;font-weight:850;letter-spacing:1.25px;color:#90e5b1;margin-bottom:7px}
+.viva-spot-now-info h3{font-size:19px!important;line-height:1.15!important;letter-spacing:-.55px;margin:0!important;color:#f5fff9;font-weight:850;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.viva-spot-now-info p{color:#c1d2cc!important;font-size:12px!important;margin:6px 0 5px!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viva-spot-now-info small{display:block;color:#839c96!important;font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viva-spot-signal{height:60px;position:relative;overflow:hidden;border:1px solid #314d47;border-radius:10px;background:repeating-linear-gradient(to right,transparent 0,transparent 37px,#82b59a17 38px,#82b59a17 39px),repeating-linear-gradient(to bottom,transparent 0,transparent 18px,#82b59a17 19px,#82b59a17 20px),#0f2022;color:#83f4b0;isolation:isolate;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent)}
+.viva-spot-signal-flow{position:absolute;display:flex;left:0;top:0;width:max-content;will-change:transform;animation:viva-spot-market-scroll 10s linear infinite;animation-play-state:paused}
+.viva-spot-signal-svg{width:520px;height:59px;flex:0 0 520px;filter:drop-shadow(0 0 4px #5cffa75a)}
+.viva-spot-signal-glow{position:absolute;pointer-events:none;inset:0;background:linear-gradient(to right,#0d201d66,transparent 30%,transparent 65%,#0e201f66)}
+.viva-spot-dock.is-playing .viva-spot-signal-flow{animation-play-state:running}
+.viva-spot-dock:not(.is-playing) .viva-spot-signal{color:#56796b;opacity:.65}
+@keyframes viva-spot-market-scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-520px,0,0)}}
+.viva-spot-signal-caption{display:flex;justify-content:space-between;gap:8px;margin:8px 1px 16px;color:#88a8a0;font-size:9px;font-weight:850;letter-spacing:1px}
+.viva-spot-signal-caption i{font-style:normal;color:#415e57}
+.viva-spot-dock.is-playing .viva-spot-signal-caption span:last-child{color:#95ffc0}
+.viva-spot-transport{display:flex;align-items:center;justify-content:center;gap:23px;margin:5px 0 17px}
+.viva-spot-dock .viva-spot-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.viva-spot-dock .viva-spot-button:active{transform:scale(.96)}
+.viva-spot-dock .viva-spot-button:disabled{opacity:.38;cursor:default}
+.viva-spot-dock .viva-spot-button.is-skip{background:#223238;border:1px solid #36504b;color:#d3e9db;border-radius:50%;width:43px;height:43px;padding:0}
+.viva-spot-dock .viva-spot-button.is-skip svg{width:19px;height:19px}
+.viva-spot-dock .viva-spot-button.is-primary{width:60px;height:60px;border-radius:50%;padding:0;background:#88f0ae;color:#0d2718;border:0;box-shadow:0 5px 24px #74eea238}
+.viva-spot-dock .viva-spot-button.is-primary svg{width:27px;height:27px}
+.viva-spot-hero-bottom{padding-top:11px;display:flex;justify-content:space-between;gap:9px;border-top:1px solid #344844;color:#a5bbb1;font-size:9px;font-weight:750;letter-spacing:.4px}
+.viva-spot-hero-bottom span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.viva-spot-hero-bottom span:last-child{white-space:nowrap;color:#91cdaa}
+.viva-spot-library{padding:19px 4px 7px}
+.viva-spot-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-bottom:11px}
+.viva-spot-section-heading span{color:#80b596;font-size:9px;letter-spacing:1.2px;font-weight:800}
+.viva-spot-section-heading h3{font-size:18px!important;color:#f3f8f5;margin:3px 0 0;font-weight:850;letter-spacing:-.3px}
+.viva-spot-dock .viva-spot-button.is-refresh{background:#223436;border:1px solid #3a5148;color:#a9dac0;border-radius:9px;padding:9px 10px;font-size:10px;white-space:nowrap}
+.viva-spot-dock .viva-spot-button.is-refresh svg{width:14px;height:14px}
+.viva-spot-dock .viva-spot-list{display:grid;gap:8px;max-height:236px;overflow:auto;padding:1px 2px 4px;scrollbar-color:#426454 transparent}
+.viva-spot-dock .viva-spot-playlist{display:flex;align-items:center;text-align:left;width:100%;gap:11px;padding:10px;background:#19272e;border:1px solid #314349;border-radius:13px;color:#eefaf1;min-height:61px;transition:background .15s,border-color .15s}
+.viva-spot-dock .viva-spot-playlist.is-selected{background:#1c382f;border-color:#79db9c;box-shadow:inset 3px 0 0 #8afaaf}
+.viva-spot-playlist .viva-spot-art-mini{width:41px;height:41px;flex:0 0 41px;border-radius:8px}
+.viva-spot-playlist-label{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.viva-spot-playlist-label b{font-size:12px;color:#eefaf3;font-weight:750;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.viva-spot-playlist-label small{font-size:9px;color:#94aca3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viva-spot-playlist.is-selected .viva-spot-playlist-label small{color:#90f2b0}
+.viva-spot-playlist-action{display:grid;place-items:center;border-radius:50%;width:31px;height:31px;flex:0 0 31px;background:#2a3c41;color:#bbddca}
+.viva-spot-playlist.is-selected .viva-spot-playlist-action{background:#82eda8;color:#092318}
+.viva-spot-playlist-action svg{width:16px;height:16px}
+.viva-spot-library-tip{font-size:10px;color:#9caeaa;line-height:1.45;margin:10px 2px 15px}
+.viva-spot-dock .viva-spot-link-form{border-top:1px solid #2c4143;padding-top:14px;margin-top:10px}
+.viva-spot-link-form label{font-size:10px!important;color:#8fafa1!important;letter-spacing:.7px;font-weight:800}
+.viva-spot-link-form>div{display:flex;gap:7px;margin-top:7px}
+.viva-spot-dock .viva-spot-link-form input{min-width:0;flex:1;margin:0!important;background:#17272d;border:1px solid #3b4e4b;border-radius:10px;color:#f0f8f1;padding:10px!important;font-size:11px}
+.viva-spot-dock .viva-spot-link-form input::placeholder{color:#6e8780}
+.viva-spot-dock .viva-spot-link-form button{flex:0 0 auto;width:auto!important;background:#264b3c!important;color:#b4eeca!important;border:1px solid #40725a!important;padding:10px 12px!important}
+.viva-spot-dock .viva-spot-button.is-embed{background:transparent;color:#96cdb0;border:none;padding:11px 3px;font-size:11px;font-weight:800}
+.viva-spot-dock .viva-spot-button.is-embed svg{width:13px;height:13px}
+.viva-spot-bottom-tools{display:flex;gap:7px;flex-wrap:wrap;padding:4px 4px 8px}
+.viva-spot-dock .viva-spot-button.is-activate,.viva-spot-dock .viva-spot-button.is-connect{background:#254639;border:1px solid #426f55;border-radius:10px;padding:11px 13px;color:#b6ebc3;font-size:11px;font-weight:800}
+.viva-spot-dock .viva-spot-button.is-disconnect{background:#18282e;border:1px solid #34454a;border-radius:10px;padding:11px;color:#a5b9ae;font-size:11px}
+.viva-spot-config{border-top:1px solid #2d3d40!important;padding:13px 5px!important;margin:0 3px!important;color:#9fb6a8}
+.viva-spot-config summary{font-size:11px!important;color:#b0cbbb!important}
+.viva-spot-config p{font-size:11px!important;color:#9bb0a8!important}
+.viva-spot-config code{color:#8ef5b2}
+.viva-spot-config label{color:#b0cbbb!important}
+.viva-spot-config input{background:#18292c!important;border:1px solid #41534e!important;color:#e8faed!important}
+.viva-spot-dock .viva-spot-config form>button{background:#244d3b;border:1px solid #3e7054;color:#b3e5c0}
+.viva-spot-notice{font-size:10px!important;color:#a4c9b6!important;line-height:1.5;margin:2px 6px 9px!important}
+.viva-spot-dock .viva-spot-empty{border:1px dashed #355046;border-radius:12px;background:#17252b;padding:15px;font-size:11px;line-height:1.55;color:#a5b9ae}
+.viva-spot-dock .viva-spot-note{font-size:11px!important;color:#a5b9ae!important}
+@media(max-width:400px){
+ .viva-spot-dock{width:calc(100% - 12px)}
+ .viva-spot-now{gap:11px}
+ .viva-spot-art{width:68px;height:68px;flex-basis:68px}
+ .viva-spot-now-info h3{font-size:17px!important}
+ .viva-spot-hero{padding:15px 12px 12px}
+ .viva-spot-hero-bottom{font-size:8px}
+ .viva-spot-mini-signal{width:50px}
+ .viva-spot-dock .viva-spot-playlist{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .viva-spot-signal-flow{animation:none!important}
+ .viva-spot-dock .viva-spot-button{transition:none}
+}
 </style></head><body><div class="wrap"><header class="header"><div class="logo">VIVA<em>.</em></div><div class="sig" id="streak">Treinos da semana</div></header><div class="viva-offline-banner" id="offline-banner" role="status" aria-live="polite">Sem internet: você pode continuar treinando com os dados deste aparelho.</div><main id="app"><section class="viva-home-top"><div class="kicker">VIVA · TREINO EM CASA</div><h1>Abrindo treinos</h1><p>Carregando o plano e seus registros salvos.</p></section><noscript>Ative o JavaScript para acessar o VIVA.</noscript></main><nav class="nav" id="nav" aria-label="Menu"><span class="viva-nav-loading">Carregando menu…</span></nav><aside id="viva-music-dock" class="viva-spot-dock" aria-label="Música do treino"></aside></div><script src='guide.js?v=1'></script><script src='coach.js?v=4'></script><script src='exercises.js?v=2'></script><script src='evolution.js?v=3'></script><script src='evolution-ui.js?v=2'></script><script src='training.js?v=4'></script><script src='backup.js?v=4'></script><script src='spotify.js?v=3'></script><script>
 (function(){'use strict';const $=s=>document.querySelector(s), app=$('#app'),nav=$('#nav'),store='viva-functional-v2';let data={duration:30,low:true,sound:true,voice:true,countdown:true,volume:0.45,history:[],profile:{heightCm:null,age:null,weighIns:[]},coach:{startedAt:null,gear:{mini:true,long:true},checkins:[],feedback:{},selectedDay:null,selectedDate:null}};try{Object.assign(data,JSON.parse(localStorage.getItem(store)||'{}'))}catch{}if(!data.profile)data.profile={heightCm:null,age:null,weighIns:[]};if(!Array.isArray(data.profile.weighIns))data.profile.weighIns=[];if(!data.coach||typeof data.coach!=='object')data.coach={startedAt:null,gear:{mini:true,long:true},checkins:[],feedback:{},selectedDay:null,selectedDate:null};if(!data.coach.gear)data.coach.gear={mini:true,long:true};data.coach.excluded=[...new Set((Array.isArray(data.coach.excluded)?data.coach.excluded:[]).filter(id=>VivaCoach.getExercise(id)))];
  data.coach.preferences=VivaExercises.safePrefs(data.coach.preferences);
