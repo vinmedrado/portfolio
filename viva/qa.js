@@ -3,7 +3,7 @@ function run(){
  const results=[];
  function test(name,fn){try{if(!fn())throw Error('A condição esperada não foi atendida.');results.push({name,pass:true})}
  catch(err){results.push({name,pass:false,error:String(err?.message||err)})}}
- const C=g.VivaCoach,B=g.VivaBackup,V=g.VivaVisual,G=g.VivaGuide,E=g.VivaEvolution,U=g.VivaEvolutionUI,T=g.VivaTraining;
+ const C=g.VivaCoach,B=g.VivaBackup,X=g.VivaExercises,G=g.VivaGuide,E=g.VivaEvolution,U=g.VivaEvolutionUI,T=g.VivaTraining;
  const date=new Date('2026-11-20T12:00:00Z');
  test('Motor do professor disponível',()=>!!C&&C.DAYS.length===5);
  test('Biblioteca contém 365 treinos',()=>C.LIBRARY_SIZE===365);
@@ -28,7 +28,7 @@ function run(){
  test('Revisão de ciclo em quatro semanas',()=>C.cycleReview({startedAt:'2026-10-27T12:00:00Z'},[],[],date).due);
  test('Instruções detalhadas disponíveis',()=>G.keys.length>=30&&G.get('row').breathing.length>10);
  test('Mini band inclui aviso de posição',()=>G.get('miniWalk').attention.includes('joelhos'));
- test('Ilustrações vetoriais disponíveis',()=>V.exercise('Remada com elástico').includes('<svg')&&V.mascot().includes('<svg'));
+ test('Todos os exercícios cadastrados possuem guia textual',()=>X.ids.length>=31&&X.ids.every(id=>X.details(id).setup&&X.details(id).execution&&X.details(id).errors&&X.details(id).easier&&X.details(id).harder));
  const raw={duration:20,history,profile:{heightCm:170,age:29,weighIns:[{day:'2026-11-20',kg:90}]},coach:{startedAt:'2026-11-20T12:00:00Z',gear:{mini:true,long:true},excluded:['miniWalk','notReal'],feedback:{'viva-1763294400000-1':{effort:5,technique:'boa'}}}};
  test('Backup exporta e restaura registros',()=>{const z=B.parse(B.serialize(raw));return z.stats.trainings===2&&z.stats.weighIns===1});
  test('Backup preserva substituições válidas',()=>B.parse(B.serialize(raw)).data.coach.excluded.join('|')==='miniWalk');
@@ -81,7 +81,19 @@ function run(){
  test('Os treinos não usam títulos promocionais',()=>C.DAYS.every(x=>!/desafio|completo e equilibrado|treino mágico|inteligente/i.test(x.title+' '+x.note)));
  test('Biblioteca mantém dia e foco por semana',()=>C.catalogItem(2).title==='Cardio em intervalos'&&C.catalogItem(5).title==='Costas, peito e abdômen');
  test('Histórico restaurado usa os rótulos atuais',()=>{const x=B.parse(B.serialize({history:[{date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20,coach:true,coachDay:1}]})).data;return x.history[0].coachFocus==='Cardio em intervalos'});
- test('Mascote não contém nome inventado',()=>!V.mascot().includes('Vivi,'));
+ test('Guia apresenta objetivo e equipamento',()=>X.details('row').equipment==='Elástico longo'&&X.details('row').muscles.includes('Costas'));
+
+ test('Sem chão não seleciona exercícios deitado',()=>[0,2,4].every(day=>T.prescribe({day,week:1,duration:20,kind:'Força',c:{gear:{mini:true,long:true},excluded:[],preferences:{noFloor:true}},moves:[]}).moves.every(m=>!X.FLOOR.has(m.id))));
+ test('Sem apoio dos joelhos remove quatro apoios',()=>!X.allowed('birdDog',{mini:true,long:true},{noKneel:true}));
+ test('Sem elásticos evita exercício que requer banda',()=>!X.allowed('row',{mini:false,long:false},{}));
+ test('Substituição validada usa movimento permitido',()=>T.pickStrength(0,1,20,{mini:true,long:true},[],{}, {squat:'squatWide'})[0].id==='squatWide');
+ test('Alternativa para ponte sem chão é exercício em pé',()=>X.alternatives('bridge',{mini:true,long:true},{noFloor:true}).some(m=>m.id==='hinge'));
+ test('Registro manual rejeita repetições impossíveis',()=>!X.sanitizeSetLog({id:'squat',setNumber:1,repsDone:0})&&!X.sanitizeSetLog({id:'squat',setNumber:1,repsDone:99}));
+ test('Registro manual preserva dificuldade e técnica',()=>{const x=X.sanitizeSetLog({id:'row',setNumber:2,repsDone:9,band:'medium',difficulty:'hard',technique:'insegura'});return x?.band==='medium'&&x?.difficulty==='hard'&&x?.technique==='insegura'});
+ test('Backup mantém preferências e substituições',()=>{const o=B.parse(B.serialize({coach:{preferences:{noFloor:true},replacements:{squat:'squatWide'},reasons:{squat:'discomfort'}}})).data;return o.coach.preferences.noFloor&&o.coach.replacements.squat==='squatWide'&&o.coach.reasons.squat==='discomfort'});
+ test('Backup preserva séries e repetições manuais',()=>{const o=B.parse(B.serialize({history:[{coach:true,coachDay:0,coachId:'viva-1763650800000-2',day:'2026-11-20',date:'2026-11-20T14:00:00Z',duration:20,setLogs:[{id:'squat',setNumber:1,repsDone:10,difficulty:'ok',band:'none',technique:'boa'}]}]})).data;return o.history[0]?.setLogs?.[0]?.repsDone===10});
+ test('Progresso só contabiliza séries informadas',()=>X.progress([{day:'2026-11-20',coachId:'a',setLogs:[{id:'squat',setNumber:1,repsDone:8}]}])[0].latest.reps===8);
+ test('Alternativas respeitam motivo, equipamento e restrições',()=>X.alternatives('row',{mini:false,long:false},{noFloor:true}).length===0);
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
