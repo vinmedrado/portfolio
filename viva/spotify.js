@@ -3,7 +3,7 @@ const CLIENT='viva-spotify-client-v1',PLAYLIST='viva-spotify-playlist-v1',TOKENS
 // Spotify Client ID is public; no Client Secret or access tokens are included in the bundle.
 const DEFAULT_CLIENT_ID='c4e9fe8799bc44cb944b26cb54557e3d';
 const REDIRECT='https://vinmedrado.com/viva/', SCOPES='streaming user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative';
-let dock=null,player=null,device='',playlists=[],song='',artist='',cover='',trackUri='',album='',playlistName='',playlistArt='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='',renderedPanel='',refreshTimer=null,visibilityBound=false;
+let dock=null,player=null,device='',playlists=[],song='',artist='',cover='',trackUri='',album='',playlistName='',playlistArt='',playing=false,expanded=false,embedOpen=false,sdkLoading=null,notice='',refreshFlight=null,lastStarted='',renderedPanel='',refreshTimer=null,visibilityBound=false,sdkStateRevision=0;
 const saved=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k)||'';v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch{return ''}};
 const temp=(k,v)=>{try{if(v===undefined)return sessionStorage.getItem(k)||'';v?sessionStorage.setItem(k,v):sessionStorage.removeItem(k)}catch{return ''}};
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,13 +26,16 @@ function setTrack(item,active){
  if(changed)draw();
 }
 function onSDKState(state){
+ sdkStateRevision++;
  const current=state?.track_window?.current_track;if(current)setTrack(current,!state.paused);
  else if(state&&playing!==!state.paused){playing=!state.paused;draw()}
 }
 async function syncPlayback(){
  if(!auth())return;
+ const revisionAtStart=sdkStateRevision;
  try{
   const x=await api('/me/player');
+  if(revisionAtStart!==sdkStateRevision)return; // a newer SDK event wins over delayed API data
   if(x?.item){setTrack(x.item,!!x.is_playing);return}
   if(player?.getCurrentState){const state=await player.getCurrentState();if(state)onSDKState(state)}
  }catch{ /* Spotify SDK events keep the player useful when the API is unavailable */ }
