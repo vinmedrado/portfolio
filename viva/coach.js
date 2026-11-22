@@ -1,10 +1,10 @@
 (function(g){'use strict';
 const DAYS=[
-{title:'Força geral e técnica',kind:'Força',note:'Movimentos lentos; foco em aprender a execução.',required:true},
-{title:'Cardio leve e mobilidade',kind:'Cardio',note:'Respiração confortável; evite se esgotar.',required:false},
-{title:'Pernas e glúteos',kind:'Força',note:'Mini band opcional; preserve a técnica.',required:true},
-{title:'Cardio e abdômen',kind:'Cardio',note:'Movimente-se sem precisar de saltos.',required:false},
-{title:'Força geral e postura',kind:'Força',note:'Elástico opcional e movimentos controlados.',required:true}
+{title:'Corpo inteiro',kind:'Força',note:'Agachamento, remada e flexão com execução controlada.',required:true},
+{title:'Cardio sem saltos',kind:'Cardio',note:'Marcha e deslocamentos leves, com pausas.',required:false},
+{title:'Pernas e glúteos',kind:'Força',note:'Quadril, pernas e glúteos. Elásticos opcionais.',required:true},
+{title:'Cardio e estabilidade',kind:'Cardio',note:'Cardio leve e movimentos para estabilidade do tronco.',required:false},
+{title:'Costas, peito e abdômen',kind:'Força',note:'Remada, flexão e controle do tronco.',required:true}
 ];
 const M={
  squat:['Agachamento controlado','Sente o quadril para trás. Joelhos acompanhando a direção dos pés.','body'],
@@ -104,13 +104,13 @@ function weightsTrend(weighIns=[]){
  return 'oscilando';
 }
 function guidance(week,perf,trend){
- if(perf.pain||perf.sore)return 'Você registrou dor ou desconforto importante. Não force o treino: descanse e procure orientação profissional se persistir.';
- if(perf.highFatigue||perf.lowEnergy)return 'A recuperação está pedindo atenção. Hoje o professor recomenda intensidade leve e mais descanso.';
- if(week<=2)return 'Adaptação inicial: aprenda os movimentos e respeite os intervalos. Os dias leves são opcionais.';
- if(trend==='subindo')return 'O peso subiu em registros semanais consecutivos. Vamos acompanhar cintura, frequência e hábitos antes de mudar o treino; força continua prioritária.';
- if(trend==='descendo')return 'Seu peso apresenta redução gradual. Continue protegendo a massa muscular com exercícios de força e recuperação adequada.';
- if(week>=5)return 'Revisão do ciclo: preserve os exercícios principais para medir força e varie alguns complementares sem perder consistência.';
- return 'Seu progresso é avaliado por treinos concluídos, esforço percebido, recuperação e tendência de peso.';
+ if(perf.pain||perf.sore)return 'Dor ou desconforto relatado. Não force a atividade e procure avaliação se persistir.';
+ if(perf.highFatigue||perf.lowEnergy)return 'Recuperação abaixo do habitual. Reduza a intensidade ou descanse.';
+ if(week<=2)return 'Primeiras duas semanas: aprenda a execução, mantenha o esforço leve e respeite os descansos.';
+ if(trend==='subindo')return 'Peso em alta nas últimas pesagens. Observe cintura e frequência antes de alterar o treino.';
+ if(trend==='descendo')return 'Peso em redução. Mantenha os dias de força e a recuperação entre as sessões.';
+ if(week>=5)return 'Na revisão, compare frequência, execução e esforço antes de aumentar a resistência.';
+ return 'A progressão considera frequência, esforço e recuperação.';
 }
 function prescription(week,day,history=[],coach={},today=new Date()){
  const perf=getPerformance(history,coach,today),minutes=duration(week,history,coach,today);
@@ -123,10 +123,10 @@ function prescription(week,day,history=[],coach={},today=new Date()){
  const goodForm=lastTwo.every(x=>!x.pain&&x.technique!=='insegura');
  const easy=week>2&&strength&&perf.ready&&lastTwo.length===2&&goodForm&&lastTwo.every(x=>Number(x.effort)<=5);
  const difficult=lastTwo.some(x=>Number(x.effort)>=8||x.technique==='insegura'||x.pain);
- const loadHint=!strength?'Mantenha um ritmo em que seja possível falar frases curtas e faça pausas se precisar.'
+ const loadHint=!strength?'Mantenha um ritmo que permita conversar e reduza a velocidade se necessário.'
   :!perf.ready||difficult?'Prefira resistência mais leve e movimentos controlados. Não avance a tensão hoje.'
-  :easy?'Se os dois últimos treinos de força foram leves e a técnica está segura, experimente uma tensão um pouco maior, sem forçar.'
-  :'Escolha uma resistência que permita repetir cada movimento com técnica e esforço moderado. Mantenha a tensão até dominar a execução.';
+  :easy?'Dois treinos de força recentes foram leves e bem executados. É possível testar uma resistência um pouco maior.'
+  :'Escolha uma resistência que permita concluir as repetições com controle. Não aumente a tensão se a técnica piorar.';
  const effortTarget=perf.ready?'Esforço percebido sugerido: de leve a moderado, aproximadamente 4–6/10.':'Hoje priorize a recuperação; se houver dor, interrompa e procure orientação.';
  const phase=week<=2?'Adaptação':week<=4?'Consolidação':week<=8?'Desenvolvimento':'Evolução';
  return {minutes,strength,phase,loadHint,effortTarget,ready:perf.ready,needsPainCare:perf.pain||perf.sore,progression:easy?'aumentar-opcional':difficult?'reduzir':'manter',c14:perf.c14,c28:perf.c28};
@@ -158,11 +158,11 @@ function cycleReview(coach={},history=[],weighIns=[],today=new Date()){
  const week=weekOf(coach,today),perf=getPerformance(history,coach,today),trend=weightsTrend(weighIns);
  const cycle=Math.floor((week-1)/4)+1,weekOfCycle=((week-1)%4)+1,due=weekOfCycle===4||weekOfCycle===1&&week>1;
  const status=!perf.ready?'recuperacao':perf.c28<6?'construir-habito':'evoluir';
- const summary=status==='recuperacao'?'Há sinais recentes de recuperação insuficiente. Reduza a intensidade e não force movimentos dolorosos.'
- :status==='construir-habito'?'Antes de aumentar a carga, priorize criar uma rotina sustentável por algumas semanas.'
- :trend==='subindo'?'Acompanhe a tendência de peso, cintura, alimentação e frequência. Não aumente o cardio abruptamente.'
- :trend==='descendo'?'Boa tendência de redução. Preserve o fortalecimento muscular e progrida conforme a recuperação.'
- :'Você mantém regularidade. Mantenha exercícios fundamentais e varie complementares conforme o esforço.';
+ const summary=status==='recuperacao'?'Recuperação insuficiente relatada. Reduza o esforço e não treine com dor.'
+ :status==='construir-habito'?'Frequência abaixo da referência. Priorize manter a rotina antes de aumentar a carga.'
+ :trend==='subindo'?'Antes de ajustar o cardio, observe peso, cintura e frequência por mais algumas semanas.'
+ :trend==='descendo'?'Peso em queda nas últimas pesagens. Mantenha a força e ajuste a dificuldade apenas se estiver recuperado.'
+ :'Frequência adequada. Mantenha os exercícios principais e ajuste a carga conforme a execução.';
  return {week,cycle,weekOfCycle,due,status,summary,metric28:perf.c28,trend};
 }
 
