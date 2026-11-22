@@ -1,6 +1,6 @@
 /* VIVA — offline-first asset cache (same-origin, app scope only). */
-const CACHE='viva-cache-20261122-r14';
-const CORE=['./','./index.html','./coach.js?v=4','./exercises.js?v=2','./evolution.js?v=3','./evolution-ui.js?v=2','./training.js?v=4','./guide.js?v=1','./backup.js?v=4','./spotify.js?v=2','./manifest.webmanifest','./favicon.svg'];
+const CACHE='viva-cache-20261122-r15';
+const CORE=['./','./index.html','./coach.js?v=4','./exercises.js?v=2','./evolution.js?v=3','./evolution-ui.js?v=2','./training.js?v=4','./guide.js?v=1','./backup.js?v=4','./spotify.js?v=3','./manifest.webmanifest','./favicon.svg'];
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE);await self.skipWaiting()})());
 });
