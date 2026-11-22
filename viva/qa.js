@@ -76,6 +76,12 @@ function run(){
  test('Aquecimento não conta como série de musculação',()=>{const p=T.weeklyMuscleSets(1,20,{mini:true,long:true},[]);return p.totalSets===18});
  test('Sexta-feira inclui estabilidade de tronco na adaptação',()=>T.pickStrength(4,1,20,{mini:true,long:true},[]).some(x=>x.id==='birdDog'));
  test('Volumetria semanal aumenta de forma estruturada',()=>T.weeklyMuscleSets(1,45,{mini:true,long:true},[]).totalSets>T.weeklyMuscleSets(1,20,{mini:true,long:true},[]).totalSets);
+
+ test('Nomes dos dias descrevem a atividade real',()=>C.DAYS.map(x=>x.title).join('|')==='Corpo inteiro|Cardio em intervalos|Pernas e glúteos|Cardio e estabilidade|Costas, peito e abdômen');
+ test('Os treinos não usam títulos promocionais',()=>C.DAYS.every(x=>!/desafio|completo e equilibrado|treino mágico|inteligente/i.test(x.title+' '+x.note)));
+ test('Biblioteca mantém dia e foco por semana',()=>C.catalogItem(2).title==='Cardio em intervalos'&&C.catalogItem(5).title==='Costas, peito e abdômen');
+ test('Histórico restaurado usa os rótulos atuais',()=>{const x=B.parse(B.serialize({history:[{date:'2026-11-20T12:00:00Z',day:'2026-11-20',duration:20,coach:true,coachDay:1}]})).data;return x.history[0].coachFocus==='Cardio em intervalos'});
+ test('Mascote não contém nome inventado',()=>!V.mascot().includes('Vivi,'));
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
