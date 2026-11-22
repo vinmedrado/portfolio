@@ -52,13 +52,38 @@ function pickCardio(day,week,available,low,recovery=false){
  const rotated=others.length?others.slice(shift%others.length).concat(others.slice(0,shift%others.length)):[];
  return [...anchor,...rotated].slice(0,n);
 }
+function strengthSetCount(minutes,week,history=[],feedback={},today=new Date(),readinessState='normal'){
+ if(minutes===45)return 3;
+ if(minutes!==30||week<5||readinessState!=='normal')return 2;
+ const cutoff=new Date(today);cutoff.setDate(cutoff.getDate()-42);
+ const recent=(Array.isArray(history)?history:[]).filter(h=>h?.coach&&h.coachRecovery!==true&&h.coachType==='strength'
+   &&h.date&&Number.isFinite(Date.parse(h.date))&&new Date(h.date)>=cutoff&&new Date(h.date)<=today)
+   .sort((a,b)=>new Date(a.date)-new Date(b.date));
+ if(!recent.length)return 2;
+ const latest=recent.at(-1),lastFeedback=feedback?.[latest.coachId];
+ if(!lastFeedback||lastFeedback.pain===true||lastFeedback.technique!=='boa'
+   ||Number(lastFeedback.effort)>7)return 2;
+ const safeDays=new Set();
+ for(const h of recent){
+  const fb=feedback?.[h.coachId],byId=new Map();
+  if(!fb||fb.pain===true||fb.technique!=='boa'||!(Number(fb.effort)>=1&&Number(fb.effort)<=7))continue;
+  for(const raw of Array.isArray(h.setLogs)?h.setLogs:[]){
+   const x=g.VivaExercises?.sanitizeSetLog(raw);
+   if(!x||x.repsDone<8||x.technique!=='boa'||x.difficulty==='hard')continue;
+   const set=byId.get(x.id)||new Set();set.add(x.setNumber);byId.set(x.id,set);
+  }
+  if([...byId.values()].filter(sets=>sets.size>=2).length>=2)safeDays.add(h.day);
+ }
+ return safeDays.size>=8?3:2;
+}
+
 function prescribe(m){
  const minutes=[20,30,45].includes(m.duration)?m.duration:20, [warm,main,cool]=split(minutes);
  const recovery=m.kind==='Recuperação ativa',strength=m.kind==='Força'&&!recovery;
  const gear=m.c?.gear||{mini:false,long:false},excluded=m.c?.excluded||[],prefs=m.c?.preferences||{},replacements=m.c?.replacements||{};
  const exercises=strength?pickStrength(m.day,m.week,minutes,gear,excluded,prefs,replacements):
   pickCardio(m.day,m.week,g.VivaExercises?g.VivaExercises.apply(m.moves||[],gear,prefs,excluded,replacements):(m.moves||[]),m.low,recovery);
- const sets=strength?(minutes===45?3:2):null;
+ const sets=strength?strengthSetCount(minutes,m.week,m.history||[],m.c?.feedback||{},m.today||new Date(),m.readiness?.status||'normal'):null;
  const targets=strength?Object.fromEntries(exercises.map(e=>[e.id,g.VivaEvolution?.strengthPrescription(e.id,m.history||[],m.c?.feedback||{},m.week,m.today||new Date(),m.readiness?.status||'normal')||null])):{};
  const reps=strength?(m.week<=2?'8–10':'8–12'):null;
  const rest= strength?Math.floor((main*60)/(Math.max(1,exercises.length)*sets))-(minutes===20?45:50):null;
@@ -134,8 +159,8 @@ const GROUPS={
  birdDog:['core'],deadBug:['core'],plank:['core'],standingCore:['core']
 };
 const GROUP_LABELS={pernas:'Pernas',gluteos:'Glúteos',posteriores:'Posterior',costas:'Costas',empurrar:'Peito, ombros e braços',core:'Abdômen e estabilidade'};
-function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=[],prefs={},replacements={}){
- const dosage=minutes===45?3:2,counts=Object.fromEntries(Object.keys(GROUP_LABELS).map(id=>[id,0])),days=[];
+function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=[],prefs={},replacements={},history=[],feedback={},today=new Date(),readinessState='normal'){
+ const dosage=strengthSetCount(minutes,week,history,feedback,today,readinessState),counts=Object.fromEntries(Object.keys(GROUP_LABELS).map(id=>[id,0])),days=[];
  for(const day of [0,2,4]){
   const moves=pickStrength(day,week,minutes,gear,excluded,prefs,replacements);
   for(const e of moves)for(const group of GROUPS[e.id]||[])counts[group]+=dosage;
@@ -145,5 +170,5 @@ function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=
   note:'Séries semanais planejadas. Um exercício pode contribuir para mais de um grupo; os números não medem intensidade nem comprovam séries executadas.'};
 }
 
-g.VivaTraining=Object.freeze({SPLITS,GROUPS,weeklyMuscleSets,split,pickStrength,prescribe,build,scheduleSummary,cardioGoals});
+g.VivaTraining=Object.freeze({SPLITS,GROUPS,weeklyMuscleSets,strengthSetCount,split,pickStrength,prescribe,build,scheduleSummary,cardioGoals});
 })(window);
