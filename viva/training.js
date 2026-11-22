@@ -4,7 +4,7 @@ const SPLITS={20:[5,10,5],30:[5,20,5],45:[7,30,8]};
 const STRENGTH={
  0:[['squat','row','wallPush'],['bridge','hinge','birdDog','miniWalk'],['calf','deadBug','bandPress','standingCore']],
  2:[['bandHinge','backLunge','bridge'],['miniWalk','miniClam','calf','miniBridge'],['deadBug','squatWide','miniKick','birdDog']],
- 4:[['row','wallPush','squatWide'],['bandPress','hinge','backLunge','bridge'],['birdDog','calf','standingCore','bandLateral']]
+ 4:[['row','wallPush','birdDog'],['bandPress','hinge','backLunge','bridge'],['squatWide','calf','standingCore','bandLateral']]
 };
 const FALLBACK={row:['superman','birdDog'],bandHinge:['hinge','bridge'],miniWalk:['step','backLunge'],miniClam:['bridge','step'],miniBridge:['bridge'],miniKick:['backLunge'],bandPress:['wallPush'],bandLateral:['wallPush'],squat:['squatWide','backLunge'],wallPush:['inclinePush'],bridge:['hinge'],backLunge:['squat','step'],squatWide:['squat'],deadBug:['birdDog'],calf:['step'],birdDog:['deadBug']};
 const warmup=[
@@ -120,5 +120,26 @@ function cardioGoals(week=1,done=0){
  return {target,done:Math.max(0,Math.round(done)),remaining:Math.max(0,target-Math.max(0,Math.round(done))),
    longTerm:150,explanation:'Referência progressiva de atividade aeróbica semanal, não meta obrigatória. Caminhadas e outras atividades também contam.'};
 }
-g.VivaTraining=Object.freeze({SPLITS,split,pickStrength,prescribe,build,scheduleSummary,cardioGoals});
+
+const GROUPS={
+ squat:['pernas','gluteos'],squatWide:['pernas','gluteos'],backLunge:['pernas','gluteos'],calf:['pernas'],
+ bandHinge:['posteriores','gluteos'],hinge:['posteriores','gluteos'],bridge:['gluteos','posteriores'],miniBridge:['gluteos','posteriores'],
+ miniWalk:['gluteos'],miniClam:['gluteos'],miniKick:['gluteos'],miniSquat:['pernas','gluteos'],
+ row:['costas'],superman:['costas','core'],wallPush:['empurrar'],inclinePush:['empurrar'],
+ bandPress:['empurrar'],bandLateral:['empurrar'],bandTriceps:['empurrar'],curl:['costas'],
+ birdDog:['core'],deadBug:['core'],plank:['core'],standingCore:['core']
+};
+const GROUP_LABELS={pernas:'Pernas',gluteos:'Glúteos',posteriores:'Posterior',costas:'Costas',empurrar:'Peito, ombros e braços',core:'Abdômen e estabilidade'};
+function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=[]){
+ const dosage=minutes===45?3:2,counts=Object.fromEntries(Object.keys(GROUP_LABELS).map(id=>[id,0])),days=[];
+ for(const day of [0,2,4]){
+  const moves=pickStrength(day,week,minutes,gear,excluded);
+  for(const e of moves)for(const group of GROUPS[e.id]||[])counts[group]+=dosage;
+  days.push({day,sets:dosage,moves:moves.map(e=>e.id)});
+ }
+ return {counts,labels:GROUP_LABELS,days,totalSets:days.reduce((sum,d)=>sum+d.sets*d.moves.length,0),
+  note:'Séries semanais planejadas. Um exercício pode contribuir para mais de um grupo; os números não medem intensidade nem comprovam séries executadas.'};
+}
+
+g.VivaTraining=Object.freeze({SPLITS,GROUPS,weeklyMuscleSets,split,pickStrength,prescribe,build,scheduleSummary,cardioGoals});
 })(window);
