@@ -122,6 +122,14 @@ function run(){
  test('Recuperação insuficiente bloqueia terceira série',()=>T.strengthSetCount(30,6,safeHist,safeFeedback,now2,'light')===2);
  test('Cronômetro soma trinta minutos com 3 séries',()=>{const p=T.prescribe({day:0,week:6,kind:'Força',duration:30,history:safeHist,c:{gear:{mini:true,long:true},feedback:safeFeedback},readiness:{status:'normal'},today:now2,moves:[]});return p.training.sets===3&&T.build(p).at(-1).end===1800});
  test('Volume muscular semanal acompanha as séries sugeridas',()=>T.weeklyMuscleSets(6,30,{mini:true,long:true},[],{noJump:true},{},safeHist,safeFeedback,now2,'normal').days.every(d=>d.sets===3));
+
+ const S=g.VivaSpotify;
+ test('Spotify não aceita link de outro domínio',()=>S.playlistId('https://example.com/playlist/37i9dQZF1DXcBWIGoYBM5M')==='');
+ test('Spotify aceita link oficial com parâmetros',()=>S.playlistId('https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M?si=abc')==='37i9dQZF1DXcBWIGoYBM5M');
+ test('Spotify aceita playlist pelo formato de URI',()=>S.playlistId('spotify:playlist:37i9dQZF1DXcBWIGoYBM5M')==='37i9dQZF1DXcBWIGoYBM5M');
+ test('Spotify rejeita links de faixa ou álbum',()=>S.playlistId('https://open.spotify.com/track/37i9dQZF1DXcBWIGoYBM5M')===''&&S.playlistId('https://open.spotify.com/album/37i9dQZF1DXcBWIGoYBM5M')==='');
+ test('Spotify valida Client ID sem expor segredo',()=>S.validId('abcdef0123456789abcdef0123456789')&&!S.validId('my-secret'));
+ test('Spotify não possui conexão automática sem autenticação',()=>!S.connected);
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
