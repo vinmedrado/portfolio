@@ -166,7 +166,7 @@ function coachModel(){
  return VivaTraining.prescribe(VivaEvolution.adapt(base,c.readiness,today));
 }
 function strengthWeekCard(m){
- const weeks=VivaTraining.weeklyMuscleSets(m.week,m.duration,m.c.gear,m.c.excluded);
+ const weeks=VivaTraining.weeklyMuscleSets(m.week,m.duration,m.c.gear,m.c.excluded,m.c.preferences,m.c.replacements);
  const keys=['pernas','posteriores','gluteos','costas','empurrar','core'];
  return `<details class='viva-strength-volume'><summary><b>Distribuição muscular desta semana</b><span>Ver séries previstas</span></summary>
  <p>O VIVA distribui os movimentos em três dias de força para não repetir exercícios aleatoriamente.</p>
@@ -265,7 +265,7 @@ function replaceView(){
  <button class='inline-button' type='button' data-replace-cancel='1'>Cancelar</button></div></div>`;
 }
 function libraryView(){
- const p=VivaCoach.catalogPage(libraryPage,10,data.coach.gear,data.low),sel=librarySelected?VivaCoach.catalogItem(librarySelected,data.coach.gear,data.low):null,selPlan=sel?VivaTraining.prescribe({day:sel.day,week:sel.week,duration:sel.plannedTime,kind:sel.kind,c:{gear:data.coach.gear,excluded:data.coach.excluded},low:data.low,moves:sel.moves}):null;
+ const p=VivaCoach.catalogPage(libraryPage,10,data.coach.gear,data.low),sel=librarySelected?VivaCoach.catalogItem(librarySelected,data.coach.gear,data.low):null,selPlan=sel?VivaTraining.prescribe({day:sel.day,week:sel.week,duration:sel.plannedTime,kind:sel.kind,c:{gear:data.coach.gear,excluded:data.coach.excluded,preferences:data.coach.preferences,replacements:data.coach.replacements},low:data.low,moves:sel.moves}):null;
  return `${header('Biblioteca','Sessões de referência por semana')}
  <div class='library-intro'><div><div class='kicker'>CONSULTA</div><h2>Treinos por semana</h2><p>365 sequências de referência. Os exercícios principais se repetem durante os ciclos; a ordem e os complementares variam. Consulte o plano semanal para saber o treino indicado hoje.</p></div></div>
  ${sel?`<div class='library-preview'><button class='inline-button' data-lib-close='1'>‹ Voltar à biblioteca</button><div class='kicker' style='margin-top:15px'>SEMANA ${sel.week} · ${['SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA'][sel.day]}</div><h2>${sel.title}</h2><p>${sel.kind} · ${sel.plannedTime} min de referência · ${sel.phase}</p><p>Prévia: ${selPlan.training.warm} min de aquecimento, ${selPlan.training.main} min de ${selPlan.training.type==='strength'?'séries de força':'cardio'} e ${selPlan.training.cool} min de volta à calma. ${selPlan.training.type==='strength'?`${selPlan.training.sets} séries de ${selPlan.training.reps} repetições, com pausas guiadas.`:'Intervalos alternados de movimento e recuperação.'} O treino indicado hoje pode ter duração e exercícios diferentes.</p>${selPlan.moves.map((m,i)=>`<div class='library-move'><span class='viva-ex-ordinal' aria-hidden='true'>${i+1}</span><div><strong>${i+1}. ${m.name}</strong>${selPlan.training.type==='strength'?`<span class='viva-dose'>${selPlan.training.sets} × ${selPlan.training.reps}</span>`:''}<small>${m.hint}${m.gear==='mini'?' · Mini band':m.gear==='long'?' · Elástico':''}</small><button type='button' class='guide-link' data-guide='${m.id||''}' data-guide-name='${m.name}'>Aprender execução ›</button></div></div>`).join('')}<button class='primary' data-go='professor'>Voltar ao plano semanal</button></div>`:
