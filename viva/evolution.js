@@ -79,7 +79,7 @@ function strengthPrescription(id,history=[],feedback={},week=1,now=new Date(),re
    description:'Houve esforço muito alto, dor ou dificuldade técnica no último registro. Não aumente a resistência. Interrompa movimentos dolorosos.',completeSessions:sessions.filter(x=>x.complete).length};
  const complete=sessions.filter(x=>x.complete);
  const prev=complete.at(-2),current=complete.at(-1);
- if(!prev||!current||!prev.feedback||!current.feedback||readinessState!=='normal'){
+ if(!prev||!current||current!==last||!prev.feedback||!current.feedback||readinessState!=='normal'){
    return {...baseline,status:'hold',title:'Mantenha a carga atual',
     description:'Ainda faltam dois treinos completos com esforço e técnica avaliados, ou a recuperação pede cautela.',completeSessions:complete.length};
  }
