@@ -20,11 +20,12 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 - **Diário individual de força**: após treinos de força, registra a dificuldade de dois exercícios principais e a resistência usada, sugerindo progressão somente após registros recentes favoráveis e execução segura.
 - **Ciclos de quatro semanas** com revisões de hábitos, tendência de peso, técnica e tolerância à resistência. Alguns exercícios básicos permanecem para acompanhar força.
 - **Mini bands e elásticos** opcionais e seleção de baixo impacto.
-- **Substituição de exercícios**: o usuário pode retirar movimentos dos próximos planos e reativá-los em Ajustes.
-- **Demonstrações**: ilustrações SVG esquemáticas, mascote original, 31 guias com preparação, execução, respiração, cuidados e alternativa simplificada.
-- **Cronômetro e áudio**: anúncios em pt-BR, bipes, contagem final, avanço manual, pausa e retomada.
+- **Substituições compatíveis**: escolha de alternativas por equipamento, restrições para exercícios no chão e apoio dos joelhos, motivo da troca e opção de reverter em Ajustes.
+- **Instruções técnicas em texto**: 31 exercícios com objetivo, músculos trabalhados, equipamento, execução, erros comuns, versão mais fácil e progressão. As imagens esquemáticas e o mascote foram removidos por falta de precisão visual.
+- **Cronômetro e áudio**: anúncios em pt-BR (validado pelo usuário no iPhone), bipes, contagem final, avanço manual, pausa e retomada.
 - **Proteção da integridade das sessões**: avançar manualmente grande parte da sessão impede o registro de conclusão. Ao sair do Safari, a sessão é pausada e pode ser retomada após recarregar.
-- **Acompanhamento**: check-ins semanais (disposição, recuperação e cintura opcional), feedback pós-treino (esforço, execução e dor), pesagens e gráfico, referência de IMC adulto, painel das últimas oito semanas e histórico.
+- **Registro manual de séries**: botão para concluir cada série de força, informar repetições realizadas, resistência, esforço e técnica. Séries sem registro manual não entram na contagem de repetições.
+- **Acompanhamento**: check-ins semanais, feedback pós-treino, pesagens, gráfico de oito semanas, comparações de repetições por exercício e histórico de força.
 - **Offline**: service worker guarda os arquivos principais após uma primeira visita com internet. O suporte em segundo plano e à voz depende do navegador e do sistema.
 - **Backup**: exportação e restauração validada de arquivo JSON, incluindo histórico, pesagens, professor, substituições, caminhadas e modalidade dos treinos.
 
@@ -43,7 +44,7 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (95 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (106 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
@@ -57,7 +58,7 @@ O VIVA oferece orientações gerais calculadas por regras, não uma avaliação 
 
 Os registros pessoais são salvos localmente no dispositivo pela chave `viva-functional-v2`; não existe backend, login ou sincronização automática entre celulares. Há também uma chave de sessão temporária para recuperação do treino. Limpar o armazenamento do navegador pode apagar os dados. Guarde o backup JSON em local privado, pois ele contém informações de saúde e treino e **não é criptografado**.
 
-No iPhone, a voz e o cronômetro podem não continuar funcionando com a tela apagada; por isso o aplicativo pausa a sessão quando vai para segundo plano. Os desenhos são ilustrativos e não substituem instruções individualizadas.
+No iPhone, a voz e o cronômetro podem não continuar funcionando com a tela apagada; por isso o aplicativo pausa a sessão quando vai para segundo plano. Os guias são textuais. Não há detecção automática de postura, contagem por câmera ou avaliação médica.
 
 ## Fundamentos consultados
 
