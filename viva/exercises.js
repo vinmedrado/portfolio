@@ -78,5 +78,5 @@ function progress(history=[],limit=5){
     label:latest.reps+' repetições em '+latest.sets+' séries'+(previous?' (registro anterior: '+previous.reps+')':'')};
  }).sort((a,b)=>(b.latest?.date||'').localeCompare(a.latest?.date||'')).slice(0,Math.max(1,limit));
 }
-g.VivaExercises=Object.freeze({details,allowed,alternatives,apply,safePrefs,sanitizeSetLog,progress,gearLabel,FLOOR,KNEEL,JUMP});
+g.VivaExercises=Object.freeze({ids:Object.keys(TARGET),details,allowed,alternatives,apply,safePrefs,sanitizeSetLog,progress,gearLabel,FLOOR,KNEEL,JUMP});
 })(window);
