@@ -42,7 +42,7 @@ function normalize(input){
  d.coach.replacements={};
  d.coach.reasons={};
  for(const [id,next] of Object.entries(c.replacements&&typeof c.replacements==='object'?c.replacements:{}).slice(0,40)){
-   if(g.VivaCoach?.getExercise(id)&&g.VivaCoach?.getExercise(next)&&id!==next)d.coach.replacements[id]=next;
+   if(g.VivaExercises?.compatible(id,next))d.coach.replacements[id]=next;
  }
  for(const [id,reason] of Object.entries(c.reasons&&typeof c.reasons==='object'?c.reasons:{}).slice(0,40)){
    if(g.VivaCoach?.getExercise(id)&&['discomfort','dislike','equipment','other'].includes(reason))d.coach.reasons[id]=reason;
