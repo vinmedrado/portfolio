@@ -1,7 +1,7 @@
 (function(g){'use strict';
 const DAYS=[
 {title:'Corpo inteiro',kind:'Força',note:'Agachamento, remada e flexão com execução controlada.',required:true},
-{title:'Cardio sem saltos',kind:'Cardio',note:'Marcha e deslocamentos leves, com pausas.',required:false},
+{title:'Cardio em intervalos',kind:'Cardio',note:'Marcha, corda simulada e deslocamentos, com pausas.',required:false},
 {title:'Pernas e glúteos',kind:'Força',note:'Quadril, pernas e glúteos. Elásticos opcionais.',required:true},
 {title:'Cardio e estabilidade',kind:'Cardio',note:'Cardio leve e movimentos para estabilidade do tronco.',required:false},
 {title:'Costas, peito e abdômen',kind:'Força',note:'Remada, flexão e controle do tronco.',required:true}
