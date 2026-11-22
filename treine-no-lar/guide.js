@@ -1,0 +1,47 @@
+(function(g){'use strict';
+const G={
+squat:['Fique com os pés afastados na largura dos ombros.','Leve o quadril para trás, flexione os joelhos e retorne empurrando o chão.','Inspire ao descer e solte o ar ao subir.','Mantenha calcanhares apoiados e joelhos alinhados aos pés.','Reduza a profundidade e utilize uma parede como referência.'],
+squatWide:['Afaste os pés um pouco mais que os ombros e vire as pontas levemente para fora.','Flexione quadril e joelhos com controle; volte sem travar as articulações.','Inspire ao descer e expire ao subir.','Evite arredondar as costas ou forçar uma abertura desconfortável.','Aproxime os pés e faça um agachamento menor.'],
+wallPush:['Posicione as mãos na parede, na altura do peito.','Flexione os cotovelos aproximando o tronco da parede; empurre para voltar.','Inspire na descida e expire ao empurrar.','Evite dobrar a lombar ou elevar demais os ombros.','Aproxime os pés da parede para reduzir a dificuldade.'],
+inclinePush:['Apoie as mãos em uma superfície firme e estável.','Mantenha o corpo alinhado, flexione os cotovelos e empurre.','Solte o ar ao empurrar.','Não utilize móveis leves ou superfícies que possam escorregar.','Prefira flexão na parede.'],
+bridge:['Deite-se de costas, pés no chão e joelhos flexionados.','Contraia o abdômen, eleve o quadril e desça lentamente.','Expire ao elevar.','Evite jogar a lombar para trás ou subir além do confortável.','Diminua a altura da elevação.'],
+march:['Fique ereto e comece com passos alternados.','Movimente os braços naturalmente e eleve os joelhos até onde for confortável.','Respire de maneira contínua.','Evite prender o ar ou acelerar até perder o controle.','Diminua a velocidade e a elevação dos joelhos.'],
+step:['Fique ereto, com os pés paralelos.','Dê um passo lateral e retorne; alterne os lados.','Respire normalmente.','Mantenha os pés apoiados no piso antiderrapante.','Dê passos menores.'],
+backLunge:['Fique perto de um apoio estável, se necessário.','Leve um pé para trás, flexione levemente os joelhos e volte.','Expire ao voltar à posição inicial.','Joelho da frente alinhado ao pé; não precisa encostar o joelho no chão.','Faça uma passada curta segurando apoio.'],
+calf:['Fique de pé próximo de uma parede para equilíbrio.','Eleve os calcanhares e abaixe lentamente.','Solte o ar ao subir.','Não balance o corpo nem faça o movimento com impulso.','Use uma amplitude pequena e apoio das mãos.'],
+birdDog:['Entre em quatro apoios, mãos sob os ombros e joelhos sob os quadris.','Estenda um braço e a perna oposta, pause e alterne.','Respire sem prender o ar.','Evite girar o quadril ou elevar a perna demais.','Estenda apenas uma perna ou apenas um braço de cada vez.'],
+deadBug:['Deite-se, quadris e joelhos flexionados, braços para o alto.','Baixe devagar braço e perna opostos sem perder o controle do tronco.','Expire durante a extensão.','Não force a lombar para ficar plana se sentir desconforto.','Movimente somente os braços ou toque um pé de cada vez no chão.'],
+kneeDrive:['Fique em pé e mantenha o tronco ereto.','Eleve os joelhos alternadamente, com controle.','Mantenha a respiração livre.','Não sacuda o pescoço nem force a altura do joelho.','Marche lentamente.'],
+imaginary:['Fique ereto com cotovelos próximos ao corpo.','Gire os punhos como se segurasse uma corda e alterne pequenos passos.','Respire normalmente.','Saltos são opcionais; evite alto impacto se ainda estiver se adaptando.','Faça o movimento sem saltar.'],
+skipping:['Comece marchando no lugar com braços coordenados.','Alterne a elevação dos joelhos; aumente a frequência somente se estiver confortável.','Respire regularmente.','Evite impactos fortes ou elevar joelhos além do controle.','Marcha rápida sem saltos.'],
+plank:['Apoie os antebraços e joelhos ou use a parede.','Ative o abdômen e mantenha uma linha confortável entre ombros e quadris.','Respire sem prender o ar.','Pare se houver dor lombar ou nos ombros; não deixe o quadril desabar.','Prancha na parede ou posição de quatro apoios.'],
+standingCore:['Fique ereto e eleve os braços.','Aproxime com controle o cotovelo de um joelho, alternando os lados.','Expire durante a aproximação.','Evite curvar o pescoço ou fazer torções rápidas.','Reduza a amplitude.'],
+punch:['Fique em base confortável e mantenha os ombros relaxados.','Alterne socos leves à frente, sem travar os cotovelos.','Respire de forma regular.','Não hiperestenda os braços nem gire o tronco bruscamente.','Faça socos curtos e lentos.'],
+toeTap:['Fique ereto, com espaço livre à frente.','Toque a ponta de um pé no chão à frente e alterne.','Respire de forma natural.','Evite bater o pé com força no piso.','Faça toques mais próximos do corpo.'],
+hinge:['De pé, flexione levemente os joelhos.','Empurre o quadril para trás com coluna neutra e volte contraindo os glúteos.','Inspire ao inclinar, expire ao retornar.','O movimento vem do quadril, não de arredondar a lombar.','Faça a amplitude bem curta até entender o padrão.'],
+superman:['Deite-se de bruços em superfície confortável.','Eleve suavemente os braços ou o peito, sem forçar a lombar.','Respire durante a elevação.','Evite hiperestender pescoço e costas.','Eleve apenas os braços, com pouca amplitude.'],
+miniWalk:['Coloque a mini band acima dos joelhos, não sobre a articulação.','Flexione um pouco os joelhos e dê pequenos passos laterais.','Respire continuamente.','Mantenha joelhos alinhados; não deixe a banda puxar os joelhos para dentro.','Retire a banda e faça passos laterais livres.'],
+miniBridge:['Deitado, coloque a mini band acima dos joelhos.','Mantenha leve tensão para fora e eleve o quadril de modo controlado.','Expire na subida.','Não force os joelhos para fora além da linha dos pés.','Faça ponte de glúteos sem banda.'],
+miniSquat:['Posicione a mini band acima dos joelhos.','Desça em agachamento curto mantendo joelhos alinhados aos pés.','Solte o ar ao subir.','Não deixe os joelhos cederem para dentro.','Faça agachamento sem banda.'],
+miniClam:['Deite-se de lado com quadris empilhados e joelhos dobrados.','Com mini band acima dos joelhos, mantenha pés juntos e abra o joelho de cima.','Expire ao abrir.','Não gire o tronco para compensar o movimento.','Retire a banda ou diminua a abertura.'],
+miniKick:['Fique apoiado em superfície firme, banda acima dos joelhos.','Leve uma perna um pouco para trás, sem inclinar o tronco.','Expire durante a extensão.','Não arqueie a lombar nem estique a banda excessivamente.','Faça extensão de quadril sem banda.'],
+row:['Pise com firmeza no centro do elástico e segure as extremidades.','Incline o tronco pelo quadril e puxe as mãos em direção ao tronco.','Expire ao puxar.','Mantenha costas neutras; não prenda a banda em grades, portas ou móveis improvisados.','Pise com os dois pés mais próximos ou use banda de menor resistência.'],
+curl:['Pise firmemente no centro do elástico e segure as pontas.','Flexione os cotovelos mantendo-os perto do tronco; retorne lentamente.','Expire ao subir.','Não balance o corpo nem deixe a banda escorregar debaixo dos pés.','Use banda mais leve ou reduza a amplitude.'],
+bandHinge:['Pise no centro do elástico com os dois pés e segure as pontas.','Leve o quadril para trás e retorne mantendo a coluna neutra.','Expire ao ficar de pé.','Evite arredondar as costas ou tensionar a banda até o limite.','Faça dobradiça de quadril sem elástico.'],
+bandPress:['Passe o elástico pelas costas, segurando uma ponta em cada mão.','Empurre as mãos à frente e retorne lentamente.','Expire ao empurrar.','Não deixe a banda subir até o pescoço; não use ancoragens improvisadas.','Faça flexão na parede.'],
+bandLateral:['Pise na banda e segure as pontas ao lado do corpo.','Eleve os braços lateralmente até uma altura confortável e desça devagar.','Expire ao elevar.','Não encolha os ombros nem use impulso.','Use uma banda mais leve ou faça sem resistência.'],
+bandTriceps:['Segure o elástico de forma estável com uma mão junto ao tronco.','Com a outra mão, estenda o cotovelo devagar contra a resistência.','Expire ao estender.','Não permita que o elástico escape nem force a articulação.','Reduza a resistência.']
+};
+const extra={
+'Marcha no lugar':'march','Círculos de ombros':'stretch','Passos laterais':'step','Mobilidade de quadril':'stretch','Elevação alternada de joelhos':'kneeDrive',
+'Respiração tranquila':'rest','Alongar panturrilhas':'stretch','Alongar quadríceps':'stretch','Alongar posteriores':'stretch','Alongar ombros':'stretch'
+};
+G.stretch=['Fique em posição confortável, sem dor.','Alongue suavemente até sentir uma tensão leve, sem balançar.','Respire lenta e continuamente.','Não force a amplitude nem prenda a respiração.','Reduza a amplitude ou apoie-se em uma parede.'];
+G.rest=['Sente-se ou fique em pé com postura confortável.','Inspire devagar pelo nariz e solte o ar sem esforço.','Não prenda o ar.','Se houver tontura, dor no peito ou falta de ar importante, interrompa o treino e procure atendimento.','Respire no seu próprio ritmo.'];
+function get(id,name=''){
+ const key=G[id]?id:extra[name]||'rest';
+ const q=G[key];
+ return {id:key,title:name||id||'Movimento orientado',setup:q[0],how:q[1],breathing:q[2],attention:q[3],easier:q[4]};
+}
+g.VivaGuide=Object.freeze({get,keys:Object.keys(G).filter(x=>!['stretch','rest'].includes(x))});
+})(window);

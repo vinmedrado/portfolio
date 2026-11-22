@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "Treine no Lar — Treino em Casa",
+  "short_name": "TreineLar",
+  "description": "Plano semanal de força e cardio, sessões guiadas e registros de treino.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#bd582d",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

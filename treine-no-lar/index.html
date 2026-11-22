@@ -1,0 +1,695 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#bd582d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Treine no Lar | Treinos guiados em casa</title><meta name='description' content='Planejamento semanal de força e cardio, exercícios guiados, registros de treino e evolução.'><meta name='apple-mobile-web-app-title' content='Treine no Lar'><link rel='manifest' href='./manifest.webmanifest'><link rel='icon' href='./favicon.svg' type='image/svg+xml'><style>
+:root{--ink:#282631;--soft:#77727d;--orange:#ff702f;--bg:#fffaf6;--line:#f0e6df;--lime:#def8d3}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:#f7f4f1}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #cc7d45;outline-offset:2px}.wrap{max-width:740px;min-height:100vh;background:var(--bg);margin:auto;padding:20px 18px 110px}.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.logo{font-size:25px;font-weight:950;letter-spacing:-1.4px}.logo em{color:var(--orange);font-style:normal}.sig{border-radius:50px;padding:10px 13px;background:white;border:1px solid var(--line);font-size:12px;font-weight:750}.hero{background:linear-gradient(120deg,#ffe7d2,#fff0d8);border:1px solid #fbdabe;border-radius:27px;padding:26px;min-height:211px;position:relative;overflow:hidden}.hero:after{content:'';position:absolute;width:170px;height:170px;border:22px solid #ffbb8166;border-radius:50%;right:-65px;top:-68px}.kicker{color:#da6733;text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:900}.hero h1{font-size:36px;letter-spacing:-1.8px;line-height:1.04;margin:14px 0 9px;max-width:310px}.hero p{font-size:13px;color:#745f58;line-height:1.55;max-width:290px}.section{margin:25px 0 13px;display:flex;align-items:end;justify-content:space-between}.section h2{font-size:20px;line-height:1.15;letter-spacing:-.7px;margin:0}.section small{color:var(--soft);font-size:11px}.durations{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.dur{border:2px solid transparent;border-radius:21px;text-align:left;min-height:128px;padding:14px 12px;background:#fff0ce}.dur:nth-child(2){background:#ffe5d8}.dur:nth-child(3){background:#eee7ff}.dur.active{border-color:var(--orange);box-shadow:0 4px 14px #f46a2e24}.dur b{display:block;font-size:29px;line-height:1.1;margin:15px 0 5px;letter-spacing:-1px}.dur small{font-size:11px;color:#756a72}.dur .symbol{font-size:19px;color:#f36e2e}.card{border:1px solid var(--line);background:#fff;border-radius:20px;padding:15px;margin-bottom:10px}.phase{display:flex;align-items:center;gap:13px}.phase .phicon{border-radius:14px;background:#fff1ca;width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;font-size:20px}.phase:nth-of-type(2) .phicon{background:#ffe6da}.phase:nth-of-type(3) .phicon{background:#e2f8e7}.phase b,.ex b{display:block;font-size:14px}.phase p,.ex p{font-size:12px;color:var(--soft);margin:3px 0 0}.primary{border:0;background:var(--orange);color:white;border-radius:17px;padding:16px 20px;width:100%;font-size:15px;font-weight:900;box-shadow:0 6px 18px #ff702f38}.primary:active,.dur:active{transform:scale(.985)}.sub{border:1px solid var(--line);border-radius:13px;background:white;color:var(--ink);padding:11px 14px;font-weight:800}.cta{margin-top:21px}.nav{max-width:740px;position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;display:flex;gap:3px;justify-content:space-around;background:#fffcfaf5;border-top:1px solid var(--line);padding:10px 10px calc(11px + env(safe-area-inset-bottom));backdrop-filter:blur(15px);z-index:10}.nav button{border:0;background:none;padding:7px 5px;color:#86808b;min-width:65px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px}.nav button.active{color:var(--orange);font-weight:850}.nav button span{font-size:19px}.plainhead{display:flex;gap:12px;align-items:center;margin-bottom:19px}.plainhead h1{margin:0;font-size:25px;letter-spacing:-.8px}.banner{border-radius:23px;background:linear-gradient(130deg,#ffe3d3,#fff4e8);padding:20px}.banner .number{font-size:43px;font-weight:950;letter-spacing:-2px;margin:9px 0 4px}.banner p{font-size:12px;color:var(--soft);margin:0}.phasegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.phasebox{border-radius:16px;padding:13px 7px;background:#fff0cc;text-align:center;font-size:12px}.phasebox:nth-child(2){background:#ffe5d9}.phasebox:nth-child(3){background:#ddf5e8}.phasebox b{display:block;margin:7px 0 4px}.phase-select{width:100%;text-align:left;cursor:pointer;transition:transform .15s,border-color .15s}.phase-select:active{transform:scale(.99)}.phase-select .phase-copy{flex:1}.phase-select .phase-view{font-size:11px;font-weight:800;color:#e4642a;white-space:nowrap}.phasebox.tap{border:2px solid transparent;cursor:pointer;min-height:100px;font:inherit;line-height:1.3}.phasebox.tap:focus-visible,.phase-select:focus-visible{outline:3px solid #f48c55;outline-offset:2px}.phasebox .phase-link{display:block;margin-top:7px;font-size:10px;color:#c46632;font-weight:850}.duration-small{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.duration-small button{background:white;border:1px solid #eddfd4;border-radius:14px;padding:12px 3px;font-size:13px;font-weight:850;color:#5b5152}.duration-small button.active{color:#ed6b2f;background:#fff1e4;border:2px solid #f7854a}.stage-block{border:1px solid #ecdfd5;background:#fff;border-radius:22px;margin:16px 0 22px;padding:16px;scroll-margin-top:16px}.stage-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}.stage-ico{background:#fff1d7;border-radius:14px;min-width:46px;height:46px;display:grid;place-items:center;font-size:20px}.stage-block.stage-main .stage-ico{background:#ffe5db}.stage-block.stage-last .stage-ico{background:#e4f6ea}.stage-head strong{font-size:17px}.stage-head small{display:block;color:#817783;font-size:11px;margin-top:3px}.stage-block .ex{background:#fff9f5;border:1px solid #f5ebe3;border-radius:12px;padding:10px;margin:7px 0}.stage-block .ex .n{min-width:32px;width:32px;height:32px;font-size:11px}.stage-block .ex b{font-size:13px}.stage-block .ex p{font-size:11px;color:#817780;margin:4px 0 0;line-height:1.4}.stage-note{font-size:11px;color:#776e76;line-height:1.5;margin:12px 1px 0}.stage-block h3{font-size:14px;margin:4px 0 11px}.ex{display:flex;gap:12px;align-items:center}.ex .n{background:#fff1e5;border-radius:12px;color:#f16c36;font-weight:900;min-width:38px;height:38px;display:grid;place-items:center}.tracker{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tracker div{border-radius:13px;padding:10px 4px;background:#ece9e5;text-align:center;font-size:11px;font-weight:800;color:#aaa}.tracker .passed{background:#dff5e6;color:#288e6d}.tracker .live{background:#ffdfc9;color:#e9632a}.clockbox{background:#fff;border:1px solid var(--line);border-radius:28px;padding:25px 16px;margin-top:16px;text-align:center}.ring{width:min(72vw,290px);height:min(72vw,290px);border-radius:50%;margin:auto;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(closest-side,white 86%,transparent 87%),conic-gradient(var(--orange) var(--pct,0%),#f6e6da 0);transition:background .15s}.phasebadge{padding:7px 12px;border-radius:50px;background:#fff0e2;color:#ed6b2c;font-weight:800;font-size:12px}.digits{font-size:clamp(43px,13vw,65px);font-weight:950;letter-spacing:-3px;margin:9px 0}.exercise{font-size:18px;font-weight:900;max-width:220px}.hint{max-width:220px;margin:8px auto 0;font-size:12px;color:var(--soft);line-height:1.5}.next{margin-top:18px;border-radius:15px;padding:14px;background:#fbf7f3;text-align:left}.next small{font-size:11px;color:var(--soft)}.next b{display:block;margin-top:3px;font-size:13px}.controls{display:flex;justify-content:center;align-items:center;gap:23px;margin-top:21px}.controls .big{width:68px;height:68px;border:0;border-radius:50%;color:white;background:var(--orange);font-size:27px}.controls .small{border:1px solid var(--line);border-radius:50%;background:#fff;width:49px;height:49px;font-size:21px}.meter{height:9px;background:#f1eae4;border-radius:9px;overflow:hidden;margin-top:10px}.meter>div{height:100%;background:var(--orange);width:0;transition:width .2s}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.metric{background:white;border:1px solid var(--line);border-radius:18px;padding:19px}.metric strong{font-size:29px;display:block;letter-spacing:-1px}.metric small{font-size:12px;color:var(--soft)}.history{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}.history b{font-size:13px}.history small{font-size:11px;color:var(--soft)}.footer{font-size:11px;color:var(--soft);line-height:1.6;text-align:center;margin:20px 0}.switch{accent-color:var(--orange);width:18px;height:18px}.hidden{display:none!important}@media(min-width:650px){.wrap{padding:28px 36px 115px}.hero h1{font-size:44px}}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:13px 0}.form-field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:800;color:#59515b}.form-field input,.form-field select{width:100%;font-family:inherit;font-size:17px;min-height:48px;padding:11px 12px;background:#fff;border:1px solid #e9ded5;border-radius:13px;color:#302a31}.form-field input:focus,.form-field select:focus{outline:2px solid #f78b50;outline-offset:1px}.split{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}.pill{background:#fff1e5;color:#e96d29;border-radius:99px;font-size:11px;font-weight:800;padding:7px 11px}.info{background:#ffefe1;border-radius:14px;padding:13px 14px;color:#795542;font-size:12px;line-height:1.6;margin:13px 0}.trend{font-size:22px;font-weight:950;margin:6px 0}.chart{width:100%;height:auto;display:block}.line{border-top:1px solid #f0e6df;padding:11px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.line b{font-size:13px}.line small{font-size:11px;color:var(--soft)}.toggler{display:flex;justify-content:space-between;gap:12px;align-items:center}.toggler b{font-size:14px}.toggler p{font-size:12px;color:var(--soft);margin:4px 0}.inline-button{background:#fff5ec;color:#e36e32;border:1px solid #f7d4b8;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:800}.audio-pill{margin-top:10px;display:flex;gap:8px;align-items:center;justify-content:center;border-radius:18px;font-size:12px;font-weight:800;color:#e46d2f}.sound-note{font-size:11px;color:#867d86;line-height:1.5;margin-top:12px}.form-grid.single{grid-template-columns:1fr}.logrow{background:white;border:1px solid var(--line);padding:11px;border-radius:13px;margin:7px 0;display:flex;justify-content:space-between;align-items:center}.logrow strong{font-size:13px}.logrow small{font-size:11px;color:var(--soft)}.chartline{stroke:#fa7633;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;fill:none}.chartdot{fill:#f46a2e;stroke:white;stroke-width:3}.minitip{font-size:11px;color:#766b72;line-height:1.5}.weight-focus{font-size:32px;font-weight:950;letter-spacing:-1px}.soft-card{border:1px solid #f4e1cf;background:linear-gradient(130deg,#fff2df,#fffdf8);border-radius:20px;padding:16px;margin:14px 0}
+@media(max-width:370px){.form-grid{grid-template-columns:1fr 1fr}.chart{height:130px}}
+
+.coach-hero{display:flex;gap:16px;align-items:center;background:linear-gradient(120deg,#ffe8d3,#fff1dc);border:1px solid #f2d9c4;border-radius:24px;padding:21px 17px;margin:15px 0}
+.coach-hero h2{font-size:23px;line-height:1.08;letter-spacing:-.8px;margin:8px 0}
+.coach-hero p{font-size:12px;line-height:1.55;color:#756b69;margin:8px 0}
+.coach-avatar{display:flex;justify-content:center;align-items:center;flex-shrink:0;width:69px;height:78px;border-radius:30px 30px 24px 24px;background:#fb792f;box-shadow:inset 0 -6px 0 #d95b21;font-size:39px;font-weight:950;color:white;transform:rotate(-4deg)}
+.coach-feature{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #f1e4dd;padding:14px;border-radius:18px;margin-top:15px}
+.coach-feature .coach-avatar{width:43px;height:51px;border-radius:17px;font-size:25px}
+.coach-feature strong{font-size:14px;display:block}
+.coach-feature small{font-size:11px;color:#857986;line-height:1.4}
+.coach-feature button{flex-shrink:0;border:0;background:#ff702f;color:#fff;border-radius:13px;padding:12px 10px;font-size:11px;font-weight:850}
+.coach-metrics{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:8px;margin:15px 0}
+.coach-metrics>div{background:#fff;border:1px solid #f1e6df;padding:12px;border-radius:15px;min-height:70px}
+.coach-metrics small{display:block;color:#8a7b84;font-size:10px;line-height:1.3}
+.coach-metrics b{display:block;font-size:12px;margin-top:7px}
+.coach-days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.coach-day{background:#fff;border:1px solid #ede1d9;border-radius:14px;padding:12px 3px 10px;min-width:0;text-align:center;color:#4d454a}
+.coach-day.active{background:#fff0dc;border:2px solid #fa7137;color:#e3632b}
+.coach-day strong,.coach-day span,.coach-day small{display:block}
+.coach-day strong{font-size:11px}.coach-day span{font-size:10px;margin:7px 0}.coach-day small{font-size:9px;color:#948791}
+.coach-daycard{background:white;border:1px solid #eee0d7;border-radius:22px;padding:18px;margin:16px 0}
+.coach-daycard h2{font-size:22px;letter-spacing:-.8px;margin:8px 0}.coach-daycard p{font-size:12px;line-height:1.5;color:#80767c}
+.coach-daycard h3,.coach-form h3,.coach-check h3{margin:20px 0 12px;font-size:16px}
+.coach-tags{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.coach-tags span{background:#f5eee7;border-radius:25px;padding:7px 10px;font-size:10px;font-weight:800;color:#816b62}
+.coach-move{display:flex;gap:10px;border-top:1px solid #f1e7e0;padding:11px 0}
+.coach-move>span{background:#fff0e0;min-width:30px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#e36b2d;font-size:11px;font-weight:900}
+.coach-move b{font-size:12px}.coach-move small{display:block;margin-top:4px;font-size:11px;line-height:1.35;color:#867b82}
+.coach-check{padding:18px}.coach-check p,.coach-check small,.coach-form p{font-size:11px;line-height:1.5;color:#80777d}
+.coach-split{display:flex;justify-content:space-between;gap:9px;align-items:flex-start}
+.coach-split button{align-self:start;flex-shrink:0}.coach-split b{font-size:13px}
+.coach-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.coach-form-grid label,.coach-waist,.coach-form>label:not(.coach-checkbox){display:block;font-size:11px;font-weight:750;color:#5b5358}
+.coach-form-grid select,.coach-waist input,.coach-form select{display:block;width:100%;margin:7px 0 12px;min-width:0;background:#fffcf9;border:1px solid #e9ded5;padding:12px 9px;border-radius:12px;font-size:12px}
+.coach-checkbox{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;margin:14px 0;color:#554a51}
+.coach-checkbox input{width:18px;height:18px;min-width:18px;accent-color:#fb722f;margin:0}
+.coach-save{display:block;width:100%;background:#fff0e3;border:1px solid #f7d4bd;border-radius:13px;color:#d65e24;font-size:13px;font-weight:850;padding:14px;margin:15px 0 9px}
+.coach-form .primary{margin-top:18px}.coach-waist input{max-width:190px}.coach-gear{background:#fff9f5;border:1px solid #f2e6df;border-radius:16px;padding:13px;margin-bottom:12px}
+@media(max-width:370px){.coach-metrics{grid-template-columns:1fr 1fr}.coach-metrics>div:first-child{grid-column:1/-1}.coach-hero{padding:15px 12px;gap:10px}.coach-avatar{width:54px;height:65px;font-size:30px}.coach-day strong{font-size:10px}.coach-day small{font-size:8px}.coach-daycard{padding:14px}}
+
+.coach-prescription{background:#fff6ea;border:1px solid #f7dfc1;border-radius:16px;padding:13px 14px;margin:12px 0}.coach-prescription b{font-size:13px;color:#83471d}.coach-prescription p{font-size:12px!important;line-height:1.55;margin:8px 0}.coach-prescription small{display:block;color:#805c44;font-size:10px}.coach-backup{background:#fffaf5;border:1px solid #efdfd4;border-radius:17px;padding:15px;margin:14px 0 16px}.coach-backup b{font-size:14px}.coach-backup p{font-size:12px;color:#776e76;line-height:1.5}.coach-backup button{cursor:pointer}.coach-import{display:block;text-align:center;padding:13px 10px;border:1px solid #e8d5c7;border-radius:13px;font-size:12px;font-weight:750;cursor:pointer;margin:9px 0}.coach-backup small{display:block;font-size:10px;color:#857b7d;line-height:1.4}.coach-file-input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.coach-library-strip{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff8ed;border:1px solid #f2d9ba;border-radius:17px;padding:13px 14px;margin:14px 0}.coach-library-strip b,.coach-library-strip small{display:block}.coach-library-strip b{font-size:13px}.coach-library-strip small{font-size:11px;color:#8c7671;margin-top:3px}.coach-library-strip button{background:#ff7a37;color:#fff;border:0;padding:10px 12px;font-size:12px;font-weight:800;border-radius:11px;white-space:nowrap}.library-intro{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,#ffe8cc,#fff5e8);border:1px solid #f4dcc9;border-radius:24px;padding:17px;margin-top:16px}.library-intro h2{font-size:22px;letter-spacing:-.8px;line-height:1.1;margin:10px 0}.library-intro p{font-size:12px;color:#7f6c68;line-height:1.5;margin:0}.library-count{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 81px;height:87px;border-radius:22px;background:#fffaf6;color:#ee6730;font-size:31px;font-weight:950;letter-spacing:-1px}.library-count small{font-size:10px;letter-spacing:0;color:#8a7c7d}.library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.library-entry{border:1px solid #efdfd3;background:#fff;border-radius:16px;padding:14px 12px;text-align:left;min-height:130px;display:flex;flex-direction:column;gap:5px;color:#443c43}.library-number{font-size:11px;color:#ec7137;font-weight:900}.library-entry strong{font-size:13px;line-height:1.2}.library-entry small{font-size:10px;color:#817681}.library-entry .library-action{font-size:11px;font-weight:800;color:#dc6d37;margin-top:auto}.library-pages{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 18px;font-size:12px;color:#877981}.library-pages button{background:white;color:#e87038;border:1px solid #efdace;border-radius:12px;padding:12px 13px;font-size:12px;font-weight:800}.library-pages button:disabled{opacity:.35;cursor:not-allowed}.library-preview{border:1px solid #e9dbcf;background:white;border-radius:20px;padding:16px;margin:16px 0}.library-preview h2{font-size:23px;letter-spacing:-.7px;margin:9px 0 6px}.library-preview p{font-size:12px;line-height:1.5;color:#7e7376}.library-move{display:flex;align-items:center;gap:12px;border-top:1px solid #f1e5db;padding:11px 0}.library-art{width:64px;height:64px;min-width:64px}.library-move strong{display:block;font-size:12px}.library-move small{display:block;font-size:11px;line-height:1.4;color:#7d7379;margin-top:4px}@media(max-width:340px){.library-grid{grid-template-columns:1fr}.library-count{flex-basis:72px}.library-intro h2{font-size:19px}}.progress-bars{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));align-items:end;gap:8px;height:155px;margin:18px 0}.progress-week{display:flex;flex-direction:column;align-items:center;justify-content:end;height:100%;min-width:0;gap:5px}.progress-week b{font-size:11px;font-weight:800}.progress-week small{font-size:9px;color:#8b7e85;white-space:nowrap}.progress-bar-track{height:105px;width:100%;max-width:30px;display:flex;align-items:flex-end;background:#fff1e6;border-radius:9px;overflow:hidden}.progress-bar-fill{background:linear-gradient(#ff9f50,#fa7638);width:100%;border-radius:8px 8px 0 0;min-height:3px}.coach-review{border:1px solid #f0dfd0;background:#fffaef;padding:18px;border-radius:20px;margin:13px 0 17px}.coach-review h2{font-size:20px;margin:10px 0 7px}.coach-review p{font-size:12px;line-height:1.5;color:#80716b}.coach-review .coach-tags{margin:14px 0}@media(max-width:350px){.progress-bars{gap:4px}.progress-week small{font-size:8px}}.viva-offline-banner{position:sticky;top:0;z-index:20;margin:-12px -6px 12px;padding:10px 12px;border-radius:10px;background:#ffefcf;border:1px solid #f5d297;color:#765532;font-size:12px;font-weight:700;display:none}.viva-offline-banner.visible{display:block}.guide-link{border:0;background:transparent;color:#e66c35;font-size:11px;font-weight:800;text-align:left;padding:7px 0 0;display:block;cursor:pointer}.guide-action{display:block;margin:0 auto 15px;border:1px solid #f4d2bb;background:#fff8f1;color:#d9652c;border-radius:13px;padding:10px 14px;font-size:12px;font-weight:850}.guide-overlay{position:fixed;inset:0;z-index:1000;background:#241e28bb;display:flex;align-items:center;justify-content:center;padding:13px;overflow:auto}.guide-dialog{width:min(100%,480px);max-height:calc(100dvh - 26px);overflow:auto;overscroll-behavior:contain;background:#fffaf5;border-radius:25px;padding:20px;box-shadow:0 20px 60px #201d2255}.guide-head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#eb753c;font-size:10px;font-weight:900;letter-spacing:1px}.guide-head button{border:0;background:#fff0e6;border-radius:50%;width:37px;height:37px;color:#9c6553;font-size:17px}.guide-top{display:flex;align-items:center;gap:14px;margin:13px 0 21px}.guide-figure{width:130px;height:130px;flex-shrink:0}.guide-top h2{font-size:22px;line-height:1.1;letter-spacing:-.7px;margin:5px 0}.guide-top p,.guide-step p{font-size:12px;line-height:1.55;color:#766d73}.guide-step{background:white;border:1px solid #eee2d8;border-radius:15px;padding:11px 14px;margin:8px 0}.guide-step b{font-size:12px;color:#343037}.guide-step p{margin:5px 0 0}.guide-easier{background:#ecf8f1}.guide-disclaimer{font-size:10px;line-height:1.5;color:#817881;margin:13px 1px 17px}@media(max-width:350px){.guide-dialog{padding:14px}.guide-figure{width:95px;height:95px}.guide-top h2{font-size:18px}}.guide-exclude{color:#988077!important;padding-top:4px!important}.coach-excluded{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #eee2d9;padding:10px 0}.coach-excluded span{font-size:12px;font-weight:750}.coach-excluded button{border:1px solid #e9d2c0;border-radius:10px;padding:9px 11px;background:#fff;color:#ca673a;font-size:11px;font-weight:850}.viva-preflight{margin:18px 0;background:#f8fcf7;border:1px solid #d9e9d9;border-radius:19px;padding:16px}.viva-preflight-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.viva-preflight-head h3{margin:8px 0 3px!important;font-size:16px}.viva-preflight-head small{color:#7c847e;font-size:11px}.viva-preflight-symbol{display:grid;place-items:center;background:#ddefdc;border-radius:12px;width:36px;height:36px;color:#568655;font-weight:900}.viva-preflight select,.viva-strength-feedback select{display:block;width:100%;background:#fff;border:1px solid #e0e5da;border-radius:11px;padding:11px 9px;font-size:12px;margin:7px 0 12px}.viva-field-label{display:block;font-size:11px;font-weight:750;margin-top:5px}.viva-readiness-state{border-radius:13px;background:#e8f7e7;padding:12px 13px;margin-top:13px;border:1px solid #d3e9d2}.viva-readiness-state b{font-size:12px;color:#416b46}.viva-readiness-state p{font-size:11px;line-height:1.45;color:#4d7451;margin:6px 0 0}.viva-readiness-light{background:#fff3e0;border-color:#f3dec0}.viva-readiness-light b,.viva-readiness-light p{color:#916b39}.viva-readiness-stop{background:#fff0ed;border-color:#f7c9c3}.viva-readiness-stop b,.viva-readiness-stop p{color:#a5534d}.viva-strength-feedback{border-top:1px solid #e8ddd2;margin-top:20px;padding-top:14px}.viva-strength-feedback h3{margin:5px 0 7px}.viva-strength-feedback>p{font-size:11px;line-height:1.5;color:#756d70}.viva-strength-question{border:1px solid #ede0d5;background:#fffaf7;border-radius:13px;padding:12px;margin:9px 0}.viva-strength-question>b{font-size:12px}.viva-strength-question label{display:block;font-size:11px;margin-top:11px;font-weight:750}.viva-strength-overview{margin-top:20px}.viva-strength-result{background:#fff;border:1px solid #eddfd5;border-radius:15px;padding:13px;margin-bottom:10px}.viva-strength-result b{font-size:13px}.viva-strength-result small{display:block;margin:4px 0 10px;color:#8c8085;font-size:10px}.viva-strength-callout{border-top:1px solid #efe2d7;padding-top:10px}.viva-strength-callout strong{font-size:12px;color:#d26a32}.viva-strength-callout p{font-size:11px;color:#7b727a;line-height:1.5;margin:6px 0}.viva-insight{border:1px solid #deeddc;background:#f5fcf3;border-radius:17px;padding:14px;margin:14px 0}.viva-insight>b{font-size:13px;color:#436c44}.viva-insight p{font-size:12px;line-height:1.5;color:#587859;margin:7px 0 0}.viva-workout-protocol{background:#fff6eb;border:1px solid #efddc9;border-radius:18px;padding:13px;margin:15px 0}.viva-workout-protocol p{font-size:11px;line-height:1.55;color:#7e6b63;margin:11px 0 0}.viva-protocol-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.viva-protocol-phases span{background:#fff;border:1px solid #f1e1d2;border-radius:11px;padding:10px 5px;text-align:center;font-size:10px;color:#89756b;line-height:1.4}.viva-protocol-phases b{display:block;font-size:16px;color:#de7134}.viva-dose{display:inline-block;background:#e8f6ea;color:#43834d;border-radius:9px;padding:4px 7px;font-size:10px;font-weight:850;margin:5px 0}.viva-set-counter{color:#236b55;font-size:13px;font-weight:850;background:#eaf7ed;border-radius:11px;padding:10px 12px;margin:12px auto 2px;width:fit-content;max-width:90%}.viva-aerobic-panel{background:#fff;border:1px solid #eeded5;border-radius:18px;padding:16px;margin:17px 0}.viva-aerobic-score{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.viva-aerobic-score>div{background:#f4fbf6;border-radius:12px;padding:13px}.viva-aerobic-score b,.viva-aerobic-score strong{display:block;font-size:22px;color:#368965}.viva-aerobic-score small{font-size:10px;color:#7d8b81;display:block;line-height:1.35;margin-top:3px}.viva-aerobic-track{height:11px;background:#e5efe5;border-radius:99px;overflow:hidden}.viva-aerobic-track>div{height:100%;background:#5fbc8d;border-radius:99px}.viva-aerobic-panel h3{font-size:13px;margin:18px 0 12px}.viva-aerobic-panel input,.viva-aerobic-panel select{width:100%;background:#fffaf7;padding:11px 9px;border:1px solid #ecdcd0;border-radius:10px;font-size:12px;margin-top:7px}.viva-aerobic-panel label{font-size:11px;font-weight:700}.viva-aerobic-disclaimer{font-size:10px;color:#8c8186;line-height:1.55;margin:12px 0 0}.viva-aerobic-log{border-top:1px solid #efe4dd;margin-top:12px}.viva-aerobic-log>div{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:10px 0;border-bottom:1px solid #f4ece8}.viva-aerobic-log span{font-size:11px}.viva-aerobic-log button{border:0;background:#fff0ea;border-radius:10px;color:#bf6947;font-size:10px;font-weight:800;padding:7px 9px}.viva-strength-volume{border:1px solid #dcece3;background:#f8fcf9;border-radius:17px;padding:13px 15px;margin:16px 0}.viva-strength-volume summary{cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;list-style:none}.viva-strength-volume summary::-webkit-details-marker{display:none}.viva-strength-volume summary b{font-size:12px}.viva-strength-volume summary span{font-size:10px;color:#438a64;font-weight:800;white-space:nowrap}.viva-strength-volume>p{font-size:11px;color:#6c8174;line-height:1.5}.viva-volume-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:13px 0}.viva-volume-grid>div{background:white;border:1px solid #e1eee5;border-radius:11px;padding:10px}.viva-volume-grid span{font-size:10px;color:#697e70;display:block}.viva-volume-grid b{display:block;font-size:12px;color:#426e52;margin-top:5px}
+/* Treine no Lar interface: neutral surfaces, compact hierarchy, accessible controls */
+:root{--ink:#252729;--soft:#687079;--orange:#bd582d;--bg:#fff;--line:#e4e6e7}
+html,body{background:#f1f2f2;color:var(--ink)}
+.wrap{background:#fff;padding:18px 17px 112px}
+.header{margin-bottom:21px}
+.sig{border:0;background:#f5f6f6;color:#61676b;padding:8px 11px;font-size:11px;font-weight:650}
+.kicker{letter-spacing:1.1px;font-size:10px;color:#9b5639}
+.card,.soft-card,.coach-daycard,.stage-block,.viva-aerobic-panel{border-color:#e5e7e7;background:#fff;border-radius:16px;box-shadow:none}
+.primary{background:#bd582d;border-radius:12px;box-shadow:none;font-weight:750;padding:15px 17px}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.sub{border-color:#dfe3e3;border-radius:11px}
+.section h2{letter-spacing:-.35px;font-size:18px}
+.nav{background:#ffffffed;border-top:1px solid #e1e4e4;padding:9px 4px calc(10px + env(safe-area-inset-bottom))}
+.nav button{color:#747b80;min-width:0;flex:1;font-size:10px;gap:5px;padding:6px 1px}
+.nav button.active{color:#a7502a;font-weight:800}
+.nav button .viva-nav-icon{height:23px;display:grid;place-items:center}
+.nav button .viva-nav-icon svg{width:20px;height:20px}
+.viva-home-top{border:1px solid #e5e8e8;background:#f8f9f9;padding:20px 18px 16px;border-radius:18px;margin:6px 0 13px}
+.viva-home-top h1{font-size:28px;line-height:1.1;letter-spacing:-.9px;margin:11px 0 8px}
+.viva-home-top>p{font-size:12px;line-height:1.55;color:#646c70;max-width:440px;margin:0 0 17px}
+.viva-home-pulse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;border-top:1px solid #e4e8e8;padding-top:12px}
+.viva-home-pulse>span{display:flex;flex-direction:column;gap:5px}
+.viva-home-pulse strong{font-size:19px;font-weight:850;color:#2e3335;letter-spacing:-.4px}
+.viva-home-pulse small{font-size:10px;color:#767f83;line-height:1.35}
+.viva-home-action{border:1px solid #dfe4e1;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border-radius:15px}
+.viva-home-action>div{min-width:0;flex:1}
+.viva-home-action b{font-size:14px;display:block}
+.viva-home-action small{display:block;margin-top:5px;color:#687178;line-height:1.45;font-size:11px}
+.viva-home-action button{background:#bd582d;color:white;border:0;border-radius:11px;padding:12px 14px;font-size:12px;font-weight:800;white-space:nowrap}
+.viva-home-note{font-size:12px;line-height:1.5;color:#657078;margin:-2px 0 12px}
+.durations{gap:8px}
+.dur,.dur:nth-child(2),.dur:nth-child(3){background:#f6f7f7;border:1px solid #e4e6e6;border-radius:13px;min-height:86px;text-align:center;padding:12px 8px}
+.dur.active{border:2px solid #bd582d;box-shadow:none;background:#fff9f6}
+.dur b{font-size:22px;margin:3px 0 8px;font-weight:850}
+.dur small{font-size:10px;color:#6b7378}
+.coach-hero,.library-intro{background:#f7f8f8;border-color:#e5e6e6;border-radius:16px;padding:16px}
+.coach-hero h2,.library-intro h2{font-size:21px;letter-spacing:-.45px}
+.coach-hero p,.library-intro p{color:#636e73}
+.coach-hero .coach-avatar.viva-svg-avatar{width:53px;height:63px}
+.coach-library-strip,.coach-prescription,.viva-workout-protocol{background:#f9faf9;border:1px solid #e2e7e3;border-radius:13px}
+.coach-library-strip button{background:#fff;color:#a5502b;border:1px solid #e5d8d1;border-radius:10px}
+.coach-metrics>div{border:1px solid #e6e9e9;background:#fff;border-radius:12px}
+.coach-day{border-radius:11px;background:#f7f8f8;border:1px solid #e4e7e7}
+.coach-day.active{background:#fdf7f3;border:2px solid #bd582d;color:#a84c27}
+.coach-day small{color:#767d81}
+.coach-tags span{background:#f1f3f2;color:#56615c}
+.coach-move{border-top:1px solid #e8ebea}
+.coach-move b{font-size:13px}
+.coach-move small{color:#667078}
+.viva-workout-protocol p,.viva-protocol-phases span{color:#5c696d}
+.viva-protocol-phases span{border-color:#e4e8e6;background:#fff}
+.viva-protocol-phases b{color:#af532d}
+.viva-dose{background:#eef4f0;color:#477460}
+.library-entry{border:1px solid #e5e7e7;border-radius:13px;background:#fff;min-height:112px}
+.library-number,.library-action{color:#ac542e!important}
+.library-preview{border-radius:15px;border-color:#e5e8e8}
+.viva-readiness-state,.viva-strength-volume,.viva-insight{border-radius:13px}
+.viva-aerobic-score b,.viva-aerobic-score strong{font-size:19px}
+.guide-link{color:#a94d29}
+.footer{color:#6d7477;line-height:1.55;font-size:11px}
+@media(min-width:650px){.wrap{padding:25px 30px 115px}.viva-home-top{padding:25px}.viva-home-top h1{font-size:32px}}
+@media(max-width:350px){.wrap{padding-left:12px;padding-right:12px}.viva-home-action{flex-wrap:wrap}.viva-home-action button{width:100%}}
+.viva-plan-notes{border:1px solid #e0e5e5;background:#fafbfb;border-radius:13px;padding:13px 15px;margin:16px 0}.viva-plan-notes summary{font-size:12px;font-weight:750;cursor:pointer;color:#4e5a60}.viva-plan-notes p{font-size:11px;line-height:1.55;color:#667177;margin:10px 0 0}.viva-nav-loading{font-size:11px;color:#777;margin:12px auto}.phase .phicon,.stage-ico{font-variant-numeric:tabular-nums;font-size:12px!important;font-weight:850;color:#805640;background:#f6f3ee!important}.phasebox.tap{border:1px solid #e5e8e8;background:#f6f7f7!important}.phasebox.tap .phase-link{color:#aa532c}.viva-ex-ordinal{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;background:#f2f4f4;color:#667079;border-radius:10px;font-size:13px;font-weight:800}.coach-move,.library-move,.viva-ex-row{align-items:start!important;gap:12px}.guide-top{align-items:start}.viva-guide-title{padding:8px 0 14px;border-bottom:1px solid #e8eaea}.viva-guide-title h2{font-size:23px;line-height:1.15;margin:8px 0}.viva-guide-title p{font-size:12px;color:#667078}.viva-filter-row{display:flex;gap:6px;overflow-x:auto;margin:13px 0 16px;padding-bottom:3px}.viva-filter-row button{flex:0 0 auto;padding:10px 12px;border:1px solid #e4e5e6;background:#f6f7f7;border-radius:11px;color:#5e676d;font-size:12px;font-weight:700}.viva-filter-row button.selected{border-color:#bd582d;background:#fff6f1;color:#a64a27}.viva-ex-directory{display:grid;gap:8px}.viva-ex-directory-card{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border:1px solid #e7e8e8;background:#fff;border-radius:13px}.viva-ex-directory-card b{font-size:13px}.viva-ex-directory-card small{display:block;margin-top:5px;font-size:10px;color:#737b7f}.viva-ex-directory-card p{font-size:11px;color:#81888a;margin:4px 0 0}.viva-ex-directory-card button{border:1px solid #e6dad3;background:#fff8f4;color:#9d4e29;font-size:11px;padding:10px;border-radius:9px;font-weight:800;flex-shrink:0}.viva-exercises-entry{width:100%;margin-top:8px}.nav button{font-size:9px!important}.nav button .viva-nav-icon svg{width:19px;height:19px}@media(max-width:340px){.nav{padding-left:1px;padding-right:1px}.nav button{font-size:8px!important}}.viva-replace-reason{display:block;width:100%;padding:12px;border:1px solid #dee3e2;border-radius:10px;margin:9px 0 17px;background:#fff}.viva-replace-choice{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e6e9e8;border-radius:13px;padding:12px;margin:8px 0}.viva-replace-choice b{display:block;font-size:12px}.viva-replace-choice small{display:block;font-size:10px;color:#737b80;margin-top:5px}.viva-replace-choice button{border:1px solid #d7dfd9;border-radius:9px;background:#f2f7f3;color:#44765a;font-size:11px;padding:10px;font-weight:800}.viva-replace-remove{width:100%;margin:12px 0 10px}.viva-manual-set{background:#f8faf9;border:1px solid #dce6e0;border-radius:15px;padding:15px;margin:13px 0 15px;text-align:left}.viva-manual-set h3{font-size:14px;margin:0 0 5px}.viva-manual-set p{font-size:11px;line-height:1.5;color:#627169}.viva-manual-set small{display:block;margin-top:8px;font-size:10px;color:#627169}.viva-manual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.viva-manual-grid label{font-size:11px;color:#4f6055;font-weight:700;display:block}.viva-manual-grid input,.viva-manual-grid select{display:block;width:100%;border:1px solid #d6e1d9;background:#fff;border-radius:10px;padding:10px 7px;margin:6px 0 13px;font-size:12px}.viva-manual-summary{font-size:11px;color:#5c7963;margin:12px 0;text-align:center}.viva-set-end{font-size:12px;color:#567463}.viva-rep-progress{margin:17px 0}.viva-rep-card{border:1px solid #e3e9e5;border-radius:14px;background:#fafcfa;padding:13px;margin:8px 0}.viva-rep-card b{font-size:13px}.viva-rep-card small{display:block;font-size:10px;color:#75827a;margin-top:4px}.viva-rep-card p{font-size:11px;line-height:1.45;color:#54745b;margin:8px 0 0}@media(max-width:350px){.viva-manual-grid{gap:6px}}.viva-rep-hint{display:block;color:#536e5a;font-size:11px;line-height:1.5;margin:6px 0 4px}.viva-weight-shortcut{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;margin:12px 0 18px;border:1px solid #e2e6e3;border-radius:14px;background:#fff}.viva-weight-shortcut b{font-size:13px;display:block}.viva-weight-shortcut small{display:block;color:#6e7975;font-size:11px;margin-top:5px}.viva-weight-shortcut button{border:1px solid #d5e2d9;background:#edf7f0;color:#386b4a;border-radius:10px;padding:11px 13px;font-size:12px;font-weight:800;white-space:nowrap}@media(max-width:350px){.viva-weight-shortcut{flex-wrap:wrap}.viva-weight-shortcut button{width:100%}}
+
+/* Treine no Lar MUSIC — single responsive layout. Avoid legacy button and grid sizing rules. */
+.viva-music-entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;margin:13px 0;border-radius:15px;background:#fff;border:1px solid #e3e8e4}
+.viva-music-entry b{display:block;font-size:13px}
+.viva-music-entry small{display:block;font-size:11px;line-height:1.45;margin-top:5px;color:#69756f}
+.viva-music-entry button,.viva-spot-run{border:1px solid #cbdccc;background:#eff5f0;color:#3b674b;font-size:12px;font-weight:750;border-radius:10px;padding:10px 14px;white-space:nowrap}
+.viva-spot-run{display:block;margin:12px 0;width:100%;text-align:center}
+/* Keep the home shortcut only before a playlist/account has been connected. */
+.wrap:has(.viva-spot-dock.is-used) .viva-music-entry{display:none}
+/* Dock: 58px mini player. Expanded sheet never covers the whole viewport. */
+.viva-spot-dock{--mtext:#1d2d28;--msoft:#6b7971;--mint:#b8eed0;
+ position:fixed;z-index:450;left:50%;transform:translateX(-50%);
+ bottom:calc(83px + env(safe-area-inset-bottom));width:min(456px,calc(100% - 18px));
+ background:#f7f8f6;color:var(--mtext);border:1px solid #cedbd2;border-radius:18px;
+ box-shadow:0 12px 38px #162b2850;max-height:min(485px,calc(100dvh - 176px));
+ overflow:hidden;display:none;flex-direction:column;font-family:system-ui,-apple-system,sans-serif;
+ -webkit-text-size-adjust:100%;text-size-adjust:100%;isolation:isolate}
+.viva-spot-dock.is-open,.viva-spot-dock.is-used{display:flex}
+.viva-spot-dock *{box-sizing:border-box;min-width:0}
+.viva-spot-dock button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.viva-spot-dock button:disabled{opacity:.45;cursor:not-allowed}
+.viva-spot-dock button:focus-visible,.viva-spot-dock summary:focus-visible,.viva-spot-dock input:focus-visible{outline:2px solid #368b57;outline-offset:2px}
+.viva-spot-bar{height:59px;flex:0 0 59px;display:flex;align-items:center;gap:9px;padding:7px 10px;background:#182627;color:#f0faf1;border-bottom:1px solid #31433d}
+.viva-spot-mini{flex:1;display:flex;align-items:center;gap:10px;min-width:0}
+.viva-spot-mini .viva-spot-art{width:41px;height:41px;flex:0 0 41px;border:1px solid #47665a;border-radius:10px;overflow:hidden}
+.viva-spot-mini-text{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.viva-spot-mini-text b{display:block!important;max-width:100%;font-size:12px!important;line-height:1.3;font-weight:800;color:#f3faf4!important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.viva-spot-mini-text small{display:block!important;max-width:100%;font-size:10px!important;color:#a5bfb1!important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin:0!important}
+.viva-spot-mini-signal{width:48px;flex:0 0 48px;height:24px;overflow:hidden}
+.viva-spot-mini-signal .viva-spot-signal{height:24px;background:transparent;border:0;border-radius:0}
+.viva-spot-mini-signal .viva-spot-signal-svg{height:24px}
+.viva-spot-mini-signal .viva-spot-signal-glow{display:none}
+.viva-spot-bar .viva-spot-button.is-minimize{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;padding:0;border:1px solid #476058;border-radius:10px;background:#293b39;color:#e7fae8}
+.viva-spot-bar .viva-spot-button.is-minimize svg{width:17px;height:17px}
+.viva-spot-dock:not(.is-open) [data-spot-body]{display:none!important}
+.viva-spot-dock [data-spot-body]{display:block;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;min-height:0;flex:1;padding:0!important;background:#f7f8f6;scrollbar-width:thin;scrollbar-color:#b2c5b9 transparent}
+.mv3{padding:13px 13px 10px;max-width:100%;overflow-x:hidden}
+.mv3-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.mv3-heading>span:first-child{display:flex;align-items:baseline;gap:7px}
+.mv3-heading b{font-size:15px;font-weight:850;letter-spacing:-.4px}
+.mv3-heading small{font-size:9px;font-weight:800;letter-spacing:.8px;color:#84948b}
+.mv3-status{display:flex;align-items:center;gap:5px;color:#667970;font-size:9px;font-weight:780;white-space:nowrap}
+.mv3-status i{width:7px;height:7px;border-radius:50%;background:#a9b7af}
+.mv3-status.is-live i{background:#4bbd78;box-shadow:0 0 6px #4bbd785f}
+.mv3-player{background:#162729;color:#f5faf5;border:1px solid #29443c;border-radius:15px;padding:13px;box-shadow:0 5px 18px #182a2816}
+.mv3-now{display:flex;gap:11px;align-items:center}
+.viva-spot-art{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;overflow:hidden;border-radius:10px;border:1px solid #416a55;background:linear-gradient(130deg,#385f4b,#1d3330)}
+.viva-spot-art img{display:block;width:100%;height:100%;object-fit:cover}
+.viva-spot-art-fallback{color:#a4e1b4;display:grid;place-items:center}
+.viva-spot-art-fallback svg{width:27px;height:27px}
+.viva-spot-art-mini{width:40px;height:40px;flex:0 0 40px;border-radius:9px}
+.viva-spot-art-mini .viva-spot-art-fallback svg{width:20px;height:20px}
+.mv3-now-text{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.mv3-now-text>small{color:#a5dfb5;font-size:9px;font-weight:830;letter-spacing:.5px}
+.mv3-now-text b{font-size:15px;line-height:1.25;color:#f3fbf5;font-weight:850;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mv3-now-text span{font-size:11px;color:#b7cabe;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mv3-market{margin:11px 0 7px}
+.viva-spot-signal{position:relative;overflow:hidden;height:26px;color:#a3ecb2;border:1px solid #36554b;border-radius:7px;
+ background:repeating-linear-gradient(to right,transparent 0,transparent 37px,#84b89d16 38px,#84b89d16 39px),#1b3531;
+ -webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);
+ mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+.viva-spot-signal-flow{position:absolute;left:0;top:0;display:flex;width:max-content;will-change:transform;animation:mv3-chart-scroll 12s linear infinite;animation-play-state:paused}
+.viva-spot-signal-svg{width:520px;height:25px;flex:0 0 520px;filter:drop-shadow(0 0 3px #a6ecb269)}
+.viva-spot-signal-glow{display:none}
+.viva-spot-dock.is-playing .viva-spot-signal-flow{animation-play-state:running}
+.viva-spot-dock:not(.is-playing) .viva-spot-signal{opacity:.55}
+@keyframes mv3-chart-scroll{from{transform:translateX(0)}to{transform:translateX(-520px)}}
+.mv3-controls{display:flex;align-items:center;justify-content:center;gap:21px;margin:6px 0 7px}
+.mv3-controls .viva-spot-button{display:grid;place-items:center;padding:0;border-radius:50%;flex-shrink:0}
+.mv3-controls .mv3-control-side{width:36px;height:36px;background:#2a403d;border:1px solid #3f5b4d;color:#d1e6d5}
+.mv3-controls .mv3-control-main{width:44px;height:44px;background:#b0efbd;border:1px solid #b0efbd;color:#10291c}
+.mv3-control-main svg{width:24px;height:24px}
+.mv3-current-list{display:flex;align-items:center;justify-content:space-between;gap:9px;border-top:1px solid #375044;padding-top:9px}
+.mv3-current-list>span{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.mv3-current-list>span svg{width:14px;height:14px;flex:0 0 14px;color:#95c6aa}
+.mv3-current-list b{font-size:10px;color:#d7ebdd;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.mv3-current-list small{font-size:8px;color:#a5d6b4;white-space:nowrap;font-weight:800}
+.mv3-library-title{display:flex;align-items:center;justify-content:space-between;gap:9px;margin:15px 0 9px}
+.mv3-library-title small{font-size:9px;letter-spacing:.7px;color:#8a9c91;font-weight:800}
+.mv3-library-title h3{margin:2px 0 0!important;color:#213229;font-size:18px!important;font-weight:850}
+.viva-spot-dock .mv3-library-title .mv3-refresh{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 10px;border-radius:9px;background:#e6eee7;color:#426c51;border:1px solid #cadccf;font-size:11px;font-weight:780;white-space:nowrap}
+.mv3-refresh svg{width:14px;height:14px}
+.mv3-playlists{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;width:100%;min-width:0;max-width:100%;overflow-x:hidden}
+.viva-spot-dock .mv3-playlist{display:grid;grid-template-columns:40px minmax(0,1fr) 29px;align-items:center;gap:10px;
+ width:100%;max-width:100%;min-width:0;text-align:left;white-space:normal;padding:9px 10px;min-height:62px;
+ border-radius:12px;border:1px solid #dce6df;background:#fff;color:#263a2c;box-shadow:none;font-size:12px;overflow:hidden}
+.viva-spot-dock .mv3-playlist.is-selected{background:#e9f6ec;border-color:#80c996;box-shadow:inset 3px 0 0 #66bc7e}
+.mv3-playlist-text{min-width:0;max-width:100%;display:flex;flex-direction:column;gap:4px}
+.mv3-playlist-text b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal;font-size:12px;line-height:1.25;font-weight:800;color:#263a2c}
+.mv3-playlist-text small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#718079;font-size:10px;line-height:1.3}
+.mv3-playlist.is-selected .mv3-playlist-text small{color:#36784d}
+.mv3-playlist-icon{width:29px;height:29px;border-radius:50%;background:#e9f1ea;color:#47755a;display:grid;place-items:center}
+.mv3-playlist-icon svg{width:15px;height:15px}
+.mv3-playlist.is-selected .mv3-playlist-icon{background:#6ac687;color:#173620}
+.mv3-empty{padding:12px;background:#eef3ef;border:1px dashed #c9d9ce;border-radius:10px;font-size:11px;color:#62746a;line-height:1.5}
+.mv3-expand{margin-top:12px;border-top:1px solid #e0e9e2;padding:11px 2px 4px}
+.mv3-expand summary{cursor:pointer;font-size:11px;font-weight:800;color:#506d58;list-style:none}
+.mv3-expand summary::-webkit-details-marker{display:none}
+.mv3-expand summary:after{content:"+";float:right;font-size:14px;color:#73967c}
+.mv3-expand[open] summary:after{content:"−"}
+.mv3-expand p{font-size:10px;color:#66766a;line-height:1.55}
+.mv3-expand label{display:block;font-size:11px;font-weight:750;color:#4f6655;margin-top:9px}
+.mv3-expand form>div{display:flex;gap:6px;max-width:100%;min-width:0}
+.mv3-expand input{display:block;background:#fff;color:#2b3b31;border:1px solid #cddbd1;border-radius:9px;
+ padding:10px;margin:8px 0 0;width:100%;max-width:100%;min-width:0;font-size:11px}
+.mv3-expand form>div input{flex:1}
+.viva-spot-dock .mv3-expand form button{padding:9px 11px;background:#e5f0e7;color:#38684a;border:1px solid #bfd6c4;border-radius:9px;font-size:11px;font-weight:750;flex-shrink:0}
+.viva-spot-dock .mv3-expand .mv3-embed{padding:8px;background:none;border:0;color:#3a7550;font-size:11px;display:inline-flex;align-items:center;gap:5px}
+.mv3-connect{display:flex;flex-wrap:wrap;gap:8px;padding-top:11px}
+.mv3-connect button{padding:10px 12px;border-radius:9px;font-size:11px;font-weight:750}
+.mv3-connect .mv3-activate{background:#e5f3e9;color:#326a47;border:1px solid #c0dbca}
+.mv3-connect .mv3-disconnect{background:transparent;color:#78857b;border:1px solid #dee6df}
+.mv3-notice{font-size:10px;color:#59715e;margin:10px 3px 2px;line-height:1.45}
+.viva-spot-frame{flex-shrink:0;max-height:155px;overflow:hidden;padding:5px 11px 10px;background:#f7f8f6}
+.viva-spot-frame iframe{display:block;max-width:100%}
+@media(max-width:360px){.viva-music-entry{flex-wrap:wrap}.viva-music-entry button{width:100%}.mv3{padding:10px}.mv3-player{padding:10px}.mv3-status{font-size:8px}.mv3-current-list small{display:none}.mv3-playlist{gap:8px!important}.viva-spot-mini-signal{width:36px;flex-basis:36px}}
+@media(prefers-reduced-motion:reduce){.viva-spot-signal-flow{animation:none!important}}
+body:has(.nav.hidden) .viva-spot-dock{bottom:calc(12px + env(safe-area-inset-bottom))}
+@media(max-width:420px){.header .logo{font-size:clamp(18px,5vw,23px);letter-spacing:-.8px}.header .sig{font-size:10px;padding:8px 10px}}
+</style></head><body><div class="wrap"><header class="header"><div class="logo">Treine<em> no Lar</em></div><div class="sig" id="streak">Treinos da semana</div></header><div class="viva-offline-banner" id="offline-banner" role="status" aria-live="polite">Sem internet: você pode continuar treinando com os dados deste aparelho.</div><main id="app"><section class="viva-home-top"><div class="kicker">Treine no Lar · TREINO EM CASA</div><h1>Abrindo treinos</h1><p>Carregando o plano e seus registros salvos.</p></section><noscript>Ative o JavaScript para acessar o Treine no Lar.</noscript></main><nav class="nav" id="nav" aria-label="Menu"><span class="viva-nav-loading">Carregando menu…</span></nav><aside id="viva-music-dock" class="viva-spot-dock" aria-label="Música do treino"></aside></div><script src='guide.js?v=1'></script><script src='coach.js?v=4'></script><script src='exercises.js?v=2'></script><script src='evolution.js?v=3'></script><script src='evolution-ui.js?v=2'></script><script src='training.js?v=4'></script><script src='backup.js?v=4'></script><script src='spotify.js?v=5'></script><script>
+(function(){'use strict';const $=s=>document.querySelector(s), app=$('#app'),nav=$('#nav'),store='viva-functional-v2';let data={duration:30,low:true,sound:true,voice:true,countdown:true,volume:0.45,history:[],profile:{heightCm:null,age:null,weighIns:[]},coach:{startedAt:null,gear:{mini:true,long:true},checkins:[],feedback:{},selectedDay:null,selectedDate:null}};try{data=VivaBackup.normalize(JSON.parse(localStorage.getItem(store)||'{}'))}catch{}if(!data.profile)data.profile={heightCm:null,age:null,weighIns:[]};if(!Array.isArray(data.profile.weighIns))data.profile.weighIns=[];if(!data.coach||typeof data.coach!=='object')data.coach={startedAt:null,gear:{mini:true,long:true},checkins:[],feedback:{},selectedDay:null,selectedDate:null};if(!data.coach.gear)data.coach.gear={mini:true,long:true};data.coach.excluded=[...new Set((Array.isArray(data.coach.excluded)?data.coach.excluded:[]).filter(id=>VivaCoach.getExercise(id)))];
+ data.coach.preferences=VivaExercises.safePrefs(data.coach.preferences);
+ if(!data.coach.replacements||typeof data.coach.replacements!=='object')data.coach.replacements={};
+ data.coach.replacements=Object.fromEntries(Object.entries(data.coach.replacements)
+  .filter(([id,next])=>VivaExercises.compatible(id,next)));
+ if(!data.coach.reasons||typeof data.coach.reasons!=='object')data.coach.reasons={};if(!Array.isArray(data.coach.checkins))data.coach.checkins=[];if(!data.coach.feedback)data.coach.feedback={};if(!Array.isArray(data.coach.strengthLogs))data.coach.strengthLogs=[];if(!Array.isArray(data.coach.walks))data.coach.walks=[];if(!data.coach.readiness||typeof data.coach.readiness!=='object')data.coach.readiness=null;if(typeof data.voice!=='boolean')data.voice=true;if(typeof data.countdown!=='boolean')data.countdown=true;if(typeof data.volume!=='number')data.volume=.45;const save=()=>{try{localStorage.setItem(store,JSON.stringify(data))}catch{}};let libraryPage=1,librarySelected=null,guideSelected=null,replaceSelected=null,exerciseFilter='all';let screen='inicio',session=null,finished=false,finishedPartial=false,finishedCoachId=null,pulse=null,ctx=null,audioReady=false,rememberSecond=-1,rememberIndex=-1,lock=null;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const plans={20:[5,10,5],30:[5,20,5],45:[7,30,8]};const base={Aquecimento:[['Marcha no lugar','Aumente o ritmo aos poucos.'],['Círculos de ombros','Movimente os ombros com leveza.'],['Passos laterais','Dê passos largos, sem saltar.'],['Mobilidade de quadril','Movimentos lentos e controlados.'],['Elevação alternada de joelhos','Alterne os joelhos com controle.']],Treino:[['Agachamento','Flexione os joelhos e mantenha o peito aberto.'],['Skipping','Eleve os joelhos alternadamente. Sem salto no modo leve.'],['Corda imaginária','Gire os punhos como se usasse corda; alterne os pés ou salte suavemente.'],['Polichinelo sem salto','Afaste um pé por vez, elevando os braços.'],['Prancha','Mantenha o abdômen ativo. Pode apoiar os joelhos.'],['Avanço alternado','Dê um passo atrás e volte com controle.'],['Ponte de glúteos','Eleve o quadril, contraindo os glúteos.'],['Corrida estacionária','Movimente braços e pernas sem sair do lugar.'],['Escalador lento','Leve um joelho por vez em direção ao peito.'],['Elevação de joelhos','Alterne os joelhos sem impacto.'],['Agachamento lateral','Desloque o quadril de um lado ao outro.'],['Abdominal curto','Mantenha o pescoço relaxado.']],Alongamento:[['Respiração tranquila','Inspire pelo nariz, solte o ar lentamente.'],['Alongar panturrilhas','Uma perna atrás de cada vez.'],['Alongar quadríceps','Segure com apoio se precisar.'],['Alongar posteriores','Incline o tronco sem forçar.'],['Alongar ombros','Cruze o braço à frente do corpo.']]};const phases=['Aquecimento','Treino','Alongamento'];const pad=n=>String(n).padStart(2,'0'),time=s=>{const n=Math.max(0,Math.ceil(s));return `${pad(Math.floor(n/60))}:${pad(n%60)}`};
+function timeline(minutes,exerciseSet=null,lowImpact=data.low){let seq=[],t=0;phases.forEach((phase,i)=>{let seconds=plans[minutes][i]*60,part=phase==='Treino'?40:30,index=0;while(seconds>0){let step=Math.min(seconds,part),e=phase==='Treino'&&Array.isArray(exerciseSet)&&exerciseSet.length?exerciseSet[index++%exerciseSet.length]:base[phase][index++%base[phase].length];if(!Array.isArray(e))e=[e.name,e.hint,e.id||''];if(phase==='Treino'&&!lowImpact){if(e[0]==='Polichinelo sem salto')e=['Polichinelo','Abra e feche braços e pernas com saltos leves.'];if(e[0]==='Escalador lento')e=['Escalador','Alterne os joelhos mais rapidamente, com controle.']}if(phase==='Treino'&&e[0]==='Skipping'){e=lowImpact?['Skipping sem saltos','Marche no lugar elevando os joelhos alternadamente, sem saltar.']:['Skipping (joelhos altos)','Corra no lugar com joelhos elevados, com saltos leves.']}if(phase==='Treino'&&e[0]==='Corda imaginária'){e=lowImpact?['Corda imaginária sem saltos','Gire os punhos e alterne apoio nas pontas dos pés, sem tirar ambos os pés do chão.']:['Pular corda sem corda','Gire os punhos como se segurasse corda, saltando baixo e suavemente.']}seq.push({id:e[2]||'',name:e[0],hint:e[1],phase,start:t,end:t+step,seconds:step,rest:false});t+=step;seconds-=step;if(phase==='Treino'&&seconds>0){let rest=Math.min(seconds,20);seq.push({name:'Pausa e respiração',hint:'Respire e prepare-se para o próximo exercício.',phase,start:t,end:t+rest,seconds:rest,rest:true});t+=rest;seconds-=rest}}});return seq}
+function streak(){let days=[...new Set(data.history.map(h=>h.day))].sort().reverse();let s=0,now=new Date();if(!days.includes(now.toLocaleDateString('sv-SE')))now.setDate(now.getDate()-1);while(days.includes(now.toLocaleDateString('sv-SE'))){s++;now.setDate(now.getDate()-1)}return s}
+function header(title,sub){return `<div class="plainhead"><button class="sub" data-go="inicio" aria-label="Voltar">‹</button><div><h1>${title}</h1><small style="color:#837a80">${sub}</small></div></div>`}function phaseCards(){return `<button type='button' class='card phase phase-select' data-phase='Aquecimento'><div class='phicon'>01</div><div class='phase-copy'><b>Aquecimento</b><p>Prepara o corpo antes do circuito.</p></div><span class='phase-view'>Ver exercícios ›</span></button><button type='button' class='card phase phase-select' data-phase='Treino'><div class='phicon'>02</div><div class='phase-copy'><b>Treino funcional</b><p>Força, skipping e corda imaginária.</p></div><span class='phase-view'>Ver exercícios ›</span></button><button type='button' class='card phase phase-select' data-phase='Alongamento'><div class='phicon'>03</div><div class='phase-copy'><b>Alongamento</b><p>Volta à calma com mobilidade suave.</p></div><span class='phase-view'>Ver exercícios ›</span></button>`}
+function coachModel(){
+ const c=data.coach,today=new Date(),week=VivaCoach.weekOf(c,today),wd=(today.getDay()+6)%7;
+ const defaultDay=wd>4?0:wd,todayKey=today.toLocaleDateString('sv-SE');
+ const day=c.selectedDate===todayKey&&Number.isInteger(c.selectedDay)?c.selectedDay:defaultDay;
+ const performance=VivaCoach.getPerformance(data.history,c,today),trend=VivaCoach.weightsTrend(data.profile.weighIns);
+ const prescription=VivaCoach.prescription(week,day,data.history,c,today),duration=prescription.minutes;
+ const d=VivaCoach.getDay(day),low=data.low||c.preferences.noJump||!performance.ready||week<=2;
+ const moves=VivaCoach.movesFor(day,week,c.gear,low,trend).filter(s=>!c.excluded.includes(s.id));
+ const base={c,today,week,day,d,duration,prescription,performance,trend,low,moves,history:data.history,weekend:wd>4,weekKey:VivaCoach.weekKey(today),cycle:Math.floor((week-1)/4)+1,cycleWeek:((week-1)%4)+1};
+ return VivaTraining.prescribe(VivaEvolution.adapt(base,c.readiness,today));
+}
+function strengthWeekCard(m){
+ const weeks=VivaTraining.weeklyMuscleSets(m.week,m.duration,m.c.gear,m.c.excluded,m.c.preferences,m.c.replacements,data.history,m.c.feedback,m.today,m.readiness.status);
+ const keys=['pernas','posteriores','gluteos','costas','empurrar','core'];
+ return `<details class='viva-strength-volume'><summary><b>Distribuição muscular desta semana</b><span>Ver séries previstas</span></summary>
+ <p>As séries são planejadas por grupo muscular. No treino de 30 minutos, a terceira série só é liberada após registros suficientes e recuperação adequada.</p>
+ <div class='viva-volume-grid'>${keys.map(k=>`<div><span>${weeks.labels[k]}</span><b>${weeks.counts[k]} séries</b></div>`).join('')}</div>
+ <p class='minitip'>${weeks.note} Na adaptação inicial, não é necessário treinar até a falha ou aumentar a resistência toda semana.</p></details>`;
+}
+function coachPage(){
+ const m=coachModel(),c=m.c;
+ if(!c.startedAt)return `${header('Plano semanal','Configure seus treinos')}
+ <div class='coach-hero'><div><div class='kicker'>CONFIGURAÇÃO INICIAL</div><h2>Como você vai treinar</h2><p>Três dias de força e dois dias opcionais de cardio. Nas primeiras semanas, a prioridade é aprender os movimentos.</p></div></div>
+ <form id='coach-onboard' class='card coach-form'><h3>Equipamentos e impacto</h3><p>Início com 20 minutos; a duração aumenta conforme seus registros.</p>
+ <label class='coach-checkbox'><input type='checkbox' id='ob-mini' ${c.gear.mini?'checked':''}> Mini band para pernas e glúteos</label>
+ <label class='coach-checkbox'><input type='checkbox' id='ob-long' ${c.gear.long?'checked':''}> Elástico longo de resistência</label>
+ <label class='coach-checkbox'><input type='checkbox' id='ob-low' checked> Começar sem saltos (recomendado)</label>
+ <button class='primary' type='submit'>Salvar e abrir plano</button></form>
+ <div class='info'>Antes de iniciar: se tiver dor persistente, doença cardiovascular não avaliada, limitações relevantes ou sintomas durante o exercício, procure orientação profissional. Verifique seus elásticos e nunca os prenda na grade do terraço.</div>`;
+ const ck=(c.checkins||[]).find(x=>x.weekKey===m.weekKey),lastWeights=[...data.profile.weighIns].sort((a,b)=>a.day.localeCompare(b.day)),lastWeight=lastWeights.at(-1);
+ const weekLogs=data.history.filter(h=>h.coach&&h.date&&!Number.isNaN(Date.parse(h.date))&&VivaCoach.weekKey(new Date(h.date))===m.weekKey);
+ const doneDay=weekLogs.some(h=>h.coachDay===m.day);
+ const weekSessions=new Set(weekLogs.map(h=>h.day)).size;
+ const weightThisWeek=lastWeight&&VivaCoach.weekKey(new Date(lastWeight.day+'T12:00:00'))===m.weekKey;
+ const cycleName=m.week<=2?'Adaptação':m.week<=4?'Consolidação':m.week<=8?'Desenvolvimento':'Evolução gradual';
+ return `${header('Plano semanal','Força, cardio e recuperação')}
+ <div class='coach-hero'><div><div class='kicker'>${m.prescription.phase} · Semana ${m.week}</div><h2>Semana ${m.week}</h2><p>${VivaCoach.guidance(m.week,m.performance,m.trend)}</p></div></div>
+ <div class='coach-library-strip'><div><b>Biblioteca de treinos</b><small>Consulte exercícios e planos por semana.</small></div><button type='button' data-go='biblioteca'>Consultar</button></div><div class='coach-metrics'><div><small>Ciclo de 4 semanas</small><b>${m.cycle}º ciclo · ${m.cycleWeek}/4</b></div><div><small>Treino sugerido</small><b>${m.duration} min</b></div><div><small>Dias com treino</small><b>${weekSessions}</b></div></div>
+ ${strengthWeekCard(m)}<div class='section'><h2>Agenda semanal</h2><small>Segunda a sexta</small></div>
+ <div class='coach-days'>${VivaCoach.DAYS.map((day,i)=>`<button type='button' class='coach-day ${m.day===i?'active':''}' data-coach-day='${i}'><strong>${['SEG','TER','QUA','QUI','SEX'][i]}</strong><span>${day.kind}</span><small>${weekLogs.some(h=>h.coachDay===i)?'✓ Feito':day.required?'Prioritário':'Leve'}</small></button>`).join('')}</div>
+ <div class='coach-daycard'><div class='kicker'>${['SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA'][m.day]} · ${m.kind}</div><h2>${m.title}</h2><p>${m.training.recovery?'Recuperação ativa suave: o objetivo é se movimentar sem esforço intenso.':m.d.note}</p><div class='coach-tags'><span>${m.duration} min</span><span>${m.low?'Baixo impacto':'Impacto opcional'}</span><span>${m.d.required?'Treino principal':'Treino opcional'}</span>${doneDay?'<span>Concluído nesta semana</span>':''}</div>
+ ${VivaEvolutionUI.dailyCard(m)}${m.weekend?'<div class="info">Sábado e domingo são dias de recuperação. Prévia da semana. Os treinos são liberados de segunda a sexta.</div>':''}<div class='viva-workout-protocol'><div class='viva-protocol-phases'><span><b>${m.training.warm} min</b>Aquecimento</span><span><b>${m.training.main} min</b>${m.training.type==='strength'?'Séries e descansos':'Cardio guiado'}</span><span><b>${m.training.cool} min</b>Volta à calma</span></div><p>${m.training.type==='strength'?`${m.training.sets} séries por movimento · ${m.training.reps} repetições por série · descanso de cerca de ${m.training.rest} segundos. O cronômetro é uma janela para executar com controle, não uma ordem para correr.`:'Intervalos de movimento e recuperação. Faça em ritmo confortável; o objetivo é progredir gradualmente.'}</p></div><h3>Exercícios deste treino</h3><p class='viva-visual-note'>Consulte a execução, os cuidados e as adaptações antes de treinar.</p>${m.moves.map((s,i)=>`<div class='coach-move'><span class='viva-ex-ordinal' aria-hidden='true'>${i+1}</span><div><b>${esc(s.name)}</b>${m.training.type==='strength'?`<span class='viva-dose'>${m.training.sets} × ${m.training.targets?.[s.id]?.target||8} repetições</span>
+ ${m.training.targets?.[s.id]?.status!=='baseline'? `<small class='viva-rep-hint'>${m.training.targets?.[s.id]?.title}. ${m.training.targets?.[s.id]?.description}</small>`:''}`:''}<small>${esc(s.hint)}${s.gear==='mini'?' · Mini band':s.gear==='long'?' · Elástico de resistência':''}</small><button class='guide-link' type='button' data-guide='${esc(s.id||'')}' data-guide-name='${esc(s.name)}'>Como executar ›</button><button class='guide-link guide-exclude' type='button' data-replace-open='${s.id}'>Substituir exercício</button></div></div>`).join('')}
+ ${m.moves.length<3?"<div class='info'>Você retirou muitos exercícios desta etapa. Reative alguns em Ajustes para iniciar com segurança.</div>":''}<div class='coach-prescription'><b>Orientações de execução</b><p>${m.prescription.loadHint}</p><p>${m.prescription.effortTarget}</p><small>${m.prescription.c14} dias de treino nas últimas duas semanas · ${m.prescription.progression==='aumentar-opcional'?'Progressão opcional de resistência':m.prescription.progression==='reduzir'?'Priorize recuperação':'Manter técnica e resistência'}</small></div><p class='minitip'>O treino inclui aquecimento e volta à calma. Interrompa em caso de dor aguda, tontura ou mal-estar.</p>
+ <button class='primary' type='button' data-coach-start='1' ${m.moves.length<3||!m.readiness.canStart||m.weekend?'disabled':''}>▶ ${doneDay?'Repetir':'Iniciar'} treino de ${['segunda','terça','quarta','quinta','sexta'][m.day]}</button></div>
+ <div class='section'><h2>Registro semanal</h2></div>
+ <div class='card coach-check'><div class='coach-split'><div><b>Peso e tendência</b><p>${lastWeight?`${wfmt(lastWeight.kg)} kg · última pesagem ${lastWeight.day.split('-').reverse().join('/')}`:'Nenhuma pesagem registrada ainda.'}</p><p>${weightThisWeek?'Pesagem semanal registrada.':'Ainda falta uma pesagem nesta semana, caso queira acompanhar sua evolução.'}</p><p>Leitura: ${m.trend==='subindo'?'alta em três registros espaçados':m.trend==='descendo'?'queda em três registros espaçados':m.trend==='oscilando'?'oscilações normais':'dados insuficientes para tendência'}. Uma pesagem isolada não muda o treino.</p></div><button class='inline-button' type='button' data-go='peso'>Registrar peso →</button></div>
+ <form id='coach-checkin'><h3>Recuperação e disposição</h3><div class='coach-form-grid'><label>Disposição
+ <select id='coach-energy'><option value='5' ${ck?.energy===5?'selected':''}>Muito boa</option><option value='4' ${ck?.energy===4?'selected':''}>Boa</option><option value='3' ${!ck||ck.energy===3?'selected':''}>Normal</option><option value='2' ${ck?.energy===2?'selected':''}>Baixa</option><option value='1' ${ck?.energy===1?'selected':''}>Muito baixa</option></select></label>
+ <label>Dores musculares após treino
+ <select id='coach-soreness'><option value='0' ${!ck||ck.soreness===0?'selected':''}>Nenhuma</option><option value='1' ${ck?.soreness===1?'selected':''}>Leves</option><option value='2' ${ck?.soreness===2?'selected':''}>Moderadas</option><option value='3' ${ck?.soreness===3?'selected':''}>Fortes</option></select></label></div>
+ <label class='coach-checkbox'><input id='coach-pain' type='checkbox' ${ck?.pain?'checked':''}> Tive dor diferente de fadiga muscular normal</label>
+ <label class='coach-waist'>Cintura (cm, opcional)<input type='number' inputmode='decimal' id='coach-waist' min='40' max='200' step='0.1' placeholder='Ex.: 95' value='${ck?.waist||''}'></label>
+ <button class='coach-save' type='submit'>${ck?'Atualizar registro':'Salvar registro'} semanal</button><small>${ck?'Seu check-in desta semana já foi registrado.':'Faça este registro uma vez por semana; você pode atualizá-lo.'}</small></form>
+ </div>
+ <details class='viva-plan-notes'><summary>Como o plano é ajustado e cuidados com elásticos</summary><p>O programa é reavaliado em ciclos de quatro semanas. Frequência, técnica e recuperação orientam os ajustes de duração e resistência. O peso isolado não determina o treino.</p><p>Use a mini band acima dos joelhos, sem cobrir a articulação. Verifique danos nos elásticos e não os prenda em grades ou móveis sem ancoragem própria.</p></details>`;
+}
+function coachFeedbackForm(){
+ if(!finishedCoachId)return '';
+ return `<form class='card coach-form' id='coach-effort'><h3>Registro do treino</h3><p>Informe o esforço para ajustar as próximas sessões.</p>
+ <label>Esforço percebido<select id='coach-effort-value'><option value='3'>3/10 · Muito leve</option><option value='4'>4/10 · Leve</option><option value='5' selected>5/10 · Moderado</option><option value='6'>6/10 · Moderado</option><option value='7'>7/10 · Difícil</option><option value='8'>8/10 · Muito difícil</option><option value='9'>9/10 · Exaustivo</option></select></label>
+ <label style='display:block;font-size:12px;font-weight:750;margin-top:13px'>Execução dos movimentos<select id='coach-post-technique'><option value='boa'>Consegui manter boa técnica</option><option value='insegura'>Tive dificuldade com a execução</option></select></label>
+ <label class='coach-checkbox'><input id='coach-post-pain' type='checkbox'> Senti dor durante o exercício (não apenas esforço)</label>
+ ${data.history.find(h=>h.coachId===finishedCoachId)?.setLogs?.length?`<p class='viva-manual-summary'>${data.history.find(h=>h.coachId===finishedCoachId).setLogs.length} séries registradas manualmente.</p>`:'<p class="viva-manual-summary">Nenhuma série foi registrada. O esforço geral será salvo, mas não gerará progresso de repetições.</p>'}
+ <button class='coach-save' type='submit'>Salvar avaliação do treino</button></form>`;
+}
+function guideModal(){
+ if(!guideSelected)return '';
+ const d=VivaExercises.details(guideSelected.id,guideSelected.name);
+ return `<div class='guide-overlay' role='dialog' aria-modal='true' aria-label='Instruções: ${d.name}'><div class='guide-dialog'>
+ <div class='guide-head'><span>GUIA DO EXERCÍCIO</span><button type='button' data-guide-close='1' aria-label='Fechar'>✕</button></div>
+ <div class='viva-guide-title'><h2>${d.name}</h2><p>${d.objective} · ${d.muscles}</p><div class='coach-tags'><span>${d.equipment}</span><span>Impacto: ${d.impact.toLowerCase()}</span></div></div>
+ <div class='guide-step'><b>Preparação</b><p>${d.setup}</p></div>
+ <div class='guide-step'><b>Execução</b><p>${d.execution}</p></div>
+ <div class='guide-step'><b>Respiração</b><p>${d.breathing}</p></div>
+ <div class='guide-step'><b>Erros comuns e cuidados</b><p>${d.errors}</p></div>
+ <div class='guide-step'><b>Mais fácil</b><p>${d.easier}</p></div>
+ <div class='guide-step'><b>Mais difícil</b><p>${d.harder}</p></div>
+ <div class='guide-step guide-easier'><b>Quando interromper</b><p>${d.avoid}</p></div>
+ <p class='guide-disclaimer'>Instruções textuais de referência. Não há análise postural por câmera. Se houver dor persistente ou limitação, procure avaliação profissional.</p>
+ <button class='primary' type='button' data-guide-close='1'>Fechar guia</button></div></div>`;
+}
+function exercisesPage(){
+ const ids=VivaExercises.ids.filter(id=>{
+  const d=VivaExercises.details(id);
+  if(exerciseFilter==='all')return true;
+  if(exerciseFilter==='cardio')return d.objective.toLowerCase().includes('cardio');
+  if(exerciseFilter==='strength')return !!VivaTraining.GROUPS[id]&&!d.objective.toLowerCase().includes('cardio');
+  return d.objective.toLowerCase().includes('estabilidade');
+ });
+ return `${header('Exercícios','Instruções e versões de cada movimento')}
+ <div class='viva-filter-row'>${[['all','Todos'],['strength','Força'],['cardio','Cardio'],['mobility','Estabilidade']].map(([k,n])=>`<button type='button' class='${exerciseFilter===k?'selected':''}' data-ex-filter='${k}' aria-pressed='${exerciseFilter===k}'>${n}</button>`).join('')}</div>
+ <p class='viva-home-note'>Cada movimento inclui preparação, execução, cuidados e alternativas. As ilustrações esquemáticas foram retiradas.</p>
+ <div class='viva-ex-directory'>${ids.map(id=>{const x=VivaExercises.details(id);return `<div class='viva-ex-directory-card'><div><b>${x.name}</b><small>${x.objective} · ${x.equipment}</small><p>${x.muscles}</p></div><button type='button' data-guide='${id}' data-guide-name='${x.name}'>Instruções</button></div>`}).join('')}</div>
+ <div class='footer'>As orientações por voz continuam disponíveis durante o treino.</div>`;
+}
+function replaceView(){
+ if(!replaceSelected)return '';
+ const id=replaceSelected,idInfo=VivaExercises.details(id),current=coachModel();
+ const used=current.moves.filter(m=>m.id!==id).map(m=>m.id);
+ const choices=VivaExercises.alternatives(id,data.coach.gear,data.coach.preferences,data.coach.excluded,used);
+ return `<div class='guide-overlay' role='dialog' aria-modal='true' aria-label='Substituir ${idInfo.name}'><div class='guide-dialog'>
+ <div class='guide-head'><span>SUBSTITUIR EXERCÍCIO</span><button type='button' data-replace-cancel='1' aria-label='Cancelar'>✕</button></div>
+ <h2>${idInfo.name}</h2><p class='viva-home-note'>A troca será aplicada aos próximos treinos. Ela não muda uma sessão já iniciada.</p>
+ <label class='viva-field-label'>Por que deseja trocar?<select id='replace-reason' class='viva-replace-reason'>
+ <option value='discomfort'>Esse movimento me incomoda</option><option value='dislike'>Prefiro outro exercício</option><option value='equipment'>Não tenho o equipamento adequado</option><option value='other'>Outra limitação</option></select></label>
+ <div class='section'><h2>Alternativas disponíveis</h2></div>
+ ${choices.length?choices.map(x=>`<div class='viva-replace-choice'><div><b>${x.name}</b><small>${VivaExercises.details(x.id).muscles} · ${VivaExercises.details(x.id).equipment}</small></div><button type='button' data-replace-choose='${x.id}'>Escolher</button></div>`).join(''):'<p class="info">Não há uma alternativa equivalente com os equipamentos e restrições atuais. Você pode retirar este movimento e reativá-lo depois.</p>'}
+ <button type='button' class='sub viva-replace-remove' data-replace-choose=''>Retirar dos próximos treinos</button>
+ <button class='inline-button' type='button' data-replace-cancel='1'>Cancelar</button></div></div>`;
+}
+function libraryView(){
+ const p=VivaCoach.catalogPage(libraryPage,10,data.coach.gear,data.low),sel=librarySelected?VivaCoach.catalogItem(librarySelected,data.coach.gear,data.low):null,selPlan=sel?VivaTraining.prescribe({day:sel.day,week:sel.week,duration:sel.plannedTime,kind:sel.kind,c:{gear:data.coach.gear,excluded:data.coach.excluded,preferences:data.coach.preferences,replacements:data.coach.replacements},low:data.low,moves:sel.moves}):null;
+ return `${header('Biblioteca','Sessões de referência por semana')}
+ <div class='library-intro'><div><div class='kicker'>CONSULTA</div><h2>Treinos por semana</h2><p>365 sequências de referência. Os exercícios principais se repetem durante os ciclos; a ordem e os complementares variam. Consulte o plano semanal para saber o treino indicado hoje.</p></div></div>
+ ${sel?`<div class='library-preview'><button class='inline-button' data-lib-close='1'>‹ Voltar à biblioteca</button><div class='kicker' style='margin-top:15px'>SEMANA ${sel.week} · ${['SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA'][sel.day]}</div><h2>${sel.title}</h2><p>${sel.kind} · ${sel.plannedTime} min de referência · ${sel.phase}</p><p>Prévia: ${selPlan.training.warm} min de aquecimento, ${selPlan.training.main} min de ${selPlan.training.type==='strength'?'séries de força':'cardio'} e ${selPlan.training.cool} min de volta à calma. ${selPlan.training.type==='strength'?`${selPlan.training.sets} séries de ${selPlan.training.reps} repetições, com pausas guiadas.`:'Intervalos alternados de movimento e recuperação.'} O treino indicado hoje pode ter duração e exercícios diferentes.</p>${selPlan.moves.map((m,i)=>`<div class='library-move'><span class='viva-ex-ordinal' aria-hidden='true'>${i+1}</span><div><strong>${i+1}. ${m.name}</strong>${selPlan.training.type==='strength'?`<span class='viva-dose'>${selPlan.training.sets} × ${selPlan.training.reps}</span>`:''}<small>${m.hint}${m.gear==='mini'?' · Mini band':m.gear==='long'?' · Elástico':''}</small><button type='button' class='guide-link' data-guide='${m.id||''}' data-guide-name='${m.name}'>Aprender execução ›</button></div></div>`).join('')}<button class='primary' data-go='professor'>Voltar ao plano semanal</button></div>`:
+ `<div class='section'><h2>Consultar treinos</h2><small>Página ${p.page} de ${p.pages}</small></div>
+ <div class='library-grid'>${p.items.map(item=>`<button type='button' class='library-entry' data-lib-open='${item.number}'><span class='library-number'>Semana ${item.week} · ${['Seg','Ter','Qua','Qui','Sex'][item.day]}</span><strong>${item.title}</strong><small>${item.kind} · ${item.plannedTime} min de referência</small><span class='library-action'>Ver detalhes</span></button>`).join('')}</div>
+ <div class='library-pages'><button type='button' data-lib-page='${p.page-1}' ${p.page===1?'disabled':''}>‹ Anterior</button><span>${p.page} / ${p.pages}</span><button type='button' data-lib-page='${p.page+1}' ${p.page===p.pages?'disabled':''}>Próxima ›</button></div><button class='primary' data-go='professor'>Voltar ao plano semanal</button>`}
+ <div class='footer'>A biblioteca é uma referência. No plano semanal, os exercícios principais são mantidos durante ciclos para acompanhar técnica e esforço.</div>`;
+}
+function home(){
+ const hasPlan=!!data.coach.startedAt;
+ const week=hasPlan?VivaCoach.weekOf(data.coach):1;
+ const key=VivaCoach.weekKey(new Date());
+ const days=new Set(data.history.filter(x=>x.coach&&x.date&&Number.isFinite(Date.parse(x.date))&&VivaCoach.weekKey(new Date(x.date))===key).map(x=>x.day)).size;
+ return `<section class='viva-home-top'>
+ <div class='kicker'>Treine no Lar · TREINO EM CASA</div>
+ <h1>Treinos da semana</h1>
+ <p>Força, cardio e recuperação. A rotina começa leve e é ajustada conforme seus registros.</p>
+ <div class='viva-home-pulse'><span><strong>${days}</strong><small>Dias treinados nesta semana</small></span><span><strong>${hasPlan?'Semana '+week:'Início'}</strong><small>${hasPlan?'Acompanhamento ativo':'Plano ainda não iniciado'}</small></span></div></section>
+ <section class='viva-home-action'><div><b>${hasPlan?'Continuar plano semanal':'Montar meu plano semanal'}</b><small>Segunda a sexta · 3 dias de força · 2 dias opcionais de cardio</small></div><button type='button' data-go='professor'>${hasPlan?'Abrir plano':'Começar'}</button></section>
+ <section class='viva-weight-shortcut' aria-label='Registro de peso'><div><b>Registrar peso</b><small>${data.profile.weighIns.length?'Último registro: '+wfmt(data.profile.weighIns.slice().sort((a,b)=>a.day.localeCompare(b.day)).at(-1).kg)+' kg':'Acompanhe suas pesagens semanais'}</small></div><button type='button' data-go='peso'>Adicionar peso</button></section>
+ <section class='viva-music-entry'><div><b>Spotify no treino</b><small>Escolha sua playlist e controle a música enquanto treina.</small></div><button type='button' data-spotify-toggle='1'>Música</button></section><div class='section'><h2>Circuito avulso</h2><small>Sem alterar o plano semanal</small></div>
+ <p class='viva-home-note'>Escolha uma duração para um circuito geral com intervalos. Para musculação com séries e repetições, use o plano semanal.</p>
+ <div class='durations'>${[20,30,45].map(m=>`<button class='dur ${data.duration===m?'active':''}' data-min='${m}' aria-pressed='${data.duration===m}'><b>${m} min</b><small>${m===20?'5 + 10 + 5':m===30?'5 + 20 + 5':'7 + 30 + 8'}</small></button>`).join('')}</div>
+ <div class='section'><h2>Etapas do circuito</h2><small>Aquecimento · treino · alongamento</small></div>
+ ${phaseCards()}<button type='button' class='sub viva-exercises-entry' data-go='exercicios'>Consultar exercícios e instruções</button>
+ <button class='primary cta' data-go='treinos'>Ver circuito de ${data.duration} min</button>
+ <div class='footer'>Interrompa o exercício se sentir dor incomum, tontura ou mal-estar.</div>`;
+}
+function stageList(phase,minutes){
+ const i=phases.indexOf(phase),items=timeline(minutes).filter(s=>s.phase===phase&&!s.rest);
+ const seen=new Set(),unique=items.filter(s=>{if(seen.has(s.name))return false;seen.add(s.name);return true});
+ const phaseMins=plans[minutes][i],icon=['01','02','03'][i],className=i===1?'stage-main':i===2?'stage-last':'';
+ const note=phase==='Treino'?'Exercícios de até 40 segundos com pausas de 20 segundos. A sequência se repete até completar o tempo do treino.':'Cada movimento dura até 30 segundos. A sequência se repete até completar esta etapa.';
+ return `<section id='stage-${i}' class='stage-block ${className}'><div class='stage-head'><div class='stage-ico'>${icon}</div><div><strong>${i+1}. ${phase}</strong><small>${phaseMins} minutos · ${items.length} intervalos de movimento</small></div></div><h3>Exercícios desta etapa</h3><p class='viva-visual-note'>Confira as instruções de cada movimento.</p>${unique.map((s,j)=>`<div class='ex viva-ex-row'><span class='viva-ex-ordinal' aria-hidden='true'>${j+1}</span><div><b>${esc(s.name)} · ${s.seconds} s</b><p>${esc(s.hint)}</p><button type='button' class='guide-link' data-guide='${esc(s.id||'')}' data-guide-name='${esc(s.name)}'>Ver instruções ›</button></div></div>`).join('')}<p class='stage-note'>${note}</p></section>`
+}
+function details(){const p=plans[data.duration];return `${header('Seu circuito','Aquecimento, funcional e alongamento')}<div class='section'><h2>Escolha 20, 30 ou 45 minutos</h2></div><div class='duration-small'>${[20,30,45].map(m=>`<button type='button' data-min='${m}' class='${m===data.duration?'active':''}' aria-pressed='${m===data.duration}'>${m} min</button>`).join('')}</div><div class='banner' style='margin-top:15px'><div class='kicker'>CIRCUITO AVULSO</div><div class='number'>${data.duration} min</div><p>Inclui as três etapas na ordem: aquecimento → treino → alongamento.</p></div><div class='section'><h2>Toque para ver uma etapa</h2></div><div class='phasegrid'>${phases.map((phase,i)=>`<button type='button' class='phasebox tap' data-phase='${phase}'>${['01','02','03'][i]}<b>${phase}</b>${p[i]} min<span class='phase-link'>Ver exercícios ↓</span></button>`).join('')}</div><div class='info' style='margin-top:15px'>O circuito funcional de ${data.duration} minutos já inclui ${p[0]} min de aquecimento, ${p[1]} min de treino e ${p[2]} min de alongamento. Veja as listas abaixo antes de começar.</div>${phases.map(phase=>stageList(phase,data.duration)).join('')}<div class='info'>Áudio guiado: o Treine no Lar anuncia cada movimento e avisa sobre os descansos. Mantenha o Safari aberto e a tela ligada para ouvir os avisos.</div><button class='primary' data-start='1'>▶ Iniciar as 3 etapas · ${data.duration} min</button>`}
+function pct(){return session?Math.min(100,100*elapsed()/session.total):0}function elapsed(){return session?Math.max(0,Math.min(session.total,session.at+(session.paused?0:(Date.now()-session.mark)/1000))):0}
+const sessionKey=store+'-session';
+let lastCheckpoint=0;
+function clearCheckpoint(){try{localStorage.removeItem(sessionKey)}catch{}}
+function checkpoint(){
+ if(!session){clearCheckpoint();return}
+ const at=elapsed();
+ const safe={version:1,savedAt:Date.now(),duration:session.duration,total:session.total,logs:(session.logs||[]).slice(0,50),
+   at:Math.max(0,Math.min(session.total,at)),skippedSeconds:Math.max(0,session.skippedSeconds||0),paused:true,steps:session.steps,
+   coach:session.coach||null,coachId:session.coachId||null,index:session.index};
+ try{localStorage.setItem(sessionKey,JSON.stringify(safe));lastCheckpoint=Date.now()}catch{}
+}
+function restoreWorkout(){
+ let snap=null;
+ try{snap=JSON.parse(localStorage.getItem(sessionKey)||'null')}catch{clearCheckpoint();return false}
+ if(!snap)return false;
+ const now=Date.now();
+ const valid= snap.version===1&&now-Number(snap.savedAt)<=48*3600000&&now>=Number(snap.savedAt)
+  &&[20,30,45].includes(snap.duration)&&snap.total===snap.duration*60
+  &&Number.isFinite(snap.at)&&snap.at>=0&&snap.at<snap.total
+  &&Array.isArray(snap.steps)&&snap.steps.length>=3&&snap.steps.length<250
+  &&snap.steps[0]?.start===0&&snap.steps.at(-1)?.end===snap.total
+  &&snap.steps.every((s,i)=>Number.isFinite(s.start)&&Number.isFinite(s.end)&&s.end>s.start
+     &&s.start>=(i?snap.steps[i-1].end:0)&&typeof s.name==='string'&&s.name.length<150
+     &&typeof s.hint==='string'&&s.hint.length<500&&['Aquecimento','Treino','Alongamento'].includes(s.phase));
+ if(!valid){clearCheckpoint();return false}
+ session={steps:snap.steps,duration:snap.duration,total:snap.total,at:snap.at,paused:true,
+   mark:Date.now(),index:0,lastPhase:null,lastBeepSecond:null,skippedSeconds:Math.max(0,Math.min(snap.total,Number(snap.skippedSeconds)||0)),coach:snap.coach||null,
+   coachId:snap.coachId||null,logs:(Array.isArray(snap.logs)?snap.logs:[]).slice(0,50).map(x=>VivaExercises.sanitizeSetLog(x)).filter(Boolean)};
+ session.index=indexAt(session.at);
+ screen='run';finished=false;return true;
+}
+function suspendWorkout(){
+ if(!session||session.paused)return;
+ session.at=elapsed();session.paused=true;session.mark=Date.now();
+ quiet();releaseAwake();checkpoint();
+}
+
+function indexAt(t){return Math.min(session.steps.length-1,session.steps.findIndex(x=>t<x.end)===-1?session.steps.length-1:session.steps.findIndex(x=>t<x.end))}
+function runner(){
+ const e=elapsed(),idx=indexAt(e),s=session.steps[idx],next=session.steps[idx+1],logs=session.logs||[];
+ const activeSet=s.mode==='strength'&&!s.rest&&s.id?s:s.mode==='strength'&&s.rest&&idx>0&&session.steps[idx-1]?.mode==='strength'&&!session.steps[idx-1]?.rest?session.steps[idx-1]:null;
+ const isSet=!!activeSet;
+ const saved=activeSet?logs.find(x=>x.id===activeSet.id&&x.setNumber===activeSet.setNumber):null;
+ const totalSets=session.steps.filter(x=>x.mode==='strength'&&!x.rest).length;
+ const strengthForm=isSet?`<div class='viva-manual-set'><h3>${saved?'Série registrada':s.rest?'Registrar série anterior':'Registrar série'}</h3>
+ <p>O Treine no Lar não conta repetições automaticamente. Informe o que você realmente fez.</p>
+ <div class='viva-manual-grid'><label>Repetições feitas<input id='set-reps' type='number' inputmode='numeric' min='1' max='30' value='${saved?.repsDone||parseInt(activeSet.reps,10)||8}'></label>
+ <label>Dificuldade<select id='set-difficulty'><option value='easy' ${saved?.difficulty==='easy'?'selected':''}>Fácil</option><option value='ok' ${!saved||saved.difficulty==='ok'?'selected':''}>Adequada</option><option value='hard' ${saved?.difficulty==='hard'?'selected':''}>Muito difícil</option></select></label></div>
+ <div class='viva-manual-grid'><label>Resistência<select id='set-band'><option value='none' ${!saved||saved.band==='none'?'selected':''}>Sem elástico</option><option value='light' ${saved?.band==='light'?'selected':''}>Leve</option><option value='medium' ${saved?.band==='medium'?'selected':''}>Média</option><option value='heavy' ${saved?.band==='heavy'?'selected':''}>Forte</option></select></label>
+ <label>Técnica<select id='set-technique'><option value='boa' ${!saved||saved.technique==='boa'?'selected':''}>Controlada</option><option value='insegura' ${saved?.technique==='insegura'?'selected':''}>Perdi a técnica</option></select></label></div>
+ <button type='button' class='coach-save' data-log-set='1'>${saved?'Atualizar registro':s.rest?'Registrar a série':'Concluí a série · Descansar'}</button>
+ <small>${logs.length} de ${totalSets} séries registradas</small></div>`:
+ totalSets?`<p class='viva-manual-summary'>${logs.length} de ${totalSets} séries registradas manualmente</p>`:'';
+ return `${header('Treino em andamento',session.coach?.mode==='strength'?'Séries e repetições':'Circuito de '+session.duration+' minutos')}
+ <div class="tracker">${phases.map(x=>`<div class="${phases.indexOf(x)<phases.indexOf(s.phase)?'passed':x===s.phase?'live':''}">${x}</div>`).join('')}</div>
+ <div class="clockbox"><div class="ring" id="ring"><div class="phasebadge" id="phase">${s.rest?'Descanso':s.phase}</div>
+ <div class="digits" id="timer">${time(s.end-e)}</div><div class="exercise" id="exname">${esc(s.name)}</div>
+ <p class="hint" id="exhint">${esc(s.hint)}</p>${isSet?`<div class="viva-set-counter">Série ${s.setNumber} de ${s.sets} · ${s.reps} repetições sugeridas</div>`:''}</div>
+ ${!s.rest?`<button class="guide-action" type="button" data-guide="${esc(s.id||'')}" data-guide-name="${esc(s.name)}">Ver execução e cuidados</button>`:''}
+ ${strengthForm}
+ <div class="next"><small>PRÓXIMO</small><b id="nextname">${next?next.name:'Fim do treino'}</b></div>
+ <div class="audio-pill"><span>${data.voice?'Voz ligada':'Voz desligada'} · ${data.sound?'Bipes ligados':'Bipes desligados'}</span><button class="inline-button" data-mute="1">${data.voice||data.sound?'Silenciar':'Ativar áudio'}</button></div>
+ <button type='button' class='viva-spot-run' data-spotify-toggle='1'>Música do treino · Spotify</button><div class="controls"><button class="small" data-step="back" title="Anterior" aria-label="Etapa anterior">⏮</button>
+ <button class="big" data-pause="1" id="pausebtn" aria-label="${session.paused?'Retomar':'Pausar'}">${session.paused?'▶':'Ⅱ'}</button>
+ <button class="small" data-step="next" title="Próximo" aria-label="Próxima etapa">⏭</button></div>
+ <div class="section"><small id="elapsed">${time(e)} / ${session.duration}:00</small><small id="pc">${Math.floor(pct())}%</small></div>
+ <div class="meter"><div id="fill"></div></div></div>
+ <button class="sub" style="margin-top:20px;width:100%" data-stop="1">Encerrar treino</button>
+ <div class="footer">O cronômetro continua avançando automaticamente. Séries não registradas não serão contabilizadas como feitas. O áudio permanece disponível no iPhone.</div>`;
+}
+function safeN(v){let n=Number(String(v).replace(',','.'));return Number.isFinite(n)?n:NaN}
+function wfmt(n,d=1){return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})}
+function weightGraph(items){if(items.length<2)return '<div class="info">Registre pelo menos duas pesagens em datas diferentes para visualizar a evolução.</div>';let w=340,h=140,pad=22,vals=items.map(x=>x.kg),lo=Math.min(...vals)-.7,hi=Math.max(...vals)+.7,dx=(w-pad*2)/(items.length-1),xx=i=>pad+i*dx,yy=v=>h-pad-(v-lo)/(hi-lo)*(h-2*pad),line=items.map((e,i)=>`${i?'L':'M'}${xx(i).toFixed(1)} ${yy(e.kg).toFixed(1)}`).join(' ');return `<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Gráfico de evolução do peso em quilogramas"><path stroke="#f1e4d9" d="M${pad},${h-pad}H${w-pad} M${pad},${pad}H${w-pad}"/><path class="chartline" d="${line}"/>${items.map((e,i)=>`<circle class="chartdot" r="5" cx="${xx(i).toFixed(1)}" cy="${yy(e.kg).toFixed(1)}"/>`).join('')}<text x="${pad}" y="${h-2}" font-size="11" fill="#857a81">${items[0].day.slice(5).split('-').reverse().join('/')}</text><text x="${w-pad}" y="${h-2}" text-anchor="end" font-size="11" fill="#857a81">${items.at(-1).day.slice(5).split('-').reverse().join('/')}</text></svg>`}
+function weightPage(){let p=data.profile,items=[...p.weighIns].sort((a,b)=>a.day.localeCompare(b.day));let last=items.at(-1),start=items[0],validHeight=p.heightCm>=120&&p.heightCm<=230,adult=Number(p.age)>=20&&Number(p.age)<=110,imc=last&&validHeight&&adult?last.kg/Math.pow(p.heightCm/100,2):null,lo=validHeight&&adult?18.5*Math.pow(p.heightCm/100,2):null,hi=validHeight&&adult?24.9*Math.pow(p.heightCm/100,2):null;let weekly=null;if(items.length>=2){let earlier=items[0],diff=(new Date(last.day+'T12:00:00')-new Date(earlier.day+'T12:00:00'))/86400000;if(diff>=7)weekly=(earlier.kg-last.kg)*7/diff;}
+return `${header('Peso e medidas','Registros semanais')}<div class="soft-card"><div class="kicker">ÚLTIMA PESAGEM</div><div class="weight-focus">${last?wfmt(last.kg)+' kg':'Sem registros'}</div><p style="font-size:12px;color:#756d77">${start&&items.length>1?`Variação desde o início: ${wfmt(last.kg-start.kg)} kg`:'Registre seu peso de hoje. Nenhuma data-limite é necessária.'}</p></div>
+<div class="section"><h2>Registrar pesagem</h2></div><form id="weightform" class="card"><div class="form-grid"><label class="form-field">Idade (anos)<input id="age-years" type="number" inputmode="numeric" min="20" max="110" step="1" required placeholder="Ex.: 29" value="${p.age||''}"></label><div class="info" style="font-size:11px">Usamos as referências de IMC para adultos a partir dos 20 anos. Sua idade fica salva só neste dispositivo.</div></div><div class="form-grid"><label class="form-field">Sua altura (cm)<input id="height-cm" type="number" inputmode="decimal" min="120" max="230" step="0.1" required placeholder="Ex.: 175" value="${p.heightCm||''}"></label><label class="form-field">Peso (kg)<input id="weight-kg" type="number" inputmode="decimal" min="30" max="350" step="0.1" required placeholder="Ex.: 90" value="${last?last.kg:''}"></label></div><div class="form-grid"><label class="form-field">Data da pesagem<input id="weight-day" type="date" required max="${new Date().toLocaleDateString('sv-SE')}" value="${new Date().toLocaleDateString('sv-SE')}"></label><div class="info" style="font-size:11px">Sua faixa semanal será calculada automaticamente a partir do peso registrado. Não é necessário escolher uma meta.</div></div><button class="primary" type="submit">Salvar pesagem</button></form>
+${validHeight&&adult&&last?`<div class="section"><h2>Referência de saúde</h2></div><div class="metrics"><div class="metric"><strong>${wfmt(imc)}</strong><small>IMC atual (adultos)</small></div><div class="metric"><strong>${wfmt(lo)}–${wfmt(hi)} kg</strong><small>Faixa indicativa pelo IMC</small></div></div>${imc>=25?`<div class="info">Seu peso está ${wfmt(Math.max(0,last.kg-hi))} kg acima do limite superior da faixa de referência do IMC adulto. Isso <b>não é um peso ideal individual</b> nem uma obrigação: composição corporal, saúde e preferências importam. <br>Primeiro marco opcional: 5% abaixo do peso inicial (${wfmt(start.kg*.95)} kg), sem prazo fixo.</div>`:`<div class="info">Seu IMC está ${imc<18.5?'abaixo':'dentro'} da faixa adulta de referência. Não há sugestão automática de emagrecimento.</div>`}`:''}
+<div class="section"><h2>Evolução</h2></div><div class="card">${weightGraph(items)}<div class="split"><div><small style="color:var(--soft)">Tendência média observada</small><div class="trend">${weekly===null?'Aguardando dados':(weekly>=0?'−':'+')+wfmt(Math.abs(weekly))+' kg/sem'}</div></div><span class="pill">Sem prazo final</span></div><p class="minitip">${weekly===null?'Para estimar uma tendência semanal, faça registros com pelo menos 7 dias de intervalo.':'Tendência matemática entre o primeiro e o último registro; o peso oscila naturalmente. Não é previsão para as próximas semanas.'}</p>${imc>=25?`<p class="minitip">Sugestão automática: ${wfmt(last.kg*0.0025,2)}–${wfmt(last.kg*0.005,2)} kg/semana (0,25% a 0,5% do peso registrado). Apenas uma referência de ritmo gradual, sem cobrança ou prazo.</p>`:''}</div>
+<div class="section"><h2>Histórico de pesagens</h2></div>${items.length?items.slice().reverse().map(item=>`<div class="logrow"><div><strong>${wfmt(item.kg)} kg</strong><div><small>${item.day.split('-').reverse().join('/')}</small></div></div><button class="inline-button" data-del-weight="${item.day}" aria-label="Excluir pesagem de ${item.day}">Excluir</button></div>`).join(''):'<p class="info">Nenhuma pesagem registrada.</p>'}<div class="footer">IMC 18,5–24,9 é uma referência de triagem para adultos, não define o peso ideal individual. Perdas graduais costumam ser mais sustentáveis, e a orientação deve ser individualizada.</div>`}
+function aerobicPanel(){
+ const today=new Date(),key=VivaCoach.weekKey(today),week=VivaCoach.weekOf(data.coach,today);
+ const doneGuided=data.history.filter(h=>h?.coachType==='cardio'&&!h.coachRecovery&&h.coachId&&h.date&&!Number.isNaN(Date.parse(h.date))&&VivaCoach.weekKey(new Date(h.date))===key&&
+   Number(data.coach.feedback?.[h.coachId]?.effort)>=4&&Number(data.coach.feedback?.[h.coachId]?.effort)<=6)
+   .reduce((sum,h)=>sum+Math.min(40,Math.max(0,Number(h.coachMainMinutes)||0)),0);
+ const walking=(data.coach.walks||[]).filter(x=>VivaCoach.weekKey(new Date(x.day+'T12:00:00'))===key);
+ const walkModerate=walking.filter(x=>x.intensity==='moderate').reduce((s,x)=>s+Number(x.minutes),0);
+ const plan=VivaTraining.cardioGoals(week,doneGuided+walkModerate);
+ return `<section class='viva-aerobic-panel'><div class='section' style='margin-top:0'><h2>Atividade aeróbica da semana</h2><small>Construção gradual</small></div>
+ <div class='viva-aerobic-score'><div><b>${plan.done} min</b><small>Registrados como moderados*</small></div><div><strong>${plan.target} min</strong><small>Referência gradual desta fase</small></div></div>
+ <div class='viva-aerobic-track'><div style='width:${Math.min(100,Math.floor(plan.done/plan.target*100))}%'></div></div>
+ <p class='minitip'>${plan.remaining?`Faltam ${plan.remaining} min para a referência semanal, se estiver confortável. Sem obrigação de completar tudo agora.`:'Referência semanal atingida. Priorize recuperação e mantenha a rotina.'} O objetivo de longo prazo é se aproximar gradualmente das recomendações gerais de 150 minutos moderados por semana.</p>
+ <form id='viva-walk'><h3>Registrar caminhada ou cardio fora do Treine no Lar</h3><div class='coach-form-grid'>
+ <label>Tempo em minutos<input id='viva-walk-minutes' type='number' inputmode='numeric' min='5' max='180' required placeholder='Ex.: 15'></label>
+ <label>Intensidade<select id='viva-walk-intensity'><option value='moderate'>Moderada (consigo conversar)</option><option value='light'>Leve (converso facilmente)</option></select></label></div>
+ <button class='coach-save' type='submit'>Salvar atividade de hoje</button></form>
+ ${walking.length?`<div class='viva-aerobic-log'>${walking.map((x,i)=>`<div><span>${x.day.split('-').reverse().join('/')} · ${x.minutes} min · ${x.intensity==='moderate'?'Moderada':'Leve'}</span><button type='button' data-walk-remove='${data.coach.walks.indexOf(x)}'>Remover</button></div>`).join('')}</div>`:''}
+ <p class='viva-aerobic-disclaimer'>*Estimativa baseada nos treinos de cardio com esforço autorrelatado de 4–6/10 e nas atividades moderadas cadastradas. Não mede frequência cardíaca, gasto calórico ou intensidade real. Aque­cimento, alongamento, recuperação leve e musculação não entram nessa soma.</p></section>`;
+}
+function manualProgress(){
+ const items=VivaExercises.progress(data.history,6);
+ return `<section class='viva-rep-progress'><div class='section'><h2>Repetições registradas</h2><small>Informadas durante as séries</small></div>
+ ${items.length?items.map(i=>`<div class='viva-rep-card'><div><b>${i.name}</b><small>${i.sessions} sessão(ões) com registro</small></div><p>${i.label}</p>
+ <small class='viva-rep-hint'>${VivaEvolution.strengthPrescription(i.id,data.history,data.coach.feedback,VivaCoach.weekOf(data.coach),new Date(),VivaEvolution.readiness(data.coach.readiness).status).title}</small></div>`).join(''):'<div class="info">Ainda não há séries registradas. Durante a musculação, use o botão "Concluí a série" e informe as repetições feitas.</div>'}
+ <p class='minitip'>São repetições informadas manualmente. Uma mudança na quantidade não comprova, sozinha, aumento de força ou massa muscular.</p></section>`;
+}
+function summary(){
+ const total=data.history.length,minutes=data.history.reduce((n,h)=>n+(Number(h.duration)||0),0),
+ stats=VivaCoach.sessionStats(data.history),review=VivaCoach.cycleReview(data.coach,data.history,data.profile.weighIns),
+ weighs=[...data.profile.weighIns].sort((a,b)=>a.day.localeCompare(b.day)),
+ last=weighs.at(-1),first=weighs[0],trend=VivaCoach.weightsTrend(weighs),weightInsight=VivaEvolution.weightWaistInsight(weighs,data.coach.checkins||[]),
+ now=new Date(),weekStarts=Array.from({length:8},(_,i)=>{let d=new Date(now);d.setDate(d.getDate()-(d.getDay()+6)%7-7*(7-i));return VivaCoach.weekKey(d)});
+ const groups=new Map();
+ for(const h of data.history){
+  if(!h.coach||!h.date||!Number.isFinite(Date.parse(h.date)))continue;
+  const wk=VivaCoach.weekKey(new Date(h.date));
+  if(!groups.has(wk))groups.set(wk,new Set());
+  groups.get(wk).add(h.day);
+ }
+ const chart=weekStarts.map(wk=>({wk,count:groups.get(wk)?.size||0}));
+ const max=Math.max(3,...chart.map(w=>w.count));
+ return `${header('Progresso','Treinos, força e medidas')}
+ <div class='metrics'><div class='metric'><strong>${total}</strong><small>Sessões registradas</small></div><div class='metric'><strong>${minutes}</strong><small>Minutos treinados</small></div><div class='metric'><strong>${stats.weekDays}</strong><small>Dias ativos nesta semana</small></div><div class='metric'><strong>${stats.strengthDays}</strong><small>Dias de força na semana</small></div></div>
+ <div class='card'><div class='section' style='margin-top:0'><h2>Sua regularidade</h2><small>Últimas 8 semanas</small></div>
+ <div class='progress-bars'>${chart.map((x,i)=>`<div class='progress-week'><b>${x.count}</b><div class='progress-bar-track'><div style='height:${Math.max(x.count?9:3,Math.round(x.count/max*100))}%' class='progress-bar-fill'></div></div><small>${x.wk.slice(5).replace('-','/')}</small></div>`).join('')}</div>
+ <p class='minitip'>Cada barra representa dias distintos com treinos concluídos no plano semanal.</p></div>
+ ${aerobicPanel()}<div class='coach-review'><div class='kicker'>REVISÃO DO PROGRAMA · CICLO ${review.cycle}</div><h2>${review.due?'Hora de reavaliar seu ciclo':'Seu ciclo está em acompanhamento'}</h2><p>${review.summary}</p><div class='coach-tags'><span>Semana ${review.week} · etapa ${review.weekOfCycle}/4</span><span>${review.metric28} dias de treino em 28 dias</span></div><button class='inline-button' data-go='professor'>Ver recomendação atual →</button></div>
+ <section class='viva-weight-shortcut' aria-label='Registrar pesagem'><div><b>Peso e medidas</b><small>${last?wfmt(last.kg)+' kg no último registro':'Nenhum peso cadastrado ainda'}</small></div><button type='button' data-go='peso'>Registrar peso</button></section>
+ <div class='viva-insight'><b>${weightInsight.title}</b><p>${weightInsight.description}</p></div><div class='soft-card'><div class='split'><div><b>Evolução do peso</b><p style='font-size:12px;color:var(--soft)'>${last?`${wfmt(last.kg)} kg · ${trend==='descendo'?'tendência de queda':trend==='subindo'?'tendência de alta':trend==='oscilando'?'peso oscilando':'aguardando mais pesagens'}`:'Ainda não há pesagens.'}</p>${first&&last&&weighs.length>1?`<small>Diferença desde o primeiro registro: ${wfmt(last.kg-first.kg)} kg</small>`:''}</div><button class='inline-button' data-go='peso'>Ver pesagens →</button></div></div>
+ ${VivaEvolutionUI.highlights(data.coach.strengthLogs||[],new Date())}${manualProgress()}<div class='section'><h2>Histórico de treinos</h2><small>${total} sessões</small></div>
+ ${total?data.history.slice().reverse().slice(0,30).map(h=>`<div class='history'><div><b>${h.coach?(h.coachRecovery?'Recuperação leve':VivaCoach.DAYS[h.coachDay]?.title||h.coachFocus||'Treino orientado'):'Circuito avulso · '+h.duration+' min'}</b><div><small>${new Date(h.date).toLocaleDateString('pt-BR')} · ${h.duration} min</small></div></div><span style='color:#289969'>✓</span></div>`).join(''):'<div class="card"><b>Nenhum treino concluído.</b><p class="minitip">Abra Plano e escolha o dia.</p></div>'}
+ <div class='footer'>Registros armazenados neste navegador. Para migrar seus dados entre aparelhos, utilize o backup em Ajustes.</div>`;
+}
+function settings(){return `${header('Ajustes','Equipamentos, áudio e dados')}<label class="card toggler"><div><b>Treino de baixo impacto</b><p>Padrão: sem saltos, até para o skipping e a corda imaginária.</p></div><input class="switch" type="checkbox" id="low" ${data.low?'checked':''}></label><div class='coach-gear'><b>Restrições de movimento</b>
+ <label class='coach-checkbox'><input id='ex-no-floor' type='checkbox' ${data.coach.preferences.noFloor?'checked':''}> Evitar exercícios deitado ou no chão</label>
+ <label class='coach-checkbox'><input id='ex-no-kneel' type='checkbox' ${data.coach.preferences.noKneel?'checked':''}> Evitar apoiar os joelhos</label>
+ <p class='minitip'>O plano troca ou retira movimentos incompatíveis. Se o movimento provocar dor, pare e procure avaliação.</p></div>
+ <div class='coach-gear'><b>Equipamentos disponíveis</b><label class='coach-checkbox'><input id='coachmini' type='checkbox' ${data.coach.gear.mini?'checked':''}> Tenho mini band</label><label class='coach-checkbox'><input id='coachlong' type='checkbox' ${data.coach.gear.long?'checked':''}> Tenho elástico longo de resistência</label><p class='minitip'>Use apenas elásticos íntegros; não prenda em grades do terraço.</p></div>
+ <div class='coach-gear'><b>Trocas realizadas</b>
+ ${Object.entries(data.coach.replacements||{}).map(([id,to])=>`<div class='coach-excluded'><span>${VivaCoach.getExercise(id)?.name||id} → ${VivaCoach.getExercise(to)?.name||to}</span><button type='button' data-coach-reactivate='${id}'>Reverter</button></div>`).join('')}
+ </div><div class='coach-gear'><b>Exercícios retirados</b><p class='minitip'>Estes movimentos não entram no plano até serem reativados.</p>${data.coach.excluded.length?data.coach.excluded.map(id=>`<div class='coach-excluded'><span>${VivaCoach.getExercise(id)?.name||'Movimento'}</span><button type='button' data-coach-reactivate='${id}'>Reativar</button></div>`).join(''):'<p class="minitip">Nenhum exercício substituído até agora.</p>'}</div><section class='viva-music-entry'><div><b>Música do treino</b><small>Spotify Premium e playlists. Configuração e autorização separadas dos seus registros.</small></div><button type='button' data-spotify-toggle='1'>Configurar</button></section><label class="card toggler"><div><b>Orientações por voz</b><p>Informa o exercício e o descanso em português.</p></div><input class="switch" type="checkbox" id="voice" ${data.voice?'checked':''}></label><label class="card toggler"><div><b>Bipes de contagem</b><p>Um bipe por segundo; acelera nos últimos 5.</p></div><input class="switch" type="checkbox" id="sound" ${data.sound?'checked':''}></label><label class="card toggler"><div><b>Contagem falada 3, 2, 1</b><p>Contagem curta antes da próxima etapa.</p></div><input class="switch" type="checkbox" id="countdown" ${data.countdown?'checked':''}></label><div class="card"><label class="form-field">Volume dos bipes <span id="volume-value">${Math.round(data.volume*100)}%</span><input type="range" id="volume" min="0" max="1" step="0.05" value="${data.volume}" style="accent-color:#ff702f"></label><button class="inline-button" data-test-audio="1" style="margin-top:14px">▶ Testar voz e bipes</button></div><div class="info"><b>Áudio no iPhone:</b> toque em “Iniciar treino” ou “Testar voz” para liberar o som. No Safari, a voz e os bipes podem parar com a tela bloqueada ou com outro app aberto. Mantenha a tela ligada para ouvir os avisos.</div><div class="footer">Respeite seus limites. Exercícios aeróbicos mais intensos são opcionais. Pare em caso de dor, tontura ou mal-estar.</div><div class='coach-backup'><b>Proteja seus registros</b><p>Exporte os dados antes de limpar o navegador ou trocar de aparelho. O arquivo contém seus registros de treino e peso.</p><button class='coach-save' type='button' data-export='1'>Exportar dados (JSON)</button><label class='coach-import' for='viva-import-file'>Importar dados (JSON)</label><input id='viva-import-file' type='file' accept='application/json,.json' class='coach-file-input'><small>A restauração substitui os dados salvos neste navegador e pede sua confirmação.</small></div><button class="sub" data-clear="1">Apagar treinos e avaliações de força</button>`}
+function end(){
+ if(!session)return;
+ quiet();releaseAwake();
+ const enough=(session.skippedSeconds||0)<=session.total*.2;
+ beep(enough?900:550,2);say(enough?'Treino concluído. Sessão registrada.':'Sessão encerrada. Ela não será registrada como treino concluído.');
+ finishedPartial=!enough;
+ let h={duration:session.duration,date:new Date().toISOString(),day:new Date().toLocaleDateString('sv-SE')};
+ if(session.coach){
+  h.coach=true;h.coachDay=session.coach.day;h.coachWeek=session.coach.week;h.coachFocus=session.coach.focus;h.coachId=session.coachId;h.coachRecovery=session.coach.kind==='Recuperação ativa';
+  h.coachAnchors=[...(session.coach.anchors||[])].filter(id=>VivaCoach.getExercise(id)).slice(0,2);h.coachType=session.coach.mode||null;h.coachMainMinutes=session.coach.mode==='cardio'?Number(session.coach.mainMinutes)||0:0;h.coachSets=Number(session.coach.sets)||null;h.setLogs=(session.logs||[]).slice(0,50);h.loggedSets=h.setLogs.length;finishedCoachId=h.coachId;
+ }else finishedCoachId=null;
+ if(enough){data.history.push(h);save()}else finishedCoachId=null;
+ session=null;clearCheckpoint();finished=true;clearInterval(pulse);pulse=null;render();
+}
+function start(isCoach=false){
+ const safety=!isCoach?VivaEvolution.readiness(data.coach.readiness):null;
+ if(safety&&['stop','rest'].includes(safety.status)){alert(safety.description);return;}
+ 
+ const m=isCoach?coachModel():null;
+ if(isCoach&&(!m.readiness.canStart||m.weekend||m.moves.length<3)){
+  alert(m.weekend?'Os treinos do professor estão programados de segunda a sexta.':m.readiness.canStart?'Reative exercícios em Ajustes antes de começar.':m.readiness.description);
+  return;
+ }
+ enableSound();keepAwake();
+ const minutes=isCoach?m.duration:(safety?.status==='light'?20:data.duration),steps=isCoach?VivaTraining.build(m):timeline(minutes,null,data.low||safety?.status==='light');
+ const id=isCoach?'viva-'+Date.now()+'-'+Math.floor(Math.random()*100000):null;
+ const anchors=m&&m.kind==='Força'?m.moves.slice(0,2).map(x=>x.id).filter(Boolean):[];
+ session={steps,duration:minutes,total:minutes*60,at:0,mark:Date.now(),paused:false,index:0,lastPhase:null,lastBeepSecond:null,skippedSeconds:0,
+ coach:isCoach?{day:m.day,week:m.week,focus:m.title,kind:m.kind,anchors,mode:m.training.type,mainMinutes:m.training.main,sets:m.training.sets}:null,coachId:id,logs:[]};
+ finished=false;finishedPartial=false;finishedCoachId=null;screen='run';clearInterval(pulse);pulse=setInterval(tick,500);checkpoint();announceStep(steps[0],true);render();
+}
+function keepAwake(){try{if(navigator.wakeLock&&navigator.wakeLock.request&&!lock)navigator.wakeLock.request('screen').then(x=>lock=x).catch(()=>{})}catch{}}function releaseAwake(){if(lock){try{lock.release()}catch{}lock=null}}
+function enableSound(){try{let C=window.AudioContext||window.webkitAudioContext;if(!ctx&&C)ctx=new C();if(ctx&&ctx.state==='suspended')ctx.resume();audioReady=!!ctx;}catch(err){audioReady=false}return audioReady}
+function beep(freq=630,count=1){if(!data.sound||!ctx)return;try{const t=ctx.currentTime+.004;for(let i=0;i<count;i++){let o=ctx.createOscillator(),g=ctx.createGain(),at=t+i*.11;o.type='sine';o.frequency.setValueAtTime(freq+i*90,at);g.gain.setValueAtTime(0.001,at);g.gain.exponentialRampToValueAtTime(Math.max(.003,data.volume*.13),at+.008);g.gain.exponentialRampToValueAtTime(.001,at+.075);o.connect(g);g.connect(ctx.destination);o.start(at);o.stop(at+.082)}}catch(err){}}
+function say(txt){if(!data.voice||!('speechSynthesis'in window))return;try{let sy=window.speechSynthesis;sy.cancel();let ut=new SpeechSynthesisUtterance(txt);ut.lang='pt-BR';ut.rate=1.04;ut.pitch=1;ut.volume=.95;let vs=sy.getVoices(),voice=vs.find(x=>x.lang.toLowerCase()==='pt-br')||vs.find(x=>x.lang.toLowerCase().startsWith('pt'));if(voice)ut.voice=voice;sy.speak(ut)}catch(err){}}
+function quiet(){try{window.speechSynthesis&&window.speechSynthesis.cancel()}catch{}}
+function announceStep(s,first=false){if(!session)return;let phase=first||session.lastPhase!==s.phase?s.phase+'. ':'';session.lastPhase=s.phase;let txt=s.rest?'Descanso. '+s.seconds+' segundos.':s.mode==='strength'?phase+s.name+'. Série '+s.setNumber+' de '+s.sets+'. Faça '+s.reps+' repetições com controle. Você tem até '+s.seconds+' segundos. Pare quando completar, sem acelerar. '+(s.hint||''):phase+s.name+'. '+s.seconds+' segundos.'+(s.hint?' '+s.hint:'');beep(s.rest?520:800,2);say(txt)}
+function audioSecond(s,left){if(!session||session.paused)return;const n=Math.ceil(left);if(n<1||n>40)return;if(n<=5){beep(n<=3?1100:970,2);if(data.countdown&&data.voice&&n<=3)say(String(n))}else{beep(620,1)}}
+function tick(){if(!session)return;if(!session.paused&&Date.now()-lastCheckpoint>=15000)checkpoint();let e=elapsed();if(e>=session.total){end();return}let idx=indexAt(e),s=session.steps[idx];if(session.index!==idx){session.index=idx;session.lastBeepSecond=null;announceStep(s);render();return}if(!session.paused&&document.visibilityState!=='hidden'){let left=Math.ceil(s.end-e);if(left!==session.lastBeepSecond){session.lastBeepSecond=left;if(left<s.seconds)audioSecond(s,left)}}let q=(e-s.start)/s.seconds;for(let [key,value] of [['#timer',time(s.end-e)],['#elapsed',`${time(e)} / ${session.duration}:00`],['#pc',Math.floor(pct())+'%']]){let el=$(key);if(el)el.textContent=value}let ring=$('#ring');if(ring)ring.style.setProperty('--pct',Math.floor(q*100)+'%');let fill=$('#fill');if(fill)fill.style.width=pct()+'%'}
+function navIcon(id){
+ const shape={
+ inicio:'<path d="M3 10.5 12 3l9 7.5V21H3z"/><path d="M9 21v-7h6v7"/>',
+ professor:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+ exercicios:'<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',treinos:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+ progresso:'<path d="M4 20h16M6 16v-5M12 16V6M18 16V9" stroke-linecap="round"/>',
+ ajustes:'<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2.5" fill="#fff"/><circle cx="16" cy="17" r="2.5" fill="#fff"/>'
+ }[id]||'';
+ return `<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">${shape}</svg>`;
+}
+function render(){if(finished){app.innerHTML=finishedPartial?`<div class='coach-review'><h2>Sessão encerrada antes do tempo</h2><p>Você avançou por uma parte grande do circuito usando o botão Próximo. Esta sessão não foi registrada como concluída, para preservar a precisão do seu progresso.</p></div><button class='primary' data-done='1'>Voltar ao início</button>`:`<div style="text-align:center;padding:40px 0 15px"><h1>Treino concluído!</h1><p>Sessão de ${data.history.at(-1).duration} minutos registrada.</p>${data.history.at(-1).coachType==='strength'?`<p class='viva-set-end'>${data.history.at(-1).loggedSets||0} série(s) com repetições informadas. As demais não foram contabilizadas.</p>`:''}</div><div class="metrics"><div class="metric"><strong>${data.history.length}</strong><small>Sessões</small></div><div class="metric"><strong>${streak()}</strong><small>Dias de sequência</small></div></div>${coachFeedbackForm()}<button class="primary cta" data-done="1">Voltar ao início</button>`}else{app.innerHTML=screen==='inicio'?home():screen==='biblioteca'?libraryView():screen==='exercicios'?exercisesPage():screen==='professor'?coachPage():screen==='treinos'?details():screen==='progresso'?summary():screen==='peso'?weightPage():screen==='ajustes'?settings():runner()}nav.classList.toggle('hidden',!!session||finished);nav.innerHTML=[['inicio','Início'],['professor','Plano'],['treinos','Avulso'],['exercicios','Exercícios'],['progresso','Progresso'],['ajustes','Ajustes']].map(([s,n])=>`<button type="button" data-go="${s}" class="${screen===s?'active':''}" aria-current="${screen===s?'page':'false'}"><span class="viva-nav-icon">${navIcon(s)}</span>${n}</button>`).join('');$('#streak').textContent=streak()?`Sequência: ${streak()} dia(s)`:'Sem treino nesta semana';if(guideSelected)app.innerHTML+=guideModal();if(replaceSelected)app.innerHTML+=replaceView();if(session)tick()}
+document.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.spotifyToggle){window.VivaSpotify.toggle();return}if(b.dataset.min){data.duration=Number(b.dataset.min);save();render()}
+else if(b.dataset.phase&&!session){let phase=b.dataset.phase;screen='treinos';render();const i=phases.indexOf(phase);if(i>=0){const el=document.getElementById('stage-'+i);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}}
+else if(b.dataset.go&&!session){finished=false;finishedCoachId=null;if(b.dataset.go==='biblioteca')librarySelected=null;screen=b.dataset.go;render()}
+else if(b.dataset.exFilter&&!session){exerciseFilter=['all','strength','cardio','mobility'].includes(b.dataset.exFilter)?b.dataset.exFilter:'all';render()}
+else if(b.dataset.guide!==undefined){if(session)suspendWorkout();guideSelected={id:b.dataset.guide,name:b.dataset.guideName||''};render()}
+else if(b.dataset.guideClose){guideSelected=null;render()}
+else if(b.dataset.libOpen!==undefined&&!session){librarySelected=Number(b.dataset.libOpen);screen='biblioteca';render();window.scrollTo?.(0,0)}
+else if(b.dataset.libClose&&!session){librarySelected=null;screen='biblioteca';render();window.scrollTo?.(0,0)}
+else if(b.dataset.libPage!==undefined&&!session){libraryPage=Math.min(37,Math.max(1,Number(b.dataset.libPage)||1));librarySelected=null;screen='biblioteca';render();window.scrollTo?.(0,0)}
+else if(b.dataset.coachDay!==undefined&&!session){data.coach.selectedDay=Number(b.dataset.coachDay);data.coach.selectedDate=new Date().toLocaleDateString('sv-SE');save();render()}
+else if(b.dataset.replaceOpen&&!session){if(VivaCoach.getExercise(b.dataset.replaceOpen)){replaceSelected=b.dataset.replaceOpen;render()}}
+else if(b.dataset.replaceCancel){replaceSelected=null;render()}
+else if(b.dataset.replaceChoose!==undefined&&!session&&replaceSelected){
+ const id=replaceSelected,candidate=b.dataset.replaceChoose,why=$('#replace-reason')?.value||'other';
+ const used=coachModel().moves.filter(x=>x.id!==id).map(x=>x.id);
+ const choices=VivaExercises.alternatives(id,data.coach.gear,data.coach.preferences,data.coach.excluded,used);
+ if(candidate&&!choices.some(x=>x.id===candidate)){alert('Esta alternativa não está disponível.');return;}
+ if(candidate){data.coach.replacements[id]=candidate;data.coach.excluded=data.coach.excluded.filter(x=>x!==id)}
+ else{data.coach.excluded=[...new Set([...data.coach.excluded,id])];delete data.coach.replacements[id]}
+ data.coach.reasons[id]=['discomfort','dislike','equipment','other'].includes(why)?why:'other';
+ replaceSelected=null;save();render();
+}
+else if(b.dataset.coachReactivate&&!session){const id=b.dataset.coachReactivate;data.coach.excluded=data.coach.excluded.filter(x=>x!==id);delete data.coach.replacements[id];delete data.coach.reasons[id];save();render()}
+else if(b.dataset.walkRemove!==undefined&&!session){const idx=Number(b.dataset.walkRemove);if(Number.isInteger(idx)&&idx>=0&&idx<data.coach.walks.length&&confirm('Remover esta atividade registrada?')){data.coach.walks.splice(idx,1);save();render()}}
+else if(b.dataset.coachStart&&!session){if(coachModel().moves.length<3){alert('Reative alguns exercícios em Ajustes para continuar.');return;}start(true)}
+else if(b.dataset.start)start()
+else if(b.dataset.logSet&&session){
+ const now=elapsed(),idx=indexAt(now),step=session.steps[idx];
+ const active=step?.mode==='strength'&&!step.rest?step:step?.mode==='strength'&&step.rest&&idx>0?session.steps[idx-1]:null;
+ if(!active||active.mode!=='strength'||active.rest||!active.id)return;
+ const log=VivaExercises.sanitizeSetLog({id:active.id,setNumber:active.setNumber,repsDone:$('#set-reps')?.value,
+  band:$('#set-band')?.value,difficulty:$('#set-difficulty')?.value,technique:$('#set-technique')?.value,date:new Date().toISOString()});
+ if(!log){alert('Informe de 1 a 30 repetições para registrar a série.');return;}
+ session.logs=(session.logs||[]).filter(x=>x.id!==log.id||x.setNumber!==log.setNumber);session.logs.push(log);
+ if(!step.rest){
+  session.at=step.end;session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;
+  checkpoint();if(!session.paused)announceStep(session.steps[session.index]);
+ }else checkpoint();
+ render();
+}
+else if(b.dataset.pause&&session){if(!session.paused){session.at=elapsed();session.paused=true;quiet()}else{session.mark=Date.now();session.paused=false}session.lastBeepSecond=null;checkpoint();if(!session.paused)keepAwake();render()}
+else if(b.dataset.step&&session){let e=elapsed(),idx=indexAt(e),s=session.steps[idx];if(b.dataset.step==='next')session.skippedSeconds=(session.skippedSeconds||0)+Math.max(0,s.end-e);session.at=b.dataset.step==='next'?s.end:(e-s.start>3?s.start:session.steps[Math.max(0,idx-1)].start);session.mark=Date.now();session.index=indexAt(session.at);session.lastBeepSecond=null;if(session.at>=session.total)end();else{checkpoint();if(!session.paused)announceStep(session.steps[session.index]);render()}}
+else if(b.dataset.stop&&confirm('Encerrar treino sem registrar a sessão?')){quiet();releaseAwake();session=null;clearCheckpoint();clearInterval(pulse);pulse=null;screen='inicio';render()}
+else if(b.dataset.mute&&session){let wantOff=data.voice||data.sound;data.voice=!wantOff;data.sound=!wantOff;save();if(!wantOff){enableSound();announceStep(session.steps[indexAt(elapsed())]);}else quiet();render()}
+else if(b.dataset.done){finished=false;finishedPartial=false;finishedCoachId=null;screen='inicio';render()}
+else if(b.dataset.export){try{let payload=VivaBackup.serialize(data),blob=new Blob([payload],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='viva-backup-'+new Date().toLocaleDateString('sv-SE')+'.json';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),4000)}catch(err){alert('Falha ao gerar backup. Confira as permissões do navegador.');}}
+else if(b.dataset.clear&&confirm('Apagar os treinos concluídos e as avaliações de força? Pesagens, caminhadas e configurações serão mantidas.')){data.history=[];data.coach.feedback={};data.coach.strengthLogs=[];finishedCoachId=null;save();render()}
+else if(b.dataset.testAudio){enableSound();beep(850,3);say('Treine no Lar pronto. Próximo exercício, skipping. Quarenta segundos. Depois, descanso.');}
+else if(b.dataset.delWeight&&confirm('Excluir a pesagem selecionada?')){data.profile.weighIns=data.profile.weighIns.filter(w=>w.day!==b.dataset.delWeight);save();render()}
+});
+document.addEventListener('submit',e=>{
+ if(e.target.id==='viva-walk'){
+  e.preventDefault();
+  const minutes=Number($('#viva-walk-minutes').value),intensity=$('#viva-walk-intensity').value;
+  if(!Number.isInteger(minutes)||minutes<5||minutes>180||!['moderate','light'].includes(intensity)){alert('Informe entre 5 e 180 minutos e escolha a intensidade.');return;}
+  data.coach.walks.push({day:new Date().toLocaleDateString('sv-SE'),minutes,intensity});data.coach.walks=data.coach.walks.slice(-1500);save();render();return;
+ }
+  if(e.target.id==='coach-readiness'){
+  e.preventDefault();const d=new Date(),raw={day:VivaEvolution.dayKey(d),energy:$('#viva-energy').value,sleep:$('#viva-sleep').value,soreness:$('#viva-soreness').value,pain:$('#viva-pain').checked,warning:$('#viva-warning').checked};
+  const clean=VivaEvolution.sanitizeReadiness(raw,d);
+  if(!clean){alert('Selecione energia, sono e desconforto para adaptar o treino.');return;}
+  data.coach.readiness=clean;save();render();return;
+ }
+  if(e.target.id==='coach-onboard'){
+ e.preventDefault();data.coach.gear={mini:!!$('#ob-mini').checked,long:!!$('#ob-long').checked};data.low=!!$('#ob-low').checked;data.coach.startedAt=new Date().toISOString();data.coach.selectedDay=null;data.coach.selectedDate=null;save();screen='professor';render();return;
+ }
+ if(e.target.id==='coach-checkin'){
+ e.preventDefault();const key=VivaCoach.weekKey(new Date()),c=data.coach,energy=Number($('#coach-energy').value),soreness=Number($('#coach-soreness').value),pain=$('#coach-pain').checked,raw=$('#coach-waist').value.trim(),waist=raw?Number(raw):null;
+ if(waist!==null&&!(waist>=40&&waist<=200)){alert('Confira a medida da cintura em centímetros.');return;}
+ c.checkins=c.checkins.filter(x=>x.weekKey!==key);c.checkins.push({weekKey:key,day:new Date().toLocaleDateString('sv-SE'),energy,soreness,pain,waist});c.checkins.sort((a,b)=>a.weekKey.localeCompare(b.weekKey));save();render();return;
+ }
+ if(e.target.id==='coach-effort'){
+ e.preventDefault();if(finishedCoachId){
+  const now=new Date().toISOString(),technique=$('#coach-post-technique').value==='insegura'?'insegura':'boa',pain=$('#coach-post-pain').checked;
+  data.coach.feedback[finishedCoachId]={effort:Number($('#coach-effort-value').value),technique,pain,date:now};
+  const record=data.history.find(x=>x.coachId===finishedCoachId);
+  const manually=(record?.setLogs||[]),reported=new Map();
+  for(const entry of manually)reported.set(entry.id,entry);
+  if(reported.size){
+   for(const entry of reported.values()){
+    const log=VivaEvolution.sanitizeStrengthLog({id:entry.id,date:now,difficulty:entry.difficulty,band:entry.band,
+      technique:technique==='insegura'?'insegura':entry.technique,pain});
+    if(log)data.coach.strengthLogs.push(log);
+   }
+  }
+  data.coach.strengthLogs=data.coach.strengthLogs.slice(-1000);save();
+ }
+ finished=false;finishedCoachId=null;screen='professor';render();return;
+ }
+ if(e.target.id!=='weightform')return;e.preventDefault();let cm=safeN($('#height-cm').value),kg=safeN($('#weight-kg').value),day=$('#weight-day').value,age=safeN($('#age-years').value),today=new Date().toLocaleDateString('sv-SE');if(!(cm>=120&&cm<=230&&kg>=30&&kg<=350&&age>=20&&age<=110&&day&&day<=today)){alert('Verifique idade (20–110 anos), altura (120–230 cm), peso (30–350 kg) e data não futura.');return;}data.profile.heightCm=cm;data.profile.age=age;data.profile.weighIns=data.profile.weighIns.filter(w=>w.day!==day);data.profile.weighIns.push({day,kg});data.profile.weighIns.sort((a,b)=>a.day.localeCompare(b.day));save();render()});
+document.addEventListener('change',e=>{
+if(e.target.id==='viva-import-file'){
+ const file=e.target.files?.[0];if(!file)return;
+ if(file.size>1100000){alert('O backup excede o tamanho permitido.');e.target.value='';return;}
+ const reader=new FileReader();
+ reader.onload=()=>{try{const restored=VivaBackup.parse(reader.result);const s=restored.stats;
+ if(confirm('Restaurar este backup com '+s.trainings+' treinos, '+s.weighIns+' pesagens e '+s.checkins+' check-ins? Isso substituirá os dados atuais do Treine no Lar neste navegador.')){
+ data=restored.data;save();finished=false;finishedCoachId=null;screen=data.coach.startedAt?'professor':'inicio';render();alert('Backup restaurado. Seus registros já estão disponíveis.');}
+ }catch(err){alert('Não foi possível restaurar o backup: '+err.message)}
+ e.target.value='';
+ };
+ reader.onerror=()=>{alert('Não foi possível ler este arquivo.');e.target.value='';};
+ reader.readAsText(file);return;
+}
+if(e.target.id==='low'){data.low=e.target.checked;data.coach.preferences.noJump=e.target.checked;save()}if(e.target.id==='ex-no-floor'){data.coach.preferences.noFloor=e.target.checked;save();render()}if(e.target.id==='ex-no-kneel'){data.coach.preferences.noKneel=e.target.checked;save();render()}if(e.target.id==='coachmini'){data.coach.gear.mini=e.target.checked;save();render()}if(e.target.id==='coachlong'){data.coach.gear.long=e.target.checked;save();render()}if(e.target.id==='sound'){data.sound=e.target.checked;save()}if(e.target.id==='voice'){data.voice=e.target.checked;save()}if(e.target.id==='countdown'){data.countdown=e.target.checked;save()}if(e.target.id==='volume'){data.volume=Number(e.target.value);save();render()}});
+document.addEventListener('input',e=>{if(e.target.id==='volume'){let out=$('#volume-value');if(out)out.textContent=Math.round(Number(e.target.value)*100)+'%'}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){suspendWorkout()}else if(session){render()}});
+window.addEventListener('pagehide',suspendWorkout);
+function onlineBanner(){const el=$('#offline-banner');if(el)el.classList.toggle('visible',navigator.onLine===false)}
+window.addEventListener('online',onlineBanner);window.addEventListener('offline',onlineBanner);
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+onlineBanner();
+restoreWorkout();
+render();
+window.VivaSpotify.mount(document.querySelector('#viva-music-dock'));
+})();
+</script></body></html>
