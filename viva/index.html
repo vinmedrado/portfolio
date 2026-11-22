@@ -113,12 +113,14 @@ html,body{background:#f1f2f2;color:var(--ink)}
 .viva-music-entry small{display:block;font-size:11px;line-height:1.45;margin-top:5px;color:#69756f}
 .viva-music-entry button,.viva-spot-run{border:1px solid #cbdccc;background:#eff5f0;color:#3b674b;font-size:12px;font-weight:750;border-radius:10px;padding:10px 14px;white-space:nowrap}
 .viva-spot-run{display:block;margin:12px 0;width:100%;text-align:center}
+/* Keep the home shortcut only before a playlist/account has been connected. */
+.wrap:has(.viva-spot-dock.is-used) .viva-music-entry{display:none}
 /* Dock: 58px mini player. Expanded sheet never covers the whole viewport. */
 .viva-spot-dock{--mtext:#1d2d28;--msoft:#6b7971;--mint:#b8eed0;
  position:fixed;z-index:450;left:50%;transform:translateX(-50%);
  bottom:calc(83px + env(safe-area-inset-bottom));width:min(456px,calc(100% - 18px));
  background:#f7f8f6;color:var(--mtext);border:1px solid #cedbd2;border-radius:18px;
- box-shadow:0 12px 38px #162b2850;max-height:min(545px,calc(100dvh - 176px));
+ box-shadow:0 12px 38px #162b2850;max-height:min(485px,calc(100dvh - 176px));
  overflow:hidden;display:none;flex-direction:column;font-family:system-ui,-apple-system,sans-serif;
  -webkit-text-size-adjust:100%;text-size-adjust:100%;isolation:isolate}
 .viva-spot-dock.is-open,.viva-spot-dock.is-used{display:flex}
