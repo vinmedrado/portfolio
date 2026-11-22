@@ -1,6 +1,6 @@
 (function(g){'use strict';
 const DAY=/^\d{4}-\d{2}-\d{2}$/, ID=/^viva-\d{8,18}-\d{1,6}$/;
-const names=['Força geral e técnica','Cardio leve e mobilidade','Pernas e glúteos','Cardio e abdômen','Força geral e postura'];
+const names=['Corpo inteiro','Cardio sem saltos','Pernas e glúteos','Cardio e estabilidade','Costas, peito e abdômen'];
 const validDay=s=>typeof s==='string'&&DAY.test(s)&&new Date(s+'T12:00:00').toLocaleDateString('sv-SE')===s;
 const validISO=s=>typeof s==='string'&&Number.isFinite(Date.parse(s))&&/^\d{4}-\d{2}-\d{2}T/.test(s);
 const number=(v,min,max,fallback=null)=>Number.isFinite(Number(v))&&Number(v)>=min&&Number(v)<=max?Number(v):fallback;
