@@ -112,6 +112,16 @@ function run(){
  test('Série incompleta na última sessão bloqueia aumento',()=>{const h=[...h2,{...h2[1],coachId:'t3',date:'2026-11-20T10:00:00Z',day:'2026-11-20',setLogs:[{...h2[1].setLogs[0]}]}];return E.strengthPrescription('row',h,{...f2,t3:{effort:5,pain:false,technique:'boa'}},6,now2).status==='hold'});
  test('Resistência maior é apenas sugerida quando ambas sessões completam 12',()=>{const h=h2.map(x=>({...x,setLogs:x.setLogs.map(y=>({...y,repsDone:12}))}));return E.strengthPrescription('row',h,f2,6,now2).bandSuggestion==='medium'});
  test('Meta individual entra nos blocos do cronômetro',()=>{const m=T.prescribe({day:0,week:6,kind:'Força',duration:20,history:h2,c:{gear:{mini:true,long:true},feedback:f2},readiness:{status:'normal'},today:now2,moves:[]});return T.build(m).filter(x=>x.id==='row').every(x=>x.reps==='10')});
+
+ const safeHist=Array.from({length:8},(_,i)=>{const n=1+i*2;return {coach:true,coachType:'strength',coachId:'series'+i,date:'2026-11-'+String(n).padStart(2,'0')+'T12:00:00Z',day:'2026-11-'+String(n).padStart(2,'0'),setLogs:['squat','row'].flatMap(id=>[1,2].map(setNumber=>({id,setNumber,repsDone:9,difficulty:'ok',band:id==='row'?'light':'none',technique:'boa'}))) };});
+ const safeFeedback=Object.fromEntries(safeHist.map(h=>[h.coachId,{effort:5,pain:false,technique:'boa'}]));
+ test('Oito dias registrados liberam três séries em 30 minutos',()=>T.strengthSetCount(30,6,safeHist,safeFeedback,now2)===3);
+ test('Treino de 20 minutos mantém duas séries',()=>T.strengthSetCount(20,6,safeHist,safeFeedback,now2)===2);
+ test('Poucas sessões não aumentam o volume',()=>T.strengthSetCount(30,6,safeHist.slice(0,4),safeFeedback,now2)===2);
+ test('Dor recente bloqueia aumento do número de séries',()=>T.strengthSetCount(30,6,safeHist,{...safeFeedback,series7:{effort:8,pain:true,technique:'insegura'}},now2)===2);
+ test('Recuperação insuficiente bloqueia terceira série',()=>T.strengthSetCount(30,6,safeHist,safeFeedback,now2,'light')===2);
+ test('Cronômetro soma trinta minutos com 3 séries',()=>{const p=T.prescribe({day:0,week:6,kind:'Força',duration:30,history:safeHist,c:{gear:{mini:true,long:true},feedback:safeFeedback},readiness:{status:'normal'},today:now2,moves:[]});return p.training.sets===3&&T.build(p).at(-1).end===1800});
+ test('Volume muscular semanal acompanha as séries sugeridas',()=>T.weeklyMuscleSets(6,30,{mini:true,long:true},[],{noJump:true},{},safeHist,safeFeedback,now2,'normal').days.every(d=>d.sets===3));
  return {passed:results.filter(r=>r.pass).length,total:results.length,ok:results.every(r=>r.pass),results};
 }
 g.VivaQA=Object.freeze({run});
