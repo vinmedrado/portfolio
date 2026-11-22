@@ -15,21 +15,46 @@ const TARGET={
 const FLOOR=new Set(['bridge','miniBridge','miniClam','deadBug','birdDog','superman','plank']);
 const KNEEL=new Set(['birdDog','plank']);
 const JUMP=new Set(['imaginary','skipping']);
-const REPLACE={squat:['squatWide','miniSquat','backLunge'],squatWide:['squat','miniSquat'],miniSquat:['squat','squatWide'],
+// Alternatives are limited to the same primary movement pattern. Never replace a pull with a back extension,
+// a biceps curl with triceps work, or a calf raise with cardio just to fill a training slot.
+const PATTERNS={
+ squat:'squat',squatWide:'squat',miniSquat:'squat',
+ backLunge:'lunge',
+ wallPush:'horizontal-push',inclinePush:'horizontal-push',bandPress:'horizontal-push',
+ bridge:'hip-extension',miniBridge:'hip-extension',miniKick:'hip-extension',
+ hinge:'hip-hinge',bandHinge:'hip-hinge',
+ miniWalk:'hip-abduction',miniClam:'hip-abduction',
+ row:'horizontal-pull',
+ curl:'elbow-flexion',bandTriceps:'elbow-extension',bandLateral:'shoulder-abduction',
+ calf:'calf-raise',superman:'spinal-extension',
+ birdDog:'core-stability',deadBug:'core-stability',plank:'core-stability',standingCore:'core-stability',
+ march:'cardio-steps',step:'cardio-steps',kneeDrive:'cardio-steps',toeTap:'cardio-steps',skipping:'cardio-steps',imaginary:'cardio-steps',
+ punch:'cardio-upper'
+};
+const REPLACE={
+ squat:['squatWide','miniSquat'],squatWide:['squat','miniSquat'],miniSquat:['squat','squatWide'],
  wallPush:['inclinePush','bandPress'],inclinePush:['wallPush','bandPress'],bandPress:['wallPush','inclinePush'],
- bridge:['miniBridge','hinge','miniKick'],miniBridge:['bridge','hinge','miniKick'],miniClam:['miniWalk','miniKick'],
- row:['superman'],bandHinge:['hinge','bridge'],hinge:['bandHinge','bridge'],backLunge:['squat','squatWide','miniSquat'],
- birdDog:['deadBug','standingCore'],deadBug:['standingCore','birdDog'],plank:['standingCore','deadBug'],
- superman:['row'],calf:['step','march'],miniWalk:['miniKick','step'],miniKick:['miniWalk','miniClam'],
- march:['step','toeTap','kneeDrive'],step:['march','toeTap','kneeDrive'],kneeDrive:['march','step'],
- skipping:['march','kneeDrive','step'],imaginary:['step','march','toeTap'],punch:['toeTap','step'],
- toeTap:['step','march'],standingCore:['deadBug','birdDog'],curl:['bandTriceps'],bandLateral:['wallPush','bandPress'],bandTriceps:['curl']};
+ bridge:['miniBridge','miniKick'],miniBridge:['bridge','miniKick'],miniKick:['bridge','miniBridge'],
+ hinge:['bandHinge'],bandHinge:['hinge'],
+ miniWalk:['miniClam'],miniClam:['miniWalk'],
+ birdDog:['deadBug','standingCore','plank'],deadBug:['birdDog','standingCore','plank'],
+ plank:['birdDog','deadBug','standingCore'],standingCore:['birdDog','deadBug','plank'],
+ march:['step','toeTap','kneeDrive'],step:['march','toeTap','kneeDrive'],
+ kneeDrive:['march','step','toeTap'],toeTap:['step','march','kneeDrive'],
+ skipping:['march','step','kneeDrive'],imaginary:['step','march','toeTap']
+};
+function compatible(original,replacement){
+ return typeof original==='string'&&typeof replacement==='string'&&original!==replacement
+  &&PATTERNS[original]!==undefined&&PATTERNS[original]===PATTERNS[replacement]
+  &&(REPLACE[original]||[]).includes(replacement);
+}
+function pattern(id){return PATTERNS[id]||null}
 const gearLabel={body:'Sem equipamento',mini:'Mini band',long:'Elástico longo'};
 function safePrefs(p={}){return {noFloor:!!p.noFloor,noKneel:!!p.noKneel,noJump:p.noJump!==false};}
 function allowed(id,gear={mini:false,long:false},prefs={}){
  const ex=g.VivaCoach?.getExercise(id);if(!ex)return false;const p=safePrefs(prefs);
  if(ex.gear==='mini'&&!gear.mini||ex.gear==='long'&&!gear.long)return false;
- if(p.noFloor&&FLOOR.has(id)||p.noKneel&&KNEEL.has(id))return false;
+ if(p.noFloor&&FLOOR.has(id)||p.noKneel&&KNEEL.has(id)||p.noJump&&JUMP.has(id))return false;
  return true;
 }
 function details(id,name=''){
@@ -44,13 +69,13 @@ function details(id,name=''){
 }
 function alternatives(id,gear,prefs,excluded=[],used=[]){
  const banned=new Set([...excluded,...used,id]);
- return (REPLACE[id]||[]).filter(x=>!banned.has(x)&&allowed(x,gear,prefs)).map(x=>g.VivaCoach.getExercise(x));
+ return (REPLACE[id]||[]).filter(x=>!banned.has(x)&&compatible(id,x)&&allowed(x,gear,prefs)).map(x=>g.VivaCoach.getExercise(x));
 }
 function apply(moves=[],gear,prefs={},excluded=[],replacements={}){
  const seen=new Set();
  return (moves||[]).map(m=>{
   if(!m?.id)return null;
-  const replacement=replacements?.[m.id],id=replacement&&allowed(replacement,gear,prefs)&&!excluded.includes(replacement)?replacement:m.id;
+  const replacement=replacements?.[m.id],id=replacement&&compatible(m.id,replacement)&&allowed(replacement,gear,prefs)&&!excluded.includes(replacement)?replacement:m.id;
   let ex=allowed(id,gear,prefs)&&!excluded.includes(id)?g.VivaCoach.getExercise(id):null;
   if(!ex)ex=alternatives(m.id,gear,prefs,excluded,[...seen])[0]||null;
   if(ex&&seen.has(ex.id))return null;
@@ -78,5 +103,5 @@ function progress(history=[],limit=5){
     label:latest.reps+' repetições em '+latest.sets+' séries'+(previous?' (registro anterior: '+previous.reps+')':'')};
  }).sort((a,b)=>(b.latest?.date||'').localeCompare(a.latest?.date||'')).slice(0,Math.max(1,limit));
 }
-g.VivaExercises=Object.freeze({ids:Object.keys(TARGET),details,allowed,alternatives,apply,safePrefs,sanitizeSetLog,progress,gearLabel,FLOOR,KNEEL,JUMP});
+g.VivaExercises=Object.freeze({ids:Object.keys(TARGET),details,allowed,alternatives,apply,compatible,pattern,safePrefs,sanitizeSetLog,progress,gearLabel,FLOOR,KNEEL,JUMP});
 })(window);
