@@ -142,7 +142,7 @@ function draw(){
  const bar=dock.querySelector('[data-spot-bar]'),body=dock.querySelector('[data-spot-body]'),frame=dock.querySelector('[data-spot-frame]');
  const mini='<div class="viva-spot-mini">'+coverMarkup(cover||selectedDetails().image,true)
   +'<span class="viva-spot-mini-text"><b>'+esc(song||'Spotify · Música do treino')+'</b><small>'+esc(artist||selectedDetails().name)+'</small></span>'
-  +'<span class="viva-spot-mini-indicator">'+spotIcon(playing?'equalizer':'music')+'</span></div>'
+  +'<span class="viva-spot-mini-signal">'+signal()+'</span></div>'
   +button('toggle',expanded?spotIcon('close'):spotIcon('chevron'),false,'is-minimize');
  if(bar&&bar.innerHTML!==mini)bar.innerHTML=mini;
  const newPanel=panel();
