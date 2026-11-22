@@ -2,12 +2,12 @@
   "id": "./",
   "name": "VIVA — Treino em Casa",
   "short_name": "VIVA",
-  "description": "Treino funcional em casa com professor virtual e acompanhamento de evolução.",
+  "description": "Plano semanal de força e cardio, sessões guiadas e registros de treino.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#fffaf6",
-  "theme_color": "#ff702f",
+  "background_color": "#ffffff",
+  "theme_color": "#bd582d",
   "lang": "pt-BR",
   "icons": [
     {
