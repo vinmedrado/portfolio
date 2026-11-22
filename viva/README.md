@@ -1,6 +1,6 @@
 # VIVA — Treino em Casa
 
-PWA de treinos funcionais guiados com professor virtual baseado em regras explícitas, acompanhamento local e interface mobile.
+Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro, acompanhamento local e funcionamento offline. As recomendações são calculadas por regras explícitas; **não há IA generativa nem avaliação de movimentos por câmera**.
 
 ## Publicação
 
@@ -10,8 +10,8 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 
 ## Funcionalidades da versão completa
 
-- **Biblioteca de 365 entradas**: 73 semanas com 5 dias por semana, consultáveis em 37 páginas. As listas exploratórias são distintas, mas o programa de força mantém exercícios fundamentais por ciclos para permitir acompanhar ganhos de técnica e força. Um ano de segunda a sexta tem cerca de 260 dias úteis de treino, não 365.
-- **Professor virtual**: agenda de segunda a sexta (3 dias principais de força e 2 dias opcionais de cardio/mobilidade), aquecimento, treino e volta à calma.
+- **Biblioteca de 365 sequências de referência**: 73 semanas com cinco dias por semana, consultáveis em 37 páginas. São combinações para consulta, **não 365 prescrições independentes**. O plano semanal preserva exercícios principais ao longo dos ciclos, e há aproximadamente 260 dias de segunda a sexta em um ano.
+- **Plano semanal**: segunda a sexta, com três dias de força e dois dias opcionais de cardio/mobilidade, aquecimento e volta à calma.
 - **Treino de força com prescrição própria**: exercícios de agachar, puxar, empurrar, quadril e estabilidade; 2–3 séries por movimento, 8–12 repetições orientativas, pausas de aproximadamente 55–100 segundos e controles por grupo muscular. O cronômetro disponibiliza uma janela para cada série, mas **não conta as repetições automaticamente**.
 - **Cardio em intervalos próprios**: alterna movimento e recuperação, com intensidade adaptada ao início e às semanas seguintes. A versão de 20 minutos tem 5 minutos de aquecimento, 10 de circuito e 5 de volta à calma; 30 minutos têm 5/20/5, e 45 minutos têm 7/30/8.
 - **Registro aeróbico gradual**: painel distingue minutos de cardio com esforço autorrelatado e caminhadas moderadas registradas, com referências semanais progressivas. Não usa minutos de musculação para alegar que uma meta aeróbica foi atingida.
@@ -23,7 +23,7 @@ PWA de treinos funcionais guiados com professor virtual baseado em regras explí
 - **Substituição de exercícios**: o usuário pode retirar movimentos dos próximos planos e reativá-los em Ajustes.
 - **Demonstrações**: ilustrações SVG esquemáticas, mascote original, 31 guias com preparação, execução, respiração, cuidados e alternativa simplificada.
 - **Cronômetro e áudio**: anúncios em pt-BR, bipes, contagem final, avanço manual, pausa e retomada.
-- **Proteção da integridade das sessões**: treino com muitos avanços manuais não é registrado como concluído. Ao sair do Safari, a sessão é pausada e recuperável após recarregar.
+- **Proteção da integridade das sessões**: avançar manualmente grande parte da sessão impede o registro de conclusão. Ao sair do Safari, a sessão é pausada e pode ser retomada após recarregar.
 - **Acompanhamento**: check-ins semanais (disposição, recuperação e cintura opcional), feedback pós-treino (esforço, execução e dor), pesagens e gráfico, referência de IMC adulto, painel das últimas oito semanas e histórico.
 - **Offline**: service worker guarda os arquivos principais após uma primeira visita com internet. O suporte em segundo plano e à voz depende do navegador e do sistema.
 - **Backup**: exportação e restauração validada de arquivo JSON, incluindo histórico, pesagens, professor, substituições, caminhadas e modalidade dos treinos.
@@ -49,7 +49,11 @@ A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
 ## Segurança, limitações e privacidade
 
-O VIVA é um orientador virtual baseado em regras, não uma avaliação clínica ou um personal trainer humano. A avaliação diária é autorrelatada, não mede sinais vitais ou condições médicas; dor incomum, sintomas preocupantes e dor muscular intensa exigem precaução. Em caso de sintomas intensos ou súbitos, procure atendimento imediato. Não diagnostica lesões, não determina uma dieta individual e não garante uma taxa de emagrecimento. O plano de força/cardio segue princípios gerais de atividade física e adaptação gradual, não é uma prescrição individual.
+**Interface:** rótulos descritivos, navegação por Início, Plano, Avulso, Progresso e Ajustes. Linguagem direta, sem nomes de personagens inventados nem promessas de resultados automáticos.
+
+**Exclusão de treinos:** o comando em Ajustes apaga o histórico de sessões e suas avaliações de força associadas, mantendo pesagens, caminhadas e configurações. Faça backup antes de limpar registros.
+
+O VIVA oferece orientações gerais calculadas por regras, não uma avaliação clínica ou acompanhamento presencial de um profissional de Educação Física. A avaliação diária é autorrelatada, não mede sinais vitais ou condições médicas; dor incomum, sintomas preocupantes e dor muscular intensa exigem precaução. Em caso de sintomas intensos ou súbitos, procure atendimento imediato. Não diagnostica lesões, não determina uma dieta individual e não garante uma taxa de emagrecimento. O plano de força/cardio segue princípios gerais de atividade física e adaptação gradual, não é uma prescrição individual.
 
 Os registros pessoais são salvos localmente no dispositivo pela chave `viva-functional-v2`; não existe backend, login ou sincronização automática entre celulares. Há também uma chave de sessão temporária para recuperação do treino. Limpar o armazenamento do navegador pode apagar os dados. Guarde o backup JSON em local privado, pois ele contém informações de saúde e treino e **não é criptografado**.
 
