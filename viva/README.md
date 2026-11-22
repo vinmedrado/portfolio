@@ -17,7 +17,9 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 - **Registro aeróbico gradual**: painel distingue minutos de cardio com esforço autorrelatado e caminhadas moderadas registradas, com referências semanais progressivas. Não usa minutos de musculação para alegar que uma meta aeróbica foi atingida.
 - **Adaptação gradual**: sessões de 20 minutos no início; 30 e 45 minutos são sugeridos apenas conforme frequência, recuperação, esforço relatado e tempo de adaptação.
 - **Avaliação diária de prontidão**: antes de iniciar, o usuário informa energia, sono e desconfortos. O sistema pode manter a sessão, propor recuperação ativa de 20 minutos ou recomendar não treinar em caso de sinais de alerta. Sem diagnóstico médico.
-- **Diário individual de força**: após treinos de força, registra a dificuldade de dois exercícios principais e a resistência usada, sugerindo progressão somente após registros recentes favoráveis e execução segura.
+- **Progressão por exercício**: a meta de repetições usa duas sessões completas em dias diferentes, com séries registradas, execução controlada e avaliação de esforço; dor e recuperação insuficiente bloqueiam aumentos. Trocar para elástico mais forte é uma sugestão opcional.
+- **Número de séries**: nos treinos de 30 minutos, pode passar de duas para três séries após oito dias de força registrados com segurança, a partir da semana 5. Sessões de 20 minutos mantêm duas séries.
+- **Substituições por padrão de movimento**: as alternativas respeitam o padrão do exercício, equipamentos e restrições. Quando não há equivalente adequado, o movimento não é substituído automaticamente.
 - **Ciclos de quatro semanas** com revisões de hábitos, tendência de peso, técnica e tolerância à resistência. Alguns exercícios básicos permanecem para acompanhar força.
 - **Mini bands e elásticos** opcionais e seleção de baixo impacto.
 - **Substituições compatíveis**: escolha de alternativas por equipamento, restrições para exercícios no chão e apoio dos joelhos, motivo da troca e opção de reverter em Ajustes.
@@ -44,7 +46,7 @@ Aplicativo de treinos em casa com plano semanal de força e cardio, cronômetro,
 | `sw.js` | Cache e funcionamento offline |
 | `manifest.webmanifest` | Configuração de aplicativo web instalável |
 | `favicon.svg` | Ícone do VIVA |
-| `qa.js`, `qa.html` | Bateria independente de regressão (106 verificações) |
+| `qa.js`, `qa.html` | Bateria independente de regressão (127 verificações) |
 
 A página de QA está em **https://vinmedrado.com/viva/qa.html**.
 
