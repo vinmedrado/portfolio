@@ -24,19 +24,23 @@ const cooldown=[
 function split(minutes){
  return SPLITS[minutes]||SPLITS[20];
 }
-function getExercise(id,gear,excluded){
- const C=g.VivaCoach, skip=new Set(excluded||[]);
- const allowed=(x)=>{const e=C?.getExercise(x);return e&&!skip.has(x)&&(e.gear==='body'||e.gear==='mini'&&gear?.mini||e.gear==='long'&&gear?.long)?e:null};
- const options=[id,...(FALLBACK[id]||[])];
- for(const x of options){const e=allowed(x);if(e)return e}
+function getExercise(id,gear,excluded=[],prefs={},replacements={},used=[]){
+ const X=g.VivaExercises,skip=new Set(excluded||[]),seen=new Set(used||[]);
+ const substitute=replacements?.[id];
+ const candidate=substitute&&X?.allowed(substitute,gear,prefs)&&!skip.has(substitute)?substitute:id;
+ const options=[candidate,...(FALLBACK[id]||[]),...(candidate===id?[]:[id])];
+ for(const choice of options){if(seen.has(choice)||skip.has(choice))continue;
+  const e=g.VivaCoach?.getExercise(choice);
+  if(e&&(X?X.allowed(choice,gear,prefs):(e.gear==='body'||e.gear==='mini'&&gear?.mini||e.gear==='long'&&gear?.long)))return e;
+ }
  return null;
 }
-function pickStrength(day,week,minutes,gear,excluded=[]){
+function pickStrength(day,week,minutes,gear,excluded=[],prefs={},replacements={}){
  const bank=STRENGTH[day]||STRENGTH[0],n=minutes===45?5:minutes===30?4:3,
  block=Math.floor(Math.max(1,week)-1)/8|0,chosen=[],seen=new Set();
  const pools=[...bank[0],bank[1][block%bank[1].length],bank[2][block%bank[2].length],
  ...bank[1],...bank[2],...bank[0]];
- for(const id of pools){const e=getExercise(id,gear,excluded);if(e&&!seen.has(e.id)){seen.add(e.id);chosen.push(e)}if(chosen.length>=n)break}
+ for(const id of pools){const e=getExercise(id,gear,excluded,prefs,replacements,[...seen]);if(e&&!seen.has(e.id)){seen.add(e.id);chosen.push(e)}if(chosen.length>=n)break}
  return chosen.slice(0,n);
 }
 function pickCardio(day,week,available,low,recovery=false){
@@ -52,9 +56,9 @@ function pickCardio(day,week,available,low,recovery=false){
 function prescribe(m){
  const minutes=[20,30,45].includes(m.duration)?m.duration:20, [warm,main,cool]=split(minutes);
  const recovery=m.kind==='Recuperação ativa',strength=m.kind==='Força'&&!recovery;
- const gear=m.c?.gear||{mini:false,long:false},excluded=m.c?.excluded||[];
- const exercises=strength?pickStrength(m.day,m.week,minutes,gear,excluded):
-  pickCardio(m.day,m.week,m.moves||[],m.low,recovery);
+ const gear=m.c?.gear||{mini:false,long:false},excluded=m.c?.excluded||[],prefs=m.c?.preferences||{},replacements=m.c?.replacements||{};
+ const exercises=strength?pickStrength(m.day,m.week,minutes,gear,excluded,prefs,replacements):
+  pickCardio(m.day,m.week,g.VivaExercises?g.VivaExercises.apply(m.moves||[],gear,prefs,excluded,replacements):(m.moves||[]),m.low,recovery);
  const sets=strength?(minutes===45?3:2):null;
  const reps=strength?(m.week<=2?'8–10':'8–12'):null;
  const rest= strength?Math.floor((main*60)/(Math.max(1,exercises.length)*sets))-(minutes===20?45:50):null;
@@ -130,10 +134,10 @@ const GROUPS={
  birdDog:['core'],deadBug:['core'],plank:['core'],standingCore:['core']
 };
 const GROUP_LABELS={pernas:'Pernas',gluteos:'Glúteos',posteriores:'Posterior',costas:'Costas',empurrar:'Peito, ombros e braços',core:'Abdômen e estabilidade'};
-function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=[]){
+function weeklyMuscleSets(week=1,minutes=20,gear={mini:true,long:true},excluded=[],prefs={},replacements={}){
  const dosage=minutes===45?3:2,counts=Object.fromEntries(Object.keys(GROUP_LABELS).map(id=>[id,0])),days=[];
  for(const day of [0,2,4]){
-  const moves=pickStrength(day,week,minutes,gear,excluded);
+  const moves=pickStrength(day,week,minutes,gear,excluded,prefs,replacements);
   for(const e of moves)for(const group of GROUPS[e.id]||[])counts[group]+=dosage;
   days.push({day,sets:dosage,moves:moves.map(e=>e.id)});
  }
